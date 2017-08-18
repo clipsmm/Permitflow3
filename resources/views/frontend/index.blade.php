@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="panel-body">
-                        Evisa
+                        E-Visa
                     </div>
 
                     <div class="panel-body">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     </div>
 
 
