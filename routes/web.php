@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/frontend', 'FrontendController@index')->name('frontend');
+Route::get('/backend', 'BackendController@index')->name('backend');
