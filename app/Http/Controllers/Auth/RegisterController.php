@@ -48,8 +48,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'id_number' => 'required|string',
+            'id_type' => 'required|string',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'phone_number' => 'required|string',
+            'gender' => 'required|string|in:M,F,other',
+            'dob' => 'required|date',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -63,9 +70,21 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'id_number' => $data['id_number'],
+            'id_type' => $data['id_type'],
+            'first_name' => $data['first_name'],
+            'full_name' => $this->full_name($data),
+            'last_name' => $data['last_name'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'phone_number' => $data['phone_number'],
+            'gender' => $data['gender'],
+            'dob' => $data['dob'],
+            'password' => $data['password']
         ]);
+    }
+
+    private function full_name($data){
+        return "{$data['first_name']} {$data['last_name']} {$data['surname']}";
     }
 }
