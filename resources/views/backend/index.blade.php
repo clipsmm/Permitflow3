@@ -14,11 +14,11 @@
                     </div>
 
                     <div class="panel-body">
-                        Evisa
+                        Users Management
                     </div>
 
                     <div class="panel-body">
-                        E-Passport
+                        Applications Management
                     </div>
 
                 </div>
