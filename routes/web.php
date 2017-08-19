@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('applications/{module_slug}')
+    ->namespace('Frontend')
+    ->group(function () {
+        Route::get('/new', 'ApplicationController@create')->name('application.create');
+        Route::post('/create', 'ApplicationController@save')->name('application.save');
+        Route::get('/{application}/edit', 'ApplicationController@edit')->name('application.edit');
+    });
