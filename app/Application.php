@@ -37,4 +37,18 @@ class Application extends Model
     {
         return implode("-", [$module->prefix, Hashids::encode($module->getUpdatedCounter())]);
     }
+
+    /**
+     * Query scope to get only applications belonging to a given module
+     *
+     * @param $query
+     * @param $module_slug
+     * @return mixed
+     */
+    public function scopeOfModule($query, $module_slug)
+    {
+        return $query->whereHas('module', function($q) use ($module_slug){
+            $q->where('modules.slug',$module_slug);
+        });
+    }
 }
