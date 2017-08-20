@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('content')
+@section('title', 'Backend')
+
+@section('body')
     <div class="container">
         <div class="row">
 
@@ -14,11 +16,11 @@
                     </div>
 
                     <div class="panel-body">
-                        Users Management
+                        <a href="/users">Users Management</a>
                     </div>
 
                     <div class="panel-body">
-                        Applications Management
+                        <a href="#">Applications Management</a>
                     </div>
 
                 </div>
@@ -29,7 +31,8 @@
                     <div class="panel-heading">Dashboard</div>
 
                     <div class="panel-body">
-                        You are logged in!
+                        @section('content')
+                        @show
                     </div>
                 </div>
             </div>
