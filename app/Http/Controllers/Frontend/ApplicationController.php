@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\ApplicationSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\Module;
@@ -41,10 +42,13 @@ class ApplicationController extends Controller
                 ->withInput();
         }
 
+
         $data = $this->module->toFormData($request->all());
         $module = Module::whereSlug($this->module->slug)->first();
         $application = Application::insertRecord($module, $data, auth()->user());
         $next_step = $this->module->getNextStep($application, $current_step);
+
+        event(new ApplicationSubmitted($application));
 
         if(is_int($next_step)){
             return redirect()->route('application.edit', [
