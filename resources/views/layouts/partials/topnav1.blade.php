@@ -26,8 +26,8 @@
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
-                    <li class="hidden-sm hidden-md hidden-lg"><a href="/accounts/46/services">Make Application</a></li>
-                    <li class="hidden-sm hidden-md hidden-lg"><a href="/accounts/46/applications">Application History</a></li>
+                    <li class=""><a href="#">Make Application</a></li>
+                    <li class=""><a href="#">Application History</a></li>
                     <li class=""><a href="/">{{ Auth::user()->name }}</a></li>
                     <li class="dropdown hidden-xs">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <b class="caret"></b></a>
