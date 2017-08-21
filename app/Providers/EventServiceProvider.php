@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Module;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -27,6 +28,13 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        // register module events and listeners
+        Module::whereEnabled(true)->each(function ($item) {
+            foreach ($item->module->listens as $event => $listeners) {
+                foreach ($listeners as $listener) {
+                    Event::listen($event, $listener);
+                }
+            }
+        });
     }
 }
