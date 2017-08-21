@@ -29,12 +29,22 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         // register module events and listeners
-        Module::whereEnabled(true)->each(function ($item) {
-            foreach ($item->module->listens as $event => $listeners) {
-                foreach ($listeners as $listener) {
-                    Event::listen($event, $listener);
+        $this->loadModuleEvents();
+
+    }
+
+    public function loadModuleEvents()
+    {
+        try{
+            Module::whereEnabled(true)->each(function ($item) {
+                foreach ($item->module->listens as $event => $listeners) {
+                    foreach ($listeners as $listener) {
+                        Event::listen($event, $listener);
+                    }
                 }
-            }
-        });
+            });
+        } catch(\Exception $e) {
+
+        }
     }
 }
