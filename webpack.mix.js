@@ -13,3 +13,10 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
+
+if (mix.inProduction()) {
+    mix.version();
+}else{
+    //change the domain as per your dev domain
+    mix.browserSync('permitflowv3.app');
+}
