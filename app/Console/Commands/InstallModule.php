@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Module;
+use App\Models\Module;
 use Illuminate\Console\Command;
 
 class InstallModule extends Command
@@ -12,7 +12,7 @@ class InstallModule extends Command
      *
      * @var string
      */
-    protected $signature = 'modules:install {slug} {--enable}';
+    protected $signature = 'modules:install {slug} {prefix} {--enable}';
 
     /**
      * The console command description.
@@ -45,7 +45,8 @@ class InstallModule extends Command
             $this->error("Module {$slug} not found");
         }else{
             $enable = $this->option('enable') ? true : $this->confirm('Enable module?', false);
-            Module::firstOrCreate(['slug' => $slug], ['enabled' => $enable]);
+            $prefix = $this->argument('prefix');
+            Module::firstOrCreate(['slug' => $slug], ['enabled' => $enable, 'prefix' => $prefix]);
             $this->info("Module {$module->name} installed successfully!");
         }
 
