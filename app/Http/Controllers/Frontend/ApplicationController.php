@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\Module;
+use App\Modules\BaseModule;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -14,7 +15,7 @@ class ApplicationController extends Controller
     public function __construct(Request $request)
     {
         //todo: add middleware to check if module is activated
-        $this->module = module_from_slug($request->route('module_slug'));
+        $this->module = BaseModule::instance_from_slug($request->route('slug'));
     }
 
     public function create()

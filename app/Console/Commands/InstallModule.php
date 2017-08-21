@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Module;
+use App\Modules\BaseModule;
 use Illuminate\Console\Command;
 
 class InstallModule extends Command
@@ -39,7 +40,7 @@ class InstallModule extends Command
     public function handle()
     {
         $slug = $this->argument('slug');
-        $module = module_from_slug($slug);
+        $module = BaseModule::instance_from_slug($slug);
 
         if(is_null($module)){
             $this->error("Module {$slug} not found");

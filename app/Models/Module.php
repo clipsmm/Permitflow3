@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Modules\BaseModule;
 use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
@@ -25,6 +26,6 @@ class Module extends Model
      */
     public function getModuleAttribute()
     {
-        return module_from_slug($this->slug);
+        return BaseModule::instance_from_slug($slug);
     }
 }
