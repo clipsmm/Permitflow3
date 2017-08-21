@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+
 use App\Models\Module;
+use App\Modules\BaseModule;
 use Illuminate\Console\Command;
 
 class InstallModule extends Command
@@ -39,14 +41,14 @@ class InstallModule extends Command
     public function handle()
     {
         $slug = $this->argument('slug');
-        $module = module_from_slug($slug);
+        $module = BaseModule::instance_from_slug($slug);
 
         if(is_null($module)){
             $this->error("Module {$slug} not found");
         }else{
             $enable = $this->option('enable') ? true : $this->confirm('Enable module?', false);
             $prefix = $this->argument('prefix');
-            Module::firstOrCreate(['slug' => $slug], ['enabled' => $enable, 'prefix' => $prefix]);
+            Module::firstOrCreate(['slug' => $slug, ''], ['enabled' => $enable, 'prefix' => $prefix]);
             $this->info("Module {$module->name} installed successfully!");
         }
 

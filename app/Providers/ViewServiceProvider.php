@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\BaseModule;
 use Caffeinated\Modules\Facades\Module;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +16,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         foreach (Module::all() as $attrs){
-            $module = module_from_slug($attrs['slug']);
+            $module = BaseModule::instance_from_slug($attrs['slug']);
             // todo: register views only if module is enabled
             if($module->hasViews){
                 view()->addNamespace($module->slug, $module->viewsPath());
