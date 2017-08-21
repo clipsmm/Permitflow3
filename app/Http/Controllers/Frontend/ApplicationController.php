@@ -58,8 +58,9 @@ class ApplicationController extends Controller
             ]);
         }
 
+
         return redirect()->route('application.review', [
-            'module_tag' => $this->module->tag,
+            'module_slug' => $this->module->slug,
             'application' => $application->id
         ]);
     }

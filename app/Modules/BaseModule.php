@@ -68,7 +68,7 @@ class BaseModule
 
     public function getValidator($request, $current_step)
     {
-        return Validator::make($request->all(), []);
+        //return Validator::make($request->all(), []);
     }
 
 }
