@@ -54,10 +54,15 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
+                                <a class="btn btn-default" href="{{ route('auth.sso_redirect') }}">
+                                    Login with eCitizen
                                 </a>
                             </div>
+                        </div>
+                        <div class="">
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Forgot Your Password?
+                                </a>
                         </div>
                     </form>
                 </div>

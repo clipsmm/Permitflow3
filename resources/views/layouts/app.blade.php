@@ -48,6 +48,21 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    @lang('Make Application') <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    @foreach($active_modules as $module)
+                                        <li>
+                                            <a href="{{route('application.create', ['module_slug' => $module->slug])}}">
+                                                {{$module->module->name}}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -70,8 +85,12 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div class="col-sm-2">
+            @yield('sidebar')
+        </div>
+        <div class="col-sm-8">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
