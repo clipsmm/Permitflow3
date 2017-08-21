@@ -1,8 +1,108 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://getbootstrap.com/examples/sticky-footer-navbar/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-@section('content')
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>eVisa</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/app.css" rel="stylesheet">
+
+    <![endif]-->
+</head>
+
+<body>
+<!-- Start Header -->
+<header>
+    <!-- Fixed navbar -->
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">eBusiness</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li class="hidden-sm hidden-md hidden-lg"><a href="/accounts/46/services">Make Application</a></li>
+                    <li class="hidden-sm hidden-md hidden-lg"><a href="/accounts/46/applications">Application History</a></li>
+                    <li class="hidden-sm hidden-md hidden-lg"><a href="/auth/logout">Logout</a>
+                </ul>
+
+                <div id="searchbar" class="col-sm-3 col-md-6">
+                    <form accept-charset="UTF-8" action="/search-business" class="navbar-form navbar-left" method="get" role="search"><input name="_utf8" type="hidden" value="✓">                            <div class="input-group">
+                            <input class="form-control" id="search_q" name="search[q]" placeholder="Search businesses by name" type="text">                                <span class="input-group-btn">
+                                    <button class="btn btn-default">
+                                        <span class="fa fa-search"></span>
+                                    </button>
+                                </span>
+                        </div>
+                    </form>                    </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden-xs"><a href="/">{{ Auth::user()->name }}</a></li>
+                    <li class="dropdown hidden-xs">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/auth/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-default navbar-fixed-top"  style="margin-top: 50px; background-color: #FFF; z-index: 900;">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
+                    <a class="navbar-brand" href="/">
+                        <span class="hidden-xs">Personal</span>
+                        <span  class="hidden-sm hidden-md hidden-lg">ISAAC KINYANJUI KIRAI</span></a>
+                </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav tp-icon">
+                    <li><a href="/accounts/46/services"><strong>Make Application</strong></a></li>
+                    <li><a href="/businesses">Businesses</a></li>
+                    <li>
+                        <a href="/accounts/46/collaterals">Collateral Registry(MPSR)</a>
+                    </li>
+                    <li><a href="/accounts/46/applications">Application History</a></li>
+
+                </ul>
+
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    <!-- End Header -->
+</header>
+
     <div class="container">
         <div class="row">
+
+
+
             <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
                 <div class="side-bar">
                     <div class="side-profile-menu">
@@ -743,8 +843,6 @@
 
         </div>
 
-
-
         <!-- Modal -->
         <div class="modal fade modal-wide" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -985,12 +1083,16 @@
             </div>
         </div>
 
+    </div> <!-- /container -->
 
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/js/vendor.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-
-    </div>
-
-
-
-@endsection
+</body>
+</html>

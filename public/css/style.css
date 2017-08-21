@@ -115,7 +115,7 @@ body {
     font-family: 'Roboto', arial, sans-serif;
     padding-top: 115px;
     height: 100%;
-    background-image: url(../../resources/assets/images/bg.png)!important;
+    background-image: url(../images/cream.png)!important;
     background-repeat: repeat!important;
 }
 
@@ -3487,12 +3487,4 @@ h4.modal-header {
 
 .application-form-data .form-field .field-label {
     font-weight: 600;
-}
-
-
-.modal.modal-wide .modal-dialog {
-  width: 50%;
-}
-.modal-wide .modal-body {
-  overflow-y: auto;
 }
