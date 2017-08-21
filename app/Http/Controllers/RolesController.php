@@ -77,7 +77,7 @@ class RolesController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $role)
     {
         $role = Role::find($role);
         $this -> validate($request, [

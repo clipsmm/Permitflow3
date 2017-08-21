@@ -4,7 +4,9 @@
 
 @section('content')
 <div class="col-md-12">
-    <form method="PUT" action="{{ route('roles.update', $role->id) }}">
+    <form method="POST" action="{{ route('roles.update', $role->id) }}">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="panel panel-default">
             <div class="panel-heading">@lang("Edit Role")</div>
             <div class="panel-body">
