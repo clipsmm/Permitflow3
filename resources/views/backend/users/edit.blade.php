@@ -1,5 +1,7 @@
 @extends('backend.index')
 
+@section('title', 'Users')
+
 @section('content')
     <div class="col-md-12">
         <form method="PUT" action="/users/{{$user->id}}">

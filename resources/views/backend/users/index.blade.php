@@ -29,8 +29,8 @@
                                     <td>{{$user->last_name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>
-                                        <a href="/users/{{$user->id}}" class="btn btn-sm btn-default">view</a>
-                                        <a href="/users/{{$user->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
+                                        <a href="/backend/users/{{$user->id}}" class="btn btn-sm btn-default">view</a>
+                                        <a href="/backend/users/{{$user->id}}/edit" class="btn btn-sm btn-warning">Edit</a>
                                         <a href="#" class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>

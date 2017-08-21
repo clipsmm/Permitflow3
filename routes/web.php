@@ -20,4 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/frontend', 'FrontendController@index')->name('frontend');
 Route::get('/backend', 'BackendController@index')->name('backend');
-Route::resource('/users', 'UsersController');
+Route::resource('/backend/roles', 'RolesController');
+Route::resource('/backend/users', 'UsersController');
