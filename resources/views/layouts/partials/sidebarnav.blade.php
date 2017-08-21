@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
         <div class="side-bar">
-            <div class="side-profile-menu">
+            <div class="side-profile-menu m-b-10">
                 <div class="thumbnail">
                     <img class="img-responsive hidden-xs" src="https://accounts.ecitizen.go.ke/profile-picture/25272520?t=citizen">
                 </div>
@@ -37,3 +37,4 @@
             </div>
         </div>
     </div>
+</div>

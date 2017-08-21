@@ -1,4 +1,4 @@
-@import url("http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.min.css")
+    @import url("http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.min.css")
 
 html, body {
     height: 100%;
@@ -37,8 +37,8 @@ tr.has-error {
 }
 
 .panel-default {
-    border-color: #d7d8da #d3d4d6 #bfbfc1;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+   /* border-color: #d7d8da #d3d4d6 #bfbfc1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);*/
 }
 
 .truncate {
@@ -115,7 +115,7 @@ body {
     font-family: 'Roboto', arial, sans-serif;
     padding-top: 115px;
     height: 100%;
-    background-image: url(../../resources/assets/images/bg.png)!important;
+    background-image: url(../images/bg.png)!important;
     background-repeat: repeat!important;
 }
 
@@ -3490,9 +3490,69 @@ h4.modal-header {
 }
 
 
+/*new styles*/
+
+
 .modal.modal-wide .modal-dialog {
-  width: 50%;
+  width: 70%;
 }
 .modal-wide .modal-body {
   overflow-y: auto;
 }
+
+h4.modal-title {
+    display: inline-block;
+}
+
+
+
+.panel-form h3{
+    margin-top: 0px;
+    font-size: 15px;
+    color: #000;
+    border-bottom: 0px solid #eee;
+    padding: 0px 0 0px;
+}
+
+
+.panel-form .form-group, .panel-form .row {
+    margin-bottom: 0px;
+    padding: 7px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+
+.modal .form-group {
+    margin-bottom: 0px;
+    padding: 8px 10px;
+}
+
+
+.modal .thumbnail img {
+    border-radius: 3px 3px 0 0;
+    border: 1px solid #e4e4e4;
+    width: 200px;
+    height: 196px;
+  
+}
+
+
+
+.panel-default {
+  /*  border-color: #d7d8da #d3d4d6 #bfbfc1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);*/
+}
+
+
+/*.modal .form-group label {
+    color: #666;
+    margin: 0 0 8px 0;
+}*/
+
+
+/*new styles*/
+
+
+
+
+

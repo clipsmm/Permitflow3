@@ -15,7 +15,10 @@
                     <a href="/accounts/46/collaterals">Collateral Registry(MPSR)</a>
                 </li>
                 <li><a href="/accounts/46/applications">Application History</a></li>
+
             </ul>
+
         </div>
+        <!--/.nav-collapse -->
     </div>
 </nav>
