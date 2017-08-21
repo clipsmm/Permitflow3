@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    protected $fillable = ['slug', 'enabled', 'settings'];
+    protected $fillable = ['slug', 'enabled', 'settings', 'prefix'];
 
 
     /**
@@ -26,6 +26,6 @@ class Module extends Model
      */
     public function getModuleAttribute()
     {
-        return BaseModule::instance_from_slug($slug);
+        return BaseModule::instance_from_slug($this->slug);
     }
 }
