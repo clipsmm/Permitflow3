@@ -24,4 +24,6 @@ interface ModuleInterface
     public function getNextStep($application, $current_step);
 
     public function getValidator($request, $current_step);
+
+    public function loadLookupData($model);
 }

@@ -71,4 +71,9 @@ class BaseModule
         return Validator::make($request->all(), []);
     }
 
+    public function loadLookupData($model)
+    {
+        return [];
+    }
+
 }

@@ -171,6 +171,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Caffeinated\Modules\ModulesServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
+        PragmaRX\Countries\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -234,6 +235,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Module' => Caffeinated\Modules\Facades\Module::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Countries'=> PragmaRX\Countries\Facade::class,
     ],
 
 ];

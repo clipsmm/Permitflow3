@@ -8,6 +8,7 @@
 
 namespace Modules;
 
+use \Countries;
 use App\Interfaces\ModuleInterface;
 use App\Modules\BaseModule;
 use Illuminate\Support\Facades\Validator;
@@ -30,5 +31,14 @@ class EVisa extends BaseModule implements ModuleInterface
         return Validator::make($request->all(), [
             'visa_type' => ['required']
         ]);
+    }
+
+    public function loadLookupData($model)
+    {
+        return [
+            'countries' => \Countries::all()
+                ->sortBy('name')
+                ->pluck('name.common', 'cca2')
+        ];
     }
 }
