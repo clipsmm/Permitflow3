@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -25,7 +26,18 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $todo = new User;
+        return view("/backend/users");
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user = new User;
         $this -> validate($request, [
             'id_number' => 'required|string',
             'id_type' => 'required|string',
@@ -49,17 +61,6 @@ class UsersController extends Controller
         $user->dob = $request->dob;
         $user->save();
         return redirect('/users');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -79,9 +80,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($user)
     {
-        return view('backend.users.edit', compact('user'));
+        $user = User::find($user);
+        return view('backend.users.edit',['user' => $user]);
     }
 
     /**
@@ -99,7 +101,7 @@ class UsersController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => ['required', Rule::unique('users')->ignore($user->id),],
             'phone_number' => 'required|string',
             'gender' => 'required|string|in:M,F,other',
             'dob' => 'required|date',
@@ -115,7 +117,7 @@ class UsersController extends Controller
         $user->gender = $request->gender;
         $user->dob = $request->dob;
         $user->save();
-        return redirect('/users');
+        return redirect('/backend/users');
     }
 
     /**

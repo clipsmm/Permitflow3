@@ -34,7 +34,7 @@
                     </tr>
                 </table>
 
-                <span><a href="/users" class="btn btn-default">Back</a></span>
+                <span><a href="/backend/users" class="btn btn-default">Back</a></span>
 
             </div>
         </div>
