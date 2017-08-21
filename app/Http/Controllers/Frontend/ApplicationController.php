@@ -15,7 +15,7 @@ class ApplicationController extends Controller
     public function __construct(Request $request)
     {
         //todo: add middleware to check if module is activated
-        $this->module = BaseModule::instance_from_slug($request->route('slug'));
+        $this->module = BaseModule::instance_from_slug($request->route('module_slug'));
     }
 
     public function create()
@@ -62,8 +62,7 @@ class ApplicationController extends Controller
 
     public function edit(Request $request, $module_slug, Application $application)
     {
-        $model_class = $application->module->module->fromFormData($application->form_data);
-        $model = new $model_class($application->form_data);
+        $model = $application->module->module->fromFormData($application->form_data);
         return view($this->module->view('edit'), [
             'application' => $application,
             'module' => $this->module,
