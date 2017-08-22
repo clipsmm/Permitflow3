@@ -169,6 +169,9 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Caffeinated\Modules\ModulesServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -178,6 +181,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ViewServiceProvider::class
 
     ],
 
@@ -229,7 +233,18 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Module' => Caffeinated\Modules\Facades\Module::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Uuid' => Webpatser\Uuid\Uuid::class,
     ],
+
+    /*
+     |
+     | Single-Signon
+     |
+     */
+     'sso_authorize_url' => env('SSO_AUTHORIZE_URL', ''),
+     'sso_client_secret' => env('SSO_CLIENT_SECRET', ''),
+ 
 
 ];
