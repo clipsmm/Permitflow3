@@ -12,21 +12,20 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                <li class="hidden-sm hidden-md hidden-lg"><a href="/accounts/46/services">Make Application</a></li>
-                <li class="hidden-sm hidden-md hidden-lg"><a href="/accounts/46/applications">Application History</a></li>
+                <li class="hidden-sm hidden-md hidden-lg"><a href="#">Make Application</a></li>
+                <li class="hidden-sm hidden-md hidden-lg"><a href="#">Application History</a></li>
                 <li class="hidden-sm hidden-md hidden-lg"><a href="/auth/logout">Logout</a>
             </ul>
-
             <div id="searchbar" class="col-sm-3 col-md-6">
                 <form accept-charset="UTF-8" action="/search-business" class="navbar-form navbar-left" method="get" role="search"><input name="_utf8" type="hidden" value="✓">                            <div class="input-group">
-                        <input class="form-control" id="search_q" name="search[q]" placeholder="Search businesses by name" type="text">                                <span class="input-group-btn">
+                        <input class="form-control" id="search_q" name="search[q]" placeholder="Search businesses by name" type="text">  <span class="input-group-btn">
                                     <button class="btn btn-default">
                                         <span class="fa fa-search"></span>
                                     </button>
                                 </span>
                     </div>
-                </form>                    </div>
-
+                </form>
+            </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="hidden-xs"><a href="/">ISAAC KINYANJUI KIRAI</a></li>
                 <li class="dropdown hidden-xs">
@@ -39,6 +38,5 @@
                 </li>
             </ul>
         </div>
-        <!--/.nav-collapse -->
     </div>
 </nav>

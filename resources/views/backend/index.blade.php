@@ -978,8 +978,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="Kirai" value="">
                                                                                 </div>
                                                                             </div>
-
-
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -987,8 +985,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="Isaac Kinyanjui" value="">
                                                                                 </div>
                                                                             </div>
-
-
 
 
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -1000,8 +996,6 @@
                                                                             </div>
 
 
-
-
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1009,9 +1003,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="12/7/1980" value="">
                                                                                 </div>
                                                                             </div>
-
-
-
 
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
@@ -1022,8 +1013,6 @@
                                                                             </div>
 
 
-
-
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1031,9 +1020,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="Kenya" value="">
                                                                                 </div>
                                                                             </div>
-
-
-
 
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
@@ -1043,9 +1029,6 @@
                                                                                 </div>
                                                                             </div>
 
-
-
-
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1053,9 +1036,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="James Doe" value="">
                                                                                 </div>
                                                                             </div>
-
-
-
 
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
@@ -1066,8 +1046,6 @@
                                                                             </div>
 
 
-
-
                                                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1076,12 +1054,7 @@
                                                                                 </div>
                                                                             </div>
 
-
-
-
                                                                         </form>
-
-
 
                                                                     </div>
 
@@ -1090,9 +1063,6 @@
                                                             </div>
 
                                                             <!-- tab1 -->
-
-
-
 
                                                             <!-- tab -->
                                                             <div class="tab-pane fade" id="tab33default">
@@ -1113,12 +1083,6 @@
                                                                             </div>
 
 
-
-
-
-
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1126,8 +1090,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="Kenya" value="">
                                                                                 </div>
                                                                             </div>
-
-
 
 
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -1148,8 +1110,6 @@
                                                                             </div>
 
 
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1158,9 +1118,6 @@
                                                                                 </div>
                                                                             </div>
 
-
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1168,9 +1125,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="doe@gmail.com" value="">
                                                                                 </div>
                                                                             </div>
-
-
-
 
                                                                         </form>
 
@@ -1183,8 +1137,6 @@
                                                             </div>
 
                                                             <!-- tab1 -->
-
-
 
                                                             <!-- tab -->
                                                             <div class="tab-pane fade" id="tab44default">
@@ -1205,9 +1157,6 @@
                                                                                 </div>
                                                                             </div>
 
-
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1225,9 +1174,6 @@
                                                                                 </div>
                                                                             </div>
 
-
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1235,9 +1181,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="12/12/1990" value="">
                                                                                 </div>
                                                                             </div>
-
-
-
 
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
@@ -1270,10 +1213,6 @@
 
                                                                         <form>
 
-
-
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1291,9 +1230,6 @@
                                                                                 </div>
                                                                             </div>
 
-
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1301,9 +1237,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="12/12/2017" value="">
                                                                                 </div>
                                                                             </div>
-
-
-
 
                                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
@@ -1313,9 +1246,6 @@
                                                                                 </div>
                                                                             </div>
 
-
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1324,9 +1254,6 @@
                                                                                 </div>
                                                                             </div>
 
-
-
-
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                                                                 <div class="form-group ">
@@ -1334,9 +1261,6 @@
                                                                                     <input class="form-control text-black" id="" maxlength="160" name="name_search[name]" placeholder="doe@gmail.com" value="">
                                                                                 </div>
                                                                             </div>
-
-
-
 
                                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
@@ -1357,9 +1281,6 @@
                                                             </div>
 
                                                             <!-- tab1 -->
-
-
-
 
                                                             <!-- tab -->
                                                             <div class="tab-pane fade" id="tab66default">
@@ -1419,9 +1340,6 @@
                                                                             </div>
 
 
-
-
-
                                                                         </form>
 
 
@@ -1433,9 +1351,6 @@
                                                             </div>
 
                                                             <!-- tab1 -->
-
-
-
 
                                                             <!-- tab -->
                                                             <div class="tab-pane fade" id="tab77default">
@@ -1497,11 +1412,6 @@
 
                                                             </div>
 
-                                                            <!-- tab1 -->
-
-
-
-
 
                                                         </div>
                                                     </div>
@@ -1512,62 +1422,11 @@
 
                                     </div>
 
-
-
-
-
                                 </div>
-
-
-                                <!--   end pannel -->
-
-
 
                             </div>
 
                         </div>
-
-
-
-
-
-
-                        <!--
-                                                <div class="row">
-
-                                                  <div class="col-md-12">
-                                                        <div class="panel panel-default panel-form m-r-10 m-l-10">
-
-                                                                                <div class="panel-heading">Supporting Documents</div>
-
-                                                                                 <div class="panel-body p-t-10 p-b-10">
-                                                                                          <a href="#" class="btn btn-md btn-default">
-                                                                                                        <span class="fa fa-id-card"></span> Scaned Passport
-                                                                                                    </a>
-                                                                                                      <a href="#" class="btn btn-md btn-default">
-                                                                                                        <span class="fa fa-envelope-o"></span> Invitation Letter
-                                                                                                    </a>
-                                                                                                      <a href="#" class="btn btn-md btn-default">
-                                                                                                       <span class="fa fa-bed"></span> Hotel Booking
-                                                                                                    </a>
-
-
-                                                                                 </div>
-
-                                                                </div>
-
-
-                                                          </div>
-
-                                                    </div>
-                         -->
-
-
-
-
-
-
-
 
                     </div>
 
