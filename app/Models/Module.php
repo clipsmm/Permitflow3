@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    protected $fillable = ['slug', 'enabled', 'settings', 'prefix'];
+    protected $fillable = ['slug', 'enabled', 'settings' , 'prefix'];
 
 
     /**

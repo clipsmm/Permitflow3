@@ -238,4 +238,13 @@ return [
         'Countries'=> PragmaRX\Countries\Facade::class,
     ],
 
+    /*
+     |
+     | Single-Signon
+     |
+     */
+     'sso_authorize_url' => env('SSO_AUTHORIZE_URL', ''),
+     'sso_client_secret' => env('SSO_CLIENT_SECRET', ''),
+ 
+
 ];

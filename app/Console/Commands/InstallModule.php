@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Module;
+
+use App\Models\Module;
 use App\Modules\BaseModule;
 use Illuminate\Console\Command;
 
@@ -47,7 +48,7 @@ class InstallModule extends Command
         }else{
             $enable = $this->option('enable') ? true : $this->confirm('Enable module?', false);
             $prefix = $this->argument('prefix');
-            Module::firstOrCreate(['slug' => $slug, ''], ['enabled' => $enable, 'prefix' => $prefix]);
+            Module::firstOrCreate(['slug' => $slug], ['enabled' => $enable, 'prefix' => $prefix]);
             $this->info("Module {$module->name} installed successfully!");
         }
 

@@ -15,8 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $modules = Module::whereEnabled(true)->get();
-        view()->share(['active_modules' => $modules]);
+        $this->loadModules();
     }
 
     /**
@@ -27,5 +26,15 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    public function loadModules()
+    {
+        try{
+            $modules = Module::whereEnabled(true)->get();
+            view()->share(['active_modules' => $modules]);
+        } catch(\Exception $e) {
+
+        }
     }
 }

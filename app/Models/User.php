@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Closure;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -30,4 +31,27 @@ class User extends Authenticatable
     {
         $this->attributes["password"] = bcrypt($password);
     }
+
+    /**
+     * Boot all of the bootable traits on the model.
+     */
+     public static function boot()
+     {
+         parent::boot();
+ 
+         self::creating(function ($user) {
+             $user->full_name  =  "{$user->first_name} {$user->last_name} {$user->surname}";
+         });
+
+     }
+
+     public static function get_by_username($username)
+     {
+        $identity = filter_var($username, FILTER_VALIDATE_EMAIL)? 'email' : 'id_number';
+
+        if($identity == 'email')
+            return self::query()->whereEmail($email)->first();
+        
+        return self::query()->whereIdNumber($username)->first();
+     }
 }
