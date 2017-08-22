@@ -40,8 +40,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
-        $this->mapModuleRoutes();
     }
 
     /**
@@ -71,23 +69,5 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
-    }
-
-    /**
-     * Registers custom routes from installed modules
-     */
-    protected function mapModuleRoutes()
-    {
-        try {
-            //todo: middleware to check if module is enabled
-            Route::group(['prefix' => 'mod/{module_slug}/'], function ($router){
-                Module::whereEnabled(true)->each(function ($mod) {
-                    $base_path = implode(DIRECTORY_SEPARATOR, [config('modules.path'), $mod->module->name, 'Routes']);
-                    require base_path(implode(DIRECTORY_SEPARATOR, [$base_path, 'web.php']));
-                    require base_path(implode(DIRECTORY_SEPARATOR, [$base_path, 'api.php']));
-                });
-            });
-        } catch (\Exception $e) {
-        }
     }
 }

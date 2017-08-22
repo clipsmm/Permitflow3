@@ -11,6 +11,8 @@ namespace App\Interfaces;
 
 interface ModuleInterface
 {
+    public function newUrl($params = []);
+
     public function getAttributes();
 
     public function toFormData($data);
@@ -18,8 +20,6 @@ interface ModuleInterface
     public function fromFormData($data);
 
     public function view($view);
-
-    public function viewsPath();
 
     public function getNextStep($application, $current_step);
 

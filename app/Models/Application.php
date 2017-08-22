@@ -23,7 +23,7 @@ class Application extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function insertRecord($module, $data, $user)
+    public static function insertRecord(Module $module, $data, User $user)
     {
         $application = new self(['form_data' => $data, 'application_number' => self::generateApplicationNumber($module)]);
         $application->user()->associate($user)

@@ -10,6 +10,7 @@ namespace App\Modules;
 
 
 use Caffeinated\Modules\Facades\Module;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
 class BaseModule
@@ -47,18 +48,12 @@ class BaseModule
     public function fromFormData($data)
     {
         $class =  $this->modelClass;
-        return new $class($data);
+        return new $class(array_only($data,   $class::$fields));
     }
 
     public function view($view)
     {
         return implode("::", [$this->slug, $view]);
-    }
-
-    public function viewsPath()
-    {
-        return implode(DIRECTORY_SEPARATOR,
-            [base_path(config('modules.path')), $this->getAttributes()['name'], 'Resources', 'Views']);
     }
 
     public function getNextStep($application, $current_step){

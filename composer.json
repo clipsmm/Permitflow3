@@ -29,8 +29,8 @@
             "Modules\\": "modules/"
         },
         "files": [
-            "app/Helpers/blade.php",
-            "app/Helpers/modules.php"
+            "app/Libs/blade.php",
+            "app/Libs/helpers.php"
         ]
     },
     "autoload-dev": {

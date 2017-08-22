@@ -54,7 +54,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     @foreach($active_modules as $module)
                                         <li>
-                                            <a href="{{route('application.create', ['module_slug' => $module->slug])}}">
+                                            <a href="{{$module->module->newUrl()}}">
                                                 {{$module->module->name}}
                                             </a>
                                         </li>
