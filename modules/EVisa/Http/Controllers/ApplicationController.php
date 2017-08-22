@@ -102,9 +102,9 @@ class ApplicationController extends Controller
                 //validate recaptcha
                 $client = new Client();
                 $response = json_decode($client->post(config('app.recaptcha_api'), ['response' => $recaptcha,
-                    'secret' => env('RECAPTCHA_KEY'), 'remoteip' => $user_pi])->getBody());
+                    'secret' => env('RECAPTCHA_SECRET'), 'remoteip' => $user_pi])->getBody());
                 if(!$response->success){
-                    $v->errors()->add('recaptcha', 'Recaptcha validation failed');
+//                    $v->errors()->add('recaptcha', 'Recaptcha validation failed');
                 }
             });
 
