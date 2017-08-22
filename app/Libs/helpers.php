@@ -705,7 +705,7 @@ if (!function_exists('create_pesaflow_bill')){
     function create_pesaflow_bill($invoice_no, $amount, $notes, \App\Models\User $user, $currency = 'KES', $return = 0)
     {
         #get all pesaflow related config
-        $config = config('pesaflow');
+        $config = \App\Libs\PaymentManager::get_default_manager_settings();
 
         #generate secure hash
         $hash = sign_pesaflow_payload([
@@ -725,10 +725,10 @@ if (!function_exists('create_pesaflow_bill')){
             'clientIDNumber' => $user->id_number,
             'clientEmail' => $user->email,
             'amountExpected' => $amount,
-            'callBackURLOnSuccess' => route('app.orders.view', [ $invoice_no]),
+            'callBackURLOnSuccess' => route('payment.success', [ $invoice_no]),
             'pictureURL' => $user->getAvatar(),
-            'notificationURL' => route('api.pesaflow-ipn', [ $invoice_no]),
-            'callBackURLOnFail' => route('app.orders.view', [ $invoice_no, 'status' =>'fail']),
+            'notificationURL' => route('payment.notification', [ $invoice_no]),
+            'callBackURLOnFail' => route('payment.failed', [ $invoice_no, 'status' =>'fail']),
             'return' => $return
         ];
 

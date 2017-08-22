@@ -54,4 +54,9 @@ class User extends Authenticatable
         
         return self::query()->whereIdNumber($username)->first();
      }
+
+     public function getAvatar()
+     {
+         return '';
+     }
 }

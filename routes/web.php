@@ -29,3 +29,12 @@ Route::prefix('applications/{module_slug}')
         Route::post('/create', 'ApplicationController@save')->name('application.save');
         Route::get('/{application}/edit', 'ApplicationController@edit')->name('application.edit');
     });
+
+
+
+/*
+ * Payment manager urls
+ *
+ */
+Route::get('payment-success', 'PaymentController@paymentSuccess')->name('payment.success');
+Route::get('payment-failed', 'PaymentController@paymentFailed')->name('payment.failed');

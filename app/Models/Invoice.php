@@ -1,0 +1,93 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Invoice extends Model
+{
+    protected $table = 'invoices';
+
+    protected $fillable = [
+        'application_id', 'status', 'date_paid','amount', 'pk', 'bill_ref'
+    ];
+
+    public function application()
+    {
+        return $this->belongsTo(Application::class, 'application_id');
+    }
+
+    public function invoice_items()
+    {
+        return $this->hasMany(InvoiceItem::class, 'invoice_id');
+    }
+
+    /**
+     * Boot all of the bootable traits on the model.
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->pk = \Uuid::generate()->string;
+        });
+
+        static::saving(function ($model) {
+            $model->pk = \Uuid::generate()->string;
+        });
+    }
+
+    public static function create_invoice($application_id,$status, array $items)
+    {
+        $invoice = null;
+        \DB::transaction(function() use (&$invoice, $application_id, $status, $items){
+            $_items =  collect($items);
+
+            $invoice  =  new self([
+                'application_id' => $application_id,
+                'status' => $status,
+                'amount' => $_items->sum('amount'),
+                'bill_ref' => generate_random_string()
+            ]);
+
+            $invoice->save();
+
+            $invoice_items  =  self::parse_items($items, $invoice);
+            //insert invoice items
+            $invoice->invoice_items()->saveMany($invoice_items);
+
+            $invoice->get_pesaflow_bill_ref();
+            $invoice->send_invoice_notification();
+        });
+
+        return $invoice;
+
+    }
+
+
+    public function get_pesaflow_bill_ref()
+    {
+        $ref  = create_pesaflow_bill($this->pk, intval(round($this->amount)), $this->notes, $this->application->user);
+        /*
+        $this->bill_ref =  $ref;
+        $this->save();
+        */
+
+        return $ref;
+    }
+
+    public function send_invoice_notification()
+    {
+
+    }
+
+    public static function parse_items(array  $items, self  $invoice)
+    {
+        return array_map(function($item) use($invoice){
+            return new InvoiceItem([
+                'invoice_id' => $invoice
+            ] + $item);
+        }, $items);
+    }
+}

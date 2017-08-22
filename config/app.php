@@ -172,6 +172,7 @@ return [
         Caffeinated\Modules\ModulesServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
 
+
         /*
          * Application Service Providers...
          */
@@ -234,6 +235,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Module' => Caffeinated\Modules\Facades\Module::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Uuid' => Webpatser\Uuid\Uuid::class,
     ],
 
     /*
