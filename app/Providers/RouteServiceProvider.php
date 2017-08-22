@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Module;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Mockery\Exception;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -39,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapModuleRoutes();
     }
 
     /**
@@ -52,8 +54,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -66,8 +68,26 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Registers custom routes from installed modules
+     */
+    protected function mapModuleRoutes()
+    {
+        try {
+            //todo: middleware to check if module is enabled
+            Route::group(['prefix' => 'mod/{module_slug}/'], function ($router){
+                Module::whereEnabled(true)->each(function ($mod) {
+                    $base_path = implode(DIRECTORY_SEPARATOR, [config('modules.path'), $mod->module->name, 'Routes']);
+                    require base_path(implode(DIRECTORY_SEPARATOR, [$base_path, 'web.php']));
+                    require base_path(implode(DIRECTORY_SEPARATOR, [$base_path, 'api.php']));
+                });
+            });
+        } catch (\Exception $e) {
+        }
     }
 }
