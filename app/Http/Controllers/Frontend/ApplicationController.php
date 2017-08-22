@@ -66,7 +66,7 @@ class ApplicationController extends Controller
 
     public function edit(Request $request, $module_slug, Application $application)
     {
-        $model = $application->module->module->fromFormData($application->form_data);
+        $model = $application->module->fromFormData($application->form_data);
         return view($this->module->view('edit'), [
             'application' => $application,
             'lookup_data' => $this->module->loadLookupData($model),

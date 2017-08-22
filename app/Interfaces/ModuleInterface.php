@@ -13,8 +13,6 @@ interface ModuleInterface
 {
     public function newUrl($params = []);
 
-    public function getAttributes();
-
     public function toFormData($data);
 
     public function fromFormData($data);

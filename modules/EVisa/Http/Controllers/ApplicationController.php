@@ -12,6 +12,7 @@ use App\Models\Application;
 use App\Models\Module;
 use App\Models\User;
 use App\Modules\BaseModule;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\EVisa\Models\EVisa;
@@ -52,7 +53,7 @@ class ApplicationController extends Controller
         $form_data = array_merge(session()->get($this->guest_app_session_key, []), $data);
         $this->saveTemp($form_data);
 
-        if($this->current_step < $this->max_temp_steps){
+        if ($this->current_step < $this->max_temp_steps) {
             return redirect($this->module->newUrl(['step' => $this->current_step + 1]));
         }
 
@@ -60,7 +61,7 @@ class ApplicationController extends Controller
         $user = User::firstOrCreate(['email' => array_get($form_data, 'email')]);
 
         //save application and send notification
-        $application = Application::insertRecord(Module::whereSlug($this->module->slug)->first(), $data, $user);
+        $application = Application::insertRecord($this->module, $data, $user);
         $this->sendEmailToUser($user, $application);
 
         session()->put($this->guest_app_id, $application->id);
@@ -72,6 +73,48 @@ class ApplicationController extends Controller
         $app_id = session()->get($this->guest_app_id);
         $application = Application::find($app_id);
         return view('e-visa::guest_complete', compact('application'));
+    }
+
+    public function guestReturnFromEmail(Request $request)
+    {
+        $return_code = $request->route('return_code');
+        //todo: check if the application is older than 1hr
+        return view('e-visa::retrieve_guest', compact('return_code'));
+    }
+
+    public function continueFromEmail(Request $request)
+    {
+        $app_number = trim($request->application_number);
+        $recaptcha = $request->get('g-recaptcha-response');
+
+        $app_id = head(\Hashids::decode($request->route('return_code')));
+        $application = Application::with('user')->find($app_id);
+
+        $validator = \Validator::make($request->all(), [])
+            ->after(function ($v) use($application, $app_number){
+                //validate application number
+                if(strtolower($app_number) != strtolower($application->application_number)){
+                    $v->errors()->add('application_number', __('Application Reference Number not matching'));
+                }
+            })
+            ->after(function($v) use ($recaptcha, $request){
+                $user_pi = $request->ip();
+                //validate recaptcha
+                $client = new Client();
+                $response = json_decode($client->post(config('app.recaptcha_api'), ['response' => $recaptcha,
+                    'secret' => env('RECAPTCHA_KEY'), 'remoteip' => $user_pi])->getBody());
+                if(!$response->success){
+                    $v->errors()->add('recaptcha', 'Recaptcha validation failed');
+                }
+            });
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        //login this user then let him edit the appliction
+        auth()->login($application->user);
+        return redirect()->route('e-visa.application.edit', ['application_id' => $app_id, 'step' => $this->max_temp_steps + 1]);
     }
 
     protected function getOrCreateFromSession()

@@ -2,6 +2,9 @@
 
 return [
 
+    'recaptcha_api' => 'https://www.google.com/recaptcha/api/siteverify',
+
+
     'ss-on-url' => 'https://accounts.ecitizen.go.ke/login',
     /*
     |--------------------------------------------------------------------------

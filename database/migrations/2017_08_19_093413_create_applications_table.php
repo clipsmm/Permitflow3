@@ -18,7 +18,7 @@ class CreateApplicationsTable extends Migration
             $table->string('application_number')->unique();
             $table->unsignedInteger('user_id');
             $table->jsonb('form_data');
-            $table->unsignedInteger('module_id');
+            $table->string('module_slug');
             $table->string('status')->default('draft');
             $table->timestamp('submitted_at')->nullable();
             $table->softDeletes();
@@ -27,11 +27,6 @@ class CreateApplicationsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade');
-
-            $table->foreign('module_id')
-                ->references('id')
-                ->on('modules')
                 ->onDelete('cascade');
         });
     }

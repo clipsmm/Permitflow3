@@ -14,5 +14,7 @@ Route::group(['prefix' => 'e-visa', 'as' => 'e-visa.'], function () {
     Route::get('/applications/new', 'ApplicationController@create')->name('application.new');
     Route::post('/applications/new', 'ApplicationController@save')->name('application.new');
     Route::get('/guest/complete', 'ApplicationController@notifyGuest')->name('guest.complete');
+    Route::get('/guest/return/{return_code}', 'ApplicationController@guestReturnFromEmail')->name('guest.email.return');
+    Route::post('/guest/return/{return_code}', 'ApplicationController@continueFromEmail')->name('guest.continue');
 });
 

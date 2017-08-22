@@ -23,14 +23,6 @@ class EVisa extends BaseModule implements ModuleInterface
         return route('e-visa.application.new', $params);
     }
 
-    public function getAttributes()
-    {
-        return [
-            'name' => 'EVisa',
-            'slug' => 'e-visa',
-        ];
-    }
-
     public function getValidator($request, $current_step)
     {
         switch ($current_step) {
