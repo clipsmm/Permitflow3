@@ -13,7 +13,7 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     protected $fillable = [
-        'application_id', 'status', 'date_paid','amount', 'pk', 'bill_ref'
+        'application_id', 'status', 'date_paid','amount', 'pk', 'bill_ref', 'description'
     ];
 
     public function application()

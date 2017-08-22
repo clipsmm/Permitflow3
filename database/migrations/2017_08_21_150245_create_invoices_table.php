@@ -21,6 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->dateTime('date_paid')->nullable()->default(null);
             $table->string('bill_ref')->unique()->nullable()->default(null);
             $table->string('status');
+            $table->text('description')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('application_id')
