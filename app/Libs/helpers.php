@@ -705,7 +705,7 @@ if (!function_exists('create_pesaflow_bill')){
     function create_pesaflow_bill($invoice_no, $amount, $notes, \App\Models\User $user, $currency = 'KES', $return = 0)
     {
         #get all pesaflow related config
-        $config = config('pesaflow');
+        $config = \App\Libs\PaymentManager::get_default_manager_settings();
 
         #generate secure hash
         $hash = sign_pesaflow_payload([
@@ -725,10 +725,10 @@ if (!function_exists('create_pesaflow_bill')){
             'clientIDNumber' => $user->id_number,
             'clientEmail' => $user->email,
             'amountExpected' => $amount,
-            'callBackURLOnSuccess' => route('app.orders.view', [ $invoice_no]),
+            'callBackURLOnSuccess' => route('payment.success', [ $invoice_no]),
             'pictureURL' => $user->getAvatar(),
-            'notificationURL' => route('api.pesaflow-ipn', [ $invoice_no]),
-            'callBackURLOnFail' => route('app.orders.view', [ $invoice_no, 'status' =>'fail']),
+            'notificationURL' => route('payment.notification', [ $invoice_no]),
+            'callBackURLOnFail' => route('payment.failed', [ $invoice_no, 'status' =>'fail']),
             'return' => $return
         ];
 
@@ -746,6 +746,35 @@ if (!function_exists('create_pesaflow_bill')){
         $result = trim($result);
 
         return is_empty($result) ? null : $result;
+    }
+}
+
+if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
+
+    function get_pesaflow_checkout_data_from_invoice(\App\Models\Invoice $invoice, $currency = 'KES')
+    {
+        $config  = config('pesaflow');
+        $user =  $invoice->application->user;
+
+
+        return [
+            'url' => $config['url'],
+            'apiClientID' => $config['apiClientId'],
+            'secureHash' => $invoice->get_payment_signature(),
+            'currency' => $currency,
+            'billDesc' => $invoice->description,
+            'billRefNumber' => $invoice->bill_ref,
+            'serviceID' => $config['apiServiceId'],
+            'clientMSISDN' => $user->phone,
+            'clientName' => $user->full_name,
+            'clientIDNumber' => $user->id_number,
+            'clientEmail' => $user->email,
+            'amountExpected' => $this->amount,
+            'callBackURLOnSuccess' => route('payment.success', [ $invoice->id]),
+            'pictureURL' => $user->getAvatar(),
+            'notificationURL' => route('payment.notification', [ $invoice->id]),
+            'callBackURLOnFail' => route('payment.failed', [ $invoice->id, 'status' =>'fail']),
+        ];
     }
 }
 

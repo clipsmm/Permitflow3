@@ -176,6 +176,7 @@ return [
         Vinkla\Hashids\HashidsServiceProvider::class,
         PragmaRX\Countries\ServiceProvider::class,
 
+
         /*
          * Application Service Providers...
          */
@@ -238,6 +239,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Module' => Caffeinated\Modules\Facades\Module::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Uuid' => Webpatser\Uuid\Uuid::class,
         'Countries'=> PragmaRX\Countries\Facade::class,
     ],
 

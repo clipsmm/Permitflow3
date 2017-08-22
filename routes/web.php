@@ -22,6 +22,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/frontend', 'FrontendController@index')->name('frontend');
+Route::get('/backend', 'BackendController@index')->name('backend');
+
+
 Route::prefix('applications/{module_slug}')
     ->namespace('Frontend')
     ->group(function () {
@@ -29,3 +33,11 @@ Route::prefix('applications/{module_slug}')
         Route::post('/create', 'ApplicationController@save')->name('application.save');
         Route::get('/{application}/edit', 'ApplicationController@edit')->name('application.edit');
     });
+
+/*
+ * Payment manager urls
+ *
+ */
+Route::get('payment-success', 'PaymentController@paymentSuccess')->name('payment.success');
+Route::get('payment-failed', 'PaymentController@paymentFailed')->name('payment.failed');
+
