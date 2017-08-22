@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Path to Modules
+    | Path to Module s
     |--------------------------------------------------------------------------
     |
     | Define the path where you'd like to store your modules. Note that if you
@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'path' => 'modules',
+    'path' => base_path('modules'),
 
     /*
     |--------------------------------------------------------------------------
