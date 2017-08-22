@@ -762,7 +762,7 @@ if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
             'apiClientID' => $config['apiClientId'],
             'secureHash' => $invoice->get_payment_signature(),
             'currency' => $currency,
-            'billDesc' => 'Payment for Application',
+            'billDesc' => $invoice->description,
             'billRefNumber' => $invoice->bill_ref,
             'serviceID' => $config['apiServiceId'],
             'clientMSISDN' => $user->phone,
