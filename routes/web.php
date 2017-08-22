@@ -23,7 +23,18 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/frontend', 'FrontendController@index')->name('frontend');
-Route::get('/backend', 'BackendController@index')->name('backend');
+
+/*
+ * Backend routes
+ */
+Route::prefix('backend')
+    ->namespace('Backend')
+    ->group(function(){
+        Route::get('', 'DashboardController@index')->name('backend');
+        Route::get('tasks', 'ModuleController@index')->name('backend.modules.index');
+
+    });
+
 
 
 Route::prefix('applications/{module_slug}')
