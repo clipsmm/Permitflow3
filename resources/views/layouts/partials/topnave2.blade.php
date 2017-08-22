@@ -9,11 +9,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav tp-icon">
-                <li><a href="#"><strong>Make Application</strong></a></li>
-                <li><a href="#">Businesses</a></li>
-                <li><a href="#">Collateral Registry(MPSR)</a></li>
-                <li><a href="#">Application History</a></li>
+                <li><a href="/accounts/46/services"><strong>Make Application</strong></a></li>
+                <li><a href="/businesses">Businesses</a></li>
+                <li>
+                    <a href="/accounts/46/collaterals">Collateral Registry(MPSR)</a>
+                </li>
+                <li><a href="/accounts/46/applications">Application History</a></li>
+
             </ul>
+
         </div>
+        <!--/.nav-collapse -->
     </div>
 </nav>
