@@ -7,13 +7,15 @@
     "require": {
         "php": ">=5.6.4",
         "caffeinated/modules": "^4.2",
+        "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "milon/barcode": "^5.3",
         "nategood/httpful": "^0.2.20",
         "vinkla/hashids": "^3.2",
-        "webpatser/laravel-uuid": "2.*"
+        "webpatser/laravel-uuid": "2.*",
+        "pragmarx/countries": "^0.1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -31,8 +33,7 @@
             "Modules\\": "modules/"
         },
         "files": [
-            "app/Helpers/blade.php",
-            "app/Helpers/modules.php",
+            "app/Libs/blade.php",
             "app/Libs/helpers.php"
         ]
     },

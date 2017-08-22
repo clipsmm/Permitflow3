@@ -15,13 +15,6 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        foreach (Module::all() as $attrs){
-            $module = BaseModule::instance_from_slug($attrs['slug']);
-            // todo: register views only if module is enabled
-            if($module->hasViews){
-                view()->addNamespace($module->slug, $module->viewsPath());
-            }
-        }
     }
 
     /**

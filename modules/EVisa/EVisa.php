@@ -8,27 +8,42 @@
 
 namespace Modules;
 
+use \Countries;
 use App\Interfaces\ModuleInterface;
 use App\Modules\BaseModule;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class EVisa extends BaseModule implements ModuleInterface
 {
-    public $numSteps = 2;
     public $modelClass = \Modules\EVisa\Models\EVisa::class;
 
-    public function getAttributes()
+    public function newUrl($params = [])
     {
-        return [
-            'name' => 'EVisa',
-            'slug' => 'e-visa',
-        ];
+        return route('e-visa.application.new', $params);
     }
 
     public function getValidator($request, $current_step)
     {
-        return Validator::make($request->all(), [
-            'visa_type' => ['required']
-        ]);
+        switch ($current_step) {
+            case 1:
+                return Validator::make($request->all(), [
+                    'country_of_application' => ['required', 'cca2'],
+                    'applicant' => ['required', Rule::in(['self', 'agent', 'child', 'spouse'])]
+                ]);
+                break;
+            case 2:
+                return Validator::make($request->all(), [
+                    'nationality' => ['required', 'cca2', 'countries_blacklist'],
+                    'country_of_residence' => ['required', 'cca2'],
+                    'city' => ['required'],
+                    'physical_address' => ['required'],
+                    'phone_number' => ['required', 'full_phone'],
+                    'email' => ['required', 'email'],
+                ], [
+                    'phone_number.full_phone' => __('Use +2547********* format'),
+                    'nationality.countries_blacklist' => _('Sorry, nationals of this country are not eligible for e-Visa')
+                ]);
+        }
     }
 }

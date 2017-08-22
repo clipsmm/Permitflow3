@@ -1,0 +1,1 @@
+export default require('./EVisa/Assets/js/create.vue');

@@ -2,5 +2,6 @@
     "name": "EVisa",
     "slug": "e-visa",
     "version": "1.0",
-    "description": "Module for evisa applications"
+    "description": "Module for evisa applications",
+    "prefix": "EV"
 }
