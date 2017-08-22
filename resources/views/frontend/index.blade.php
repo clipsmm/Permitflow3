@@ -182,7 +182,7 @@
                                                                         <small class="hidden-md hidden-lg">NS-NLDHMX</small>
                                                                     </td>
                                                                     <td class="hidden-xs hidden-sm">NS-NLDHMX</td>
-                                                                    <tdd
+                                                                    <td>
                                                                         <a href="#" class="btn btn-xs btn-primary">
                                                                             <span class="fa fa-eye"></span> View
                                                                         </a>
@@ -309,25 +309,7 @@
                                                 <div class="panel-body">
                                                     <div class="panel panel-default m-b-0">
 
-                                                        <div class="panel-body b-b-1">
-                                                            <form class="col-sm-6" accept-charset="UTF-8" action="" method="get"><input name="_utf8" type="hidden" value="✓">
-                                                                <div class="input-group " id="adv-search">
-                                                                    <input type="hidden" name="application_id" value=''>
-                                                                    <input id="search_type" name="search[type]" type="hidden">            <input class="form-control" id="search_q" name="search[q]" placeholder="Enter Ref No." type="text" value="">
-                                                                    <div class="input-group-btn">
-                                                                        <div class="btn-group" role="group">
-                                                                            <div class="dropdown dropdown-lg full_width"></div>
-                                                                            <button type="submit" name="submit" class="btn btn5 btn-primary"><span class="search_btn_txt"> <span class="fa fa-search"></span> Search</span></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
 
-                                                            </form>
-                                                            <a href="#" class="btn btn-sm btn-success pull-right">
-                                                                <span class="fa fa-tasks"></span> Pick Task
-                                                            </a>
-
-                                                        </div>
 
                                                         <div class="panel-body padding-0">
                                                             <table class="table table-hover table-special table-striped">
