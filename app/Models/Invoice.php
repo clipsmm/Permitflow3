@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed $invoice_items
+ * @property mixed $application
+ */
 class Invoice extends Model
 {
     protected $table = 'invoices';
@@ -62,7 +66,6 @@ class Invoice extends Model
         });
 
         return $invoice;
-
     }
 
 
@@ -89,5 +92,16 @@ class Invoice extends Model
                 'invoice_id' => $invoice
             ] + $item);
         }, $items);
+    }
+
+    public function get_payment_signature($currency = 'KES')
+    {
+        $config = \App\Libs\PaymentManager::get_default_manager_settings();
+        $user  =  $this->application->user;
+
+        return sign_pesaflow_payload([
+            $config['apiClientId'], intval(round($this->amount)), $config['apiServiceId'], $user->id_number,
+            $currency, $this->bill_ref, $this->notes, $user->full_name, $config['apiSecret']
+        ], $config['apiKey']);
     }
 }

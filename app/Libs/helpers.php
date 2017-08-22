@@ -749,3 +749,32 @@ if (!function_exists('create_pesaflow_bill')){
     }
 }
 
+if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
+
+    function get_pesaflow_checkout_data_from_invoice(\App\Models\Invoice $invoice, $currency = 'KES')
+    {
+        $config  = config('pesaflow');
+        $user =  $invoice->application->user;
+
+
+        return [
+            'url' => $config['url'],
+            'apiClientID' => $config['apiClientId'],
+            'secureHash' => $invoice->get_payment_signature(),
+            'currency' => $currency,
+            'billDesc' => 'Payment for Application',
+            'billRefNumber' => $invoice->bill_ref,
+            'serviceID' => $config['apiServiceId'],
+            'clientMSISDN' => $user->phone,
+            'clientName' => $user->full_name,
+            'clientIDNumber' => $user->id_number,
+            'clientEmail' => $user->email,
+            'amountExpected' => $this->amount,
+            'callBackURLOnSuccess' => route('payment.success', [ $invoice->id]),
+            'pictureURL' => $user->getAvatar(),
+            'notificationURL' => route('payment.notification', [ $invoice->id]),
+            'callBackURLOnFail' => route('payment.failed', [ $invoice->id, 'status' =>'fail']),
+        ];
+    }
+}
+

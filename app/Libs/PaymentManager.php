@@ -7,6 +7,8 @@ namespace App\Libs;
  *
  */
 
+use Illuminate\Http\Request;
+
 class  PaymentManager  {
     public $config;
 
@@ -34,6 +36,12 @@ class  PaymentManager  {
         } catch (\Exception $ex) {
             throw $ex;
         }
+    }
+
+    public static function validate_pesaflow_request(Request $request)
+    {
+        //todo: pesaflow payment validation logic here
+        return [true, $request];
     }
 
 
