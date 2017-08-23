@@ -23,9 +23,6 @@
                                 <div class="panel panel-default m-b-0">
 
 
-
-
-
                                     <div class="panel-body b-b-1">
                                         <form class="col-sm-6" accept-charset="UTF-8" action="" method="get"><input name="_utf8" type="hidden" value="✓">
                                             <div class="input-group " id="adv-search">
@@ -298,8 +295,6 @@
 
 
                             <div class="panel-footer">
-
-
                                 <div class="page-nation">
                                     <ul class="pagination pagination-large">
                                         <li class="disabled"><span>«</span></li>
@@ -316,14 +311,7 @@
 
                                     </ul>
                                 </div>
-
                             </div>
-
-
-
-
-
-
 
                         </div>
 
@@ -331,15 +319,8 @@
 
                         <div class="tab-pane fade" id="tab2default">
 
-
-
-
                             <div class="panel-body">
                                 <div class="panel panel-default m-b-0">
-
-
-
-
 
                                     <div class="panel-body b-b-1">
                                         <form class="col-sm-6" accept-charset="UTF-8" action="" method="get"><input name="_utf8" type="hidden" value="✓">
@@ -360,8 +341,6 @@
                                         </a>
 
                                     </div>
-
-
 
                                     <div class="panel-body padding-0">
                                         <table class="table table-hover table-special table-striped">
@@ -606,11 +585,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
 
                             <div class="panel-footer">
 
