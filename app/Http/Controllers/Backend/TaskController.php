@@ -22,7 +22,7 @@ class TaskController extends Controller
 
     public function index()
     {
-        return view('backend.tasks.index', [
+        return view('backend.tasks.dashboard', [
             'tasks' => []
         ])->with('page_title', __('pages.tasks_page'));
     }
