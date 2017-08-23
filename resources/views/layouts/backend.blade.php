@@ -29,6 +29,24 @@
 
                     </div>
                 </div>
+
+
+                @if($my_modules)
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">Modules</div>
+                        </div>
+                        <div class=panel-body>
+                            <ul class="nav navbar-nav nav-profile">
+                                @foreach($my_modules as $mod)
+                                    <li><a href="{{ route('backend.tasks.queue', $mod['slug']) }}">{{ $mod['name'] }}</a></li>
+                                @endforeach
+                            </ul>
+
+                        </div>
+                    </div>
+                @endif
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title">Need Help?</div>
@@ -62,40 +80,7 @@
 
 
                 <!-- pannel -->
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <div class="pull-right" role="">
-
-                            <a href="{{ route('backend.tasks.index') }}" class="btn btn-sm btn-success">
-                                <span class="fa fa-tasks"></span> Tasks
-                            </a>
-                            <a href="#" class="btn btn-sm btn-primary">
-                                <span class="fa fa-list"></span> Applications
-                            </a>
-                            <a href="#" class="btn btn-sm btn-warning">
-                                <span class="fa fa-file-text"></span> Reports
-                            </a>
-                            <a href="#" class="btn btn-sm btn-info">
-                                <span class="fa fa-cogs"></span> Settings
-                            </a>
-                        </div>
-                        <h3 class="panel-title">Tasks</h3>
-                        <!--   <small> Application tasks</small> -->
-                    </div>
-
-
-                    <div class="panel-body">
-
-                        @yield('body')
-
-                    </div>
-
-
-
-
-
-                </div>
-
+            @yield('body')
 
                 <!--   end pannel -->
             </div>

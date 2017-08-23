@@ -9,6 +9,8 @@
 namespace App\Modules;
 
 
+use App\Models\Application;
+use App\Models\Task;
 use Caffeinated\Modules\Facades\Module;
 
 class BaseModule
@@ -62,4 +64,16 @@ class BaseModule
         return $counter + 1;
     }
 
+    public function get_task_actions(Task $task)
+    {
+        return self::$stages[$task->stage];
+    }
+
+    public function render_application_view(Application $application)
+    {
+        return view("{$this->slug}::application_view", [
+            'application' => $application,
+            'module' => $this
+        ]);
+    }
 }

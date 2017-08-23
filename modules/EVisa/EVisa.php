@@ -8,6 +8,7 @@
 
 namespace Modules;
 
+use App\Events\ApplicationSubmitted;
 use App\Models\Task;
 use Carbon\Carbon;
 use \Countries;
@@ -15,10 +16,25 @@ use App\Interfaces\ModuleInterface;
 use App\Modules\BaseModule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Modules\EVisa\TaskHandler;
+use Modules\Evisa\Listeners\EvisaApplicationSubmittedHandler;
 
 class EVisa extends BaseModule implements ModuleInterface
 {
     public $modelClass = \Modules\EVisa\Models\EVisa::class;
+
+    /**
+     * Module specific event /listener pairs
+     *
+     * @var array
+     */
+
+    public $listens = [
+        ApplicationSubmitted::class => [
+            EvisaApplicationSubmittedHandler::class
+        ]
+    ];
+
     public static $stages  = [
         'review' => [
             'reject' => [
@@ -37,6 +53,7 @@ class EVisa extends BaseModule implements ModuleInterface
             ]
         ]
     ];
+
     public $numSteps = 8;
 
     public function newUrl($params = [])
@@ -137,8 +154,23 @@ class EVisa extends BaseModule implements ModuleInterface
 
     public function handle_task(Task $task, $action, $comments = null)
     {
+        $task->load(['application', 'application.user']);
+
+        $handler  = new TaskHandler($task);
+
         switch($action){
-            case '';
+            case 'reject':
+                $handler->reject_application($comments);
+                break;
+            case 'corrections':
+                $handler->send_to_corrections($comments);
+                break;
+            case 'approve':
+                $handler->approve_application();
+                break;
+            default:
+                throw new \Exception(__('errors.undefined_task'));
+                break;
         }
     }
 }

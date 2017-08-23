@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Passport\Listeners;
+namespace Modules\Evisa\Listeners;
 
 use App\Events\ApplicationSubmitted;
 use App\Models\Task;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PassportApplicationHandler
+class EvisaApplicationSubmittedHandler
 {
     /**
      * Create the event listener.
@@ -29,6 +29,6 @@ class PassportApplicationHandler
     {
         //create passport review task
         $application =  $event->application;
-        Task::create_task($application->id, "Passport Review Task",'review','pending');
+        Task::create_task($application->id, "Evisa Review Task",'review','pending');
     }
 }

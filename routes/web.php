@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('auth/sso','Auth\SsoController@ssoRedirect')->name('auth.sso_redirect');
 Route::get('auth/sso/authorize','Auth\SsoController@ssoRedirect')->name('auth.sso_authorize');
 
@@ -31,8 +33,17 @@ Route::prefix('backend')
     ->namespace('Backend')
     ->group(function(){
         Route::get('', 'DashboardController@index')->name('backend');
-        Route::get('tasks', 'TaskController@index')->name('backend.tasks.index');
+        Route::group(['prefix' => 'tasks'], function(){
+            Route::get('', 'TaskController@index')->name('backend.tasks.index');
 
+            Route::group(['prefix' => '{module}'], function (){
+                Route::get('', 'TaskController@myQueue')->name('backend.tasks.queue');
+                Route::get('inbox', 'TaskController@myInbox')->name('backend.tasks.inbox');
+                Route::get('outbox', 'TaskController@myOutbox')->name('backend.tasks.outbox');
+                Route::get('corrections', 'TaskController@myInCorrection')->name('backend.tasks.corrections');
+                Route::get('{task}/view', 'TaskController@show')->name('backend.tasks.show');
+            });
+        });
     });
 
 

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Modules\BaseModule;
 use Caffeinated\Modules\Facades\Module;
+use Caffeinated\Modules\Modules;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -36,8 +38,9 @@ class EventServiceProvider extends ServiceProvider
     public function loadModuleEvents()
     {
         try{
-            Module::whereEnabled(true)->each(function ($item) {
-                foreach ($item->listens as $event => $listeners) {
+            Module::enabled()->each(function ($item) {
+                $module  =  BaseModule::instance_from_slug($item['slug']);
+                foreach ($module->listens as $event => $listeners) {
                     foreach ($listeners as $listener) {
                         Event::listen($event, $listener);
                     }

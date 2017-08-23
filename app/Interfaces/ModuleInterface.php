@@ -9,6 +9,7 @@
 namespace App\Interfaces;
 
 
+use App\Models\Application;
 use App\Models\Task;
 
 interface ModuleInterface
@@ -28,4 +29,8 @@ interface ModuleInterface
     public function loadLookupData($model);
 
     public function handle_task(Task $task, $action, $comments  = null);
+
+    public function get_task_actions(Task $task);
+
+    public function render_application_view(Application $application);
 }

@@ -10,6 +10,7 @@ namespace Modules;
 
 
 use App\Events\ApplicationSubmitted;
+use App\Models\Task;
 use Modules\Passport\Listeners\PassportApplicationHandler;
 use Validator;
 use App\Interfaces\ModuleInterface;
@@ -20,17 +21,7 @@ class Passport extends BaseModule implements ModuleInterface
     public $numSteps = 1;
     public $modelClass = \Modules\Passport\Models\Passport::class;
 
-    /**
-     * Module specific event /listener pairs
-     *
-     * @var array
-     */
 
-    public $listens = [
-        ApplicationSubmitted::class => [
-            PassportApplicationHandler::class
-        ]
-    ];
 
     public function getAttributes()
     {
@@ -59,5 +50,10 @@ class Passport extends BaseModule implements ModuleInterface
     public function newUrl()
     {
         // TODO: Implement newUrl() method.
+    }
+
+    public function handle_task(Task $task, $action, $comments = null)
+    {
+        // TODO: Implement handle_task() method.
     }
 }
