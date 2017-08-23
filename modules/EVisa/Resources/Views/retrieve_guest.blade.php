@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">@lang('Retrieve your application to continue')</div>
             <div class="panel-body">
-                {!! Form::open(['url' => route('e-visa.guest.continue', ['return_code' => $return_code])]) !!}
+                {!! Form::open(['url' => route('e-visa.guest.resume', ['return_code' => $return_code])]) !!}
                     <div class="form-group {{error_class($errors, 'application_number')}}">
                         <label for="">
                             @lang('Application Reference Number')

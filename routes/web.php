@@ -43,6 +43,7 @@ Route::prefix('applications/{module_slug}')
         Route::get('/new', 'ApplicationController@create')->name('application.create');
         Route::post('/create', 'ApplicationController@save')->name('application.save');
         Route::get('/{application}/edit', 'ApplicationController@edit')->name('application.edit');
+        Route::get('/{application}/review', 'ApplicationController@review')->name('application.review');
     });
 
 /*

@@ -78,5 +78,6 @@ class ApplicationController extends Controller
 
     public function review(Application $application)
     {
+        dd($application);
     }
 }

@@ -37,4 +37,9 @@ class Application extends Model
     {
         return implode("-", [$module->prefix, Hashids::encode($module->getUpdatedCounter())]);
     }
+    
+    public function updateFormData($data){
+        $this->form_data = array_merge($this->form_data, $data);
+        $this->save();
+    }
 }
