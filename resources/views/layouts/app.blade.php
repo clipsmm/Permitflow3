@@ -22,7 +22,7 @@
 <body>
 <div id="app">
      @include('layouts.partials.topnav1')
-{{--     @include('layouts.partials.topnave2')--}}
+     @include('layouts.partials.topnave2')
     @yield('content')
 </div>
 
@@ -32,5 +32,7 @@
 <script src="{{ asset('js/app.js') }}"></script>
 
 
+@stack('page_js')
+@stack('javascripts')
 </body>
 </html>

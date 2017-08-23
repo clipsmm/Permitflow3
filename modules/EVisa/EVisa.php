@@ -35,7 +35,7 @@ class EVisa extends BaseModule implements ModuleInterface
         ]
     ];
 
-    public static $stages = [
+    public $stages  = [
         'review' => [
             'reject' => [
                 'color' => 'danger',

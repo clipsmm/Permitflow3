@@ -31,9 +31,12 @@ class TaskController extends Controller
     {
         //todo: ensure user can view this task
 
+        $actions = $module->get_task_actions($task);
+
         return view('backend.tasks.view',[
             'task' => $task,
-            'module' => $module
+            'module' => $module,
+            'actions' => $actions
         ]);
     }
 
@@ -123,6 +126,36 @@ class TaskController extends Controller
         }
 
         return redirect()->route('backend.tasks.show', [$module->slug, $task->id]);
+    }
+
+    public function handleTask($module, Task $task, Request $request)
+    {
+        $this->validate($request, [
+            'action' => "required"
+        ]);
+        $_action = $request->input('action');
+
+        try{
+            $action = $module->get_task_actions($task)[$_action];
+        } catch (\Exception $e){
+            throw  $e;
+        }
+
+        $rule = array_get($action, 'feedback',false) ? "required" : "nullable";
+
+        $this->validate($request, [
+            'comment' => $rule
+        ]);
+
+        $comment = $request->input('comment');
+
+        $module->handle_task($task, $_action, $comment);
+
+        //todo: check if module auto pick task is enabled and pick next task
+        return redirect()->route('backend.tasks.show', [$module->slug, $task->id])
+            ->with('alerts', [
+                ['type' => 'success', 'message' => __('messages.task_handled')]
+            ]);
     }
 
 

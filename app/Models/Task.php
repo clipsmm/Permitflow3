@@ -19,7 +19,7 @@ class Task extends Model
     protected $table = 'tasks';
 
     protected $fillable = [
-        'application_id', 'name', 'user_id', 'assigned_at', 'expires_at', 'completed_at', 'status'
+        'application_id', 'name', 'user_id', 'assigned_at', 'expires_at', 'completed_at', 'status', 'stage'
     ];
 
     public function application()

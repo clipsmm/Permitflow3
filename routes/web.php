@@ -39,11 +39,11 @@ Route::prefix('backend')
             Route::group(['prefix' => '{module}'], function (){
                 Route::get('', 'TaskController@myQueue')->name('backend.tasks.queue');
                 Route::get('pick', 'TaskController@pickTask')->name('backend.tasks.pick');
-                Route::post('submit', 'TaskController@myQueue')->name('backend.tasks.submit');
                 Route::get('inbox', 'TaskController@myInbox')->name('backend.tasks.inbox');
                 Route::get('outbox', 'TaskController@myOutbox')->name('backend.tasks.outbox');
                 Route::get('corrections', 'TaskController@myInCorrection')->name('backend.tasks.corrections');
                 Route::get('{task}/view', 'TaskController@show')->name('backend.tasks.show');
+                Route::post('{task}/view', 'TaskController@handleTask')->name('backend.tasks.submit');
             });
         });
     });
@@ -57,6 +57,7 @@ Route::prefix('applications/{module_slug}')
         Route::post('/create', 'ApplicationController@save')->name('application.save');
         Route::get('/{application}/edit', 'ApplicationController@edit')->name('application.edit');
         Route::get('/{application}/review', 'ApplicationController@review')->name('application.review');
+        Route::get('/{application}/checkout/{invoice_pk}', 'FrontendController@loadApplicationCheckout')->name('application.checkout');
         Route::post('/{application}/submit', 'ApplicationController@submit')->name('application.review.submit');
         Route::get('/{application}/submitted', 'ApplicationController@submitted')->name('application.submitted');
     });

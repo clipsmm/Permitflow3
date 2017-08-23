@@ -67,7 +67,7 @@ class BaseModule
 
     public function get_task_actions(Task $task)
     {
-        return self::$stages[$task->stage];
+        return $this->stages[$task->stage];
     }
 
     public function render_application_view(Application $application)
