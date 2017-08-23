@@ -66,7 +66,7 @@
                     <div class="panel-heading clearfix">
                         <div class="pull-right" role="">
 
-                            <a href="#" class="btn btn-sm btn-success">
+                            <a href="{{ route('backend.tasks.index') }}" class="btn btn-sm btn-success">
                                 <span class="fa fa-tasks"></span> Tasks
                             </a>
                             <a href="#" class="btn btn-sm btn-primary">

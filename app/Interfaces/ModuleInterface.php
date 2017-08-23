@@ -9,6 +9,8 @@
 namespace App\Interfaces;
 
 
+use App\Models\Task;
+
 interface ModuleInterface
 {
     public function newUrl($params = []);
@@ -24,4 +26,6 @@ interface ModuleInterface
     public function getValidator($request, $current_step);
 
     public function loadLookupData($model);
+
+    public function handle_task(Task $task, $action, $comments  = null);
 }

@@ -31,7 +31,7 @@ Route::prefix('backend')
     ->namespace('Backend')
     ->group(function(){
         Route::get('', 'DashboardController@index')->name('backend');
-        Route::get('tasks', 'ModuleController@index')->name('backend.modules.index');
+        Route::get('tasks', 'TaskController@index')->name('backend.tasks.index');
 
     });
 

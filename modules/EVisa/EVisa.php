@@ -8,6 +8,7 @@
 
 namespace Modules;
 
+use App\Models\Task;
 use \Countries;
 use App\Interfaces\ModuleInterface;
 use App\Modules\BaseModule;
@@ -17,6 +18,25 @@ use Illuminate\Validation\Rule;
 class EVisa extends BaseModule implements ModuleInterface
 {
     public $modelClass = \Modules\EVisa\Models\EVisa::class;
+
+    public static $stages  = [
+        'review' => [
+            'reject' => [
+                'color' => 'danger',
+                'name' => 'Reject',
+                'feedback' => true
+            ],
+            'corrections' => [
+                'color' => 'warning',
+                'name' => 'Send to Corrections',
+                'feedback' => true
+            ],
+            'approve' => [
+                'color' => 'primary',
+                'name' => 'Approve',
+            ]
+        ]
+    ];
 
     public function newUrl($params = [])
     {
@@ -44,6 +64,13 @@ class EVisa extends BaseModule implements ModuleInterface
                     'phone_number.full_phone' => __('Use +2547********* format'),
                     'nationality.countries_blacklist' => _('Sorry, nationals of this country are not eligible for e-Visa')
                 ]);
+        }
+    }
+
+    public function handle_task(Task $task, $action, $comments = null)
+    {
+        switch($action){
+            case '';
         }
     }
 }
