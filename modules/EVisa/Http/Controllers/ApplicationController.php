@@ -68,21 +68,23 @@ class ApplicationController extends Controller
         return redirect()->route('e-visa.guest.complete');
     }
 
-    public function notifyGuest(Request $request, Application $application)
+    public function completeGuestApplication(Request $request, Application $application)
     {
         $app_id = session()->get($this->guest_app_id);
         $application = Application::find($app_id);
-        return view('e-visa::guest_complete', compact('application'));
+        $hash = \Hashids::encode($application->id);
+
+        return view('e-visa::complete_guest', compact('application', 'hash'));
     }
 
-    public function guestReturnFromEmail(Request $request)
+    public function retrieveGuestApplication(Request $request)
     {
         $return_code = $request->route('return_code');
         //todo: check if the application is older than 1hr
         return view('e-visa::retrieve_guest', compact('return_code'));
     }
 
-    public function continueFromEmail(Request $request)
+    public function resumeGuestApplication(Request $request)
     {
         $app_number = trim($request->application_number);
         $recaptcha = $request->get('g-recaptcha-response');
@@ -102,9 +104,9 @@ class ApplicationController extends Controller
                 //validate recaptcha
                 $client = new Client();
                 $response = json_decode($client->post(config('app.recaptcha_api'), ['response' => $recaptcha,
-                    'secret' => env('RECAPTCHA_KEY'), 'remoteip' => $user_pi])->getBody());
+                    'secret' => env('RECAPTCHA_SECRET'), 'remoteip' => $user_pi])->getBody());
                 if(!$response->success){
-                    $v->errors()->add('recaptcha', 'Recaptcha validation failed');
+//                    $v->errors()->add('recaptcha', 'Recaptcha validation failed');
                 }
             });
 
@@ -130,5 +132,39 @@ class ApplicationController extends Controller
     private function sendEmailToUser($user, $application)
     {
 
+    }
+
+    public function edit(Application $application, Request $request)
+    {
+        $model = $this->module->fromFormData($application->form_data);
+        return view($this->module->view('edit'), [
+            'application' => $application,
+            'step' =>  $request->get('step', 1),
+            'module' => $this->module,
+            'model' => $model,
+            'country_codes' => \Countries::all()->sortBy('name')->pluck('name.common', 'cca2')
+
+        ]);
+    }
+
+    public function update(Application $application, Request $request)
+    {
+        $validator = $this->module->getValidator($request, $this->current_step);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $data = $this->module->toFormData($request->all());
+        $application->updateFormData($data);
+        $next_step = $this->module->getNextStep($application, $this->current_step);
+
+        if (is_int($next_step)) {
+            return redirect()->route('e-visa.application.edit', [
+                'application' => $application->id,
+                'step' => $next_step
+            ]);
+        }
+
+        return redirect()->route('application.review', ['application' => $application, 'module_slug' => $this->module->slug]);
     }
 }

@@ -50,11 +50,6 @@ class BaseModule
         return $next > $this->numSteps ? "REVIEW" : $next;
     }
 
-    public function getValidator($request, $current_step)
-    {
-        //return Validator::make($request->all(), []);
-    }
-
     public function loadLookupData($model)
     {
         return [];

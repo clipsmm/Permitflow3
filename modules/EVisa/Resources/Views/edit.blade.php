@@ -1,12 +1,26 @@
-@extends('applications.edit')
-@section('form-body')
-    <div class="col-sm-6">
-        <div class="form-group {{error_class($errors, 'visa_type')}}">
-            <label for="">
-                @lang('Visa Type')
-            </label>
-            {!! Form::select('visa_type', ['32_page' => __('32 Page'), '48_page' => __('48 Page')], '32_page', ['class' => 'form-control input-sm']) !!}
-            {!! error_tag($errors, 'visa_type') !!}
+@extends('layouts.frontend')
+@php
+    if(!isset($step)){
+        $step = 1;
+    }
+@endphp
+@section('body')
+    {!! Form::model($model, ['url' => route('e-visa.application.update', ['application' => $application, 'step' => $step])]) !!}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @lang('Edit Application')
+        </div>
+        <div class="panel-body">
+            @include('e-visa::form_body')
+        </div>
+        <div class="panel-footer text-right">
+            @if($step > 1)
+                <a href="#" class="btn btn-primary btn-sm">
+                    @lang('Previous')
+                </a>
+            @endif
+            <button type="submit" class="btn btn-sm btn-primary">@lang('Next')</button>
         </div>
     </div>
+    {!! Form::close() !!}
 @stop
