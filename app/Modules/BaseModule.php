@@ -64,6 +64,7 @@ class BaseModule
         return $counter + 1;
     }
 
+
     public function get_task_actions(Task $task)
     {
         return self::$stages[$task->stage];
@@ -71,9 +72,18 @@ class BaseModule
 
     public function render_application_view(Application $application)
     {
+
+        $model = $this->fromFormData($application->form_data);
         return view("{$this->slug}::application_view", [
             'application' => $application,
-            'module' => $this
+            'model' => $model,
+            'module' => $this,
+            'lookup_data' => $this->loadLookupData($model)
         ]);
+    }
+
+    public function create_invoice($application)
+    {
+        return null;
     }
 }

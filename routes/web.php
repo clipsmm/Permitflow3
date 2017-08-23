@@ -57,6 +57,8 @@ Route::prefix('applications/{module_slug}')
         Route::post('/create', 'ApplicationController@save')->name('application.save');
         Route::get('/{application}/edit', 'ApplicationController@edit')->name('application.edit');
         Route::get('/{application}/review', 'ApplicationController@review')->name('application.review');
+        Route::post('/{application}/submit', 'ApplicationController@submit')->name('application.review.submit');
+        Route::get('/{application}/submitted', 'ApplicationController@submitted')->name('application.submitted');
     });
 
 /*

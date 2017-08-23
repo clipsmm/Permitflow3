@@ -61,6 +61,13 @@ class EVisa extends BaseModule implements ModuleInterface
         return route('e-visa.application.new', $params);
     }
 
+    public function loadLookupData($model)
+    {
+        return [
+            'country_codes' => \Countries::all()->pluck('name.common', 'cca2')
+        ];
+    }
+
     public function getValidator($request, $current_step)
     {
         $today = Carbon::today();

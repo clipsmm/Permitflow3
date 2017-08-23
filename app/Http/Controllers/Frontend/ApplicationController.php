@@ -57,7 +57,6 @@ class ApplicationController extends Controller
             ]);
         }
 
-
         return redirect()->route('application.review', [
             'module_slug' => $this->module->slug,
             'application' => $application->id
@@ -76,8 +75,28 @@ class ApplicationController extends Controller
         ]);
     }
 
-    public function review(Application $application)
+    public function review($module, Application $application)
     {
-        dd($application);
+        return view('applications.review', ['application' => $application, 'module' => $this->module]);
+    }
+
+    public function submit($module, Application $application)
+    {
+        $invoice = $this->module->create_invoice($application);
+        if(is_null($invoice)){
+            return redirect()->route('application.submitted', ['module_slug' => $this->module->slug, 'application' => $application->id]);
+        }
+
+        return redirect()->route('application.checkout', ['invoice_id' => $invoice->pk, 'application' => $application->id]);
+    }
+
+    public function submitted($module_slug, Application $application)
+    {
+        return view('applications.submitted', ['application' => $application, 'module' => $this->module]);
+    }
+
+    public function checkout($module, Application $application, $invoice)
+    {
+        dd($invoice);
     }
 }
