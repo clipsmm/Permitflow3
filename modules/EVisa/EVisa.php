@@ -207,8 +207,11 @@ class EVisa extends BaseModule implements ModuleInterface
 
     public function create_invoice($application)
     {
+        //todo: consider other checks before creating invoice
+        if($application->submitted_at){
+            return null;
+        }
         return Invoice::create_invoice($application->id, [['amount' => 20, 'description' => 'foo']], 'bar');
     }
-
 
 }

@@ -15,7 +15,7 @@
         </div>
         <div class="panel-footer text-right">
             @if($step > 1)
-                <a href="#" class="btn btn-primary btn-sm">
+                <a href="{{route('e-visa.application.edit', ['application' => $application, 'step' => $step - 1])}}" class="btn btn-primary btn-sm">
                     @lang('Previous')
                 </a>
             @endif

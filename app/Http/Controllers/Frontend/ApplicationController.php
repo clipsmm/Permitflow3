@@ -83,7 +83,9 @@ class ApplicationController extends Controller
 
     public function submit($module, Application $application)
     {
+        event(new ApplicationSubmitted($application));
         $invoice = $this->module->create_invoice($application);
+
         if(is_null($invoice)){
             return redirect()->route('application.submitted', ['module_slug' => $this->module->slug, 'application' => $application->id]);
         }
