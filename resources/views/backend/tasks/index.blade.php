@@ -76,7 +76,55 @@
                                                     {!! $tasks->render() !!}
                                                 </div>
                                             </div>
+<<<<<<< HEAD
                                         </div>
+=======
+
+                                        </form>
+                                        <a href="{{ route('backend.tasks.pick', [$module->slug]) }}" class="btn btn-sm btn-success pull-right">
+                                            <span class="fa fa-tasks"></span> Pick Task
+                                        </a>
+
+                                    </div>
+                                    <div class="panel-body padding-0">
+                                        <table class="table table-hover table-special table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Service</th>
+                                                <th class="hidden-xs hidden-sm">Ref no.</th>
+
+                                                <th class="hidden-xs">Action</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            @forelse($tasks as $task)
+                                                <tr class=' '>
+                                                    <td class="big-data width-40">
+                                                        <h1>{{ $task->name }}</h1>
+                                                        <p>{{ $task->submitted_at }}</p>
+                                                        <small class="hidden-md hidden-lg">{{ $task->application->application_number }}</small>
+                                                    </td>
+                                                    <td class="hidden-xs hidden-sm">{{ $task->application->application_number }}</td>
+
+
+                                                    <td>
+
+                                                        <a href="{{ route('backend.tasks.show',[$module->slug, $task->id]) }}" class="btn btn-xs btn-primary" >
+                                                            <span class="fa fa-eye"></span> View
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="3">No tasks available</td>
+                                                </tr>
+                                            @endforelse
+
+                                            </tbody>
+                                        </table>
+>>>>>>> task-manager
                                     </div>
                                 </div>
                             </div>

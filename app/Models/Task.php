@@ -19,7 +19,7 @@ class Task extends Model
     protected $table = 'tasks';
 
     protected $fillable = [
-        'application_id', 'name', 'user_id', 'assigned_at', 'expires_at', 'completed_at', 'status'
+        'application_id', 'name', 'user_id', 'assigned_at', 'expires_at', 'completed_at', 'status', 'stage'
     ];
 
     public function application()
@@ -51,8 +51,11 @@ class Task extends Model
      * Filter tasks for a specific module
      *
      */
-    public function scopeModule($query, $module)
+    public function scopeModule($query, $module = null)
     {
+        if (!$module)
+            return $query;
+
         return $query->whereHas('application', function ($q) use ($module){
             $q->where('applications.module_slug', $module);
         });
@@ -81,24 +84,26 @@ class Task extends Model
 
     public function scopeProcessing($query)
     {
-        return $query->whereNotNull("tasks.completed_at")->whereNotNull('tasks.user_id');
+        return $query->whereNull("tasks.completed_at")->whereNotNull('tasks.user_id');
     }
 
-    public function scopeHasAccess($query, User $user)
+    public function scopeHasAccess($query, User $user = null)
     {
         //todo: only get tasks for applications where user has access rights
         return $query;
     }
 
-    public static function pick_task($task_id  = null)
+    public static function pick_task($module  = null, $task_id  = null)
     {
         $task  = null;
 
-        \DB::transaction(function () use (&$task, $task_id) {
+        \DB::transaction(function () use (&$task, $task_id, $module) {
+
             $task  = self::query()
                 ->queued()
+                ->module($module)
                 ->hasAccess()
-                ->orderBy('applications.submitted_at','ASC')
+                ->orderBy('tasks.created_at','ASC')
                 ->first();
 
             if($task){

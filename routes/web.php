@@ -38,10 +38,12 @@ Route::prefix('backend')
 
             Route::group(['prefix' => '{module}'], function (){
                 Route::get('', 'TaskController@myQueue')->name('backend.tasks.queue');
+                Route::get('pick', 'TaskController@pickTask')->name('backend.tasks.pick');
                 Route::get('inbox', 'TaskController@myInbox')->name('backend.tasks.inbox');
                 Route::get('outbox', 'TaskController@myOutbox')->name('backend.tasks.outbox');
                 Route::get('corrections', 'TaskController@myInCorrection')->name('backend.tasks.corrections');
                 Route::get('{task}/view', 'TaskController@show')->name('backend.tasks.show');
+                Route::post('{task}/view', 'TaskController@handleTask')->name('backend.tasks.submit');
             });
         });
     });

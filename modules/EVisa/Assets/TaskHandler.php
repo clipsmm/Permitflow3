@@ -4,6 +4,7 @@ namespace Modules\EVisa;
 
 
 use App\Models\Task;
+use Carbon\Carbon;
 
 class TaskHandler {
     protected $task;
@@ -19,11 +20,12 @@ class TaskHandler {
         \DB::transaction(function() use (&$task, $comments){
             $application  =  $task->application;
 
-            $task->complete  =  true;
+            $task->completed_at  =  Carbon::now();
             $task->comments = $comments;
             $task->status  = 'rejected';
             $task->save();
 
+            $application->complete  =  true;
             $application->status  = 'rejected';
             $application->save();
 
@@ -39,7 +41,6 @@ class TaskHandler {
         \DB::transaction(function() use (&$task, $comments){
             $application  =  $task->application;
 
-            $task->complete  =  true;
             $task->comments = $comments;
             $task->status  = 'corrections';
             $task->save();
@@ -59,10 +60,11 @@ class TaskHandler {
         \DB::transaction(function() use (&$task){
             $application  =  $task->application;
 
-            $task->complete  =  true;
+            $task->completed_at  =  Carbon::now();
             $task->status  = 'approved';
             $task->save();
 
+            $application->complete  =  true;
             $application->status  = 'corrections';
             $application->save();
         });
