@@ -8,16 +8,51 @@
 
 namespace Modules;
 
+use App\Events\ApplicationSubmitted;
+use App\Models\Task;
 use Carbon\Carbon;
 use \Countries;
 use App\Interfaces\ModuleInterface;
 use App\Modules\BaseModule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Modules\EVisa\TaskHandler;
+use Modules\Evisa\Listeners\EvisaApplicationSubmittedHandler;
 
 class EVisa extends BaseModule implements ModuleInterface
 {
     public $modelClass = \Modules\EVisa\Models\EVisa::class;
+
+    /**
+     * Module specific event /listener pairs
+     *
+     * @var array
+     */
+
+    public $listens = [
+        ApplicationSubmitted::class => [
+            EvisaApplicationSubmittedHandler::class
+        ]
+    ];
+
+    public static $stages = [
+        'review' => [
+            'reject' => [
+                'color' => 'danger',
+                'name' => 'Reject',
+                'feedback' => true
+            ],
+            'corrections' => [
+                'color' => 'warning',
+                'name' => 'Send to Corrections',
+                'feedback' => true
+            ],
+            'approve' => [
+                'color' => 'primary',
+                'name' => 'Approve',
+            ]
+        ]
+    ];
 
     public $numSteps = 8;
 
@@ -99,7 +134,7 @@ class EVisa extends BaseModule implements ModuleInterface
                     'places_to_visit.*.type' => ['required', 'in:hotel,firm,relative,other'],
                     'places_to_visit.*.address' => ['required'],
                     'places_to_visit.*.name' => ['required']
-                ],[
+                ], [
                     'places_to_visit.required' => __('e-visa::validation.custom.places_to_visit.required'),
                     'places_to_visit.*.*.required' => __('e-visa::validation.nested_required')
                 ]);
@@ -132,10 +167,32 @@ class EVisa extends BaseModule implements ModuleInterface
 
             case 8:
                 return Validator::make($request->all(), [
-                    'passport_bio' => ['required','file','max:2048','mimes:pdf,png,jpg,jpeg'],
-                    'passport_photo' => ['required','file','max:2048','mimes:pdf,png,jpg,jpeg'],
-                    'additional_documents' => ['required','file','max:2048','mimes:pdf,png,jpg,jpeg']
+                    'passport_bio' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
+                    'passport_photo' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
+                    'additional_documents' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg']
                 ]);
+        }
+    }
+
+    public function handle_task(Task $task, $action, $comments = null)
+    {
+        $task->load(['application', 'application.user']);
+
+        $handler = new TaskHandler($task);
+
+        switch ($action) {
+            case 'reject':
+                $handler->reject_application($comments);
+                break;
+            case 'corrections':
+                $handler->send_to_corrections($comments);
+                break;
+            case 'approve':
+                $handler->approve_application();
+                break;
+            default:
+                throw new \Exception(__('errors.undefined_task'));
+                break;
         }
     }
 
