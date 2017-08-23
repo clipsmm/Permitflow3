@@ -37,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        $this->loadBindings();
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
@@ -69,5 +70,13 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     *
+     */
+    protected function loadBindings()
+    {
+        require base_path('routes/bindings.php');
     }
 }
