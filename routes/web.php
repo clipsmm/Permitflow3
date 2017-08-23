@@ -57,6 +57,7 @@ Route::prefix('applications/{module_slug}')
         Route::post('/create', 'ApplicationController@save')->name('application.save');
         Route::get('/{application}/edit', 'ApplicationController@edit')->name('application.edit');
         Route::get('/{application}/review', 'ApplicationController@review')->name('application.review');
+        Route::get('/{application}/checkout/{invoice_pk}', 'FrontendController@loadApplicationCheckout')->name('application.checkout');
     });
 
 /*
