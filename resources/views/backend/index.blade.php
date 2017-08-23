@@ -7,7 +7,7 @@
             <div class="panel with-nav-tabs panel-default">
                 <div class="panel-heading p-t-10">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab1default" data-toggle="tab">Queued <span class="label label-default"> 3000</span></a></li>
+                        <li class="active"><a href="#tab1default" data-toggle="tab">Queued<span class="label label-default"> 300000</span></a></li>
                         <li><a href="#tab2default" data-toggle="tab">My Task <span class="label label-default"> 3000</span></a></li>
                         <li><a href="#tab3default" data-toggle="tab">Awaiting Corrections <span class="label label-default"> 200</span></a></li>
                         <li><a href="#tab2default" data-toggle="tab">Proccessing <span class="label label-default"> 5600</span></a></li>
