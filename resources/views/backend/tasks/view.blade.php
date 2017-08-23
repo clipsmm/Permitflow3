@@ -11,7 +11,9 @@
             <div class="panel panel-default panel-form m-r-10 m-l-10">
                 <div class="panel-heading clearfix">
                     <div class="pull-right" role="">
-
+                        <a href="{{ route('backend.tasks.queue', [$module->slug]) }}" class="btn btn-sm btn-default">
+                            <span class="fa fa-arrow-left"></span> Back to Tasks
+                        </a>
                         <a href="#" class="btn btn-sm btn-success">
                             <span class="fa fa-check"></span> Approve
                         </a>
@@ -19,7 +21,7 @@
                             <span class="fa fa-exclamation-triangle"></span> Send for correction
                         </a>
                         <a href="#" class="btn btn-sm btn-info">
-                            <span class="fa fa-tasks"></span> Asign Task
+                            <span class="fa fa-tasks"></span> Assign Task
                         </a>
 
                     </div>

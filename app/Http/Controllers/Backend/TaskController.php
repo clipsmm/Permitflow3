@@ -111,9 +111,9 @@ class TaskController extends Controller
         ])->with('page_title', __('pages.tasks_page'));
     }
 
-    public function pickTask(Request $request)
+    public function pickTask(Request $request, $module)
     {
-        $task = Task::pick_task($request->get('task_id'));
+        $task = Task::pick_task($module->slug, $request->get('task_id'));
 
         if (!$task){
             return redirect()->back()
@@ -122,7 +122,7 @@ class TaskController extends Controller
                 ]);
         }
 
-        return redirect()->route('backend.tasks.view', [$task->id]);
+        return redirect()->route('backend.tasks.show', [$module->slug, $task->id]);
     }
 
 
