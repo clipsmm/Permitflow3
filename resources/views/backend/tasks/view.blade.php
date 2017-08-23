@@ -69,6 +69,7 @@
                 </div>
 
                 <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
+
                     {!! $module->render_application_view($task->application) !!}
                 </div>
 
