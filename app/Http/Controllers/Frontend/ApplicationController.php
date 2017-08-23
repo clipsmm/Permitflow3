@@ -22,9 +22,11 @@ class ApplicationController extends Controller
     public function create()
     {
         $model_class = $this->module->modelClass;
+        $model = new $model_class;
         return view($this->module->view('create'), [
+            'lookup_data' => $this->module->loadLookupData($model),
             'module' => $this->module,
-            'model' => new $model_class
+            'model' => $model
         ]);
     }
 
@@ -42,15 +44,12 @@ class ApplicationController extends Controller
                 ->withInput();
         }
 
-
         $data = $this->module->toFormData($request->all());
         $module = Module::whereSlug($this->module->slug)->first();
         $application = Application::insertRecord($module, $data, auth()->user());
         $next_step = $this->module->getNextStep($application, $current_step);
 
-        event(new ApplicationSubmitted($application));
-
-        if(is_int($next_step)){
+        if (is_int($next_step)) {
             return redirect()->route('application.edit', [
                 'module_slug' => $this->module->slug,
                 'application' => $application->id,
@@ -67,15 +66,18 @@ class ApplicationController extends Controller
 
     public function edit(Request $request, $module_slug, Application $application)
     {
-        $model = $application->module->module->fromFormData($application->form_data);
+        $model = $application->module->fromFormData($application->form_data);
         return view($this->module->view('edit'), [
             'application' => $application,
+            'lookup_data' => $this->module->loadLookupData($model),
             'module' => $this->module,
             'model' => $model,
             'step' => $request->get('step', 1)
-         ]);
+        ]);
     }
 
-    public function review(Application $application){
+    public function review(Application $application)
+    {
+        dd($application);
     }
 }

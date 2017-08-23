@@ -2,6 +2,9 @@
 
 return [
 
+    'recaptcha_api' => 'https://www.google.com/recaptcha/api/siteverify',
+
+
     'ss-on-url' => 'https://accounts.ecitizen.go.ke/login',
     /*
     |--------------------------------------------------------------------------
@@ -171,6 +174,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Caffeinated\Modules\ModulesServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
+        PragmaRX\Countries\ServiceProvider::class,
 
 
         /*
@@ -236,6 +240,7 @@ return [
         'Module' => Caffeinated\Modules\Facades\Module::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'Uuid' => Webpatser\Uuid\Uuid::class,
+        'Countries'=> PragmaRX\Countries\Facade::class,
     ],
 
     /*

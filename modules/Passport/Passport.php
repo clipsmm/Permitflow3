@@ -55,4 +55,9 @@ class Passport extends BaseModule implements ModuleInterface
     {
         return ;
     }
+
+    public function newUrl()
+    {
+        // TODO: Implement newUrl() method.
+    }
 }

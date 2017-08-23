@@ -52,11 +52,11 @@
 
 
 
-                {{--<div class="alert alert_sucess_custom" role="alert">--}}
-                    {{--<i class="fa fa-check fa-lg" aria-hidden="true"></i>--}}
-                    {{--<strong>Notice!</strong> Our system has been facing some challenges due to some maintenance that is currently being undertaken--}}
-                    {{--that is causing some delays in processing applications. Please accept our apologies for any inconvenience caused, we are making every effort to restore our services.--}}
-                {{--</div>--}}
+                <div class="alert alert_sucess_custom" role="alert">
+                    <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+                    <strong>Notice!</strong> Our system has been facing some challenges due to some maintenance that is currently being undertaken
+                    that is causing some delays in processing applications. Please accept our apologies for any inconvenience caused, we are making every effort to restore our services.
+                </div>
 
 
 
@@ -86,38 +86,7 @@
 
                     <div class="panel-body">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel with-nav-tabs panel-default">
-
-                                    <div class="panel-body padding-0">
-                                        <div class="tab-content">
-                                            <div class="tab-pane fade in active" id="tab1default">
-
-                                                <div class="panel-body">
-                                                    <div class="panel panel-default m-b-0">
-
-                                                        <div class="panel-body padding-0">
-                                                            body
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="panel-footer">
-                                                    footer
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        @yield('body')
 
                     </div>
 
@@ -138,6 +107,8 @@
 
         </div>
 
+        <!-- Modal -->
+        @stack('modals')
     </div>
 
 @endsection

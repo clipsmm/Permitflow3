@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Module;
+use Caffeinated\Modules\Facades\Module;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -37,7 +37,7 @@ class EventServiceProvider extends ServiceProvider
     {
         try{
             Module::whereEnabled(true)->each(function ($item) {
-                foreach ($item->module->listens as $event => $listeners) {
+                foreach ($item->listens as $event => $listeners) {
                     foreach ($listeners as $listener) {
                         Event::listen($event, $listener);
                     }

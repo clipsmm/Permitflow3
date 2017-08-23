@@ -10,33 +10,23 @@ namespace App\Modules;
 
 
 use Caffeinated\Modules\Facades\Module;
-use Illuminate\Support\Facades\Validator;
 
 class BaseModule
 {
-    public $hasViews = true;
-    public $numSteps = 1;
-    public $modelClass;
 
-    public static function class_from_slug($slug)
+    public function __construct($attrs)
     {
-        $class_name = Module::where('slug', $slug)->get('name');
-        return is_null($class_name) ? null : implode("\\", ['Modules', $class_name]);
+        foreach ($attrs as $key => $val){
+            $this->{$key} = $val;
+        }
     }
 
     public static function instance_from_slug($slug)
     {
-        $class = self::class_from_slug($slug);
-        return $class ? new $class : null;
-    }
-
-    public function __get($name)
-    {
-        return $this->getAttributes()[$name];
-    }
-
-    public function getAttributes(){
-        return [];
+        $attrs = Module::where('slug', $slug);
+        $class_name = $attrs->get('name');
+        $class = is_null($class_name) ? null : implode("\\", ['Modules', $class_name]);
+        return $class ? new $class($attrs->toArray()) : null;
     }
 
     public function toFormData($data) {
@@ -47,7 +37,7 @@ class BaseModule
     public function fromFormData($data)
     {
         $class =  $this->modelClass;
-        return new $class($data);
+        return new $class(array_only($data,   $class::$fields));
     }
 
     public function view($view)
@@ -55,20 +45,21 @@ class BaseModule
         return implode("::", [$this->slug, $view]);
     }
 
-    public function viewsPath()
-    {
-        return implode(DIRECTORY_SEPARATOR,
-            [base_path(config('modules.path')), $this->getAttributes()['name'], 'Resources', 'Views']);
-    }
-
     public function getNextStep($application, $current_step){
         $next = ++$current_step;
         return $next > $this->numSteps ? "REVIEW" : $next;
     }
 
-    public function getValidator($request, $current_step)
+    public function loadLookupData($model)
     {
-        //return Validator::make($request->all(), []);
+        return [];
+    }
+
+    public function getUpdatedCounter(){
+        $counter = Module::get("{$this->slug}::counter", 0);
+        Module::set("{$this->slug}::counter", $counter + 1);
+
+        return $counter + 1;
     }
 
 }

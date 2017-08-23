@@ -2,20 +2,21 @@
 
 namespace App\Models;
 
+use Caffeinated\Modules\Facades\Module;
 use Illuminate\Database\Eloquent\Model;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Application extends Model
 {
-    protected $fillable = ['application_number', 'form_data', 'module_id', 'status'];
+    protected $fillable = ['application_number', 'form_data', 'module_slug', 'status'];
 
     protected $casts = [
         'form_data' => 'array',
     ];
 
-    public function module()
+    public function getModuleAttribute()
     {
-        return $this->belongsTo(Module::class);
+        return Module::where('slug', $this->module_slug);
     }
 
     public function user()
@@ -23,11 +24,10 @@ class Application extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function insertRecord($module, $data, $user)
+    public static function insertRecord($module, $data, User $user)
     {
-        $application = new self(['form_data' => $data, 'application_number' => self::generateApplicationNumber($module)]);
+        $application = new self(['form_data' => $data, 'module_slug' => $module->slug, 'application_number' => self::generateApplicationNumber($module)]);
         $application->user()->associate($user)
-            ->module()->associate($module)
             ->save();
 
         return $application;
@@ -36,5 +36,10 @@ class Application extends Model
     public static function generateApplicationNumber($module)
     {
         return implode("-", [$module->prefix, Hashids::encode($module->getUpdatedCounter())]);
+    }
+    
+    public function updateFormData($data){
+        $this->form_data = array_merge($this->form_data, $data);
+        $this->save();
     }
 }

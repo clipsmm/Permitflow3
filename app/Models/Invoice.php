@@ -13,7 +13,7 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     protected $fillable = [
-        'application_id', 'status', 'date_paid','amount', 'pk', 'bill_ref'
+        'application_id', 'status', 'date_paid','amount', 'pk', 'bill_ref', 'description'
     ];
 
     public function application()
@@ -42,17 +42,18 @@ class Invoice extends Model
         });
     }
 
-    public static function create_invoice($application_id,$status, array $items)
+    public static function create_invoice($application_id,$status, array $items, $description)
     {
         $invoice = null;
-        \DB::transaction(function() use (&$invoice, $application_id, $status, $items){
+        \DB::transaction(function() use (&$invoice, $application_id, $status, $items, $description){
             $_items =  collect($items);
 
             $invoice  =  new self([
                 'application_id' => $application_id,
                 'status' => $status,
                 'amount' => $_items->sum('amount'),
-                'bill_ref' => generate_random_string()
+                'bill_ref' => generate_random_string(),
+                'description' => $description
             ]);
 
             $invoice->save();
@@ -71,7 +72,7 @@ class Invoice extends Model
 
     public function get_pesaflow_bill_ref()
     {
-        $ref  = create_pesaflow_bill($this->pk, intval(round($this->amount)), $this->notes, $this->application->user);
+        $ref  = create_pesaflow_bill($this->pk, intval(round($this->amount)), $this->description, $this->application->user);
         /*
         $this->bill_ref =  $ref;
         $this->save();
