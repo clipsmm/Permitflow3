@@ -95,9 +95,13 @@ class EVisa extends BaseModule implements ModuleInterface
 
             case 6:
                 return Validator::make($request->all(), [
-                    'places_to_visit' => ['required', 'array'],
+                    'places_to_visit' => ['required', 'array', 'min:1'],
                     'places_to_visit.*.type' => ['required', 'in:hotel,firm,relative,other'],
-                    'places_to_visit.*.address' => ['required']
+                    'places_to_visit.*.address' => ['required'],
+                    'places_to_visit.*.name' => ['required']
+                ],[
+                    'places_to_visit.required' => __('e-visa::validation.custom.places_to_visit.required'),
+                    'places_to_visit.*.*.required' => __('e-visa::validation.nested_required')
                 ]);
 
             case 7:
@@ -109,11 +113,31 @@ class EVisa extends BaseModule implements ModuleInterface
                     'recent_visits' => ['array'],
                     'recent_visits.*.date' => ['required', 'date', "before:{$today}"],
                     'recent_visits.*.duration' => ['required', 'integer', 'min:1'],
-                    'recent_visits.*.duration_type' => ['required', 'in:months,days,years']
+                    'recent_visits.*.duration_type' => ['required', 'in:months,days,years'],
+                    'returning_to_country' => ['required', 'boolean'],
+                    'no_return_reason' => ['required_if:returning_to_country,0'],
+                    'denied_entry_before' => ['required', 'boolean'],
+                    'denied_entry_reason' => ['required_if:denied_entry_before,1'],
+                    'denied_entry_others' => ['required', 'boolean'],
+                    'denied_entry_others_reason' => ['required_if:denied_entry_others,1'],
+                    'convicted_before' => ['required', 'boolean'],
+                    'convicted_reason' => ['required_if:convicted_before,1'],
                 ], [
+                    'other_recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     'other_recent_visits.*.date.before' => __('validation.before_today'),
-                    'recent_visits.*.date.before' => __('validation.before_today')
+                    'recent_visits.*.date.before' => __('validation.before_today'),
+                    'recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
+                    '*.required_if' => __('This field is required')
+                ]);
+
+            case 8:
+                return Validator::make($request->all(), [
+                    'passport_bio' => ['required','file','max:2048','mimes:pdf,png,jpg,jpeg'],
+                    'passport_photo' => ['required','file','max:2048','mimes:pdf,png,jpg,jpeg'],
+                    'additional_documents' => ['required','file','max:2048','mimes:pdf,png,jpg,jpeg']
                 ]);
         }
     }
+
+
 }

@@ -5,7 +5,7 @@
     }
 @endphp
 @section('body')
-    {!! Form::model($model, ['url' => route('e-visa.application.update', ['application' => $application, 'step' => $step])]) !!}
+    {!! Form::model($model, ['files' => true, 'url' => route('e-visa.application.update', ['application' => $application, 'step' => $step])]) !!}
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('Edit Application')

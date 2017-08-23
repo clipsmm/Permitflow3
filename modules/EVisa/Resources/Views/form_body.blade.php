@@ -6,9 +6,7 @@
                          :other_recent_visits="{{json_encode(old('other_recent_visits', $model->other_recent_visits))}}"
                          :recent_visits="{{json_encode(old('recent_visits', $model->recent_visits))}}"
                          :places_to_visit="{{json_encode(old('places_to_visit', $model->places_to_visit))}}"
-                         :other_recent_visits_errors="{{form_errors_to_json($errors, 'other_recent_visits', [])}}"
-                         :recent_visits_errors="{{form_errors_to_json($errors, 'recent_visits', [])}}"
-                         :places_to_visit_errors="{{form_errors_to_json($errors, 'places_to_visit', [])}}"
+                         :form_errors="{{json_encode($errors->messages())}}"
 >
     <div>
         <?php switch($step){
@@ -308,53 +306,57 @@
             @lang('DETAILS OF PLACES TO VISIT IN KENYA')
         </h4>
         <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-12" v-for="(place, i) in placesToVisit">
-                    <div class="col-sm-12 text-right">
-                        <span @click.close="placesToVisit.splice(i, 1)" class="close">
-                            <span class="fa fa-times-circle"></span>
+            <div class="col-sm-12" v-for="(place, i) in placesToVisit">
+                <div class="col-sm-12 text-right">
+                    <span @click.close="placesToVisit.splice(i, 1)" class="close">
+                        <span class="fa fa-times-circle"></span>
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.type']}">
+                        <label for="">
+                            @lang('Type')
+                        </label>
+                        {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['class' => 'form-control input-sm',
+                        ':name' => "'places_to_visit[' + i + '][type]'", 'v-model' => 'place.type']) !!}
+                        <span class="help-block">
+                            @{{(form_errors['places_to_visit.'+i+'.type'] || [])[0]}}
                         </span>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="form-group {{error_class($errors, 'place_type')}}">
-                            <label for="">
-                                @lang('Type')
-                            </label>
-                            {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['class' => 'form-control input-sm',
-                            ':name' => "'places_to_visit[' + i + '][type]'", 'v-model' => 'place.type']) !!}
-                            {!! error_tag($errors, 'place_type') !!}
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group {{error_class($errors, 'place_name')}}">
-                            <label for="">
-                                @lang('Name Of Place/Person')
-                            </label>
-                            {!! Form::text(null, '', ['v-model' => 'place.name', 'class' => 'form-control input-sm', ':name' => "'places_to_visit[' + i + '][name]'",]) !!}
-                            {!! error_tag($errors, 'place_name') !!}
-                        </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="form-group {{error_class($errors, 'address_of_place')}}">
-                            <label for="">
-                                @lang('Physical Address')
-                            </label>
-                            {!! Form::text(null, '', ['v-model' => 'place.address', 'class' => 'form-control input-sm', ':name' => "'places_to_visit[' + i + '][address]'",]) !!}
-                            {!! error_tag($errors, 'address_of_place') !!}
-                        </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.name']}">
+                        <label for="">
+                            @lang('Name Of Place/Person')
+                        </label>
+                        {!! Form::text(null, '', ['v-model' => 'place.name', 'class' => 'form-control input-sm', ':name' => "'places_to_visit[' + i + '][name]'",]) !!}
+                        <span class="help-block">
+                            @{{(form_errors['places_to_visit.'+i+'.name'] || [])[0]}}
+                        </span>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <button @click.prevent="placesToVisit.push({type: '', name: '', address: ''})"
-                                    class="btn-sm btn btn-primary">
-                                <span class="fa fa-plus"></span>
-                                @lang('Add')
-                            </button>
-                        </div>
+                <div class="col-sm-5">
+                    <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.address']}">
+                        <label for="">
+                            @lang('Physical Address')
+                        </label>
+                        {!! Form::text(null, '', ['v-model' => 'place.address', 'class' => 'form-control input-sm', ':name' => "'places_to_visit[' + i + '][address]'",]) !!}
+                        <span class="help-block">
+                            @{{(form_errors['places_to_visit.'+i+'.address'] || [])[0]}}
+                        </span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group {{error_class($errors, 'places_to_visit')}}">
+                <button @click.prevent="placesToVisit.push({type: '', name: '', address: ''})"
+                        class="btn-sm btn btn-primary">
+                    <span class="fa fa-plus"></span>
+                    @lang('Add')
+                </button>
+                <br>
+                {!! error_tag($errors, 'places_to_visit') !!}
             </div>
         </div>
         <div class="col-sm-12">
@@ -366,43 +368,55 @@
         <h4 class="col-sm-12">
             @lang('TRAVEL HISTORY')
         </h4>
-        <label class="col-sm-12">
-            @lang('Details of countries visited in last 3 months ')
-        </label>
         <div class="col-sm-12">
-            <div class="row">
-                <div class="place-to-visit" v-for="(visit, i)  in otherRecentVisits" key="visit.date">
-                    <span @click.close="otherRecentVisits.splice(i, 1)" class="close col-sm-12 text-right">x</span>
-                    <div class="col-sm-4">
-                        <div class="form-group {{error_class($errors, 'other_recent_visits.1.country')}}">
-                            <label for="">
-                                @lang('Country Visited')
-                            </label>
-                            {!! Form::select('', $country_codes, '', ['class' => 'form-control input-sm', 'value' => '',
-                             'v-model' => 'visit.country', 'v-bind:name' => "'other_recent_visits[' + i + '][country]'"]) !!}
-                            {!! error_tag($errors, 'other_recent_visits.1.country') !!}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @lang('Details of countries visited in last 3 months ')
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12" v-for="(visit, i)  in otherRecentVisits" key="visit.date">
+                        <div class="col-sm-12 text-right">
+                <span @click.close="otherRecentVisits.splice(i, 1)" class="close">
+                    <span class="fa fa-times-circle"></span>
+                </span>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group {{error_class($errors, 'other_recent_visits.1.date')}}">
-                            <label for="">
-                                @lang('Date Of Visit')
-                            </label>
-                            {!! Form::date('', '', ['class' => 'form-control input-sm', 'v-model' => 'visit.date', 'v-bind:name' => "'other_recent_visits[' + i + '][date]'"]) !!}
-                            {!! error_tag($errors, 'other_recent_visits.1.date') !!}
+                        <div class="col-sm-4">
+                            <div class="form-group" :class="{'has-error' : form_errors['other_recent_visits.'+i+'.country']}">
+                                <label for="">
+                                    @lang('Country Visited')
+                                </label>
+                                {!! Form::select(null, $country_codes, '', ['class' => 'form-control input-sm', 'value' => '',
+                                 'v-model' => 'visit.country', 'v-bind:name' => "'other_recent_visits[' + i + '][country]'"]) !!}
+                                <span class="help-block">
+                        @{{(form_errors['other_recent_visits.'+i+'.country'] || [])[0]}}
+                    </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="form-group {{error_class($errors, 'other_recent_visits.1.duration')}}">
-                            <label for="">
-                                @lang('Duration Of Visit(Days)')
-                            </label>
-                            {!! Form::number('', '', ['class' => 'form-control input-sm', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'other_recent_visits[' + i + '][duration]'"]) !!}
-                            {!! error_tag($errors, 'other_recent_visits.1.duration') !!}
+                        <div class="col-sm-3">
+                            <div class="form-group" :class="{'has-error' : form_errors['other_recent_visits.'+i+'.date']}">
+                                <label for="">
+                                    @lang('Date Of Visit')
+                                </label>
+                                {!! Form::date(null, '', ['class' => 'form-control input-sm', 'v-model' => 'visit.date', 'v-bind:name' => "'other_recent_visits[' + i + '][date]'"]) !!}
+                                <span class="help-block">
+                        @{{(form_errors['other_recent_visits.'+i+'.date'] || [])[0]}}
+                    </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group" :class="{'has-error' : form_errors['other_recent_visits.'+i+'.duration']}">
+                                <label for="">
+                                    @lang('Duration Of Visit(Days)')
+                                </label>
+                                {!! Form::number(null, '', ['class' => 'form-control input-sm', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'other_recent_visits[' + i + '][duration]'"]) !!}
+                                <span class="help-block">
+                        @{{(form_errors['other_recent_visits.'+i+'.duration'] || [])[0]}}
+                    </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
+                <div class="panel-footer">
                     <button @click.prevent="otherRecentVisits.push({country: '', date: '', duration: ''})"
                             class="btn-sm btn btn-primary">
                         <span class="fa fa-plus"></span>
@@ -412,44 +426,54 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <br>
-        </div>
-        <label for="" class="col-sm-12">
-            @lang('Dates and Duration of previous visits to Kenya')
-        </label>
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="place-to-visit" v-for="(visit, i) in recentVisits" key="visit.date">
-                    <span @click.close="recentVisits.splice(i, 1)" class="close col-sm-12 text-right">x</span>
-                    <div class="col-sm-4">
-                        <div class="form-group {{error_class($errors, 'recent_visits.1.date')}}">
-                            <label for="">
-                                @lang('Date Of Visit')
-                            </label>
-                            {!! Form::date('', '', ['class' => 'form-control input-sm', 'v-model' => 'visit.date', 'v-bind:name' => "'recent_visits[' + i + '][date]'"]) !!}
-                            {!! error_tag($errors, 'recent_visits.1.date') !!}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @lang('Dates and Duration of previous visits to Kenya')
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12" v-for="(visit, i) in recentVisits" key="visit.date">
+                        <div class="col-sm-12 text-right">
+                    <span @click.close="recentVisits.splice(i, 1)" class="close">
+                        <span class="fa fa-times-circle"></span>
+                    </span>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group {{error_class($errors, 'recent_visits.1.duration')}}">
-                            <label for="">
-                                @lang('Duration Of Visit')
-                            </label>
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    {!! Form::number('', '', ['class' => 'form-control input-sm', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'recent_visits[' + i + ']duration'"]) !!}
-                                </div>
-                                <div class="col-sm-5">
-                                    {!! Form::select('', ['days' => __('Days'), 'months' => __('Months'), 'years' => __('Years')], '',
-                                    ['class' => 'form-control input-sm', 'v-model' => 'visit.duration_type', 'v-bind:name' => "'visits[' + i + '][duration_type]'"]) !!}
+                        <div class="col-sm-4">
+                            <div class="form-group" :class="{'has-error' : form_errors['recent_visits.'+i+'.date']}">
+                                <label for="">
+                                    @lang('Date Of Visit')
+                                </label>
+                                {!! Form::date(null, '', ['class' => 'form-control input-sm', 'v-model' => 'visit.date', 'v-bind:name' => "'recent_visits[' + i + '][date]'"]) !!}
+                                <span class="help-block">
+                            @{{(form_errors['recent_visits.'+i+'.date'] || [])[0]}}
+                        </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="">
+                                    @lang('Duration Of Visit')
+                                </label>
+                                <div class="row col-sm-12">
+                                    <div class="col-sm-7" :class="{'has-error' : form_errors['recent_visits.'+i+'.duration']}">
+                                        {!! Form::number(null, '', ['class' => 'form-control input-sm', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'recent_visits[' + i + '][duration]'"]) !!}
+                                        <span class="help-block">
+                                    @{{(form_errors['recent_visits.'+i+'.duration'] || [])[0]}}
+                                </span>
+                                    </div>
+                                    <div class="col-sm-5" :class="{'has-error' : form_errors['recent_visits.'+i+'.duration_type']}">
+                                        {!! Form::select(null, ['days' => __('Days'), 'months' => __('Months'), 'years' => __('Years')], '',
+                                        ['class' => 'form-control input-sm', 'placeholder' => __('--Select--'), 'v-model' => 'visit.duration_type', 'v-bind:name' => "'recent_visits[' + i + '][duration_type]'"]) !!}
+                                        <span class="help-block">
+                                    @{{(form_errors['recent_visits.'+i+'.duration_type'] || [])[0]}}
+                                </span>
+                                    </div>
                                 </div>
                             </div>
-                            {!! error_tag($errors, 'recent_visits.1.duration') !!}
                         </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
                 </div>
-                <div class="col-sm-12">
+                <div class="panel-footer">
                     <button @click.prevent="recentVisits.push({duration_type: '', date: '', duration: ''})"
                             class="btn-sm btn btn-primary">
                         <span class="fa fa-plus"></span>
@@ -458,9 +482,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12">
-            <br>
-        </div>
         <div class="col-sm-6">
             <div class="form-group {{error_class($errors, 'returning_to_country')}}">
                 <label for="">
@@ -468,25 +489,25 @@
                 </label>
                 <div class="radio">
                     <label>
-                        <input name="returning_to_country" type="radio" v-model="returningToCountry" value="Y">
+                        <input name="returning_to_country" type="radio" v-model="returningToCountry" :value="1">
                         @lang('Yes')
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input name="returning_to_country" type="radio" v-model="returningToCountry" value="N">
+                        <input name="returning_to_country" type="radio" v-model="returningToCountry" :value="0">
                         @lang('No')
                     </label>
                 </div>
                 {!! error_tag($errors, 'returning_to_country') !!}
             </div>
         </div>
-        <div class="col-sm-6" v-if="returningToCountry == 'N'">
+        <div class="col-sm-6" v-if="returningToCountry == false">
             <div class="form-group {{error_class($errors, 'no_return_reason')}}">
                 <label for="">
                     @lang('Reason For Not Returning')
                 </label>
-                {!! Form::textarea('no_return_reason', '', ['class' => 'form-control input-sm', 'rows' => '3']) !!}
+                {!! Form::textarea('no_return_reason', null, ['class' => 'form-control input-sm', 'rows' => '3']) !!}
                 {!! error_tag($errors, 'no_return_reason') !!}
             </div>
         </div>
@@ -498,25 +519,25 @@
                 </label>
                 <div class="radio">
                     <label>
-                        <input name="denied_entry_before" type="radio" v-model="deniedEntryBefore" value="Y">
+                        <input name="denied_entry_before" type="radio" v-model="deniedEntryBefore" :value="1">
                         @lang('Yes')
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input name="denied_entry_before" type="radio" v-model="deniedEntryBefore" value="N">
+                        <input name="denied_entry_before" type="radio" v-model="deniedEntryBefore" :value="0">
                         @lang('No')
                     </label>
                 </div>
                 {!! error_tag($errors, 'denied_entry_before') !!}
             </div>
         </div>
-        <div class="col-sm-6" v-if="deniedEntryBefore == 'Y'">
+        <div class="col-sm-6" v-if="deniedEntryBefore">
             <div class="form-group {{error_class($errors, 'denied_entry_reason')}}">
                 <label for="">
                     @lang('Denial Reason')
                 </label>
-                {!! Form::textarea('denied_entry_reason', '', ['class' => 'form-control input-sm', 'rows' => '3']) !!}
+                {!! Form::textarea('denied_entry_reason', null, ['class' => 'form-control input-sm', 'rows' => '3']) !!}
                 {!! error_tag($errors, 'denied_entry_reason') !!}
             </div>
         </div>
@@ -528,25 +549,25 @@
                 </label>
                 <div class="radio">
                     <label>
-                        <input name="denied_entry_others" type="radio" v-model="deniedEntryOthers" value="Y">
+                        <input name="denied_entry_others" type="radio" v-model="deniedEntryOthers" :value="1">
                         @lang('Yes')
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input name="denied_entry_others" type="radio" v-model="deniedEntryOthers" value="N">
+                        <input name="denied_entry_others" type="radio" v-model="deniedEntryOthers" :value="0">
                         @lang('No')
                     </label>
                 </div>
                 {!! error_tag($errors, 'denied_entry_others') !!}
             </div>
         </div>
-        <div class="col-sm-6" v-if="deniedEntryOthers == 'Y'">
+        <div class="col-sm-6" v-if="deniedEntryOthers">
             <div class="form-group {{error_class($errors, 'denied_entry_others_reason')}}">
                 <label for="">
                     @lang('Denial Reason')
                 </label>
-                {!! Form::textarea('denied_entry_others_reason', '', ['class' => 'form-control input-sm', 'rows' => '3']) !!}
+                {!! Form::textarea('denied_entry_others_reason', null, ['class' => 'form-control input-sm', 'rows' => '3']) !!}
                 {!! error_tag($errors, 'denied_entry_others_reason') !!}
             </div>
         </div>
@@ -558,31 +579,80 @@
                 </label>
                 <div class="radio">
                     <label>
-                        <input name="convicted_before" type="radio" v-model="convictedBefore" value="Y">
+                        <input name="convicted_before" type="radio" v-model="convictedBefore" :value="1">
                         @lang('Yes')
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input name="convicted_before" type="radio" v-model="convictedBefore" value="N">
+                        <input name="convicted_before" type="radio" v-model="convictedBefore" :value="0">
                         @lang('No')
                     </label>
                 </div>
                 {!! error_tag($errors, 'convicted_before') !!}
             </div>
         </div>
-        <div class="col-sm-6" v-if="convictedBefore == 'Y'">
+        <div class="col-sm-6" v-if="convictedBefore">
             <div class="form-group {{error_class($errors, 'convicted_reason')}}">
                 <label for="">
                     @lang('Conviction Reason')
                 </label>
-                {!! Form::textarea('convicted_reason', '', ['class' => 'form-control input-sm', 'rows' => '3']) !!}
-                {!! error_tag($errors, 'denied_entry_others_reason') !!}
+                {!! Form::textarea('convicted_reason', null, ['class' => 'form-control input-sm', 'rows' => '3']) !!}
+                {!! error_tag($errors, 'convicted_reason') !!}
             </div>
         </div>
         <div class="clearfix"></div>
 
         <?php break; ?>
+        <?php case 8: ?>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @lang('Supporting Documents')
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group {{error_class($errors, 'passport_bio')}}">
+                            <label>
+                                @lang('e-visa::forms.passport_bio')
+                            </label>
+                            <div class="alert alert-info">
+                                @lang('e-visa::help_blocks.passport_bio')
+                            </div>
+                            {!! Form::file('passport_bio', ['class' => 'form-control input-sm']) !!}
+                            {!! error_tag($errors, 'passport_bio') !!}
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group {{error_class($errors, 'passport_photo')}}">
+                            <label>
+                                @lang('e-visa::forms.passport_photo')
+                            </label>
+                            <div class="alert alert-info">
+                                @lang('e-visa::help_blocks.passport_photo')
+                            </div>
+                            {!! Form::file('passport_photo', ['class' => 'form-control input-sm']) !!}
+                            {!! error_tag($errors, 'passport_photo') !!}
+                        </div>
+
+                        <br>
+                        <br>
+                        <div class="form-group {{error_class($errors, 'additional_documents')}}">
+                            <label>
+                                @lang('e-visa::forms.additional_documents')
+                            </label>
+                            <div class="alert alert-info">
+                                @lang('e-visa::help_blocks.additional_documents')
+                            </div>
+                            {!! Form::file('additional_documents', ['class' => 'form-control input-sm']) !!}
+                            {!! error_tag($errors, 'additional_documents') !!}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        <?php break; ?>
+
         <?php } ?>
 
     </div>

@@ -20,7 +20,8 @@ class EVisa extends Model
         'passport_date_of_expiry', 'passport_issued_by', 'travel_reason', 'date_of_entry', 'date_of_departure',
         'travel_email', 'travel_phone_number', 'arrival_by', 'entry_point', 'places_to_visit', 'other_recent_visits',
         'recent_visits', 'returning_to_country', 'no_return_reason', 'denied_entry_before', 'denied_entry_reason', 'denied_entry_others',
-        'denied_entry_others_reason', 'convicted_before', 'convicted_reason'
+        'denied_entry_others_reason', 'convicted_before', 'convicted_reason', 'passport_bio', 'passport_photo',
+        'additional_documents'
         ];
 
 }

@@ -5,7 +5,7 @@
     }
 @endphp
 @section('content')
-    {!! Form::model($model, ['url' => route('e-visa.application.new', ['step' => $step])]) !!}
+    {!! Form::model($model, ['files' => true, 'url' => route('e-visa.application.new', ['step' => $step])]) !!}
         <div class="panel panel-default">
             <div class="panel-heading">
                 @lang('New Application')
