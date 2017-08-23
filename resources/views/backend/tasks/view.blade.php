@@ -11,18 +11,57 @@
             <div class="panel panel-default panel-form m-r-10 m-l-10">
                 <div class="panel-heading clearfix">
                     <div class="pull-right" role="">
-                        <a href="{{ route('backend.tasks.queue', [$module->slug]) }}" class="btn btn-sm btn-default">
-                            <span class="fa fa-arrow-left"></span> Back to Tasks
-                        </a>
-                        <a href="#" class="btn btn-sm btn-success">
-                            <span class="fa fa-check"></span> Approve
-                        </a>
-                        <a href="#" class="btn btn-sm btn-warning">
-                            <span class="fa fa-exclamation-triangle"></span> Send for correction
-                        </a>
-                        <a href="#" class="btn btn-sm btn-info">
-                            <span class="fa fa-tasks"></span> Assign Task
-                        </a>
+                        <form method="post">
+                            {!! csrf_field() !!}
+                            <a href="{{ route('backend.tasks.queue', [$module->slug]) }}" class="btn btn-sm btn-default">
+                                <span class="fa fa-arrow-left"></span> @lang('labels.back_to_tasks')
+                            </a>
+
+                            @if(!$task->application->complete)
+                                @foreach($actions as $action => $props)
+                                    @if(array_get($props,'feedback',false))
+                                        <button type="button" class="btn btn-sm btn-{{array_get($props,'color')}}" data-toggle="modal" data-target="#md_tskv_{{ $action.'_'.$task->id}}">
+                                            <span class="fa fa-{{ array_get($props,'icon') }}"></span> {{array_get($props,'name')}}
+                                        </button>
+
+                                        @push('modals')
+                                            <div class="modal fade modal-wide" id="md_tskv_{{ $action.'_'.$task->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <form class="modal-content" method="post">
+                                                        {!! csrf_field() !!}
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="exampleModalLongTitle"> @lang('labels.reason_for', [ 'action' => array_get($props,'name') ])  </h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <textarea name="comment" class="form-control"></textarea>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-default" data-dismiss="modal" aria-label="Close">@lang('labels.cancel')</button>
+                                                            <button type="submit" class="btn btn-primary" value="{{ $action }}" name="action">
+                                                                <span class="fa fa-{{ array_get($props,'icon') }}"></span> {{array_get($props,'name')}}
+                                                            </button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endpush
+                                    @else
+                                        <button type="submit" class="btn btn-sm btn-success" value="{{ $action }}" name="action">
+                                            <span class="fa fa-{{ array_get($props,'icon') }}"></span> {{array_get($props,'name')}}
+                                        </button>
+                                    @endif
+
+                                @endforeach
+                            @endif
+                        </form>
+
 
                     </div>
                     <h3 class="panel-title"></h3>
