@@ -41,7 +41,6 @@
                                     @lang('e-visa::forms.country_of_application')
                                 </th>
                                 <td>
-                                    {{$lookup_data['country_codes'][$model->country_of_application]}}
                                 </td>
                             </tr>
                             </tbody>

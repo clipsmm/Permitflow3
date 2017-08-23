@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Events\ApplicationSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\Invoice;
 use App\Models\Module;
 use App\Modules\BaseModule;
 use Illuminate\Http\Request;
@@ -87,7 +88,7 @@ class ApplicationController extends Controller
             return redirect()->route('application.submitted', ['module_slug' => $this->module->slug, 'application' => $application->id]);
         }
 
-        return redirect()->route('application.checkout', ['invoice_id' => $invoice->pk, 'application' => $application->id]);
+        return redirect()->route('application.checkout', ['module_slug' => $this->module->slug, 'invoice_id' => $invoice->pk, 'application' => $application->id]);
     }
 
     public function submitted($module_slug, Application $application)
@@ -95,8 +96,14 @@ class ApplicationController extends Controller
         return view('applications.submitted', ['application' => $application, 'module' => $this->module]);
     }
 
-    public function checkout($module, Application $application, $invoice)
+    public function checkout(Request $request, $module_slug, Application $application, Invoice $invoice)
     {
-        dd($invoice);
+        $invoice->get_pesaflow_bill_ref();
+        $checkout_data = get_pesaflow_checkout_data_from_invoice($invoice);
+        return view('frontend.checkout', [
+            'data' => $checkout_data,
+            'module' => $this->module,
+            'application' => $application
+        ]);
     }
 }

@@ -9,6 +9,7 @@
 namespace Modules;
 
 use App\Events\ApplicationSubmitted;
+use App\Models\Invoice;
 use App\Models\Task;
 use Carbon\Carbon;
 use \Countries;
@@ -201,6 +202,12 @@ class EVisa extends BaseModule implements ModuleInterface
                 throw new \Exception(__('errors.undefined_task'));
                 break;
         }
+    }
+
+
+    public function create_invoice($application)
+    {
+        return Invoice::create_invoice($application->id, [['amount' => 20, 'description' => 'foo']], 'bar');
     }
 
 
