@@ -32,5 +32,7 @@
 <script src="{{ asset('js/app.js') }}"></script>
 
 
+@stack('page_js')
+@stack('javascripts')
 </body>
 </html>

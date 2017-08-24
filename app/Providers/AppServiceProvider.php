@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\BaseModule;
 use Caffeinated\Modules\Facades\Module;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -31,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function loadModules()
     {
         try{
-            $modules = Module::enabled();
+            $modules = BaseModule::get_enabled_modules();
             view()->share(['active_modules' => $modules]);
         } catch(\Exception $e) {
 

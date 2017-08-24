@@ -42,15 +42,15 @@ class Invoice extends Model
         });
     }
 
-    public static function create_invoice($application_id,$status, array $items, $description)
+    public static function create_invoice($application_id, array $items, $description)
     {
         $invoice = null;
-        \DB::transaction(function() use (&$invoice, $application_id, $status, $items, $description){
+        \DB::transaction(function() use (&$invoice, $application_id, $items, $description){
             $_items =  collect($items);
 
             $invoice  =  new self([
                 'application_id' => $application_id,
-                'status' => $status,
+                'status' => 'unpaid',
                 'amount' => $_items->sum('amount'),
                 'bill_ref' => generate_random_string(),
                 'description' => $description

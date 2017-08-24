@@ -9,15 +9,14 @@
         <div class="col-md-3 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
-
+                @foreach($active_modules as $module)
                 <div class="panel-body">
-                    Evisa
+                    <h5>{{$module->name}}</h5>
+                    <a href="{{$module->newUrl()}}">
+                        @lang('common.make_application')
+                    </a>
                 </div>
-
-                <div class="panel-body">
-                    E-Passport
-                </div>
-
+                @endforeach
             </div>
         </div>
 

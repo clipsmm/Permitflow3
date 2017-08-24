@@ -11,10 +11,25 @@
                                 <div class="panel with-nav-tabs panel-default">
                                     <div class="panel-heading p-t-10">
                                         <ul class="nav nav-tabs">
+<<<<<<< HEAD
                                             <li class="{{ menu_current_route('backend.tasks.queue') }}"><a href="{{ route('backend.tasks.queue', [$module->slug]) }}" >Queued <span class="label label-default"> 3000</span></a></li>
                                             <li class="{{ menu_current_route('backend.tasks.inbox') }}"><a href="{{ route('backend.tasks.inbox', [$module->slug]) }}" >My Task <span class="label label-default"> 3000</span></a></li>
                                             <li class="{{ menu_current_route('backend.tasks.corrections') }}"><a href="{{ route('backend.tasks.corrections', [$module->slug]) }}" >Awaiting Corrections <span class="label label-default"> 200</span></a></li>
                                             <li class="{{ menu_current_route('backend.tasks.outbox') }}"><a href="{{ route('backend.tasks.outbox', [$module->slug]) }}" >completed <span class="label label-default"> 3000</span></a></li>
+=======
+                                            <li class="{{ menu_current_route('backend.tasks.queue') }}"><a
+                                                        href="{{ route('backend.tasks.queue', [$module->slug]) }}">Queued
+                                                    <span class="label label-default"> 3000</span></a></li>
+                                            <li class="{{ menu_current_route('backend.tasks.inbox') }}"><a
+                                                        href="{{ route('backend.tasks.inbox', [$module->slug]) }}">My
+                                                    Task <span class="label label-default"> 3000</span></a></li>
+                                            <li class="{{ menu_current_route('backend.tasks.corrections') }}"><a
+                                                        href="{{ route('backend.tasks.corrections', [$module->slug]) }}">Awaiting
+                                                    Corrections <span class="label label-default"> 200</span></a></li>
+                                            <li class="{{ menu_current_route('backend.tasks.outbox') }}"><a
+                                                        href="{{ route('backend.tasks.outbox', [$module->slug]) }}">completed
+                                                    <span class="label label-default"> 3000</span></a></li>
+>>>>>>> e_visa_module
                                         </ul>
                                     </div>
                                     <div class="panel-body padding-0">
@@ -23,6 +38,7 @@
                                                 <div class="panel-body">
                                                     <div class="panel panel-default m-b-0">
                                                         <div class="panel-body b-b-1">
+<<<<<<< HEAD
                                                             <form class="col-sm-6" accept-charset="UTF-8" action="" method="get">
                                                                 <input name="_utf8" type="hidden" value="✓">
                                                                 <div class="input-group " id="adv-search">
@@ -32,11 +48,37 @@
                                                                         <div class="btn-group" role="group">
                                                                             <div class="dropdown dropdown-lg full_width"></div>
                                                                             <button type="submit" name="submit" class="btn btn5 btn-primary"><span class="search_btn_txt"> <span class="fa fa-search"></span> Search</span></button>
+=======
+                                                            <form class="col-sm-6" accept-charset="UTF-8" action=""
+                                                                  method="get">
+                                                                <input name="_utf8" type="hidden" value="✓">
+                                                                <div class="input-group " id="adv-search">
+                                                                    <input type="hidden" name="application_id" value=''>
+                                                                    <input id="search_type" name="search[type]"
+                                                                           type="hidden"> <input class="form-control"
+                                                                                                 id="search_q"
+                                                                                                 name="search[q]"
+                                                                                                 placeholder="Enter Ref No."
+                                                                                                 type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <div class="btn-group" role="group">
+                                                                            <div class="dropdown dropdown-lg full_width"></div>
+                                                                            <button type="submit" name="submit"
+                                                                                    class="btn btn5 btn-primary"><span
+                                                                                        class="search_btn_txt"> <span
+                                                                                            class="fa fa-search"></span> Search</span>
+                                                                            </button>
+>>>>>>> e_visa_module
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </form>
+<<<<<<< HEAD
                                                             <a href="#" class="btn btn-sm btn-success pull-right"><span class="fa fa-tasks"></span> Pick Task</a>
+=======
+                                                            <a href="#" class="btn btn-sm btn-success pull-right"><span
+                                                                        class="fa fa-tasks"></span> Pick Task</a>
+>>>>>>> e_visa_module
                                                         </div>
                                                         <div class="panel-body padding-0">
                                                             <table class="table table-hover table-special table-striped">
@@ -57,7 +99,12 @@
                                                                         </td>
                                                                         <td class="hidden-xs hidden-sm">{{ $task->application->application_number }}</td>
                                                                         <td>
+<<<<<<< HEAD
                                                                             <a href="{{ route('backend.tasks.show',[$module->slug, $task->id]) }}" class="btn btn-xs btn-primary" >
+=======
+                                                                            <a href="{{ route('backend.tasks.show',[$module->slug, $task->id]) }}"
+                                                                               class="btn btn-xs btn-primary">
+>>>>>>> e_visa_module
                                                                                 <span class="fa fa-eye"></span> View
                                                                             </a>
                                                                         </td>
@@ -76,6 +123,13 @@
                                                     {!! $tasks->render() !!}
                                                 </div>
                                             </div>
+<<<<<<< HEAD
+=======
+
+                                            </form>
+
+                                        </div>
+>>>>>>> e_visa_module
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +137,12 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal -->
         </div>
+<<<<<<< HEAD
         <!-- Modal -->
+=======
+>>>>>>> e_visa_module
     </div>
 @endsection
 

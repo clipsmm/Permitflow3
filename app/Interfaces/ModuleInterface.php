@@ -33,4 +33,6 @@ interface ModuleInterface
     public function get_task_actions(Task $task);
 
     public function render_application_view(Application $application);
+
+    public function create_invoice($application);
 }

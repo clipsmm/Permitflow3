@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('content')
+@section('body')
     <div class="panel panel-default">
         <div class="panel-body">
             You have successfully completed step 1 on the application process. Use the link sent to your email to complete the application process.

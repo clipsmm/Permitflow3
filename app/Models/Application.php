@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Caffeinated\Modules\Facades\Module;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Application extends Model
@@ -26,7 +27,8 @@ class Application extends Model
 
     public static function insertRecord($module, $data, User $user)
     {
-        $application = new self(['form_data' => $data, 'module_slug' => $module->slug, 'application_number' => self::generateApplicationNumber($module)]);
+        $application = new self(['module_slug' => $module->slug, 'application_number' => self::generateApplicationNumber($module)]);
+        $application->form_data = $data;
         $application->user()->associate($user)
             ->save();
 
@@ -42,4 +44,5 @@ class Application extends Model
         $this->form_data = array_merge($this->form_data, $data);
         $this->save();
     }
+
 }
