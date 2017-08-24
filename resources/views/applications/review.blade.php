@@ -12,10 +12,12 @@
         </div>
         <div class="panel-footer">
             <div class="form-group text-right">
-                <a href="#" class="btn btn-primary btn-sm">
-                    <span class="fa fa-edit"></span>
-                    @lang('Edit')
-                </a>
+                @if($application->isEditable())
+                    <a href="{{$module->get_edit_url($application)}}" class="btn btn-primary btn-sm">
+                        <span class="fa fa-edit"></span>
+                        @lang('Edit')
+                    </a>
+                @endif
                 <button type="submit" class="btn btn-success btn-sm">
                     <span class="fa fa-check-circle"></span>
                     @lang('Submit Application')

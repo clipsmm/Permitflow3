@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\ApplicationResubmitted;
 use App\Events\ApplicationSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
@@ -9,6 +10,7 @@ use App\Models\Invoice;
 use App\Models\Module;
 use App\Modules\BaseModule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
@@ -83,8 +85,21 @@ class ApplicationController extends Controller
 
     public function submit($module, Application $application)
     {
-        event(new ApplicationSubmitted($application));
-        $invoice = $this->module->create_invoice($application);
+        $invoice = null;
+
+        DB::transaction(function() use($application, &$invoice){
+            $invoice = $this->module->create_invoice($application);
+            $in_corrections = $application->in_corrections;
+
+            $application->submit();
+
+            if($in_corrections){
+                event(new ApplicationResubmitted($application));
+            }else{
+                event(new ApplicationSubmitted($application));
+            }
+
+        });
 
         if(is_null($invoice)){
             return redirect()->route('application.submitted', ['module_slug' => $this->module->slug, 'application' => $application->id]);

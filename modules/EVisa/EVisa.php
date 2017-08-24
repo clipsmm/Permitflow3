@@ -30,12 +30,6 @@ class EVisa extends BaseModule implements ModuleInterface
      * @var array
      */
 
-    public $listens = [
-        ApplicationSubmitted::class => [
-            EvisaApplicationSubmittedHandler::class
-        ]
-    ];
-
     public $stages  = [
         'review' => [
             'reject' => [
@@ -60,6 +54,11 @@ class EVisa extends BaseModule implements ModuleInterface
     public function newUrl($params = [])
     {
         return route('e-visa.application.new', $params);
+    }
+
+    public function get_edit_url($application)
+    {
+        return route('e-visa.application.edit', ['application' => $application->id]);
     }
 
     public function loadLookupData($model)

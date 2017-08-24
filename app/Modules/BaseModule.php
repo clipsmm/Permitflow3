@@ -93,4 +93,9 @@ class BaseModule
     {
         return null;
     }
+
+    public function get_edit_url($application)
+    {
+        return route('applications.edit', ['module_slug' => $application->module_slug, 'application' => $application->id]);
+    }
 }

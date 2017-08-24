@@ -27,7 +27,7 @@ class EvisaApplicationSubmittedHandler
      */
     public function handle(ApplicationSubmitted $event)
     {
-        //create passport review task
+        ///create passport review task
         $application =  $event->application;
         Task::create_task($application->id, "Evisa Review Task",'review','pending');
     }

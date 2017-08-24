@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Caffeinated\Modules\Facades\Module;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\UploadedFile;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Application extends Model
 {
-    protected $fillable = ['application_number', 'form_data', 'module_slug', 'status'];
+    const DRAFT = 'draft';
+
+    protected $fillable = ['application_number', 'form_data', 'module_slug', 'status', 'submitted_at', 'in_corrections' ];
 
     protected $casts = [
         'form_data' => 'array',
@@ -23,6 +25,16 @@ class Application extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function corrections()
+    {
+        return $this->hasMany(ApplicationCorrection::class);
+    }
+
+    public function activeCorrection()
+    {
+        return $this->corrections()->whereCompletedAt(null)->first();
     }
 
     public static function insertRecord($module, $data, User $user)
@@ -42,6 +54,17 @@ class Application extends Model
     
     public function updateFormData($data){
         $this->form_data = array_merge($this->form_data, $data);
+        $this->save();
+    }
+
+    public function isEditable(){
+        return in_array($this->status, [self::DRAFT]);
+    }
+
+    public function submit()
+    {
+        $this->submitted_at = Carbon::now();
+        $this->in_corrections = false;
         $this->save();
     }
 
