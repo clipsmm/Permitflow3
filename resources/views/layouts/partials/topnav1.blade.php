@@ -16,15 +16,14 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                <li class=""><a href="/accounts/46/services">Make Application</a></li>
-                <li class=""><a href="/accounts/46/applications">Application History</a></li>
-                >
+                <li class=""><a href="#">Make Application</a></li>
+                <li class=""><a href="#">Application History</a></li>
             </ul>
             <div id="searchbar" class="col-sm-3 col-md-6">
-                <form accept-charset="UTF-8" action="/search-business" class="navbar-form navbar-left" method="get" role="search">
+                <form accept-charset="UTF-8" action="" class="navbar-form navbar-left" method="get" role="search">
                     <input name="_utf8" type="hidden" value="✓">
                     <div class="input-group">
-                        <input class="form-control" id="search_q" name="search[q]" placeholder="Search businesses by name" type="text">  <span class="input-group-btn">
+                        <input class="form-control" id="search_q" name="search[q]" placeholder="Search" type="text">  <span class="input-group-btn">
             <button class="btn btn-default">
             <span class="fa fa-search"></span>
             </button>
@@ -42,7 +41,7 @@
                     @include('layouts.partials.topnave2')
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->first_name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Profile</a></li>
