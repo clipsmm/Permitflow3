@@ -52,6 +52,7 @@ Route::prefix('backend')
             Route::get("{module}/manage", "ModuleController@show")->name("backend.modules.show");
             Route::get("{module}/permissions", "ModuleController@managePermissions")->name("backend.module.permissions");
         });
+        Route::resource('users', 'UsersController');
     });
 
 
@@ -74,4 +75,3 @@ Route::prefix('applications/{module_slug}')
  */
 Route::get('payment-success', 'PaymentController@paymentSuccess')->name('payment.success');
 Route::get('payment-failed', 'PaymentController@paymentFailed')->name('payment.failed');
-
