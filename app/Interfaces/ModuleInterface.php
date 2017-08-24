@@ -33,4 +33,8 @@ interface ModuleInterface
     public function get_task_actions(Task $task);
 
     public function render_application_view(Application $application);
+
+    public function get_permissions();
+
+    public function render_settings_view();
 }

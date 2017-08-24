@@ -31,7 +31,7 @@
                 </div>
 
 
-                @if($my_modules)
+                @isset($my_modules)
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">Modules</div>
@@ -45,7 +45,7 @@
 
                         </div>
                     </div>
-                @endif
+                @endisset
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
