@@ -17,7 +17,7 @@ class SsoController extends Controller
      */
      public function ssoRedirect(Request $request)
      {
-         $url = config('app.sso_authorize_url') . '/authorize?' . http_build_query(
+         $url = config('app.sso_authorize_url') . '?' . http_build_query(
                  ['return_url' => route('auth.sso_authorize')]);
          return redirect($url);
      }

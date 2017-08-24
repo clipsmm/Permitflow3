@@ -54,7 +54,7 @@
                                                                     </div>
                                                                 </div>
                                                             </form>
-                                                            <a href="#" class="btn btn-sm btn-success pull-right"><span
+                                                            <a href="{{ route('backend.tasks.pick', $module->slug) }}" class="btn btn-sm btn-success pull-right"><span
                                                                         class="fa fa-tasks"></span> Pick Task</a>
                                                         </div>
                                                         <div class="panel-body padding-0">

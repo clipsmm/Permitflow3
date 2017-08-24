@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class UsersController extends Controller
+class UsersController extends BaseController
 {
     /**
      * Display a listing of the resource.

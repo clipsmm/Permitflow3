@@ -7,17 +7,16 @@ use Caffeinated\Modules\Facades\Module;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TaskController extends Controller
+class TaskController extends BaseController
 {
     protected $tasks;
     protected $modules;
 
     public function __construct(Task $task)
     {
-        $this->tasks = $task;
-        $modules  = Module::enabled();
+        parent::__construct();
 
-        view()->share('my_modules', $modules);
+        $this->tasks = $task;
     }
 
     public function index()
