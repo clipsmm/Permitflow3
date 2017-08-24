@@ -13,11 +13,11 @@
                         <li><a href="#tab2default" data-toggle="tab">Proccessing <span class="label label-default"> 5600</span></a></li>
                         <li><a href="#tab2default" data-toggle="tab">completed <span class="label label-default"> 3000</span></a></li>
 
-                    </ul>
-                </div>
-                <div class="panel-body padding-0">
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1default">
+            </ul>
+                </div >
+                    <div class="panel-body padding-0">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tab1default">
 
                             <div class="panel-body">
                                 <div class="panel panel-default m-b-0">

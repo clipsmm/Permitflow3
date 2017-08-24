@@ -52,6 +52,7 @@ Route::prefix('backend')
             Route::get("{module}/manage", "ModuleController@show")->name("backend.modules.show");
             Route::get("{module}/permissions", "ModuleController@managePermissions")->name("backend.module.permissions");
         });
+        Route::resource('roles', 'RolesController');
         Route::resource('users', 'UsersController');
     });
 

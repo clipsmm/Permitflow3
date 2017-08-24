@@ -1,12 +1,15 @@
-@extends('backend.index')
+@extends('layouts.backend')
 
-@section('content')
+@section('title', 'Users')
+
+@section('body')
     <div class="col-md-12">
-        <form method="PUT" action="/users/{{$user->id}}">
+        <form method="POST" action="{{ route('users.update', $user->id) }}">
             <div class="panel panel-default">
                 <div class="panel-heading">@lang("Edit Profile")</div>
                 <div class="panel-body">
-                    {{ csrf_field() }}
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="col-md-4">
                         <div class="form-group{{ error_class($errors, 'first_name') }}">
                             <label for="name" class="control-label">@lang("First Name")</label>
@@ -86,7 +89,7 @@
                         @lang("Submit Edit")
                     </button>
                     <span class="pull-left">
-                        <a href="/users" class="btn btn-md btn-default">Back</a>
+                        <a href="/backend/users" class="btn btn-md btn-default">Back</a>
                     </span>
                 </div>
             </div>
