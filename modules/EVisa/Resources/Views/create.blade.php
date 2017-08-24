@@ -5,7 +5,7 @@
     }
 @endphp
 @section('body')
-    <div class="row m-t-20">
+    <div class="row m-t-0">
 
         <div class="col-md-12">
 
@@ -79,8 +79,8 @@
 
                         </div>
 
-                        {!! Form::model($model, ['files' => true, 'url' => route('e-visa.application.new', ['step' => $step])]) !!}
-        <div class="panel panel-default">
+             {!! Form::model($model, ['files' => true, 'url' => route('e-visa.application.new', ['step' => $step])]) !!}
+
             <div class="panel-heading">
                 @lang('e-visa::common.single_entry_visa')
             </div>
@@ -96,8 +96,7 @@
                 <button type="submit" class="btn btn-sm btn-primary">@lang('Next')</button>
             </div>
         </div>
-    {!! Form::close() !!}
-                    </div>
+         {!! Form::close() !!}
                 </div>
             </div>
         </div>

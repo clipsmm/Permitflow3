@@ -5,7 +5,7 @@
     }
 @endphp
 @section('body')
-    <div class="row m-t-20">
+    <div class="row m-t-0">
         <div class="col-md-12">
 
 
@@ -72,7 +72,7 @@
                         </div>
 
                     {!! Form::model($model, ['files' => true, 'url' => route('e-visa.application.update', ['application' => $application, 'step' => $step])]) !!}
-    <div class="panel panel-default">
+
         <div class="panel-heading">
             @lang('Edit Application')
         </div>
@@ -89,7 +89,7 @@
         </div>
     </div>
     {!! Form::close() !!}
-    </div>
+
 
 
     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
