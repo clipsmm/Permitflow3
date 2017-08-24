@@ -14,7 +14,7 @@
                         <form method="post">
                             {!! csrf_field() !!}
                             <a href="{{ route('backend.tasks.queue', [$module->slug]) }}" class="btn btn-sm btn-default">
-                                <span class="fa fa-arrow-left"></span> @lang('labels.back_to_tasks')
+                                <span class="fa fa-arrow-left"></span> @lang('common.back_to_tasks')
                             </a>
 
                             @if(!$task->application->complete)

@@ -55,4 +55,14 @@ class Passport extends BaseModule implements ModuleInterface
     {
         // TODO: Implement newUrl() method.
     }
+
+    public function get_permissions()
+    {
+        // TODO: Implement get_permissions() method.
+    }
+
+    public function render_settings_view()
+    {
+        // TODO: Implement render_settings_view() method.
+    }
 }

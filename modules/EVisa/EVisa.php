@@ -213,4 +213,13 @@ class EVisa extends BaseModule implements ModuleInterface
         return Invoice::create_invoice($application->id, [['amount' => 20, 'description' => 'foo']], 'bar');
     }
 
+    public function get_permissions()
+    {
+        // TODO: Implement get_permissions() method.
+    }
+
+    public function render_settings_view()
+    {
+        // TODO: Implement render_settings_view() method.
+    }
 }

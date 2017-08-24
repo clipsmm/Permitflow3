@@ -29,32 +29,27 @@ Route::get('/frontend', 'FrontendController@index')->name('frontend');
 /*
  * Backend routes
  */
-Route::prefix('backend')
-    ->namespace('Backend')
-    ->group(function(){
-        Route::get('', 'DashboardController@index')->name('backend');
-        Route::group(['prefix' => 'tasks'], function(){
-            Route::get('', 'TaskController@index')->name('backend.tasks.index');
+Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.'], function(){
+    Route::get('', 'DashboardController@index');
 
-            Route::group(['prefix' => '{module}'], function (){
-                Route::get('', 'TaskController@myQueue')->name('backend.tasks.queue');
-                Route::get('pick', 'TaskController@pickTask')->name('backend.tasks.pick');
-                Route::get('inbox', 'TaskController@myInbox')->name('backend.tasks.inbox');
-                Route::get('outbox', 'TaskController@myOutbox')->name('backend.tasks.outbox');
-                Route::get('corrections', 'TaskController@myInCorrection')->name('backend.tasks.corrections');
-                Route::get('{task}/view', 'TaskController@show')->name('backend.tasks.show');
-                Route::post('{task}/view', 'TaskController@handleTask')->name('backend.tasks.submit');
-            });
-        });
-
-        Route::group(['prefix' => 'modules'], function (){
-            Route::get("", 'ModuleController@index')->name("backend.modules.index");
-            Route::get("{module}/manage", "ModuleController@show")->name("backend.modules.show");
-            Route::get("{module}/permissions", "ModuleController@managePermissions")->name("backend.module.permissions");
-        });
+    Route::group(['prefix' => 'modules', 'as' => 'modules.'], function (){
+        Route::get("", 'ModuleController@index')->name("index");
+        Route::get("{module}/manage", "ModuleController@show")->name("manage");
+        Route::get("{module}/permissions", "ModuleController@managePermissions")->name("permissions");
     });
 
-
+    Route::group(['prefix' => '{module}'], function(){
+        Route::group(['prefix' => 'tasks', 'as' => 'tasks.'], function(){
+            Route::get('', 'TaskController@myQueue')->name('queue');
+            Route::get('pick', 'TaskController@pickTask')->name('pick');
+            Route::get('inbox', 'TaskController@myInbox')->name('inbox');
+            Route::get('outbox', 'TaskController@myOutbox')->name('outbox');
+            Route::get('corrections', 'TaskController@myInCorrection')->name('corrections');
+            Route::get('{task}/view', 'TaskController@show')->name('show');
+            Route::post('{task}/view', 'TaskController@handleTask')->name('submit');
+        });
+    });
+});
 
 Route::prefix('applications/{module_slug}')
     ->namespace('Frontend')

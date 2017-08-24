@@ -30,6 +30,13 @@ class BaseModule
         });
     }
 
+    public static function get_all_modules()
+    {
+        return Module::all()->map(function($item){
+            return self::instance_from_slug($item['slug']);
+        });
+    }
+
     public static function instance_from_slug($slug)
     {
         $attrs = Module::where('slug', $slug);

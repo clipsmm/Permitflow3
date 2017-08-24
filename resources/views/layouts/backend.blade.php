@@ -2,11 +2,7 @@
 
 @section('content')
     <div class="container">
-
         <div class="row">
-
-
-
             <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
                 <div class="side-bar">
                     <div class="side-profile-menu m-b-10">
@@ -31,15 +27,15 @@
                 </div>
 
 
-                @isset($my_modules)
+                @isset($backend_modules)
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">Modules</div>
                         </div>
                         <div class=panel-body>
                             <ul class="nav navbar-nav nav-profile">
-                                @foreach($my_modules as $mod)
-                                    <li><a href="{{ route('backend.tasks.queue', $mod['slug']) }}">{{ $mod['name'] }}</a></li>
+                                @foreach($backend_modules as $mod)
+                                    <li><a href="{{ route("backend.tasks.queue", $mod->slug) }}">{{ $mod->name }}</a></li>
                                 @endforeach
                             </ul>
 

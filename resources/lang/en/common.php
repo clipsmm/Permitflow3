@@ -7,5 +7,6 @@
  */
 
 return [
-    'make_application' => "Apply Now"
+    'make_application' => "Apply Now",
+    'back_to_tasks' => 'Back To Tasks'
 ];
