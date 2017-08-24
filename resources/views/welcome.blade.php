@@ -1,18 +1,40 @@
 @extends('layouts.app')
 @section('content')
     <header>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse    navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">eVisa</a>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'eVisa') }}
+                    </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            @include('layouts.partials.topnave2')
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Profile</a></li>
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -26,20 +48,10 @@
                         <li><a href="eligibility.html">Eligibility</a></li>
                         <li><a href="faq.html">FAQs</a></li>
                         <li><a href="contacts.html">Contact Us</a></li>
-                        @if (Route::has('login'))
-                            @auth
-                                <li><a href="{{ url('/home') }}">Home</a></li>
-                                @else
-                                    <li class="pull-right">  <a href="{{ route('login') }}">Login</a></li>
-                                    <li class="pull-right"> <a href="{{ route('register') }}">Register</a></li>
-                                    @endauth
-                                @endif
                     </ul>
                 </div>
-                <!--/.nav-collapse -->
             </div>
         </nav>
-        <!-- End Header -->
     </header>
     <div class="container">
         <div class="row">

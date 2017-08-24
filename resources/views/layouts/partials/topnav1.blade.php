@@ -1,14 +1,6 @@
 <nav class="navbar navbar-inverse    navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'eVisa') }}
             </a>
@@ -18,7 +10,7 @@
                 <li><a href="/">Home</a></li>
                 <li class=""><a href="/accounts/46/services">Make Application</a></li>
                 <li class=""><a href="/accounts/46/applications">Application History</a></li>
-                >
+
             </ul>
             <div id="searchbar" class="col-sm-3 col-md-6">
                 <form accept-charset="UTF-8" action="/search-business" class="navbar-form navbar-left" method="get" role="search">

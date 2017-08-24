@@ -37,11 +37,13 @@
                             <div class="panel-title">Modules</div>
                         </div>
                         <div class=panel-body>
+
                             <ul class="nav navbar-nav nav-profile">
                                 @foreach($my_modules as $mod)
-                                    <li><a href="{{ route('backend.tasks.queue', $mod['slug']) }}">{{ $mod['name'] }}</a></li>
+                                    <li> <div class="panel-title"><a href="{{ route('backend.tasks.queue', $mod['slug']) }}">{{ $mod['name'] }}</a> </div></li>
                                 @endforeach
                             </ul>
+
 
                         </div>
                     </div>

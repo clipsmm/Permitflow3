@@ -20,7 +20,6 @@
                 {!! error_tag($errors, 'country_of_application') !!}
             </div>
         </div>
-
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'applicant')}}">
                 <label for="name_search_type">
@@ -32,7 +31,6 @@
         </div>
         <?php break; ?>
         <?php  case 3: ?>
-
         <h4 class="col-sm-12">@lang('2. Traveler Information')</h4>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'surname')}}">
@@ -126,7 +124,6 @@
         </div>
         <?php break; ?>
         <?php  case 2: ?>
-
         <h4 class="col-sm-12">@lang('NATIONALITY AND RESIDENCE')</h4>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'nationality')}}">
@@ -184,7 +181,6 @@
         </div>
         <?php break; ?>
         <?php  case 4: ?>
-
         <h4 class="col-sm-12">@lang('PASSPORT/TRAVEL DOCUMENT')</h4>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'passport_number')}}">
@@ -233,7 +229,6 @@
         </div>
         <?php break; ?>
         <?php  case 5: ?>
-
         <h4 class="col-sm-12">@lang('TRAVEL INFORMATION')</h4>
         <div class="col-sm-12">
             <div class="form-group {{error_class($errors, 'travel_reason')}}">
@@ -258,7 +253,6 @@
                 <label for="name_search_type">
                     @lang('Proposed Date Of Departure from Kenya')
                 </label>
-
                 {!! Form::date('date_of_departure', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
                 {!! error_tag($errors, 'date_of_departure') !!}
             </div>
@@ -301,16 +295,15 @@
         </div>
         <?php break; ?>
         <?php  case 6: ?>
-
         <h4 class="col-sm-12">
             @lang('DETAILS OF PLACES TO VISIT IN KENYA')
         </h4>
         <div class="col-sm-12">
             <div class="col-sm-12" v-for="(place, i) in placesToVisit">
                 <div class="col-sm-12 text-right">
-                    <span @click.close="placesToVisit.splice(i, 1)" class="close">
-                        <span class="fa fa-times-circle"></span>
-                    </span>
+          <span @click.close="placesToVisit.splice(i, 1)" class="close">
+          <span class="fa fa-times-circle"></span>
+          </span>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.type']}">
@@ -320,8 +313,8 @@
                         {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['class' => 'form-control text-black',
                         ':name' => "'places_to_visit[' + i + '][type]'", 'v-model' => 'place.type', 'maxlength'=>'160']) !!}
                         <span class="help-block">
-                            @{{(form_errors['places_to_visit.'+i+'.type'] || [])[0]}}
-                        </span>
+            @{{(form_errors['places_to_visit.'+i+'.type'] || [])[0]}}
+            </span>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -331,8 +324,8 @@
                         </label>
                         {!! Form::text(null, '', ['v-model' => 'place.name', 'class' => 'form-control text-black', 'maxlength'=>'160', ':name' => "'places_to_visit[' + i + '][name]'",]) !!}
                         <span class="help-block">
-                            @{{(form_errors['places_to_visit.'+i+'.name'] || [])[0]}}
-                        </span>
+            @{{(form_errors['places_to_visit.'+i+'.name'] || [])[0]}}
+            </span>
                     </div>
                 </div>
                 <div class="col-sm-5">
@@ -342,8 +335,8 @@
                         </label>
                         {!! Form::text(null, '', ['v-model' => 'place.address', 'class' => 'form-control text-black','maxlength'=>'160', ':name' => "'places_to_visit[' + i + '][address]'",]) !!}
                         <span class="help-block">
-                            @{{(form_errors['places_to_visit.'+i+'.address'] || [])[0]}}
-                        </span>
+            @{{(form_errors['places_to_visit.'+i+'.address'] || [])[0]}}
+            </span>
                     </div>
                 </div>
             </div>
@@ -364,7 +357,6 @@
         </div>
         <?php break; ?>
         <?php  case 7: ?>
-
         <h4 class="col-sm-12">
             @lang('TRAVEL HISTORY')
         </h4>
@@ -376,9 +368,9 @@
                 <div class="panel-body">
                     <div class="col-sm-12" v-for="(visit, i)  in otherRecentVisits" key="visit.date">
                         <div class="col-sm-12 text-right">
-                <span @click.close="otherRecentVisits.splice(i, 1)" class="close">
-                    <span class="fa fa-times-circle"></span>
-                </span>
+              <span @click.close="otherRecentVisits.splice(i, 1)" class="close">
+              <span class="fa fa-times-circle"></span>
+              </span>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group" :class="{'has-error' : form_errors['other_recent_visits.'+i+'.country']}">
@@ -386,10 +378,10 @@
                                     @lang('Country Visited')
                                 </label>
                                 {!! Form::select(null, $country_codes, '', ['class' => 'form-control text-black', 'maxlength'=>'160', 'value' => '',
-                                 'v-model' => 'visit.country', 'v-bind:name' => "'other_recent_visits[' + i + '][country]'"]) !!}
+                                'v-model' => 'visit.country', 'v-bind:name' => "'other_recent_visits[' + i + '][country]'"]) !!}
                                 <span class="help-block">
-                        @{{(form_errors['other_recent_visits.'+i+'.country'] || [])[0]}}
-                    </span>
+                @{{(form_errors['other_recent_visits.'+i+'.country'] || [])[0]}}
+                </span>
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -399,8 +391,8 @@
                                 </label>
                                 {!! Form::date(null, '', ['class' => 'form-control text-black','maxlength'=>'160', 'v-model' => 'visit.date', 'v-bind:name' => "'other_recent_visits[' + i + '][date]'"]) !!}
                                 <span class="help-block">
-                        @{{(form_errors['other_recent_visits.'+i+'.date'] || [])[0]}}
-                    </span>
+                @{{(form_errors['other_recent_visits.'+i+'.date'] || [])[0]}}
+                </span>
                             </div>
                         </div>
                         <div class="col-sm-5">
@@ -410,8 +402,8 @@
                                 </label>
                                 {!! Form::number(null, '', ['class' => 'form-control text-black', 'maxlength'=>'160', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'other_recent_visits[' + i + '][duration]'"]) !!}
                                 <span class="help-block">
-                        @{{(form_errors['other_recent_visits.'+i+'.duration'] || [])[0]}}
-                    </span>
+                @{{(form_errors['other_recent_visits.'+i+'.duration'] || [])[0]}}
+                </span>
                             </div>
                         </div>
                     </div>
@@ -433,9 +425,9 @@
                 <div class="panel-body">
                     <div class="col-sm-12" v-for="(visit, i) in recentVisits" key="visit.date">
                         <div class="col-sm-12 text-right">
-                    <span @click.close="recentVisits.splice(i, 1)" class="close">
-                        <span class="fa fa-times-circle"></span>
-                    </span>
+              <span @click.close="recentVisits.splice(i, 1)" class="close">
+              <span class="fa fa-times-circle"></span>
+              </span>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group" :class="{'has-error' : form_errors['recent_visits.'+i+'.date']}">
@@ -444,8 +436,8 @@
                                 </label>
                                 {!! Form::date(null, '', ['class' => 'form-control text-black','maxlength'=>'160', 'v-model' => 'visit.date', 'v-bind:name' => "'recent_visits[' + i + '][date]'"]) !!}
                                 <span class="help-block">
-                            @{{(form_errors['recent_visits.'+i+'.date'] || [])[0]}}
-                        </span>
+                @{{(form_errors['recent_visits.'+i+'.date'] || [])[0]}}
+                </span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -457,15 +449,15 @@
                                     <div class="col-sm-7" :class="{'has-error' : form_errors['recent_visits.'+i+'.duration']}">
                                         {!! Form::number(null, '', ['class' => 'form-control text-black', 'maxlength'=>'160', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'recent_visits[' + i + '][duration]'"]) !!}
                                         <span class="help-block">
-                                    @{{(form_errors['recent_visits.'+i+'.duration'] || [])[0]}}
-                                </span>
+                    @{{(form_errors['recent_visits.'+i+'.duration'] || [])[0]}}
+                    </span>
                                     </div>
                                     <div class="col-sm-5" :class="{'has-error' : form_errors['recent_visits.'+i+'.duration_type']}">
                                         {!! Form::select(null, ['days' => __('Days'), 'months' => __('Months'), 'years' => __('Years')], '',
                                         ['class' => 'form-control text-black', 'maxlength'=>'160', 'placeholder' => __('--Select--'), 'v-model' => 'visit.duration_type', 'v-bind:name' => "'recent_visits[' + i + '][duration_type]'"]) !!}
                                         <span class="help-block">
-                                    @{{(form_errors['recent_visits.'+i+'.duration_type'] || [])[0]}}
-                                </span>
+                    @{{(form_errors['recent_visits.'+i+'.duration_type'] || [])[0]}}
+                    </span>
                                     </div>
                                 </div>
                             </div>
@@ -602,58 +594,52 @@
             </div>
         </div>
         <div class="clearfix"></div>
-
         <?php break; ?>
         <?php case 8: ?>
-            <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        @lang('Supporting Documents')
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @lang('Supporting Documents')
+                </div>
+                <div class="panel-body">
+                    <div class="form-group {{error_class($errors, 'passport_bio')}}">
+                        <label>
+                            @lang('e-visa::forms.passport_bio')
+                        </label>
+                        <div class="alert alert-info">
+                            @lang('e-visa::help_blocks.passport_bio')
+                        </div>
+                        {!! Form::file('passport_bio', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! error_tag($errors, 'passport_bio') !!}
                     </div>
-                    <div class="panel-body">
-                        <div class="form-group {{error_class($errors, 'passport_bio')}}">
-                            <label>
-                                @lang('e-visa::forms.passport_bio')
-                            </label>
-                            <div class="alert alert-info">
-                                @lang('e-visa::help_blocks.passport_bio')
-                            </div>
-                            {!! Form::file('passport_bio', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                            {!! error_tag($errors, 'passport_bio') !!}
+                    <br>
+                    <br>
+                    <div class="form-group {{error_class($errors, 'passport_photo')}}">
+                        <label>
+                            @lang('e-visa::forms.passport_photo')
+                        </label>
+                        <div class="alert alert-info">
+                            @lang('e-visa::help_blocks.passport_photo')
                         </div>
-                        <br>
-                        <br>
-                        <div class="form-group {{error_class($errors, 'passport_photo')}}">
-                            <label>
-                                @lang('e-visa::forms.passport_photo')
-                            </label>
-                            <div class="alert alert-info">
-                                @lang('e-visa::help_blocks.passport_photo')
-                            </div>
-                            {!! Form::file('passport_photo', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                            {!! error_tag($errors, 'passport_photo') !!}
+                        {!! Form::file('passport_photo', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! error_tag($errors, 'passport_photo') !!}
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group {{error_class($errors, 'additional_documents')}}">
+                        <label>
+                            @lang('e-visa::forms.additional_documents')
+                        </label>
+                        <div class="alert alert-info">
+                            @lang('e-visa::help_blocks.additional_documents')
                         </div>
-
-                        <br>
-                        <br>
-                        <div class="form-group {{error_class($errors, 'additional_documents')}}">
-                            <label>
-                                @lang('e-visa::forms.additional_documents')
-                            </label>
-                            <div class="alert alert-info">
-                                @lang('e-visa::help_blocks.additional_documents')
-                            </div>
-                            {!! Form::file('additional_documents', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                            {!! error_tag($errors, 'additional_documents') !!}
-                        </div>
+                        {!! Form::file('additional_documents', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! error_tag($errors, 'additional_documents') !!}
                     </div>
                 </div>
-
             </div>
-
+        </div>
         <?php break; ?>
-
         <?php } ?>
-
     </div>
 </e-visa-application-form>
