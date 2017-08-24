@@ -7,7 +7,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 @lang("Roles")
-                <a href="/backend/roles/create" class="btn btn-sm btn-primary">Add Role</a>
+                <a href="{{route('backend.roles.create')}}" class="btn btn-sm btn-primary">Add Role</a>
             </div>
             <div class="panel-body">
                 <table class="table table-responsive table-bordered table-hover table-striped" style="width: 92%;">

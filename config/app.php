@@ -181,6 +181,7 @@ return [
         Vinkla\Hashids\HashidsServiceProvider::class,
         PragmaRX\Countries\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
 
         /*

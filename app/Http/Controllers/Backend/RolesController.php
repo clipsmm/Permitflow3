@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
 use App\Models\Role;
+use App\Modules\BaseModule;
 use Illuminate\Http\Request;
 
 class RolesController extends BaseController
@@ -13,6 +15,8 @@ class RolesController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
+    protected $guard_name = 'web';
+
     public function index()
     {
         $roles = Role::all();
@@ -26,32 +30,38 @@ class RolesController extends BaseController
      */
     public function create(Request $request)
     {
-        return view("backend.roles.create");
+        $active_modules = BaseModule::get_enabled_modules();
+        $permisions = $this->loadPermissions($active_modules->pluck('slug')->toArray());
+
+        return view("backend.roles.create", ['role' => new Role, 'permissions' => $permisions, 'active_modules' => $active_modules]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $role = new Role;
         $this->validate($request, [
             'name' => 'required|string|max:255',
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id'
         ]);
 
-        $role->name = $request->name;
-        $role->guard_name = $request->guard_name;
-        $role->save();
+        \DB::transaction(function() use($request){
+            $role = Role::create(['name' => $request->name, 'guard_name' => $this->guard_name]);
+            $role->permissions()->sync($request->permissions);
+        });
+
         return redirect("backend/roles");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Role $role
      * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
@@ -62,20 +72,23 @@ class RolesController extends BaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Role $role
      * @return \Illuminate\Http\Response
      */
-    public function edit($role)
+    public function edit($role_id)
     {
-        $role = Role::find($role);
-        return view('backend.roles.edit',['role' => $role]);
+        $active_modules = BaseModule::get_enabled_modules();
+        $permisions = $this->loadPermissions($active_modules->pluck('slug')->toArray());
+        $role = Role::find($role_id);
+
+        return view("backend.roles.edit", ['role' => $role, 'permissions' => $permisions, 'active_modules' => $active_modules]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Role $role
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $role)
@@ -83,22 +96,35 @@ class RolesController extends BaseController
         $role = Role::find($role);
         $this->validate($request, [
             'name' => 'required|string|max:255',
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id'
         ]);
 
-        $role->name = $request->name;
-        $role->guard_name = $request->guard_name;
-        $role->save();
+        \DB::transaction(function() use($request, $role){
+            $role->update(['name' => $request->name]);
+            $role->permissions()->sync($request->permissions);
+        });
+
         return redirect("backend/roles");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Role $role
      * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
     {
         //
+    }
+
+    private function loadPermissions($active_modules)
+    {
+        return Permission::all()
+            ->filter(function ($p) use($active_modules){
+                return $p->owner == 'system' || in_array($p->owner, $active_modules);
+            })
+            ->groupBy('owner');
     }
 }
