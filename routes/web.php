@@ -12,9 +12,8 @@
 */
 
 
-
-Route::get('auth/sso','Auth\SsoController@ssoRedirect')->name('auth.sso_redirect');
-Route::get('auth/sso/authorize','Auth\SsoController@authorizeSso')->name('auth.sso_authorize');
+Route::get('auth/sso', 'Auth\SsoController@ssoRedirect')->name('auth.sso_redirect');
+Route::get('auth/sso/authorize', 'Auth\SsoController@authorizeSso')->name('auth.sso_authorize');
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,17 +28,17 @@ Route::get('/frontend', 'FrontendController@index')->name('frontend');
 /*
  * Backend routes
  */
-Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.'], function(){
+Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.'], function () {
     Route::get('', 'DashboardController@index');
 
-    Route::group(['prefix' => 'modules', 'as' => 'modules.'], function (){
+    Route::group(['prefix' => 'modules', 'as' => 'modules.'], function () {
         Route::get("", 'ModuleController@index')->name("index");
         Route::get("{module}/manage", "ModuleController@show")->name("manage");
         Route::get("{module}/permissions", "ModuleController@managePermissions")->name("permissions");
     });
 
-    Route::group(['prefix' => '{module}'], function(){
-        Route::group(['prefix' => 'tasks', 'as' => 'tasks.'], function(){
+    Route::group(['prefix' => '{module}'], function () {
+        Route::group(['prefix' => 'tasks', 'as' => 'tasks.'], function () {
             Route::get('', 'TaskController@myQueue')->name('queue');
             Route::get('pick', 'TaskController@pickTask')->name('pick');
             Route::get('inbox', 'TaskController@myInbox')->name('inbox');
@@ -48,9 +47,10 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
             Route::get('{task}/view', 'TaskController@show')->name('show');
             Route::post('{task}/view', 'TaskController@handleTask')->name('submit');
         });
-        Route::resource('roles', 'RolesController');
-        Route::resource('users', 'UsersController');
     });
+
+    Route::resource('roles', 'RolesController');
+    Route::resource('users', 'UsersController');
 });
 
 Route::prefix('applications/{module_slug}')
