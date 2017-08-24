@@ -23,6 +23,13 @@ class BaseModule
         }
     }
 
+    public static function get_enabled_modules()
+    {
+        return Module::enabled()->map(function($item){
+            return self::instance_from_slug($item['slug']);
+        });
+    }
+
     public static function instance_from_slug($slug)
     {
         $attrs = Module::where('slug', $slug);
@@ -64,6 +71,7 @@ class BaseModule
         return $counter + 1;
     }
 
+
     public function get_task_actions(Task $task)
     {
         return $this->stages[$task->stage];
@@ -71,9 +79,23 @@ class BaseModule
 
     public function render_application_view(Application $application)
     {
+
+        $model = $this->fromFormData($application->form_data);
         return view("{$this->slug}::application_view", [
             'application' => $application,
-            'module' => $this
+            'model' => $model,
+            'module' => $this,
+            'lookup_data' => $this->loadLookupData($model)
         ]);
+    }
+
+    public function create_invoice($application)
+    {
+        return null;
+    }
+
+    public function get_edit_url($application)
+    {
+        return route('applications.edit', ['module_slug' => $application->module_slug, 'application' => $application->id]);
     }
 }

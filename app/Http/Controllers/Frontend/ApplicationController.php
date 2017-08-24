@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\ApplicationResubmitted;
 use App\Events\ApplicationSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\Invoice;
 use App\Models\Module;
 use App\Modules\BaseModule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
@@ -57,7 +60,6 @@ class ApplicationController extends Controller
             ]);
         }
 
-
         return redirect()->route('application.review', [
             'module_slug' => $this->module->slug,
             'application' => $application->id
@@ -76,8 +78,49 @@ class ApplicationController extends Controller
         ]);
     }
 
-    public function review(Application $application)
+    public function review($module, Application $application)
     {
-        dd($application);
+        return view('applications.review', ['application' => $application, 'module' => $this->module]);
+    }
+
+    public function submit($module, Application $application)
+    {
+        $invoice = null;
+
+        DB::transaction(function() use($application, &$invoice){
+            $invoice = $this->module->create_invoice($application);
+            $in_corrections = $application->in_corrections;
+
+            $application->submit();
+
+            if($in_corrections){
+                event(new ApplicationResubmitted($application));
+            }else{
+                event(new ApplicationSubmitted($application));
+            }
+
+        });
+
+        if(is_null($invoice)){
+            return redirect()->route('application.submitted', ['module_slug' => $this->module->slug, 'application' => $application->id]);
+        }
+
+        return redirect()->route('application.checkout', ['module_slug' => $this->module->slug, 'invoice_id' => $invoice->pk, 'application' => $application->id]);
+    }
+
+    public function submitted($module_slug, Application $application)
+    {
+        return view('applications.submitted', ['application' => $application, 'module' => $this->module]);
+    }
+
+    public function checkout(Request $request, $module_slug, Application $application, Invoice $invoice)
+    {
+        $invoice->get_pesaflow_bill_ref();
+        $checkout_data = get_pesaflow_checkout_data_from_invoice($invoice);
+        return view('frontend.checkout', [
+            'data' => $checkout_data,
+            'module' => $this->module,
+            'application' => $application
+        ]);
     }
 }

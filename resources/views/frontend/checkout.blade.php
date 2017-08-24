@@ -6,13 +6,13 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <form id="moodleform" name="moodleform" method="post" action="{{ settings('pesaflow_iframe_url') }}" target="my_frame">
-                        <input type="hidden" name="apiClientID" value="{{ $data['apiClientId'] }}" >
+                    <form id="moodleform" name="moodleform" method="post" action="{{ $data['url'] }}" target="my_frame">
+                        <input type="hidden" name="apiClientID" value="{{ $data['apiClientID'] }}" >
                         <input type="hidden" name="secureHash" value="{{ $data['secureHash'] }}" >
                         <input type="hidden" name="billDesc" value="{{ $data['billDesc'] }}" >
                         <input type="hidden" name="billRefNumber" value="{{ $data['billRefNumber'] }}" >
                         <input type="hidden" name="currency" value="{{ $data['currency'] }}" >
-                        <input type="hidden" name="serviceID" value="{{ $data['apiServiceId'] }}" >
+                        <input type="hidden" name="serviceID" value="{{ $data['serviceID'] }}" >
                         <input type="hidden" name="clientMSISDN" value="{{ $data['clientMSISDN'] }}" >
                         <input type="hidden" name="clientName" value="{{ $data['clientName']  }}" >
                         <input type="hidden" name="clientIDNumber" value="{{ $data['clientIDNumber']  }}" >

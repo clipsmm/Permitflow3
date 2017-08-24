@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\ApplicationResubmitted;
+use App\Listeners\ApplicationResubmittedHandler;
 use App\Modules\BaseModule;
 use Caffeinated\Modules\Facades\Module;
-use Caffeinated\Modules\Modules;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -18,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\Event' => [
             'App\Listeners\EventListener',
+        ],
+        ApplicationResubmitted::class => [
+            ApplicationResubmittedHandler::class
         ],
     ];
 

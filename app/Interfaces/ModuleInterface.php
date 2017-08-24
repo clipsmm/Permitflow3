@@ -34,6 +34,10 @@ interface ModuleInterface
 
     public function render_application_view(Application $application);
 
+    public function create_invoice($application);
+
+    public function get_edit_url($application);
+
     public function get_permissions();
 
     public function render_settings_view();

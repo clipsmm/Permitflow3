@@ -1,6 +1,5 @@
 @extends('layouts.frontend')
-@section('content')
-    <div class="col-sm-6 col-sm-offset-3">
+@section('body')
         <div class="panel panel-default">
             <div class="panel-heading">@lang('Retrieve your application to continue')</div>
             <div class="panel-body">
@@ -24,6 +23,4 @@
                 {!! Form::close() !!}
             </div>
         </div>
-    </div>
-
 @endsection

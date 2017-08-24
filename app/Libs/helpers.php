@@ -753,7 +753,7 @@ if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
 
     function get_pesaflow_checkout_data_from_invoice(\App\Models\Invoice $invoice, $currency = 'KES')
     {
-        $config  = config('pesaflow');
+        $config  = \App\Libs\PaymentManager::get_default_manager_settings();
         $user =  $invoice->application->user;
 
 
@@ -769,7 +769,7 @@ if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
             'clientName' => $user->full_name,
             'clientIDNumber' => $user->id_number,
             'clientEmail' => $user->email,
-            'amountExpected' => $this->amount,
+            'amountExpected' => $invoice->amount,
             'callBackURLOnSuccess' => route('payment.success', [ $invoice->id]),
             'pictureURL' => $user->getAvatar(),
             'notificationURL' => route('payment.notification', [ $invoice->id]),

@@ -21,8 +21,6 @@ class Passport extends BaseModule implements ModuleInterface
     public $numSteps = 1;
     public $modelClass = \Modules\Passport\Models\Passport::class;
 
-
-
     public function getAttributes()
     {
         return [
@@ -47,13 +45,14 @@ class Passport extends BaseModule implements ModuleInterface
         return ;
     }
 
-    public function newUrl()
-    {
-        // TODO: Implement newUrl() method.
-    }
 
     public function handle_task(Task $task, $action, $comments = null)
     {
         // TODO: Implement handle_task() method.
+    }
+
+    public function newUrl($params = [])
+    {
+        // TODO: Implement newUrl() method.
     }
 }

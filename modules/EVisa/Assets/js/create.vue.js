@@ -2,7 +2,7 @@ import Vue from 'vue';
 export default Vue.component('e-visa-application-form', {
     props: ['returning_to_country', 'denied_entry_before', 'denied_entry_others',
         'convicted_before', 'other_recent_visits', 'recent_visits', 'places_to_visit',
-        'other_recent_visits_errors', 'recent_visits_errors', 'places_to_visit_errors'],
+        'form_errors'],
     data: function(){
         return {
             returningToCountry: this.returning_to_country,

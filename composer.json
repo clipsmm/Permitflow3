@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "caffeinated/modules": "^4.2",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.4.*",
@@ -13,9 +14,9 @@
         "laravelcollective/html": "^5.4.0",
         "milon/barcode": "^5.3",
         "nategood/httpful": "^0.2.20",
+        "pragmarx/countries": "^0.1.1",
         "vinkla/hashids": "^3.2",
-        "webpatser/laravel-uuid": "2.*",
-        "pragmarx/countries": "^0.1.1"
+        "webpatser/laravel-uuid": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

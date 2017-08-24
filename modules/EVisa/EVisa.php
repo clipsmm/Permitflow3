@@ -9,6 +9,7 @@
 namespace Modules;
 
 use App\Events\ApplicationSubmitted;
+use App\Models\Invoice;
 use App\Models\Task;
 use Carbon\Carbon;
 use \Countries;
@@ -28,12 +29,6 @@ class EVisa extends BaseModule implements ModuleInterface
      *
      * @var array
      */
-
-    public $listens = [
-        ApplicationSubmitted::class => [
-            EvisaApplicationSubmittedHandler::class
-        ]
-    ];
 
     public $stages  = [
         'review' => [
@@ -59,6 +54,18 @@ class EVisa extends BaseModule implements ModuleInterface
     public function newUrl($params = [])
     {
         return route('e-visa.application.new', $params);
+    }
+
+    public function get_edit_url($application)
+    {
+        return route('e-visa.application.edit', ['application' => $application->id]);
+    }
+
+    public function loadLookupData($model)
+    {
+        return [
+            'country_codes' => \Countries::all()->pluck('name.common', 'cca2')
+        ];
     }
 
     public function getValidator($request, $current_step)
@@ -130,9 +137,13 @@ class EVisa extends BaseModule implements ModuleInterface
 
             case 6:
                 return Validator::make($request->all(), [
-                    'places_to_visit' => ['required', 'array'],
+                    'places_to_visit' => ['required', 'array', 'min:1'],
                     'places_to_visit.*.type' => ['required', 'in:hotel,firm,relative,other'],
-                    'places_to_visit.*.address' => ['required']
+                    'places_to_visit.*.address' => ['required'],
+                    'places_to_visit.*.name' => ['required']
+                ], [
+                    'places_to_visit.required' => __('e-visa::validation.custom.places_to_visit.required'),
+                    'places_to_visit.*.*.required' => __('e-visa::validation.nested_required')
                 ]);
 
             case 7:
@@ -144,10 +155,28 @@ class EVisa extends BaseModule implements ModuleInterface
                     'recent_visits' => ['array'],
                     'recent_visits.*.date' => ['required', 'date', "before:{$today}"],
                     'recent_visits.*.duration' => ['required', 'integer', 'min:1'],
-                    'recent_visits.*.duration_type' => ['required', 'in:months,days,years']
+                    'recent_visits.*.duration_type' => ['required', 'in:months,days,years'],
+                    'returning_to_country' => ['required', 'boolean'],
+                    'no_return_reason' => ['required_if:returning_to_country,0'],
+                    'denied_entry_before' => ['required', 'boolean'],
+                    'denied_entry_reason' => ['required_if:denied_entry_before,1'],
+                    'denied_entry_others' => ['required', 'boolean'],
+                    'denied_entry_others_reason' => ['required_if:denied_entry_others,1'],
+                    'convicted_before' => ['required', 'boolean'],
+                    'convicted_reason' => ['required_if:convicted_before,1'],
                 ], [
+                    'other_recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     'other_recent_visits.*.date.before' => __('validation.before_today'),
-                    'recent_visits.*.date.before' => __('validation.before_today')
+                    'recent_visits.*.date.before' => __('validation.before_today'),
+                    'recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
+                    '*.required_if' => __('This field is required')
+                ]);
+
+            case 8:
+                return Validator::make($request->all(), [
+                    'passport_bio' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
+                    'passport_photo' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
+                    'additional_documents' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg']
                 ]);
         }
     }
@@ -156,9 +185,9 @@ class EVisa extends BaseModule implements ModuleInterface
     {
         $task->load(['application', 'application.user']);
 
-        $handler  = new TaskHandler($task);
+        $handler = new TaskHandler($task);
 
-        switch($action){
+        switch ($action) {
             case 'reject':
                 $handler->reject_application($comments);
                 break;
@@ -173,4 +202,15 @@ class EVisa extends BaseModule implements ModuleInterface
                 break;
         }
     }
+
+
+    public function create_invoice($application)
+    {
+        //todo: consider other checks before creating invoice
+        if($application->submitted_at){
+            return null;
+        }
+        return Invoice::create_invoice($application->id, [['amount' => 20, 'description' => 'foo']], 'bar');
+    }
+
 }

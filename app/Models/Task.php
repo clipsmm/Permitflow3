@@ -120,4 +120,9 @@ class Task extends Model
         return $task;
     }
 
+    public function completeCorrection($correction)
+    {
+        //Here you can send a notification to the reviewer that the application has been re-submitted from corrections
+    }
+
 }

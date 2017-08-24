@@ -17,9 +17,3 @@ function error_tag($errors, $key)
 {
     return $errors->has($key) ? "<span class='help-block'><strong>{$errors->first($key)}</strong></span>" : "";
 }
-
-function form_errors_to_json($errors, $field, $default = null)
-{
-    $err = $errors->has($field) ? $errors->first($field) : $default;
-    return json_encode($err);
-}
