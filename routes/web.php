@@ -46,6 +46,12 @@ Route::prefix('backend')
                 Route::post('{task}/view', 'TaskController@handleTask')->name('backend.tasks.submit');
             });
         });
+
+        Route::group(['prefix' => 'modules'], function (){
+            Route::get("", 'ModuleController@index')->name("backend.modules.index");
+            Route::get("{module}/manage", "ModuleController@show")->name("backend.modules.show");
+            Route::get("{module}/permissions", "ModuleController@managePermissions")->name("backend.module.permissions");
+        });
     });
 
 

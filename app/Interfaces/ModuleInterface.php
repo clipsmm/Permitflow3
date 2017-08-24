@@ -14,6 +14,7 @@ use App\Models\Task;
 
 interface ModuleInterface
 {
+    public function newUrl($params = []);
 
     public function toFormData($data);
 
@@ -35,7 +36,9 @@ interface ModuleInterface
 
     public function create_invoice($application);
 
-    public function newUrl($params = []);
-
     public function get_edit_url($application);
+
+    public function get_permissions();
+
+    public function render_settings_view();
 }
