@@ -45,9 +45,9 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav tp-icon">
                         <li><a href="#"><strong>Overview</strong></a></li>
-                        <li><a href="eligibility.html">Eligibility</a></li>
-                        <li><a href="faq.html">FAQs</a></li>
-                        <li><a href="contacts.html">Contact Us</a></li>
+                        <li><a href="{{ route('eligibility') }}">Eligibility</a></li>
+                        <li><a href="{{ route('faq') }}">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
             </div>

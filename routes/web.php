@@ -15,15 +15,14 @@
 
 Route::get('auth/sso','Auth\SsoController@ssoRedirect')->name('auth.sso_redirect');
 Route::get('auth/sso/authorize','Auth\SsoController@ssoRedirect')->name('auth.sso_authorize');
+Route::get('/', 'LandingPageController@index')->name('welcome');
+Route::get('/faq', 'LandingPageController@faq')->name('faq');
+Route::get('/eligibility', 'LandingPageController@eligibility')->name('eligibility');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/frontend', 'FrontendController@index')->name('frontend');
 
 /*
