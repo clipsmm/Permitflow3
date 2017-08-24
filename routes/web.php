@@ -51,6 +51,11 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
 
     Route::resource('roles', 'RolesController');
     Route::resource('users', 'UsersController');
+
+    Route::group(['prefix' => 'users/{user}/roles', 'as' => 'users.roles.'], function(){
+        Route::get('edit', 'UsersController@editRoles')->name('edit');
+        Route::post('update', 'UsersController@updateRoles')->name('update');
+    });
 });
 
 Route::prefix('applications/{module_slug}')

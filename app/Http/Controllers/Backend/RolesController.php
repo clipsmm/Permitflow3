@@ -101,7 +101,7 @@ class RolesController extends BaseController
         ]);
 
         \DB::transaction(function() use($request, $role){
-            $role->update(['name' => $request->name]);
+            $role->update(['name' => $request->name, 'guard_name' => 'web']);
             $role->permissions()->sync($request->permissions);
         });
 

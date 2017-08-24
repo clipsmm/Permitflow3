@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -130,5 +131,22 @@ class UsersController extends BaseController
     public function destroy($id)
     {
         //
+    }
+
+
+    public function editRoles(User $user)
+    {
+        $roles = Role::all();
+        return view('backend.users.edit_roles', ['user' => $user, 'roles' => $roles]);
+    }
+
+    public function updateRoles(User $user, Request $request)
+    {
+        $roles_ids = $request->get('roles', []);
+        $roles = Role::whereIn('id', $roles_ids)->get();
+
+        $user->syncRoles($roles);
+
+        return redirect()->route('backend.users.index');
     }
 }
