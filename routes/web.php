@@ -48,6 +48,8 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
             Route::get('{task}/view', 'TaskController@show')->name('show');
             Route::post('{task}/view', 'TaskController@handleTask')->name('submit');
         });
+        Route::resource('roles', 'RolesController');
+        Route::resource('users', 'UsersController');
     });
 });
 
@@ -69,4 +71,3 @@ Route::prefix('applications/{module_slug}')
  */
 Route::get('payment-success', 'PaymentController@paymentSuccess')->name('payment.success');
 Route::get('payment-failed', 'PaymentController@paymentFailed')->name('payment.failed');
-
