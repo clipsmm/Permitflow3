@@ -570,6 +570,7 @@ if (!function_exists('save_settings')){
     function save_settings(array  $settings)
     {
         //if user is not active do not log changes
+        /*
         if ($user  = user()){
             $logs = [];
             foreach ($settings as $key => $value){
@@ -579,15 +580,15 @@ if (!function_exists('save_settings')){
                     $logs[] = "$user changed setting: '{$key}' from '{$old_val}' to '{$value}'";
                 }
             }
-        }
+        } */
 
         //sync settings and save
         \Setting::set($settings);
         \Setting::save();
 
         //log any changes
-        if (!empty($logs))
-            event(new \App\Events\SettingsChanged($logs, $user));
+        //if (!empty($logs))
+            //event(new \App\Events\SettingsChanged($logs, $user));
 
         return $settings;
     }

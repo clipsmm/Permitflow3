@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-
         <div class="row">
 
             <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
@@ -28,16 +27,32 @@
                     </div>
                 </div>
 
-
-                @isset($my_modules)
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">Modules</div>
+                @isset($module)
+                    <div class="side-profile-menu">
+                        <div class="profile-info">
+                            <h4 class="profile-name">Business Registration Service</h4>
                         </div>
-                        <div class=panel-body>
-                            <ul class="nav navbar-nav nav-profile">
-                                @foreach($my_modules as $mod)
-                                    <li><a href="{{ route('backend.tasks.queue', $mod['slug']) }}">{{ $mod['name'] }}</a></li>
+                        <div class="sidebar-nav">
+                            <ul class="nav">
+                                @foreach($module->get_menus() as $menu)
+                                    <li class="{{ request()->fullUrl() == array_get($menu, 'action') ? 'active' : '' }}">
+                                        <a href="{{ array_get($menu, 'action') }}"><i class="{{ array_get($menu, 'icon') }}"></i> {{ array_get($menu, 'name') }}</a>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+                        </div>
+                    </div>
+
+                @endisset
+
+                @isset($backend_modules)
+                    <div class="side-profile-menu">
+                        <div class="sidebar-nav">
+                            <h3>Modules</h3>
+                            <ul class="nav">
+                                @foreach($backend_modules as $mod)
+                                    <li><a href="{{ route("backend.tasks.queue", $mod->slug) }}">{{ $mod->name }}</a></li>
                                 @endforeach
                             </ul>
 
@@ -45,31 +60,13 @@
                     </div>
                 @endisset
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title">Need Help?</div>
-                    </div>
-                    <div class=panel-body>
 
-                        eVisa services Queries:<br/>
-                        +254 790 724 571 <br/><br/>
-                        ePassport services Queries:<br/>
-                        +254 790 724 485  <br/><br/>
-                        Payment Issues:<br/>
-                        +254 709 480 000<br/><br/>
-                        Email: support@im.go.ke
-                    </div>
-                </div>
+
             </div>
 
             <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
-
                 @include('partials.notifier')
-
-                <!-- pannel -->
-            @yield('body')
-
-                <!--   end pannel -->
+                @yield('body')
             </div>
 
 

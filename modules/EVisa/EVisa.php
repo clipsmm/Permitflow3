@@ -224,16 +224,18 @@ class EVisa extends BaseModule implements ModuleInterface
         // TODO: Implement render_settings_view() method.
     }
 
-    public function getMenus()
+    public function get_menus()
     {
         return [
             [
                 'name' => __('e-visa::menus.tasks'),
-                'action' => route('backend.tasks.index', $this->slug)
+                'action' => route('backend.tasks.queue', $this->slug),
+                'icon' => 'fa fa-tasks'
             ],
             [
-                'name' => __('e-visa::menus.tasks'),
-                'action' => route('e-visa.settings.all', $this->slug)
+                'name' => __('e-visa::menus.settings'),
+                'action' => route('e-visa.settings.all'),
+                'icon' => 'fa fa-cogs'
             ]
         ];
     }
