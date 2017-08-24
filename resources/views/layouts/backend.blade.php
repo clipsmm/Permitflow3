@@ -5,8 +5,6 @@
 
         <div class="row">
 
-
-
             <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
                 <div class="side-bar">
                     <div class="side-profile-menu m-b-10">
@@ -66,11 +64,7 @@
 
             <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
 
-                {{--<div class="alert alert_sucess_custom" role="alert">--}}
-                    {{--<i class="fa fa-check fa-lg" aria-hidden="true"></i>--}}
-                    {{--<strong>Notice!</strong> Our system has been facing some challenges due to some maintenance that is currently being undertaken--}}
-                    {{--that is causing some delays in processing applications. Please accept our apologies for any inconvenience caused, we are making every effort to restore our services.--}}
-                {{--</div>--}}
+                @include('partials.notifier')
 
                 <!-- pannel -->
             @yield('body')
