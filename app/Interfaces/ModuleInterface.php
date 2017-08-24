@@ -41,4 +41,6 @@ interface ModuleInterface
     public function get_permissions();
 
     public function render_settings_view();
+
+    public function get_menus();
 }

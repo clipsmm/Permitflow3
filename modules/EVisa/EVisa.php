@@ -49,6 +49,7 @@ class EVisa extends BaseModule implements ModuleInterface
         ]
     ];
 
+
     public $numSteps = 8;
 
     public function newUrl($params = [])
@@ -221,5 +222,21 @@ class EVisa extends BaseModule implements ModuleInterface
     public function render_settings_view()
     {
         // TODO: Implement render_settings_view() method.
+    }
+
+    public function get_menus()
+    {
+        return [
+            [
+                'name' => __('e-visa::menus.tasks'),
+                'action' => route('backend.tasks.queue', $this->slug),
+                'icon' => 'fa fa-tasks'
+            ],
+            [
+                'name' => __('e-visa::menus.settings'),
+                'action' => route('e-visa.settings.all'),
+                'icon' => 'fa fa-cogs'
+            ]
+        ];
     }
 }

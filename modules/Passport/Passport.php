@@ -65,4 +65,9 @@ class Passport extends BaseModule implements ModuleInterface
     {
         // TODO: Implement render_settings_view() method.
     }
+
+    public function get_menus()
+    {
+        return [];
+    }
 }

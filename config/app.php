@@ -182,6 +182,7 @@ return [
         PragmaRX\Countries\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        anlutro\LaravelSettings\ServiceProvider::class,
 
 
         /*
@@ -248,6 +249,7 @@ return [
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'Uuid' => Webpatser\Uuid\Uuid::class,
         'Countries'=> PragmaRX\Countries\Facade::class,
+        'Setting' => anlutro\LaravelSettings\Facade::class,
     ],
 
 

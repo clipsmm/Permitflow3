@@ -43,6 +43,7 @@
                 </div>
             </div>
             <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
+                @include('partials.notifier')
                 @yield('body')
             </div>
         </div>
