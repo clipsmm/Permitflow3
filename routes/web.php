@@ -14,7 +14,7 @@
 
 
 Route::get('auth/sso','Auth\SsoController@ssoRedirect')->name('auth.sso_redirect');
-Route::get('auth/sso/authorize','Auth\SsoController@ssoRedirect')->name('auth.sso_authorize');
+Route::get('auth/sso/authorize','Auth\SsoController@authorizeSso')->name('auth.sso_authorize');
 
 Route::get('/', function () {
     return view('welcome');

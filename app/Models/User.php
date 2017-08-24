@@ -50,7 +50,7 @@ class User extends Authenticatable
         $identity = filter_var($username, FILTER_VALIDATE_EMAIL)? 'email' : 'id_number';
 
         if($identity == 'email')
-            return self::query()->whereEmail($email)->first();
+            return self::query()->whereEmail($username)->first();
         
         return self::query()->whereIdNumber($username)->first();
      }

@@ -4,8 +4,13 @@ return [
 
     'recaptcha_api' => 'https://www.google.com/recaptcha/api/siteverify',
 
-
-    'ss-on-url' => 'https://accounts.ecitizen.go.ke/login',
+    /*
+     |
+     | Single-Signon
+     |
+     */
+     'sso_authorize_url' => env('SSO_AUTHORIZE_URL', 'https://accounts.ecitizen.go.ke/authorize'),
+     'sso_client_secret' => env('SSO_CLIENT_SECRET', ''),
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -244,13 +249,6 @@ return [
         'Countries'=> PragmaRX\Countries\Facade::class,
     ],
 
-    /*
-     |
-     | Single-Signon
-     |
-     */
-     'sso_authorize_url' => env('SSO_AUTHORIZE_URL', ''),
-     'sso_client_secret' => env('SSO_CLIENT_SECRET', ''),
- 
+
 
 ];
