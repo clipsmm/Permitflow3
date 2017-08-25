@@ -9,7 +9,6 @@
 namespace Modules\EVisa\Http\Controllers;
 
 use App\Models\Application;
-use App\Models\Module;
 use App\Models\User;
 use App\Modules\BaseModule;
 use GuzzleHttp\Client;
@@ -19,6 +18,11 @@ use Modules\EVisa\Models\EVisa;
 
 class SettingsController extends Controller
 {
+    public function __construct()
+    {
+
+    }
+
     public function allSettings(Request $request)
     {
         return view('e-visa::settings')

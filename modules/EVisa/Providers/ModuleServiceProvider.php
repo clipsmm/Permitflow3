@@ -2,6 +2,7 @@
 
 namespace Modules\EVisa\Providers;
 
+use App\Modules\BaseModule;
 use Caffeinated\Modules\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,6 +21,9 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../Resources/Views', 'e-visa');
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations', 'e-visa');
         $this->addCustomValidators();
+
+        $module  = BaseModule::instance_from_slug('e-visa');
+        view()->share('module', $module);
     }
 
     /**

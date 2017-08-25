@@ -183,6 +183,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
 
         /*
@@ -250,6 +251,7 @@ return [
         'Uuid' => Webpatser\Uuid\Uuid::class,
         'Countries'=> PragmaRX\Countries\Facade::class,
         'Setting' => anlutro\LaravelSettings\Facade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-header">
             <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="{{ route('frontend') }}">
                     <span class="hidden-xs">Personal</span>
                     <span  class=""></span></a>
             </div>
@@ -10,12 +10,6 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav tp-icon">
                 <li><a href="#"><strong>Make Application</strong></a></li>
-                <li><a href="#">Businesses</a></li>
-                <li>
-                    <a href="#">Collateral Registry(MPSR)</a>
-                </li>
-                <li><a href="#">Application History</a></li>
-
             </ul>
 
         </div>

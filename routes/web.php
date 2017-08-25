@@ -21,14 +21,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'FrontendController@index')->name('home');
 
 Route::get('/frontend', 'FrontendController@index')->name('frontend');
 
 /*
  * Backend routes
  */
-Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.'], function () {
+Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.', 'middleware' => ['auth']], function () {
     Route::get('', 'DashboardController@index');
 
     Route::group(['prefix' => 'modules', 'as' => 'modules.'], function () {

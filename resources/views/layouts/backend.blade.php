@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('layouts.partials.topnav1')
+    @include('layouts.partials.topnave2')
+
     <div class="container">
         <div class="row">
 
@@ -12,11 +16,11 @@
                         </div>
 
                         <div class="profile-info">
-                            <h4 class="profile-name">ISAAC KINYANJUI KIRAI </h4>
+                            <h4 class="profile-name">{{ user()->full_name }} </h4>
                             <ul class="nav navbar-nav nav-profile">
-                                <li>25272520</li>
-                                <li>+254725716411</li>
-                                <li class="truncate">kinyanjuiisaac@gmail.com</li>
+                                <li>{{ user()->id_number }}</li>
+                                <li>{{ user()->phone }}</li>
+                                <li class="truncate">{{ user()->email }}</li>
                             </ul>
                         </div>
 
@@ -30,7 +34,7 @@
                 @isset($module)
                     <div class="side-profile-menu">
                         <div class="profile-info">
-                            <h4 class="profile-name">Business Registration Service</h4>
+                            <h4 class="profile-name">{{ $module->name }}</h4>
                         </div>
                         <div class="sidebar-nav">
                             <ul class="nav">

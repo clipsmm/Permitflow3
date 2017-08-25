@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('layouts.partials.topnav1')
+    @include('layouts.partials.topnave2')
+
     <div class="container">
         <div class="row">
             <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
@@ -12,11 +16,11 @@
                         </div>
 
                         <div class="profile-info">
-                            <h4 class="profile-name">ISAAC KINYANJUI KIRAI </h4>
+                            <h4 class="profile-name">{{ user()->full_name }} </h4>
                             <ul class="nav navbar-nav nav-profile">
-                                <li>25272520</li>
-                                <li>+254725716411</li>
-                                <li class="truncate">kinyanjuiisaac@gmail.com</li>
+                                <li>{{ user()->id_number }}</li>
+                                <li>{{ user()->phone }}</li>
+                                <li class="truncate">{{ user()->email }}</li>
                             </ul>
                         </div>
 
@@ -31,7 +35,6 @@
                         <div class="panel-title">Need Help?</div>
                     </div>
                     <div class=panel-body>
-
                         eVisa services Queries:<br/>
                         +254 790 724 571 <br/><br/>
                         ePassport services Queries:<br/>

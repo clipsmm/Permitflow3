@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('body')
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -105,6 +105,7 @@
                             </div>
                         </div>
                         <div class="panel-footer text-right">
+                                <span class="pull-left">Already have an account? <a href="{{ url('login') }}">Sign In</a>  </span>
                                 <button type="submit" class="btn btn-primary">
                                     @lang("Register")
                                 </button>

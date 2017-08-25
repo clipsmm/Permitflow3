@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('body')
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -23,6 +23,7 @@
                                 @endif
                             </div>
                         </div>
+                        <br>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
@@ -43,10 +44,14 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            Forgot Your Password?
+                                        </a>
                                     </label>
                                 </div>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
@@ -58,11 +63,9 @@
                                     Login with eCitizen
                                 </a>
                             </div>
-                        </div>
-                        <div class="">
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
+                        </div> <br>
+                        <div class="modal-footer">
+                            <span class="pull-left">Don't have an account? <a href="{{ url('register') }}"> Create account</a>  </span>
                         </div>
                     </form>
                 </div>
