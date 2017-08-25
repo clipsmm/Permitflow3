@@ -51,7 +51,7 @@ class InstallModule extends Command
             //Insert module permissions
             $permissions = [];
             foreach($module->get_permissions() as $p){
-                $permissions[] = Permission::firstOrCreate(['name' => $p['name'], 'guard_name' => $p['guard'], 'owner' => $module->slug]);
+                $permissions[] = Permission::firstOrCreate(['name' => $p['name'], 'label' => $p['label'], 'guard_name' => $p['guard'], 'owner' => $module->slug]);
             }
 
             $count = count($permissions);

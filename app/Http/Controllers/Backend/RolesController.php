@@ -31,9 +31,10 @@ class RolesController extends BaseController
     public function create(Request $request)
     {
         $active_modules = BaseModule::get_enabled_modules();
-        $permisions = $this->loadPermissions($active_modules->pluck('slug')->toArray());
+        $permissions = $this->loadPermissions($active_modules->pluck('slug')->toArray());
+        $module_permissions = $permissions->filter(function($v, $k){return $k != 'system';});
 
-        return view("backend.roles.create", ['role' => new Role, 'permissions' => $permisions, 'active_modules' => $active_modules]);
+        return view("backend.roles.create", ['module_permissions' => $module_permissions, 'role' => new Role(), 'permissions' => $permissions, 'active_modules' => $active_modules]);
     }
 
     /**

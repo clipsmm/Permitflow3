@@ -23,7 +23,7 @@
                                 <td>{{ $role->name }}</td>
                                 <td>
                                     <a href="/backend/roles/{{ $role->id }}/edit" class="btn btn-sm btn-default">Edit</a>
-                                    <a href="/backend/roles/{{ $role->id }}/delete" class="btn btn-sm btn-primary">Delete</a>
+                                    {{--<a href="/backend/roles/{{ $role->id }}/delete" class="btn btn-sm btn-primary">Delete</a>--}}
                                 </td>
                             </tr>
                         @endforeach

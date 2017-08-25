@@ -13,9 +13,11 @@ class SystemRolesSeeder extends Seeder
      * These are test permissions.
      * Add more permissions
      */
-    protected $permissions = [
-        'Manage Modules', 'Edit Users', 'Edit User Roles',
-    ];
+    protected $permissions =
+        [
+            'manage_modules' => 'Manage Modules', 'edit_users' => 'Edit Users',
+            'edit_user_roles' => 'Edit User Roles'
+        ];
 
     /*
      * These are test roles
@@ -23,7 +25,7 @@ class SystemRolesSeeder extends Seeder
      *
      */
     protected $roles = [
-        'Super User' => ['Edit Users', 'Edit User Roles', 'Manage Modules'],
+        'Super User' => ['manage_modules', 'edit_users', 'edit_user_roles'],
     ];
 
     /**
@@ -48,17 +50,17 @@ class SystemRolesSeeder extends Seeder
 
     protected function inserPermissions()
     {
-        $existing_perms = Permission::whereIn('name', $this->permissions)
+        $existing_perms = Permission::whereIn('name', array_keys($this->permissions))
             ->whereGuardName('web')
             ->pluck('name')->toArray();
 
-        $new_perms = array_filter($this->permissions, function ($p) use ($existing_perms) {
+        $new_perms = array_filter(array_keys($this->permissions), function ($p) use ($existing_perms) {
             return !in_array($p, $existing_perms);
         });
 
         $new_perms = array_map(function ($i) {
             return ['created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now(),
-                'name' => $i, 'guard_name' => 'web', 'owner' => 'system'];
+                'name' => $i, 'guard_name' => 'web', 'owner' => 'system', 'label' => $this->permissions[$i]];
         }, $new_perms);
 
         Permission::insert($new_perms);
