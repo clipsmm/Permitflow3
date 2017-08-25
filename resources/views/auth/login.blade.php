@@ -55,13 +55,12 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
                                 <a class="btn btn-default" href="{{ route('auth.sso_redirect') }}">
                                     Login with eCitizen
                                 </a>
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
                             </div>
                         </div> <br>
                         <div class="modal-footer">

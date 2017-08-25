@@ -7,7 +7,6 @@
 </div>
 <div class="clearfix"></div>
 <br>
-
 <h4 class="form-section">
     @lang('System Permissions')
 </h4>
@@ -27,11 +26,9 @@
 </div>
 <div class="clearfix"></div>
 <br>
-
 <h4 class="form-section">
     @lang('Module Based Permissions')
 </h4>
-
 @foreach($module_permissions as $slug => $perms)
     <div class="col-sm-12">
         <h5 clas="form-section">

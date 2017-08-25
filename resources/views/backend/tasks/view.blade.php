@@ -16,7 +16,6 @@
                             <a href="{{ route('backend.tasks.queue', [$module->slug]) }}" class="btn btn-sm btn-default">
                                 <span class="fa fa-arrow-left"></span> @lang('common.back_to_tasks')
                             </a>
-
                             @if(!$task->application->complete)
                                 @foreach($actions as $action => $props)
                                     @if(array_get($props,'feedback',false))
@@ -39,7 +38,6 @@
                                                             <div class="form-group">
                                                                 <textarea name="comment" class="form-control"></textarea>
                                                             </div>
-
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button class="btn btn-default" data-dismiss="modal" aria-label="Close">@lang('labels.cancel')</button>
@@ -61,24 +59,14 @@
                                 @endforeach
                             @endif
                         </form>
-
-
                     </div>
                     <h3 class="panel-title"></h3>
-                    <!--   <small> Application tasks</small> -->
                 </div>
-
                 <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
-
                     {!! $module->render_application_view($task->application) !!}
                 </div>
-
             </div>
-
-            <!-- panel -->
-
         </div>
-
     </div>
 
 @endsection
