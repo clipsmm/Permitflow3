@@ -7,7 +7,7 @@
                 <li><a href="#"><strong>Overview</strong></a></li>
                 <li><a href="{{ route('eligibility') }}">Eligibility</a></li>
                 <li><a href="{{ route('faq') }}">FAQs</a></li>
-                <li><a href="contacts.html">Contact Us</a></li>
+                <li><a href="#">Contact Us</a></li>
             </ul>
         </div>
     </div>

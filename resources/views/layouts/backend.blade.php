@@ -47,7 +47,7 @@
                         </div>
                         <ul class="nav">
                             @foreach($active_modules as $mod)
-                                <li><a href="{{ route("backend.tasks.queue", $mod->slug) }}">{{ $mod->name }}</a></li>
+                                <li><a href="{{ route("backend.tasks.queue", $mod->slug)    }}">{{ $mod->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
