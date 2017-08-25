@@ -13,7 +13,7 @@
                             <div class="tab-pane fade in active" id="tab1default">
                                 <div class="panel panel-form m-r-10 m-l-10 m-t-0 m-b-0">
                                     <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
-                                        <table class="table table-responsive table-bordered table-hover table-striped" style="width: 92%;">
+                                        <table class="table table-responsive table-bordered table-hover table-striped">
                                             <thead class="thead-default">
                                             <tr>
                                                 <th>First Name</th>
