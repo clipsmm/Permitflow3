@@ -4,7 +4,7 @@
         <div class="panel-body">
             <div class="col-sm-4 col-sm-offset-4">
                 <h4>
-                    {{$module->name}}: @lang('e-visa::common.retrieve_existing_application')
+                    {{$current_module->name}}: @lang('e-visa::common.retrieve_existing_application')
                 </h4>
                 <hr>
                 {!! Form::open(['url' => route('e-visa.retrieve_existing.submit')]) !!}

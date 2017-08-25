@@ -4,7 +4,7 @@
         <div class="panel-body">
             <div class="col-sm-6 col-sm-offset-3">
                 <h4>
-                    {{$module->name}}: @lang('e-visa::common.retrieve_existing_application')
+                    {{$current_module->name}}: @lang('e-visa::common.retrieve_existing_application')
                 </h4>
                 <hr>
                 <div class="alert alert-info">

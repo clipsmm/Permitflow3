@@ -19,7 +19,7 @@ class ApplicationController extends Controller
     public function __construct(Request $request)
     {
         //todo: add middleware to check if module is activated
-        $this->module = BaseModule::instance_from_slug($request->route('module_slug'));
+        $this->module = BaseModule::instance_from_slug($request->route('module_slug'));;
     }
 
     public function create()

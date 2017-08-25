@@ -28,6 +28,7 @@ class ApplicationController extends Controller
 
     public function __construct(Request $request)
     {
+        parent::__construct();
         $this->current_step = $request->get('step', 1);
         $this->module = BaseModule::instance_from_slug('e-visa');
     }

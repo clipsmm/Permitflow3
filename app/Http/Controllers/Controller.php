@@ -17,10 +17,7 @@ class Controller extends BaseController
     {
         //load current module for views
         if($module  = $this->is_a_module_route()){
-            if ($module){
-                view()->share('current_module', BaseModule::instance_from_slug($module->slug));
-            }
-
+            view()->share('current_module', BaseModule::instance_from_slug($module->slug));
         }
     }
 
