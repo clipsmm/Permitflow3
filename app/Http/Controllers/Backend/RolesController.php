@@ -78,10 +78,11 @@ class RolesController extends BaseController
     public function edit($role_id)
     {
         $active_modules = BaseModule::get_enabled_modules();
-        $permisions = $this->loadPermissions($active_modules->pluck('slug')->toArray());
+        $permissions = $this->loadPermissions($active_modules->pluck('slug')->toArray());
+        $module_permissions = $permissions->filter(function($v, $k){return $k != 'system';});
         $role = Role::find($role_id);
 
-        return view("backend.roles.edit", ['role' => $role, 'permissions' => $permisions, 'active_modules' => $active_modules]);
+        return view("backend.roles.edit", ['module_permissions' => $module_permissions, 'role' => $role, 'permissions' => $permissions, 'active_modules' => $active_modules]);
     }
 
     /**

@@ -216,7 +216,10 @@ class EVisa extends BaseModule implements ModuleInterface
 
     public function get_permissions()
     {
-        // TODO: Implement get_permissions() method.
+        return [
+            ['name' => 'Approve Application', 'guard' => 'web'],
+            ['name' => 'Reject Application', 'guard' => 'web']
+        ];
     }
 
     public function render_settings_view()

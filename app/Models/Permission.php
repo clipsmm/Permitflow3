@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Permission extends Model implements \Spatie\Permission\Contracts\Permission
 {
+    protected $guarded = ['id'];
+
     //
     /**
      * A permission can be applied to roles.

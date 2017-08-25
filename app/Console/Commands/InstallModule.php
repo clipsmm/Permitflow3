@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 
 use App\Models\Module;
+use App\Models\Permission;
 use App\Modules\BaseModule;
 use Illuminate\Console\Command;
 
@@ -14,7 +15,7 @@ class InstallModule extends Command
      *
      * @var string
      */
-    protected $signature = 'modules:install {slug} {prefix} {--enable}';
+    protected $signature = 'modules:install {slug}';
 
     /**
      * The console command description.
@@ -46,9 +47,15 @@ class InstallModule extends Command
         if(is_null($module)){
             $this->error("Module {$slug} not found");
         }else{
-            $enable = $this->option('enable') ? true : $this->confirm('Enable module?', false);
-            $prefix = $this->argument('prefix');
-            Module::firstOrCreate(['slug' => $slug], ['enabled' => $enable, 'prefix' => $prefix]);
+
+            //Insert module permissions
+            $permissions = [];
+            foreach($module->get_permissions() as $p){
+                $permissions[] = Permission::firstOrCreate(['name' => $p['name'], 'guard_name' => $p['guard'], 'owner' => $module->slug]);
+            }
+
+            $count = count($permissions);
+            $this->info("{$count} permissions inserted");
             $this->info("Module {$module->name} installed successfully!");
         }
 

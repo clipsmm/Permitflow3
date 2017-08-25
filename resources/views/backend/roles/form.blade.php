@@ -25,13 +25,16 @@
                 </div>
             @endforeach
         </div>
-        <br>
+        <div class="clearfix">
+            <br>
+            <br>
+        </div>
 
         <h4>
             @lang('Module Based Permissions')
         </h4>
 
-        @foreach($permissions as $slug => $perms)
+        @foreach($module_permissions as $slug => $perms)
             <div class="col-sm-12">
                 <h5 clas="form-section">
                     {{\App\Modules\BaseModule::instance_from_slug($slug)->name}}
