@@ -5,7 +5,7 @@
         <div class="panel-heading">
             @lang('Review Application Details')
             <br>
-            Ref: {{$application->application_number}}
+        Ref: <strong>{{$application->application_number}}</strong>
         </div>
         <div class="panel-body padding-0">
             {!! $module->render_application_view($application) !!}

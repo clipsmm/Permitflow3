@@ -12,12 +12,13 @@
 */
 
 
+
+Route::get('/', 'LandingPageController@index')->name('welcome');
+Route::get('/faq', 'LandingPageController@faq')->name('faq');
+Route::get('/eligibility', 'LandingPageController@eligibility')->name('eligibility');
 Route::get('auth/sso', 'Auth\SsoController@ssoRedirect')->name('auth.sso_redirect');
 Route::get('auth/sso/authorize', 'Auth\SsoController@authorizeSso')->name('auth.sso_authorize');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 

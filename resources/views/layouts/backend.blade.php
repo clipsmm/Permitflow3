@@ -37,11 +37,9 @@
                             <h4 class="profile-name">{{ $module->name }}</h4>
                         </div>
                         <div class="sidebar-nav">
-                            <ul class="nav">
+                            <ul class="nav ">
                                 @foreach($module->get_menus() as $menu)
-                                    <li class="{{ request()->fullUrl() == array_get($menu, 'action') ? 'active' : '' }}">
-                                        <a href="{{ array_get($menu, 'action') }}"><i class="{{ array_get($menu, 'icon') }}"></i> {{ array_get($menu, 'name') }}</a>
-                                    </li>
+                                    <li class="{{ request()->fullUrl() == array_get($menu, 'action') ? 'active' : '' }}"><div class="panel-title"><a href="{{ array_get($menu, 'action') }}"><i class="{{ array_get($menu, 'icon') }}"></i> {{ array_get($menu,'name') }}</a></div></li>
                                 @endforeach
 
                             </ul>

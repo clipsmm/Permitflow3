@@ -91,7 +91,7 @@ class EVisa extends BaseModule implements ModuleInterface
                     'email' => ['required', 'email'],
                 ], [
                     'phone_number.full_phone' => __('Use +2547********* format'),
-                    'nationality.countries_blacklist' => _('Sorry, nationals of this country are not eligible for e-Visa')
+                    'nationality.countries_blacklist' => __('Sorry, nationals of this country are not eligible for e-Visa')
                 ]);
 
             case 3:

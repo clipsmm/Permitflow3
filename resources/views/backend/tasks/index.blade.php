@@ -1,5 +1,4 @@
 @extends('layouts.backend')
-
 @section('body')
     <div class="container">
         <div class="row">
@@ -13,16 +12,20 @@
                                         <ul class="nav nav-tabs">
                                             <li class="{{ menu_current_route('backend.tasks.queue') }}"><a
                                                         href="{{ route('backend.tasks.queue', [$module->slug]) }}">Queued
-                                                    <span class="label label-default"> 3000</span></a></li>
+                                                    <span class="label label-default"> 3000</span></a>
+                                            </li>
                                             <li class="{{ menu_current_route('backend.tasks.inbox') }}"><a
                                                         href="{{ route('backend.tasks.inbox', [$module->slug]) }}">My
-                                                    Task <span class="label label-default"> 3000</span></a></li>
+                                                    Task <span class="label label-default"> 3000</span></a>
+                                            </li>
                                             <li class="{{ menu_current_route('backend.tasks.corrections') }}"><a
                                                         href="{{ route('backend.tasks.corrections', [$module->slug]) }}">Awaiting
-                                                    Corrections <span class="label label-default"> 200</span></a></li>
+                                                    Corrections <span class="label label-default"> 200</span></a>
+                                            </li>
                                             <li class="{{ menu_current_route('backend.tasks.outbox') }}"><a
                                                         href="{{ route('backend.tasks.outbox', [$module->slug]) }}">completed
-                                                    <span class="label label-default"> 3000</span></a></li>
+                                                    <span class="label label-default"> 3000</span></a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="panel-body padding-0">
@@ -96,9 +99,7 @@
                                                     {!! $tasks->render() !!}
                                                 </div>
                                             </div>
-
                                             </form>
-
                                         </div>
                                     </div>
                                 </div>
@@ -111,8 +112,5 @@
         </div>
     </div>
 @endsection
-
 @push('modals')
-
 @endpush
-
