@@ -7,6 +7,7 @@
 
     <div class="container">
         <div class="row">
+            @if (!Auth::guest())
             <div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
                 <div class="side-bar">
                     <div class="side-profile-menu m-b-10">
@@ -45,6 +46,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
                 @include('partials.notifier')
                 @yield('body')
