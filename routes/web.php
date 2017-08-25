@@ -26,6 +26,10 @@ Route::get('/home', 'FrontendController@index')->name('home');
 
 Route::get('/frontend', 'FrontendController@index')->name('frontend');
 
+Route::group(['prefix' => 'app', 'namespace' => 'Frontend', 'as' => 'frontend.', 'middleware' => ['auth']], function (){
+    Route::get('my_applications', 'ApplicationController@myApplications')->name("applications.index");
+});
+
 /*
  * Backend routes
  */
