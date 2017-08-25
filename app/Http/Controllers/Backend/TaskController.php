@@ -7,7 +7,7 @@ use Caffeinated\Modules\Facades\Module;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TaskController extends BaseController
+class TaskController extends Controller
 {
     protected $tasks;
     protected $modules;
