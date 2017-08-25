@@ -2,14 +2,12 @@
 
 @section('body')
     <div class="container">
+
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
                 <div class="panel with-nav-tabs panel-default">
                     <div class="panel-heading p-t-10">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1default" data-toggle="tab"> General Settings</a></li>
-
-                        </ul>
+                        @include('backend.settings._backend_settings_menu')
                     </div>
                     <div class="panel-body padding-0">
                         <div class="tab-content">
@@ -25,19 +23,16 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary"> @lang('labels.update_settings') </button>
+                                                <button type="submit" class="btn btn-primary"> @lang('labels.update_settings')</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

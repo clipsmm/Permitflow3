@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
-    @include('layouts.partials.topnav1')
-    @include('layouts.partials.topnave2')
+       @include('layouts.partials.topnav1')
+    @if (Auth::guest())
+       @include('layouts.partials.top_nav_default')
+    @else
+       @include('layouts.partials.topnave2')
+    @endif
 
     <div class="container">
         <div class="row">
@@ -15,7 +18,6 @@
                             <img class="img-responsive hidden-xs"
                                  src="https://accounts.ecitizen.go.ke/profile-picture/25272520?t=citizen">
                         </div>
-
                         <div class="profile-info">
                             <h4 class="profile-name">{{ user()->full_name }} </h4>
                             <ul class="nav navbar-nav nav-profile">
@@ -24,11 +26,8 @@
                                 <li class="truncate">{{ user()->email }}</li>
                             </ul>
                         </div>
-
-                        <!-- side-profile-menu-->
                         <div class="left-nav hidden-xs">
                         </div>
-
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -47,7 +46,11 @@
                 </div>
             </div>
             @endif
-            <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
+                @if (Auth::guest())
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                @else
+                    <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
+                @endif
                 @include('partials.notifier')
                 @yield('body')
             </div>

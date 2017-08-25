@@ -12,6 +12,13 @@
             <ul class="nav navbar-nav tp-icon">
                 <li><a href="#"><strong>Make Application</strong></a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                @if(user())
+                    <li class="#">
+                        <a href="{{ route('backend.settings.general') }}"><i class="fa fa-cogs"></i> Settings</a>
+                    </li>
+                @endif
+            </ul>
         </div>
     </div>
 </nav>

@@ -7,8 +7,6 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
     <title>{{ config('app.name', 'eVisa') }}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
 
@@ -25,11 +23,9 @@
     @yield('content')
 </div>
 
-
 <!-- Scripts -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-
 
 @stack('page_js')
 @stack('javascripts')

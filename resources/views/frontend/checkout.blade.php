@@ -23,8 +23,6 @@
                         <input type="hidden" name="notificationURL" value="{{  $data['notificationURL']  }}" >
                         <input type="hidden" name="amountExpected" value="{{ $data['amountExpected']  }}" >
                     </form>
-
-
                     <iframe style="border: none;" scrolling="no" id="my_frame" width="100%" height="900px" name="my_frame" ></iframe>
                 </div>
             </div>
