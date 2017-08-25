@@ -13,9 +13,11 @@ use App\Models\Module;
 use App\Models\User;
 use App\Modules\BaseModule;
 use GuzzleHttp\Client;
+use Hashids\Hashids;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\EVisa\Models\EVisa;
+use Validator;
 
 class ApplicationController extends Controller
 {
@@ -124,7 +126,7 @@ class ApplicationController extends Controller
         $app_id = head(\Hashids::decode($request->route('return_code')));
         $application = Application::with('user')->find($app_id);
 
-        $validator = \Validator::make($request->all(), [])
+        $validator = Validator::make($request->all(), [])
             ->after(function ($v) use ($application, $app_number) {
                 //validate application number
                 if (strtolower($app_number) != strtolower($application->application_number)) {
@@ -202,4 +204,60 @@ class ApplicationController extends Controller
             'phone_number' => $model->phone_number
         ]);
     }
+
+    public function getExistingApplication()
+    {
+        return view('e-visa::retrieve_existing');
+    }
+
+    public function retrieveExistingApplication(Request $request)
+    {
+        $application = null;
+        $validator = Validator::make($request->all(),
+            [
+                'application_number' => 'required',
+                'email' => 'required|email'
+            ]
+        )->after(function ($v) use ($request, &$application) {
+
+            $application = Application::with('user')
+                ->forModule('e-visa')
+                ->byApplicationNumber($request->application_number)
+                ->first();
+
+            if (is_null($application)) {
+
+                $v->errors()->add('application_number', __('e-visa::validation.application_not_found'));
+
+            } else if ($application->user->email != $request->email) {
+
+                $v->errors()->add('email', __('e-visa::validation.email_not_matching'));
+
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+        session()->put('e-visa-retrieved-application-id', $application->id);
+
+        return redirect()->route('e-visa.retrieve_existing_success');
+    }
+
+    public function retrieveExistingApplicationSuccess()
+    {
+        $application = Application::with('user')
+            ->forModule('e-visa')
+            ->findOrFail(session('e-visa-retrieved-application-id'));
+
+        return view('e-visa::retrieve_existing_success', ['application' => $application]);
+    }
+
+
+
+
 }

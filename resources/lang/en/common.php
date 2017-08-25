@@ -7,6 +7,8 @@
  */
 
 return [
+    'oops' => 'Something went wrong!',
     'make_application' => "Apply Now",
-    'back_to_tasks' => 'Back To Tasks'
+    'back_to_tasks' => 'Back To Tasks',
+    'application_number' => 'Application Reference Number',
 ];

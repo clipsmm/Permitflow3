@@ -11,6 +11,10 @@
 |
 */
 Route::group(['prefix' => 'e-visa', 'as' => 'e-visa.'], function () {
+    Route::get('retrieve', 'ApplicationController@getExistingApplication')->name('retrieve_existing');
+    Route::post('retrieve', 'ApplicationController@retrieveExistingApplication')->name('retrieve_existing.submit');
+    Route::get('retrieve/success', 'ApplicationController@retrieveExistingApplicationSuccess')->name('retrieve_existing_success');
+
     Route::get('/applications/new', 'ApplicationController@create')->name('application.new');
     Route::post('/applications/new', 'ApplicationController@save')->name('application.new');
 

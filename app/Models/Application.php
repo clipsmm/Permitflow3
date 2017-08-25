@@ -11,7 +11,7 @@ class Application extends Model
 {
     const DRAFT = 'draft';
 
-    protected $fillable = ['application_number', 'form_data', 'module_slug', 'status', 'submitted_at', 'in_corrections' ];
+    protected $fillable = ['application_number', 'form_data', 'module_slug', 'status', 'submitted_at', 'in_corrections'];
 
     protected $casts = [
         'form_data' => 'array',
@@ -20,6 +20,16 @@ class Application extends Model
     public function scopeSubmitted($query)
     {
         return $query->whereNotNull('submitted_at');
+    }
+
+    public function scopeForModule($query, $module)
+    {
+        return $query->whereModuleSlug($module);
+    }
+
+    public function scopeByApplicationNumber($query, $number)
+    {
+        return $query->where('application_number', 'ilike', trim($number));
     }
 
     public function getModuleAttribute()

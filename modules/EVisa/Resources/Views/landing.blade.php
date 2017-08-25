@@ -135,6 +135,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12 text-center m-t-45">
+                                    <a href="{{ route('e-visa.retrieve_existing') }}" style="border-radius: 30px;" class="btn btn-info apply-button padding-15" title="Enlace">
+                                        @lang('e-visa::common.retrieve_existing_application')
+                                    </a>
+                            </div>
                         </div>
                     </div>
                 </div>

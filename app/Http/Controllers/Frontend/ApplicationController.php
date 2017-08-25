@@ -123,4 +123,13 @@ class ApplicationController extends Controller
             'application' => $application
         ]);
     }
+
+    public function show(Request $request, $module, $app_id)
+    {
+        $application = Application::with('user')
+            ->forModule($module)
+            ->find($app_id);
+
+        return view('applications.show', ['application' => $application, 'module' => $this->module]);
+    }
 }

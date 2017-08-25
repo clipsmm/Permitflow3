@@ -1,5 +1,6 @@
 <?php
 return [
+    'retrieve_existing_success' => 'An email has been sent to the address you provided. Click on the link in the email to retrieve your application.',
     'passport_bio' => "The following are guidelines that will help prevent delays from an unacceptable passport upload;
      Do: 1. Scan your original passport (don't scan a photocopy of your passport), 
      2. Scan in color: Open your passport and lay it flat on the scanner so that all four corners show up on the final scanned image, 

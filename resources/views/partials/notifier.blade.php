@@ -1,12 +1,19 @@
 @if (count($errors) > 0)
 
-    <div class="alert alert-danger icon-alert clearfix">
-        <span class="fa fa-times alert-icon"></span>
+    <div class="alert alert-danger alert-dismissable">
+        <span class="close" data-dismiss="alert">
+            <span class="fa fa-times"></span>
+        </span>
         <div class="alert-body">
-            <h4 class="alert-title">Oopsy!</h4>
-            @foreach ($errors->all() as $error)
-                <p class="alert-text p-0 m-0">{{ $error }}</p>
-            @endforeach
+            <h4 class="alert-title">
+                Oopsy!
+            </h4>
+            <h5>
+                @lang('common.oops')
+            </h5>
+            {{--@foreach ($errors->all() as $error)--}}
+                {{--<p class="alert-text p-0 m-0">{{ $error }}</p>--}}
+            {{--@endforeach--}}
         </div>
     </div>
     <div class="clearfix"></div>

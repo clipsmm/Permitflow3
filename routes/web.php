@@ -69,6 +69,8 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
 Route::prefix('applications/{module_slug}')
     ->namespace('Frontend')
     ->group(function () {
+        Route::get('/{application}', 'ApplicationController@show')->name('application.show');
+
         Route::get('/new', 'ApplicationController@create')->name('application.create');
         Route::post('/create', 'ApplicationController@save')->name('application.save');
         Route::get('/{application}/edit', 'ApplicationController@edit')->name('application.edit');
