@@ -57,7 +57,7 @@ class SystemRolesSeeder extends Seeder
         });
 
         $new_perms = array_map(function ($i) {
-            return ['inserted_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now(),
+            return ['created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now(),
                 'name' => $i, 'guard_name' => 'web', 'owner' => 'system'];
         }, $new_perms);
 
