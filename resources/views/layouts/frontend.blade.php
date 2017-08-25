@@ -15,14 +15,17 @@
                                  src="https://accounts.ecitizen.go.ke/profile-picture/25272520?t=citizen">
                         </div>
 
-                        <div class="profile-info">
-                            <h4 class="profile-name">{{ user()->full_name }} </h4>
-                            <ul class="nav navbar-nav nav-profile">
-                                <li>{{ user()->id_number }}</li>
-                                <li>{{ user()->phone }}</li>
-                                <li class="truncate">{{ user()->email }}</li>
-                            </ul>
-                        </div>
+
+                        @if(auth()->user())
+                            <div class="profile-info">
+                                <h4 class="profile-name">{{ user()->full_name }} </h4>
+                                <ul class="nav navbar-nav nav-profile">
+                                    <li>{{ user()->id_number }}</li>
+                                    <li>{{ user()->phone }}</li>
+                                    <li class="truncate">{{ user()->email }}</li>
+                                </ul>
+                            </div>
+                        @endif
 
                         <!-- side-profile-menu-->
                         <div class="left-nav hidden-xs">

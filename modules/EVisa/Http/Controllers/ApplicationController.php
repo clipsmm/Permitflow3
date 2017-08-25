@@ -40,6 +40,11 @@ class ApplicationController extends Controller
         ]);
     }
 
+    protected function getOrCreateFromSession()
+    {
+        return new EVisa(session()->get($this->guest_app_session_key, []));
+    }
+
     public function save(Request $request)
     {
         $validator = $this->module->getValidator($request, $this->current_step);
@@ -59,6 +64,7 @@ class ApplicationController extends Controller
 
         //create dummy user account
         $user = User::firstOrCreate(['email' => array_get($form_data, 'email')]);
+        $data = $this->mergeWithPreviousApplication($form_data, $user);
 
         //save application and send notification
         $application = Application::insertRecord($this->module, $data, $user);
@@ -66,6 +72,32 @@ class ApplicationController extends Controller
 
         session()->put($this->guest_app_id, $application->id);
         return redirect()->route('e-visa.guest.complete');
+    }
+
+    protected function saveTemp($data)
+    {
+        session()->put($this->guest_app_session_key, $data);
+    }
+
+    private function mergeWithPreviousApplication($form_data, $user)
+    {
+        $application = $user->applications()
+            ->submitted()
+            ->whereModuleSlug('e-visa')
+            ->latest()
+            ->first();
+
+        if ($application) {
+            $previous_data = array_except($application->form_data, ['travel_reason', 'date_of_entry',
+                'date_of_departure', 'arrival_by', 'entry_point', 'places_to_visit', 'passport_bio']);
+            $form_data = array_merge($previous_data, $form_data);
+        }
+        return $this->module->toFormData($form_data);
+    }
+
+    private function sendEmailToUser($user, $application)
+    {
+
     }
 
     public function completeGuestApplication(Request $request, Application $application)
@@ -93,24 +125,24 @@ class ApplicationController extends Controller
         $application = Application::with('user')->find($app_id);
 
         $validator = \Validator::make($request->all(), [])
-            ->after(function ($v) use($application, $app_number){
+            ->after(function ($v) use ($application, $app_number) {
                 //validate application number
-                if(strtolower($app_number) != strtolower($application->application_number)){
+                if (strtolower($app_number) != strtolower($application->application_number)) {
                     $v->errors()->add('application_number', __('Application Reference Number not matching'));
                 }
             })
-            ->after(function($v) use ($recaptcha, $request){
+            ->after(function ($v) use ($recaptcha, $request) {
                 $user_pi = $request->ip();
                 //validate recaptcha
                 $client = new Client();
                 $response = json_decode($client->post(config('app.recaptcha_api'), ['response' => $recaptcha,
                     'secret' => env('RECAPTCHA_SECRET'), 'remoteip' => $user_pi])->getBody());
-                if(!$response->success){
-//                    $v->errors()->add('recaptcha', 'Recaptcha validation failed');
+                if (!$response->success) {
+                    //$v->errors()->add('recaptcha', 'Recaptcha validation failed');
                 }
             });
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -119,27 +151,13 @@ class ApplicationController extends Controller
         return redirect()->route('e-visa.application.edit', ['application_id' => $app_id, 'step' => $this->max_temp_steps + 1]);
     }
 
-    protected function getOrCreateFromSession()
-    {
-        return new EVisa(session()->get($this->guest_app_session_key, []));
-    }
-
-    protected function saveTemp($data)
-    {
-        session()->put($this->guest_app_session_key, $data);
-    }
-
-    private function sendEmailToUser($user, $application)
-    {
-
-    }
-
     public function edit(Application $application, Request $request)
     {
+
         $model = $this->module->fromFormData($application->form_data);
         return view($this->module->view('edit'), [
             'application' => $application,
-            'step' =>  $request->get('step', 1),
+            'step' => $request->get('step', 1),
             'module' => $this->module,
             'model' => $model,
             'country_codes' => \Countries::all()->sortBy('name')->pluck('name.common', 'cca2')
@@ -150,7 +168,7 @@ class ApplicationController extends Controller
     public function update(Application $application, Request $request)
     {
         $validator = $this->module->getValidator($request, $this->current_step);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -165,6 +183,23 @@ class ApplicationController extends Controller
             ]);
         }
 
+        $this->updateUserDetails($application);
+
         return redirect()->route('application.review', ['application' => $application, 'module_slug' => $this->module->slug]);
+    }
+
+    private function updateUserDetails($application)
+    {
+        $model = $this->module->fromFormData($application->form_data);
+        $user = auth()->user();
+        $names = explode(' ', $model->other_names);
+        $user->update([
+            'surname' => $model->surname,
+            'first_name' => array_get($names, 0),
+            'last_name' => array_get($names, 1),
+            'gender' => $model->gender,
+            'dob' => $model->date_of_birth,
+            'phone_number' => $model->phone_number
+        ]);
     }
 }

@@ -17,6 +17,11 @@ class Application extends Model
         'form_data' => 'array',
     ];
 
+    public function scopeSubmitted($query)
+    {
+        return $query->whereNotNull('submitted_at');
+    }
+
     public function getModuleAttribute()
     {
         return Module::where('slug', $this->module_slug);

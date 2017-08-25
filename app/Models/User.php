@@ -39,7 +39,7 @@ class User extends Authenticatable
      {
          parent::boot();
  
-         self::creating(function ($user) {
+         self::saving(function ($user) {
              $user->full_name  =  "{$user->first_name} {$user->last_name} {$user->surname}";
          });
 
@@ -58,5 +58,10 @@ class User extends Authenticatable
      public function getAvatar()
      {
          return '';
+     }
+
+     public function applications()
+     {
+         return $this->hasMany(Application::class);
      }
 }
