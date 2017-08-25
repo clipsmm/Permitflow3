@@ -32,7 +32,7 @@
                 </div>
 
                 @isset($module)
-                    <div class="side-profile-menu">
+                    <div class="side-profile-menu m-b-10">
                         <div class="profile-info">
                             <h4 class="profile-name">{{ $module->name }}</h4>
                         </div>
@@ -49,7 +49,7 @@
                 @endisset
 
                 @isset($backend_modules)
-                    <div class="side-profile-menu">
+                    <div class="side-profile-menu m-b-10">
                         <div class="sidebar-nav">
                             <h3>Modules</h3>
                             <ul class="nav">
