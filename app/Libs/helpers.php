@@ -738,7 +738,6 @@ if (!function_exists('create_pesaflow_bill')){
             ->sendsType(Httpful\Mime::FORM)
             ->send();
 
-
         if (!$response->code == 200 || !$response->body) {
             return null;
         }
@@ -766,7 +765,7 @@ if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
             'billDesc' => $invoice->description,
             'billRefNumber' => $invoice->bill_ref,
             'serviceID' => $config['apiServiceId'],
-            'clientMSISDN' => $user->phone,
+            'clientMSISDN' => $user->phone_number,
             'clientName' => $user->full_name,
             'clientIDNumber' => $user->id_number,
             'clientEmail' => $user->email,
