@@ -37,9 +37,6 @@ class Invoice extends Model
             $model->pk = \Uuid::generate()->string;
         });
 
-        static::saving(function ($model) {
-            $model->pk = \Uuid::generate()->string;
-        });
     }
 
     public static function create_invoice($application_id, array $items, $description)
@@ -72,11 +69,10 @@ class Invoice extends Model
 
     public function get_pesaflow_bill_ref()
     {
-        $ref  = create_pesaflow_bill($this->pk, intval(round($this->amount)), $this->description, $this->application->user);
-        /*
+        $ref  = create_pesaflow_bill($this->bill_ref, intval(round($this->amount)), $this->description, $this->application->user);
         $this->bill_ref =  $ref;
         $this->save();
-        */
+
 
         return $ref;
     }

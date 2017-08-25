@@ -115,8 +115,9 @@ class ApplicationController extends Controller
 
     public function checkout(Request $request, $module_slug, Application $application, Invoice $invoice)
     {
-        $invoice->get_pesaflow_bill_ref();
+        //$invoice->get_pesaflow_bill_ref();
         $checkout_data = get_pesaflow_checkout_data_from_invoice($invoice);
+        //dd($checkout_data);
         return view('frontend.checkout', [
             'data' => $checkout_data,
             'module' => $this->module,
