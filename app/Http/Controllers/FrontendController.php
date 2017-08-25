@@ -11,12 +11,6 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $modules  =  Module::enabled()->map(function($item){
-            return (object)$item;
-        });
-
-        return view('frontend.index', [
-            'modules' => $modules
-        ]);
+        return view('frontend.index');
     }
 }
