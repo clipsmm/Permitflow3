@@ -70,4 +70,9 @@ class Passport extends BaseModule implements ModuleInterface
     {
         return [];
     }
+
+    public function get_landing_page()
+    {
+        // TODO: Implement get_landing_page() method.
+    }
 }

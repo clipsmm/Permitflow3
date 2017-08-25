@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Modules\BaseModule;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $landing_page  = settings('landing_page');
+
+        dd($landing_page);
+        if(!$landing_page)
+            return view('home');
+
+        return BaseModule::instance_from_slug($landing_page)->get_landing_page();
     }
 
 

@@ -32,7 +32,7 @@
                 </div>
 
                 @isset($module)
-                    <div class="side-profile-menu">
+                    <div class="side-profile-menu m-b-10">
                         <div class="profile-info">
                             <h4 class="profile-name">{{ $module->name }}</h4>
                         </div>
@@ -47,9 +47,12 @@
                     </div>
 
                 @endisset
+
                     <div class="side-profile-menu">
                         <div class="sidebar-nav">
-                            <h3>Modules</h3>
+                            <div class="profile-info">
+                                <h4 class="profile-name">Modules</h4>
+                            </div>
                             <ul class="nav">
                                 @foreach($active_modules as $mod)
                                     <li><a href="{{ route("backend.tasks.queue", $mod->slug) }}">{{ $mod->name }}</a></li>

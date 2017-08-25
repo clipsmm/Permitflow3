@@ -17,6 +17,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('fonts/font-awesome.min.css') }}" rel="stylesheet">
+    @stack('page_css')
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>

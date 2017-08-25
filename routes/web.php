@@ -57,6 +57,13 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
         Route::get('edit', 'UsersController@editRoles')->name('edit');
         Route::post('update', 'UsersController@updateRoles')->name('update');
     });
+
+    Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
+        Route::get('','SettingsController@generalSettings')->name('general');
+        Route::post('','SettingsController@saveGeneralSettings')->name('general');
+    });
+
+
 });
 
 Route::prefix('applications/{module_slug}')
