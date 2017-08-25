@@ -72,7 +72,7 @@ class SsoController extends Controller
                     'email' => $data['email'],
                     'phone_number' => $data['mobile_number'],
                     'gender' => $data['gender'],
-                    'dob' => $data['dob'],
+//                    'dob' => $data['dob'],
                     'password' => str_random(7)
                 ]);
             }
