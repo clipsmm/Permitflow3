@@ -8,14 +8,13 @@
 
 namespace Modules\EVisa\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Application;
-use App\Models\Module;
 use App\Models\User;
 use App\Modules\BaseModule;
 use GuzzleHttp\Client;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Modules\EVisa\Models\EVisa;
 use Validator;
 

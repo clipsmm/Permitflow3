@@ -31,6 +31,23 @@
                     </div>
                 </div>
 
+                @isset($current_module)
+                    <div class="side-profile-menu m-b-10">
+                        <div class="profile-info">
+                            <h4 class="profile-name">{{ $current_module->name }}</h4>
+                        </div>
+                        <div class="sidebar-nav">
+                            <ul class="nav ">
+                                @foreach($current_module->get_menus() as $menu)
+                                    <li class="{{ request()->fullUrl() == array_get($menu, 'action') ? 'active' : '' }}"><div class="panel-title"><a href="{{ array_get($menu, 'action') }}"><i class="{{ array_get($menu, 'icon') }}"></i> {{ array_get($menu,'name') }}</a></div></li>
+                                @endforeach
+
+                            </ul>
+                        </div>
+                    </div>
+
+                @endisset
+
                     <div class="side-profile-menu">
                         <div class="sidebar-nav">
                             <div class="profile-info">

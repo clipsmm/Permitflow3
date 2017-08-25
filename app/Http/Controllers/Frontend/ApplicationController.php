@@ -132,4 +132,14 @@ class ApplicationController extends Controller
 
         return view('applications.show', ['application' => $application, 'module' => $this->module]);
     }
+
+    public function myApplications(Request $request)
+    {
+        $user  =  user();
+        $applications = $user->applications()->paginate(20);
+
+        return view('frontend.my_applications',[
+            'applications' => $applications
+        ]);
+    }
 }
