@@ -31,11 +31,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function loadModules()
     {
-        try{
-            $modules = BaseModule::get_enabled_modules();
-            view()->share(['active_modules' => $modules]);
-        } catch(\Exception $e) {
-
-        }
+        $active_modules = BaseModule::get_enabled_modules();
+        $all_modules = BaseModule::get_all_modules();
+        view()->share(['all_modules' => $all_modules]);
+        view()->share(['active_modules' => $active_modules]);
     }
 }
