@@ -1,0 +1,37 @@
+@extends('layouts.frontend')
+
+@section('body')
+    <div class="container">
+        <div class="panel panel-form m-r-10 m-l-10 m-t-0 m-b-0">
+            <div class="panel-heading">@lang('labels.application_history')</div>
+            <div class="panel-body p-t-10 p-b-10 p-l-10 p-r-10">
+                <table class="table table-hover table-special table-striped">
+                    <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Ref No</th>
+                        <th>Bill Status</th>
+                        <th>Application Status</th>
+                        <th>Submitted On</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse($applications as $application)
+                        <tr>
+                            <td>{{ $application->module['name'] }}</td>
+                            <td>{{ $application->application_number }}</td>
+                            <td>{{ $application->status }}</td>
+                            <td>{{ $application->status }}</td>
+                            <td>{{ $application->submitted_at }}</td>
+                            <td></td>
+                        </tr>
+                    @empty
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+@endsection

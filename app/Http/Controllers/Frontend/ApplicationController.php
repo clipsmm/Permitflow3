@@ -123,4 +123,14 @@ class ApplicationController extends Controller
             'application' => $application
         ]);
     }
+
+    public function myApplications(Request $request)
+    {
+        $user  =  user();
+        $applications = $user->applications()->paginate(20);
+
+        return view('frontend.my_applications',[
+            'applications' => $applications
+        ]);
+    }
 }
