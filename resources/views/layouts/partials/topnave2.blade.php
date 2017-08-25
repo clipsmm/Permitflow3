@@ -12,6 +12,13 @@
                 <li><a href="#"><strong>Make Application</strong></a></li>
             </ul>
 
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li class="#">
+                    <a href="{{ route('backend.settings.general') }}"><i class="fa fa-cogs"></i> Settings</a>
+                </li>
+
+            </ul>
+
         </div>
         <!--/.nav-collapse -->
     </div>
