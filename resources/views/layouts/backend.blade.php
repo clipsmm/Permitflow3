@@ -47,6 +47,7 @@
                     </div>
 
                 @endisset
+
                     <div class="side-profile-menu">
                         <div class="sidebar-nav">
                             <div class="profile-info">

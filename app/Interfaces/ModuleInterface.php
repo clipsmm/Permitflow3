@@ -43,4 +43,6 @@ interface ModuleInterface
     public function render_settings_view();
 
     public function get_menus();
+
+    public function get_landing_page();
 }

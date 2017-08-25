@@ -242,4 +242,10 @@ class EVisa extends BaseModule implements ModuleInterface
             ]
         ];
     }
+
+    public function get_landing_page()
+    {
+        return view("{$this->slug}::landing")
+            ->with("page_title", __("{$this->slug}::labels.landing_page_title"));
+    }
 }
