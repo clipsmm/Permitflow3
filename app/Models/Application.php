@@ -104,4 +104,9 @@ class Application extends Model
         $this->save();
     }
 
+    public function get_data($key, $default = null)
+    {
+        return array_get($this->form_data,$key, $default);
+    }
+
 }
