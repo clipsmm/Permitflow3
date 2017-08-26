@@ -105,4 +105,9 @@ class BaseModule
     {
         return route('applications.edit', ['module_slug' => $application->module_slug, 'application' => $application->id]);
     }
+
+    public function getApplicationActions($application)
+    {
+        return [];
+    }
 }
