@@ -30,6 +30,9 @@ class TaskController extends Controller
     {
         //todo: ensure user can view this task
 
+        $task->load(['application', 'application.user','application.tasks',
+            'application.invoices', 'application.corrections', 'application.corrections.task','application.corrections.task.user']);
+
         $actions = $module->get_task_actions($task);
 
         return view('backend.tasks.view',[

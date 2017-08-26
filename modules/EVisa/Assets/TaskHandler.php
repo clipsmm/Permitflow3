@@ -3,6 +3,7 @@
 namespace Modules\EVisa;
 
 
+use App\Models\Correction;
 use App\Models\Task;
 use Carbon\Carbon;
 
@@ -25,6 +26,15 @@ class TaskHandler {
             $task->status  = 'rejected';
             $task->save();
 
+            // if application was in corrections, complete the task
+            if($application->in_corrections){
+                $current_correction = $task->current_correction;
+                $current_correction->completed_at  = Carbon::now();
+                $current_correction->save();
+
+                $application->in_corrections  =  false;
+            }
+
             $application->complete  =  true;
             $application->status  = 'rejected';
             $application->save();
@@ -45,7 +55,10 @@ class TaskHandler {
             $task->status  = 'corrections';
             $task->save();
 
-            $application->status  = 'corrections';
+            //add corrections record
+            Correction::add_correction($application->id, $task->id, $comments);
+
+            $application->in_corrections  = true;
             $application->save();
 
             //todo: fire event here
@@ -63,6 +76,15 @@ class TaskHandler {
             $task->completed_at  =  Carbon::now();
             $task->status  = 'approved';
             $task->save();
+
+            // if application was in corrections, complete the task
+            if($application->in_corrections){
+                $current_correction = $task->current_correction;
+                $current_correction->completed_at  = Carbon::now();
+                $current_correction->save();
+
+                $application->in_corrections  =  false;
+            }
 
             $application->complete  =  true;
             $application->status  = 'corrections';

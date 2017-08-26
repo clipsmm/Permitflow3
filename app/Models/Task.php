@@ -32,6 +32,17 @@ class Task extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function corrections()
+    {
+        return $this->hasMany(Correction::class, 'task_id');
+    }
+
+    public function current_correction()
+    {
+        return $this->hasOne(Correction::class,'task_id')
+            ->whereNull('completed_at');
+    }
+
     public static function create_task($application_id, $task_name, $stage, $status)
     {
         $task = new self([

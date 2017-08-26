@@ -45,4 +45,10 @@ interface ModuleInterface
     public function get_menus();
 
     public function get_landing_page();
+
+    /*
+     * Return a list of actions with label, action, method, confirm, icon, color
+     * Example ['label' => 'Cancel', 'action' => data-placement="right" route('some.route'), 'method' => 'post', 'color' => 'danger', 'icon' => 'fa fa-times', 'confirm' => 'Are you sure?']
+     */
+    public function getApplicationActions($application);
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Modules\BaseModule;
 use Caffeinated\Modules\Facades\Module;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -34,7 +35,7 @@ class Application extends Model
 
     public function getModuleAttribute()
     {
-        return Module::where('slug', $this->module_slug);
+        return BaseModule::instance_from_slug($this->module_slug);
     }
 
     public function user()
@@ -42,9 +43,19 @@ class Application extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'application_id');
+    }
+
     public function corrections()
     {
         return $this->hasMany(ApplicationCorrection::class);
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'application_id');
     }
 
     public function activeCorrection()
@@ -76,11 +87,26 @@ class Application extends Model
         return in_array($this->status, [self::DRAFT]);
     }
 
+    public function canBeDeleted()
+    {
+        return $this->status == self::DRAFT;
+    }
+
+    public function getActions()
+    {
+        return $this->module->getApplicationActions($this);
+    }
+
     public function submit()
     {
         $this->submitted_at = Carbon::now();
         $this->in_corrections = false;
         $this->save();
+    }
+
+    public function get_data($key, $default = null)
+    {
+        return array_get($this->form_data,$key, $default);
     }
 
 }

@@ -12,7 +12,7 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .styles(['resources/assets/brs_assets/brs.css'], 'public/css/app.css');
+   .styles(['node_modules/jquery-confirm/dist/jquery-confirm.min.css', 'resources/assets/brs_assets/brs.css'], 'public/css/app.css');
 
 if (mix.inProduction()) {
     mix.version();

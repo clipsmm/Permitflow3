@@ -11,4 +11,13 @@ return [
     'make_application' => "Apply Now",
     'back_to_tasks' => 'Back To Tasks',
     'application_number' => 'Application Reference Number',
+    'service' => 'Service',
+    'ref_no' => 'Reference Number',
+    'payment_status' => 'Payment Status',
+    'application_status' => 'Application Status',
+    'actions' => 'Actions',
+    'view' => 'View',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'in_corrections' => 'Has Corrections'
 ];
