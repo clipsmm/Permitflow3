@@ -13,6 +13,40 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    /**
+     * Abort if permission(s) fail
+     * @param string|array $permission
+     * @param int $status
+     */
+    public function can($permission, $status  = 403)
+    {
+        if (!user()->can($permission)) abort($status, "Access Denied");
+    }
+
+    /**
+     * Check if given permission(s) fail and closure evaluates false
+     * @param string|array $permission
+     * @param $closure
+     * @param int $status
+     * @internal param bool $strict
+     */
+    public function _can($permission, $closure, $status = 403)
+    {
+        if ((!user()-can($permission)) || !$closure() )
+            abort($status, "Access Denied");
+    }
+
+    /**
+     * If closure fails abort with 403
+     * @param $closure
+     * @param int $status
+     */
+    public function before($closure, $status = 403)
+    {
+        if (!$closure())
+            abort($status, "Access Denied");
+    }
+
     public function __construct()
     {
         //load current module for views
