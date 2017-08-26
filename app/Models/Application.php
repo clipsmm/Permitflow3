@@ -42,9 +42,19 @@ class Application extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'application_id');
+    }
+
     public function corrections()
     {
         return $this->hasMany(ApplicationCorrection::class);
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'application_id');
     }
 
     public function activeCorrection()

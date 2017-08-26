@@ -64,4 +64,9 @@ class User extends Authenticatable
      {
          return '';
      }
+
+     public function __toString()
+     {
+         return $this->full_name;
+     }
 }
