@@ -249,4 +249,10 @@ class EVisa extends BaseModule implements ModuleInterface
             'module'  => $this
         ])->with("page_title", __("{$this->slug}::labels.landing_page_title"));
     }
+
+    public function getApplicationActions($application)
+    {
+        return [
+        ];
+    }
 }

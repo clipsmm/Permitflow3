@@ -45,4 +45,6 @@ interface ModuleInterface
     public function get_menus();
 
     public function get_landing_page();
+
+    public function getApplicationActions($application);
 }
