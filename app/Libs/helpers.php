@@ -784,5 +784,9 @@ if(!function_exists('get_form_actions')){
     {
 
     }
+
+    function permission_name($name, $prefix){
+        return \App\Models\Permission::constructName($name, $prefix);
+    }
 }
 

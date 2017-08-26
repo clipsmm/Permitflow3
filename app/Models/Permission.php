@@ -10,6 +10,14 @@ class Permission extends Model implements \Spatie\Permission\Contracts\Permissio
 {
     protected $guarded = ['id'];
 
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function($p){
+            $p->name = self::constructName($p->name, $p->owner);
+        });
+    }
+
     //
     /**
      * A permission can be applied to roles.
@@ -35,5 +43,10 @@ class Permission extends Model implements \Spatie\Permission\Contracts\Permissio
     public static function findByName(string $name, $guardName): \Spatie\Permission\Contracts\Permission
     {
         return self::whereName($name)->whereGuard($guardName)->first();
+    }
+
+    public static function constructName($name, $prefix)
+    {
+        return snake_case(implode('_', [studly_case($prefix), $name]));
     }
 }

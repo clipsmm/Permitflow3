@@ -30,7 +30,7 @@ class EVisa extends BaseModule implements ModuleInterface
      * @var array
      */
 
-    public $stages  = [
+    public $stages = [
         'review' => [
             'reject' => [
                 'color' => 'danger',
@@ -208,7 +208,7 @@ class EVisa extends BaseModule implements ModuleInterface
     public function create_invoice($application)
     {
         //todo: consider other checks before creating invoice
-        if($application->submitted_at){
+        if ($application->submitted_at) {
             return null;
         }
         return Invoice::create_invoice($application->id, [['amount' => 20, 'description' => 'foo']], 'bar');
@@ -246,7 +246,7 @@ class EVisa extends BaseModule implements ModuleInterface
     public function get_landing_page()
     {
         return view("{$this->slug}::landing", [
-            'module'  => $this
+            'module' => $this
         ])->with("page_title", __("{$this->slug}::labels.landing_page_title"));
     }
 
@@ -254,5 +254,18 @@ class EVisa extends BaseModule implements ModuleInterface
     {
         return [
         ];
+    }
+
+
+    public function authorizeTask($task, $user)
+    {
+        return true;
+//        switch ($task->stage) {
+//            case 'review':
+//                return $user->hasAnyPermission([
+//                    permission_name('approve_application', 'e-visa'),
+//                    permission_name('reject_application', 'e-visa')
+//                ]);
+//        }
     }
 }

@@ -44,14 +44,19 @@ class InstallModule extends Command
         $slug = $this->argument('slug');
         $module = BaseModule::instance_from_slug($slug);
 
-        if(is_null($module)){
+        if (is_null($module)) {
             $this->error("Module {$slug} not found");
-        }else{
+        } else {
 
             //Insert module permissions
             $permissions = [];
-            foreach($module->get_permissions() as $p){
-                $permissions[] = Permission::firstOrCreate(['name' => $p['name'], 'label' => $p['label'], 'guard_name' => $p['guard'], 'owner' => $module->slug]);
+            foreach ($module->get_permissions() as $p) {
+                $perm = Permission::whereName(permission_name($p['name'], $module->slug))->first();
+                if (is_null($perm)) {
+                    Permission::create(['name' => $p['name'], 'label' => $p['label'], 'guard_name' => $p['guard'], 'owner' => $module->slug]);
+                }
+
+                $permissions[] = $perm;
             }
 
             $count = count($permissions);
