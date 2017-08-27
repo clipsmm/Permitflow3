@@ -57,20 +57,12 @@
         </nav>
     </header>
     <div class="container margin-top">
-
         <div class="panel visa-types requirement2">
-
-
             <div class="panel-heading m-t-50">
                 <h3>Requirements and all you need to Know</h3>
                 <!--   <p>Below are the requirements and fees for a single entry visa.</p> -->
-
             </div>
-
-
             <div class="panel-body">
-
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel with-nav-tabs panel-default m-b-0">
@@ -84,28 +76,18 @@
                                             Requirements</a></li>
                                     <li><a href="#tab44default" data-toggle="tab"><i class="fa fa-camera"></i>Photo
                                             Requirement</a></li>
-
-
                                 </ul>
                             </div>
                             <div class="panel-body padding-0">
                                 <div class="tab-content">
-
-
                                     <!-- tab -->
-
                                     <div class="tab-pane fade in active" id="tab11default">
                                         <div class="panel panel-form m-r-10 m-l-10 m-t-0 m-b-0">
-
-
                                             <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
-
                                                 <div class="p-t-0 p-m-10 p-b-10">
                                                     <p>All evisa applications attract a 1 USD service charge and card
                                                         handling fee will be surcharged.</p>
                                                 </div>
-
-
                                                 <div class="col-md-4">
                                                     <div class="pricing hover-effect">
                                                         <div class="pricing-head">
@@ -136,8 +118,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                                 <div class="col-md-4">
                                                     <div class="pricing hover-effect">
                                                         <div class="pricing-head">

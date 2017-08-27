@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\SendSms;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -76,7 +77,7 @@ class Invoice extends Model
         return $ref;
     }
 
-    public function send_invoice_notification()
+    public function send_invoice_notification($email = false)
     {
 
     }

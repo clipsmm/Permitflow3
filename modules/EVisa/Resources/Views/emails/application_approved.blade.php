@@ -1,0 +1,1 @@
+Hi, your application {{ $application->application_number }} has been approved. Login and download your visa
