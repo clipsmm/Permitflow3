@@ -50,7 +50,7 @@ class EVisa extends BaseModule implements ModuleInterface
     ];
 
 
-    public $numSteps = 6;
+    public $numSteps = 5;
 
     public static function getTravelReasons()
     {
@@ -120,7 +120,10 @@ class EVisa extends BaseModule implements ModuleInterface
                     'passport_place_of_issue' => ['required'],
                     'passport_date_of_issue' => ['required', 'date', "before:{$tomorrow}"],
                     'passport_date_of_expiry' => ['required', "after:{$today}"],
-                    'passport_issued_by' => ['required']
+                    'passport_issued_by' => ['required'],
+                    'passport_bio' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
+                    'passport_photo' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
+                    'additional_documents' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg']
 
                 ], [
                     'passport_date_of_issue.before' => __('validation.before_tomorrow'),
@@ -182,20 +185,14 @@ class EVisa extends BaseModule implements ModuleInterface
                     'recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     '*.required_if' => __('This field is required')
                 ]);
-
-            case 6:
-                return Validator::make($request->all(), [
-                    'passport_bio' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
-                    'passport_photo' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
-                    'additional_documents' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg']
-                ]);
         }
     }
 
     public static function getVisaTypes()
     {
         return [
-            'single_entry' => __('e-visa::common.single_entry_visa')
+            'single_entry' => __('e-visa::common.single_entry_visa'),
+            'transit_visa' => __('Transit Visa')
         ];
     }
 

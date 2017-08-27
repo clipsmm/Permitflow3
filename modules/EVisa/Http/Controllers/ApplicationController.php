@@ -195,6 +195,7 @@ class ApplicationController extends Controller
     {
         $model = $this->module->fromFormData($application->form_data);
         $user = auth()->user();
+
         $names = explode(' ', $model->other_names);
         $user->update([
             'surname' => $model->surname,
