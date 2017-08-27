@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <h4>
-                                @lang('e-visa::common.single_entry_visa'):
+                                @lang('e-visa::common.kenyan_visa'):
                                 {{$application->application_number}}
                             </h4>
                             <hr>
