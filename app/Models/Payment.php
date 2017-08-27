@@ -13,7 +13,7 @@ class Payment extends Model
     protected $table = 'payments';
 
     protected $fillable = [
-        'bill_ref', 'payment_ref', 'extra', 'status'
+        'bill_ref', 'payment_ref', 'extra', 'status', 'amount'
     ];
 
     public function invoice()
@@ -28,7 +28,7 @@ class Payment extends Model
             'payment_ref' => $payment_ref,
             'channel' => 'pesaflow',
             'amount' => $amount,
-            'extra' => $extra,
+            'extra' => json_encode($extra),
             'status' => $status
         ]);
 

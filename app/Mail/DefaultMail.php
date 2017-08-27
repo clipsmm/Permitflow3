@@ -11,9 +11,7 @@ class DefaultMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $view;
-
-    public $user;
+    public $view;
 
     public $payload;
 
@@ -36,6 +34,8 @@ class DefaultMail extends Mailable
      */
     public function build()
     {
-        return $this->view($this->view);
+        $view  = $this->view($this->view, $this->payload);
+
+        return $view;
     }
 }

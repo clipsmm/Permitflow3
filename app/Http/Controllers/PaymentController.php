@@ -24,7 +24,13 @@ class PaymentController extends Controller
     {
         \Log::info("Payment notification request received => ", $request->all());
 
-        $p = Payment::add_payment($request->bill_ref, $request->payment_ref, $request->amount, 'pending', []);
+        $this->validate($request, [
+            'trx_ref' => "required|unique:payments,payment_ref",
+            "bill_ref" => "required",
+            "amount" => "required"
+        ]);
+
+        $p = Payment::add_payment($request->bill_ref, $request->trx_ref, $request->amount, 'pending', []);
 
         if (!$p){
             return response()->json([

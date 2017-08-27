@@ -92,7 +92,7 @@ class TaskHandler {
             }
 
             $application->complete  =  true;
-            $application->status  = 'corrections';
+            $application->status  = 'issued';
             $application->save();
 
             # generate output

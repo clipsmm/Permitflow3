@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Events\ApplicationResubmitted;
+use App\Events\PaymentCompleted;
+use App\Events\PaymentReceived;
 use App\Listeners\ApplicationResubmittedHandler;
+use App\Listeners\PaymentCompletedHandler;
+use App\Listeners\PaymentReceivedHandler;
 use App\Modules\BaseModule;
 use Caffeinated\Modules\Facades\Module;
 use Illuminate\Support\Facades\Event;
@@ -23,6 +27,12 @@ class EventServiceProvider extends ServiceProvider
         ApplicationResubmitted::class => [
             ApplicationResubmittedHandler::class
         ],
+        PaymentReceived::class => [
+            PaymentReceivedHandler::class
+        ],
+        PaymentCompleted::class => [
+            PaymentCompletedHandler::class
+        ]
     ];
 
     /**
