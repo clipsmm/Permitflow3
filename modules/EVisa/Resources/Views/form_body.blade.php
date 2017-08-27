@@ -245,7 +245,7 @@
                     <div class="alert alert-info">
                         @lang('e-visa::help_blocks.passport_bio')
                     </div>
-                    {!! Form::file('passport_bio', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    <file-upload field="passport_bio" :val="{{json_encode(old('passport_bio', $model->passport_bio))}}"></file-upload>
                     {!! error_tag($errors, 'passport_bio') !!}
                 </div>
             </div>
@@ -257,7 +257,7 @@
                 <div class="alert alert-info">
                     @lang('e-visa::help_blocks.passport_photo')
                 </div>
-                {!! Form::file('passport_photo', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                <file-upload field="passport_photo" :val="{{json_encode(old('passport_photo', $model->passport_photo))}}"></file-upload>
                 {!! error_tag($errors, 'passport_photo') !!}
             </div>
 
@@ -270,7 +270,7 @@
                     <div class="alert alert-info">
                         @lang('e-visa::help_blocks.additional_documents')
                     </div>
-                    {!! Form::file('additional_documents', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    <file-upload field="additional_documents" :val="{{json_encode(old('additional_documents', $model->additional_documents))}}"></file-upload>
                     {!! error_tag($errors, 'additional_documents') !!}
                 </div>
             </div>
