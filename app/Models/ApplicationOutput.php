@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\ApplicationOuputCreated;
 use Illuminate\Database\Eloquent\Model;
 
 class ApplicationOutput extends Model
@@ -59,6 +60,8 @@ class ApplicationOutput extends Model
         ]);
 
         $application_output->save();
+
+        event(new ApplicationOuputCreated($application_output));
 
         return $application_output;
     }
