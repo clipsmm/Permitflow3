@@ -52,7 +52,7 @@ class RolesController extends BaseController
         ]);
 
         \DB::transaction(function() use($request){
-            $role = Role::create(['name' => $request->name, 'guard_name' => $this->guard_name]);
+            $role = Role::create(['name' => $request->name, 'guard_name' => 'web']);
             $role->permissions()->sync($request->permissions);
         });
 
