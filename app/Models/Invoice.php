@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\SendSms;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -76,7 +77,7 @@ class Invoice extends Model
         return $ref;
     }
 
-    public function send_invoice_notification()
+    public function send_invoice_notification($email = false)
     {
 
     }
@@ -99,5 +100,23 @@ class Invoice extends Model
             $config['apiClientId'], intval(round($this->amount)), $config['apiServiceId'], $user->id_number,
             $currency, $this->pk, $this->description, $user->full_name, $config['apiSecret']
         ], $config['apiKey']);
+    }
+
+    public function get_status_label()
+    {
+        switch ($this->status) {
+            case 'paid':
+                return '<span class="label label-success"><i class="fa fa-check"></i> paid </span>';
+            case 'processing':
+                return '<span class="label label-info"><i class="fa fa-info"></i> processing </span>';
+            case 'unpaid':
+                return '<span class="label label-danger"><i class="fa fa-ban"></i> not paid </span>';
+            case 'cancelled':
+                return '<span class="label label-default"><i class="fa fa-trash"></i> cancelled </span>';
+            case 'pending':
+                return '<span class="label label-danger"><i class="fa fa-ban"></i> not paid </span>';
+            default:
+                break;
+        }
     }
 }

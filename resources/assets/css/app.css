@@ -84,7 +84,7 @@ h1.applicant-name {
 
 
 /*End Permitflow Pro*/
-
+pm
 
 /*-------Modal -----------------------------------------*/
 
@@ -3082,7 +3082,7 @@ h4.modal-header {
 
 .panel-form .form-group, .panel-form .row {
     margin-bottom: 0px;
-    padding: 15px 20px;
+    padding: 15px 5px;
     border-bottom: 1px solid #eee;
 }
 
@@ -3535,7 +3535,7 @@ h4.modal-title {
 
 .panel-form .form-group, .panel-form .row {
     margin-bottom: 0px;
-    padding: 7px 20px;
+    padding: 7px 5px;
     border-bottom: 1px solid #eee;
 }
 

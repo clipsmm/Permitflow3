@@ -88,6 +88,12 @@ class Application extends Model
         return $this->hasMany(Invoice::class, 'application_id');
     }
 
+    public function current_invoice()
+    {
+        return $this->hasOne(Invoice::class, 'application_id')
+            ->latest('invoices.created_at');
+    }
+
     public function outputs()
     {
         return $this->hasMany(ApplicationOutput::class, 'application_id');

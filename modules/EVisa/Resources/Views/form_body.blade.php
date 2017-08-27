@@ -13,10 +13,10 @@
     <div>
         <?php switch($step){
         case 1: ?>
-        <div id="step1">
-
-
-            <h3 class="p-l-20">@lang('NATIONALITY AND RESIDENCE')</h3>
+        <div id="step1" class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@lang('NATIONALITY AND RESIDENCE')</h3>
+            </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'visa_type')}}">
                     <label>
@@ -29,7 +29,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'country_of_application')}}">
                     <label>
-                        @lang('Country Of Application')
+                        @lang('Country of Application')
                     </label>
                     {!! Form::select('country_of_application', $country_codes, NULL, ['class' => 'form-control text-black input-sm', 'placeholder' => __('--Select--')]) !!}
                     {!! error_tag($errors, 'country_of_application') !!}
@@ -48,7 +48,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'country_of_residence')}}">
                     <label for="name_search_type">
-                        @lang('Country Of Residence')
+                        @lang('Country of Residence')
                     </label>
                     {!! Form::select('country_of_residence', $country_codes, NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
                     {!! error_tag($errors, 'country_of_residence') !!}
@@ -66,7 +66,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'physical_address')}}">
                     <label for="name_search_type">
-                        @lang('Physical Address')
+                        @lang('Residence Address')
                     </label>
                     {!! Form::text('physical_address', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
                     {!! error_tag($errors, 'physical_address') !!}
@@ -94,8 +94,10 @@
         <?php break; ?>
 
         <?php  case 2: ?>
-        <div class="step-2">
-            <h4 class="col-sm-12">@lang('PASSPORT/TRAVELER INFO')</h4>
+        <div class="step-2 panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@lang('PASSPORT/TRAVELER INFO')</h3>
+            </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'surname')}}">
                     <label for="name_search_type">
@@ -278,7 +280,10 @@
 
         <?php break; ?>
         <?php  case 3: ?>
-        <h4 class="col-sm-12">@lang('TRAVEL INFORMATION')</h4>
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@lang('TRAVEL INFORMATION')</h3>
+            </div>
         <div class="col-sm-12">
             <div class="form-group {{error_class($errors, 'travel_reason')}}">
                 <label for="name_search_type">
@@ -359,12 +364,13 @@
                 {!! error_tag($errors, 'entry_point') !!}
             </div>
         </div>
+       </div>
         <?php break; ?>
         <?php  case 4: ?>
-        <div>
-            <h4 class="col-sm-12">
-                @lang('DETAILS OF PLACES TO VISIT IN KENYA')
-            </h4>
+        <div class="panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@lang('DETAILS OF PLACES TO VISIT IN KENYA')</h3>
+            </div>
             <div class="col-sm-12">
                 <div class="row" v-for="(place, i) in placesToVisit">
                     <div class="col-sm-12 text-right">
@@ -427,10 +433,13 @@
         <?php break; ?>
 
         <?php  case 5: ?>
-        <div>
-            <h4 class="col-sm-12">
-                @lang('TRAVEL HISTORY')
-            </h4>
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">@lang('TRAVEL HISTORY')</h3>
+            </div>
+
+
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">

@@ -790,3 +790,30 @@ if(!function_exists('get_form_actions')){
     }
 }
 
+if(!function_exists('send_sms')){
+    /**
+     * @param $to
+     * @param $message
+     * @return array|bool|object|string
+     */
+    function send_sms($to,$message)
+    {
+        $url  =  '197.248.4.234/send_bulk_sms';
+        $params  = [
+            'MESSAGE' => $message,
+            'MSISDN' => encode_phone_number($to),
+            "SOURCE" => "20642"
+        ];
+
+        $response = \Httpful\Request::post($url,http_build_query($params))
+            ->sendsType(\Httpful\Mime::FORM)->send();
+
+        if (!$response->code == 200 || !$response->body) {
+            //stuff failed
+            return false;
+        }
+
+        return $response->body;
+    }
+}
+

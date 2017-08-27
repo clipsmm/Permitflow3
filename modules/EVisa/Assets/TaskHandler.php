@@ -3,6 +3,7 @@
 namespace Modules\EVisa;
 
 
+use App\Mail\DefaultMail;
 use App\Models\Correction;
 use App\Models\Task;
 use Carbon\Carbon;
@@ -38,7 +39,10 @@ class TaskHandler {
             $application->status  = 'rejected';
             $application->save();
 
-            //todo: fire event here
+            \Mail::to($application->user)
+                ->send(new DefaultMail('e-visa::emails.application_rejected', [
+                    'application' => $application
+                ]));
         });
 
         return $task;
@@ -60,7 +64,10 @@ class TaskHandler {
             $application->in_corrections  = true;
             $application->save();
 
-            //todo: fire event here
+            \Mail::to($application->user)
+                ->send(new DefaultMail('e-visa::emails.application_corrections', [
+                    'application' => $application
+                ]));
         });
 
         return $task;
@@ -85,12 +92,18 @@ class TaskHandler {
             }
 
             $application->complete  =  true;
-            $application->status  = 'corrections';
+            $application->status  = 'issued';
             $application->save();
 
             # generate output
             $application->add_output('EVISA-OUTPUT', $task->id);
+
+            \Mail::to($application->user)
+                ->send(new DefaultMail('e-visa::emails.application_approved', [
+                    'application' => $application
+                ]));
         });
+
 
         return $task;
     }

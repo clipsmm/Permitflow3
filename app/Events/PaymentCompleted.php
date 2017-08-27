@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Payment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -14,14 +15,16 @@ class PaymentCompleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $payment;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Payment $payment)
     {
-        //
+        $this->payment =  $payment;
     }
 
     /**

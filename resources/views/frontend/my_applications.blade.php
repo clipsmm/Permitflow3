@@ -6,7 +6,7 @@
             <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
                 <div class="panel with-nav-tabs panel-default">
                     <div class="panel-heading p-t-10">
-                        <div class="panel-heading">@lang('labels.application_history')</div>
+                        <div class="panel-heading">@lang('labels.my_applications')</div>
                     </div>
                     <div class="panel-body padding-0">
                         <div class="panel panel-form m-r-10 m-l-10 m-t-0 m-b-0">
@@ -36,7 +36,9 @@
                                         <tr>
                                             <td>{{ $application->module->name }}</td>
                                             <td>{{ $application->application_number }}</td>
-                                            <td></td>
+                                            <td>
+                                                {!! $application->current_invoice ? $application->current_invoice->get_status_label() : '' !!}
+                                            </td>
                                             <td>
                                                 <span class="text-uppercase bold">{{ $application->status }}</span>
                                                 @if($application->in_corrections)
@@ -82,6 +84,9 @@
                                             </td>
                                         </tr>
                                     @empty
+                                        <tr>
+                                            <td colspan="5">@lang('common.no_recent_applications')</td>
+                                        </tr>
                                     @endforelse
                                     </tbody>
                                 </table>

@@ -57,6 +57,7 @@
         </nav>
     </header>
     <div class="container margin-top">
+<<<<<<< HEAD
         <div class="row">
             <div class="col-md-12">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -96,6 +97,46 @@
                                                     <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
                                                         <div class="p-t-0 p-m-10 p-b-10">
                                                             <p>All evisa applications attract a 1 USD service charge and card handling fee will be surcharged.</p>
+=======
+        <div class="panel visa-types requirement2">
+            <div class="panel-heading m-t-50">
+                <h3>Requirements and all you need to Know</h3>
+                <!--   <p>Below are the requirements and fees for a single entry visa.</p> -->
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel with-nav-tabs panel-default m-b-0">
+                            <div class="panel-heading p-t-10">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab11default" data-toggle="tab"><i
+                                                    class="fa fa-money"></i>Fees</a></li>
+                                    <li><a href="#tab22default" data-toggle="tab"><i class="fa fa-paperclip"></i>Attachments</a>
+                                    </li>
+                                    <li><a href="#tab33default" data-toggle="tab"><i class="fa fa-file-text"></i>Basic
+                                            Requirements</a></li>
+                                    <li><a href="#tab44default" data-toggle="tab"><i class="fa fa-camera"></i>Photo
+                                            Requirement</a></li>
+                                </ul>
+                            </div>
+                            <div class="panel-body padding-0">
+                                <div class="tab-content">
+                                    <!-- tab -->
+                                    <div class="tab-pane fade in active" id="tab11default">
+                                        <div class="panel panel-form m-r-10 m-l-10 m-t-0 m-b-0">
+                                            <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
+                                                <div class="p-t-0 p-m-10 p-b-10">
+                                                    <p>All evisa applications attract a 1 USD service charge and card
+                                                        handling fee will be surcharged.</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="pricing hover-effect">
+                                                        <div class="pricing-head">
+
+                                                            <h3>Single entry visa</h3>
+
+                                                            <h4><i>$</i>51</h4>
+>>>>>>> master
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="pricing hover-effect">
@@ -124,6 +165,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+<<<<<<< HEAD
                                                         <div class="col-md-4">
                                                             <div class="pricing hover-effect">
                                                                 <div class="pricing-head">
@@ -150,6 +192,17 @@
                                                                 <div class="pricing-footer">
                                                                 </div>
                                                             </div>
+=======
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="pricing hover-effect">
+                                                        <div class="pricing-head">
+
+                                                            <h3>Transit Visa</h3>
+
+                                                            <h4><i>$</i>21</h4>
+>>>>>>> master
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="pricing hover-effect">
