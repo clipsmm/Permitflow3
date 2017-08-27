@@ -24,8 +24,18 @@
 </div>
 
 <!-- Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+
+<script src="{{ asset('js/vendor.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script>
+    $('.carousel').carousel({
+        interval: 10000
+    });
+</script>
 
 @stack('page_js')
 @stack('javascripts')

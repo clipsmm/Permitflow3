@@ -17,6 +17,7 @@
                                class="btn btn-sm btn-default">
                                 <span class="fa fa-arrow-left"></span> @lang('common.back_to_tasks')
                             </a>
+
                             @if(!$task->application->complete)
                                 @foreach($actions as $action => $props)
                                     @if(array_get($props,'feedback',false))
@@ -69,6 +70,8 @@
                                 @endforeach
                             @endif
                         </form>
+
+
                     </div>
                     <h3 class="panel-title"></h3>
                 </div>
@@ -81,7 +84,6 @@
                             <div class="thumbnail m-t-0 m-b-5 m-l-5 m-r-0">
                                 <img class="img-responsive hidden-xs" src="https://accounts.ecitizen.go.ke/profile-picture/25272520?t=citizen">
                             </div>
-
                         </div>
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
 
@@ -114,10 +116,6 @@
                                             </td>
                                             <td class="hidden-xs hidden-sm">{{ $task->application->submitted_at }}</td>
                                         </tr>
-
-
-
-
                                         <tr class=' '>
                                             <td class="big-data width-40">
                                                 <h1>Days in progress::</h1>
@@ -142,17 +140,8 @@
                                                 </a>
                                             </td>
                                         </tr>
-
-
-
-
-
-
-
-
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
@@ -346,6 +335,8 @@
                         </div>
                     </div>
 
+
+
                 </div>
             </div>
         </div>
@@ -356,3 +347,6 @@
 @push('modals')
 
 @endpush
+
+
+

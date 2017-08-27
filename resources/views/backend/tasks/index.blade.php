@@ -36,18 +36,12 @@
                                                 <div class="input-group " id="adv-search">
                                                     <input type="hidden" name="application_id" value=''>
                                                     <input id="search_type" name="search[type]"
-                                                           type="hidden"> <input class="form-control"
-                                                                                 id="search_q"
-                                                                                 name="search[q]"
-                                                                                 placeholder="Enter Ref No."
-                                                                                 type="text" value="">
+                                                           type="hidden"> <input class="form-control" id="search_q" name="search[q]" placeholder="Enter Ref No." type="text" value="">
                                                     <div class="input-group-btn">
                                                         <div class="btn-group" role="group">
                                                             <div class="dropdown dropdown-lg full_width"></div>
-                                                            <button type="submit" name="submit"
-                                                                    class="btn btn5 btn-primary"><span
-                                                                        class="search_btn_txt"> <span
-                                                                            class="fa fa-search"></span> Search</span>
+                                                            <button type="submit" name="submit" class="btn btn5 btn-primary"><span class="search_btn_txt">
+                                                                    <span class="fa fa-search"></span> Search</span>
                                                             </button>
                                                         </div>
                                                     </div>
