@@ -50,6 +50,12 @@ class TaskController extends Controller
             ->queued()
             ->paginate(20);
 
+//        $filtered = array_filter($tasks->items(), function($task){
+//            return $task->application->module->authorizeTask($task, auth()->user());
+//        });
+//
+//        $tasks->setItems($filtered);
+
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module

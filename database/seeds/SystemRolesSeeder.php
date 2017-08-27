@@ -15,7 +15,8 @@ class SystemRolesSeeder extends Seeder
      */
     protected $permissions =
         [
-            'manage_modules' => 'Manage Modules', 'edit_users' => 'Edit Users',
+            'manage_modules' => 'Manage Modules',
+            'edit_users' => 'Edit Users',
             'edit_user_roles' => 'Edit User Roles'
         ];
 
@@ -35,11 +36,17 @@ class SystemRolesSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = $this->inserPermissions();
+        $permissions = $this->insertPermissions();
 
         foreach ($this->roles as $name => $perm_names) {
             $role = \App\Models\Role::firstOrCreate(['name' => $name, 'guard_name' => 'web']);
+
+            $perm_names = array_map(function($n){
+                return permission_name($n, 'system');
+            }, $perm_names);
+
             $perm_ids = $permissions->whereIn('name', $perm_names)->pluck('id')->toArray();
+
             $role->permissions()->sync($perm_ids);
         }
 
@@ -48,22 +55,15 @@ class SystemRolesSeeder extends Seeder
         }
     }
 
-    protected function inserPermissions()
+    protected function insertPermissions()
     {
-        $existing_perms = Permission::whereIn('name', array_keys($this->permissions))
-            ->whereGuardName('web')
-            ->pluck('name')->toArray();
+        foreach ($this->permissions as $name => $label){
+            $p = Permission::whereName(permission_name($name, 'system'))->first();
+            if(is_null($p)){
+                Permission::create(['name' => $name, 'label' => $label, 'owner' => 'system', 'guard_name' => 'web']);
+            }
 
-        $new_perms = array_filter(array_keys($this->permissions), function ($p) use ($existing_perms) {
-            return !in_array($p, $existing_perms);
-        });
-
-        $new_perms = array_map(function ($i) {
-            return ['created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now(),
-                'name' => $i, 'guard_name' => 'web', 'owner' => 'system', 'label' => $this->permissions[$i]];
-        }, $new_perms);
-
-        Permission::insert($new_perms);
+        }
 
         return Permission::all();
     }

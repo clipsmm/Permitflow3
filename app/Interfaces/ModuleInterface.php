@@ -51,4 +51,6 @@ interface ModuleInterface
      * Example ['label' => 'Cancel', 'action' => data-placement="right" route('some.route'), 'method' => 'post', 'color' => 'danger', 'icon' => 'fa fa-times', 'confirm' => 'Are you sure?']
      */
     public function getApplicationActions($application);
+
+    public function authorizeTask($task, $user);
 }

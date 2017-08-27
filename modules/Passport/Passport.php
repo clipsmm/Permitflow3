@@ -75,4 +75,9 @@ class Passport extends BaseModule implements ModuleInterface
     {
         // TODO: Implement get_landing_page() method.
     }
+
+    public function authorizeTask($task, $user)
+    {
+        // TODO: Implement authorizeTask() method.
+    }
 }

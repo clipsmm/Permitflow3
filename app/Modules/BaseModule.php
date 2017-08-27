@@ -110,4 +110,9 @@ class BaseModule
     {
         return [];
     }
+
+    public function authorizeTask($task, $user)
+    {
+        return true;
+    }
 }
