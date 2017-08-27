@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Correction extends Model
@@ -38,5 +39,11 @@ class Correction extends Model
         $correction->save();
 
         return $correction;
+    }
+
+    public function complete()
+    {
+        $this->completed_at = Carbon::now();
+        $this->save();
     }
 }
