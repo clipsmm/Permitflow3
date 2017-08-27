@@ -19,5 +19,6 @@ return [
     'view' => 'View',
     'edit' => 'Edit',
     'delete' => 'Delete',
-    'in_corrections' => 'Has Corrections'
+    'in_corrections' => 'Has Corrections',
+    'no_recent_applications' => "No recent applications"
 ];

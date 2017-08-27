@@ -101,4 +101,22 @@ class Invoice extends Model
             $currency, $this->pk, $this->description, $user->full_name, $config['apiSecret']
         ], $config['apiKey']);
     }
+
+    public function get_status_label()
+    {
+        switch ($this->status) {
+            case 'paid':
+                return '<span class="label label-success"><i class="fa fa-check"></i> paid </span>';
+            case 'processing':
+                return '<span class="label label-info"><i class="fa fa-info"></i> processing </span>';
+            case 'unpaid':
+                return '<span class="label label-danger"><i class="fa fa-ban"></i> not paid </span>';
+            case 'cancelled':
+                return '<span class="label label-default"><i class="fa fa-trash"></i> cancelled </span>';
+            case 'pending':
+                return '<span class="label label-danger"><i class="fa fa-ban"></i> not paid </span>';
+            default:
+                break;
+        }
+    }
 }
