@@ -29,8 +29,7 @@ class TaskHandler {
             // if application was in corrections, complete the task
             if($application->in_corrections){
                 $current_correction = $task->current_correction;
-                $current_correction->completed_at  = Carbon::now();
-                $current_correction->save();
+                $current_correction->complete();
 
                 $application->in_corrections  =  false;
             }
@@ -80,8 +79,7 @@ class TaskHandler {
             // if application was in corrections, complete the task
             if($application->in_corrections){
                 $current_correction = $task->current_correction;
-                $current_correction->completed_at  = Carbon::now();
-                $current_correction->save();
+                $current_correction->complete();
 
                 $application->in_corrections  =  false;
             }
@@ -89,6 +87,9 @@ class TaskHandler {
             $application->complete  =  true;
             $application->status  = 'corrections';
             $application->save();
+
+            # generate output
+            $application->add_output('EVISA-OUTPUT', $task->id);
         });
 
         return $task;

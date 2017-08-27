@@ -88,6 +88,11 @@ class Application extends Model
         return $this->hasMany(Invoice::class, 'application_id');
     }
 
+    public function outputs()
+    {
+        return $this->hasMany(ApplicationOutput::class, 'application_id');
+    }
+
     public function activeCorrection()
     {
         return $this->corrections()->whereCompletedAt(null)->first();
@@ -137,6 +142,11 @@ class Application extends Model
             return $form_data;
         }
         return json_decode($form_data, true);
+    }
+
+    public function add_output($code, $task_id)
+    {
+        return ApplicationOutput::add_application_output($this->id, $code, $task_id);
     }
 
 }

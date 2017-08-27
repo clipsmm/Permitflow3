@@ -34,7 +34,7 @@ class Invoice extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->pk = \Uuid::generate()->string;
+            $model->pk = generate_random_string(7);
         });
 
     }
@@ -69,10 +69,9 @@ class Invoice extends Model
 
     public function get_pesaflow_bill_ref()
     {
-        $ref  = create_pesaflow_bill($this->bill_ref, intval(round($this->amount)), $this->description, $this->application->user);
+        $ref  = create_pesaflow_bill($this->pk, intval(round($this->amount)), $this->description, $this->application->user);
         $this->bill_ref =  $ref;
         $this->save();
-
 
         return $ref;
     }
@@ -98,7 +97,7 @@ class Invoice extends Model
 
         return sign_pesaflow_payload([
             $config['apiClientId'], intval(round($this->amount)), $config['apiServiceId'], $user->id_number,
-            $currency, $this->bill_ref, $this->notes, $user->full_name, $config['apiSecret']
+            $currency, $this->pk, $this->description, $user->full_name, $config['apiSecret']
         ], $config['apiKey']);
     }
 }

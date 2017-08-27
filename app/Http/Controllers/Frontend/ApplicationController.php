@@ -6,8 +6,10 @@ use App\Events\ApplicationResubmitted;
 use App\Events\ApplicationSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\ApplicationOutput;
 use App\Models\Invoice;
 use App\Models\Module;
+use App\Models\Output;
 use App\Modules\BaseModule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -115,9 +117,13 @@ class ApplicationController extends Controller
 
     public function checkout(Request $request, $module_slug, Application $application, Invoice $invoice)
     {
-        //$invoice->get_pesaflow_bill_ref();
+        if(!$invoice->bill_ref){
+            $invoice->get_pesaflow_bill_ref();
+            $invoice->fresh();
+        }
+
         $checkout_data = get_pesaflow_checkout_data_from_invoice($invoice);
-        //dd($checkout_data);
+
         return view('frontend.checkout', [
             'data' => $checkout_data,
             'module' => $this->module,
@@ -127,7 +133,7 @@ class ApplicationController extends Controller
 
     public function show(Request $request, $module, $app_id)
     {
-        $application = Application::with('user')
+        $application = Application::with(['user','invoices', 'outputs', 'outputs.output'])
             ->forModule($module)
             ->find($app_id);
 
@@ -141,6 +147,20 @@ class ApplicationController extends Controller
 
         return view('frontend.my_applications',[
             'applications' => $applications
+        ]);
+    }
+
+    public function downloadOutput(Request $request, $module, Application $application, ApplicationOutput $applicationOutput)
+    {
+        $applicationOutput->load(['application', 'task', 'task.user']);
+
+        $output  = Output::render_output($applicationOutput->output, [
+            'application' => $applicationOutput->application,
+            'task' => $applicationOutput->task
+        ]);
+
+        return view('blank', [
+            'content' => $output
         ]);
     }
 }

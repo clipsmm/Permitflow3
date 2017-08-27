@@ -7,7 +7,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <form id="moodleform" name="moodleform" method="post" action="{{ $data['url'] }}" target="my_frame">
-
                         <input type="hidden" name="apiClientID" value="{{ $data['apiClientID'] }}" >
                         <input type="hidden" name="secureHash" value="{{ $data['secureHash'] }}" >
                         <input type="hidden" name="billDesc" value="{{ $data['billDesc'] }}" >

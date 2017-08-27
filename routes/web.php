@@ -52,6 +52,15 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
             Route::get('{task}/view', 'TaskController@show')->name('show');
             Route::post('{task}/view', 'TaskController@handleTask')->name('submit');
         });
+
+        Route::group(['prefix' => 'ouputs', 'as' => 'outputs.'], function () {
+            Route::get('', 'OutputController@index')->name('index');
+            Route::get('new', 'OutputController@create')->name('new');
+            Route::post('new', 'OutputController@store')->name('store');
+            Route::get('{output}/preview', 'OutputController@show')->name('show');
+            Route::get('{output}/edit', 'OutputController@edit')->name('edit');
+            Route::post('{output}/edit', 'OutputController@update')->name('update');
+        });
     });
 
     Route::resource('roles', 'RolesController');
@@ -74,6 +83,7 @@ Route::prefix('applications/{module_slug}')
     ->namespace('Frontend')
     ->group(function () {
         Route::get('/{application}', 'ApplicationController@show')->name('application.show');
+        Route::get('/{application_id}/download/{application_output}', 'ApplicationController@downloadOutput')->name('application.download');
 
         Route::get('/new', 'ApplicationController@create')->name('application.create');
         Route::post('/create', 'ApplicationController@save')->name('application.save');

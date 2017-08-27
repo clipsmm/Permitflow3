@@ -31,6 +31,11 @@
                     </div>
                 </div>
                 <div class="panel-footer text-right">
+                    @if($step ==  1)
+                        <a href="{{ route('e-visa.retrieve_existing') }}" class="btn btn-default" title="">
+                            @lang('e-visa::common.retrieve_existing_application')
+                        </a>
+                    @endif
                     @if($step > 1)
                         <a href="{{route('e-visa.application.new', ['step' => $step - 1])}}"
                            class="btn btn-default btn-sm">
