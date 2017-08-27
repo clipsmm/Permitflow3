@@ -50,7 +50,21 @@ class EVisa extends BaseModule implements ModuleInterface
     ];
 
 
-    public $numSteps = 8;
+    public $numSteps = 6;
+
+    public static function getTravelReasons()
+    {
+        return [
+            'business' => __('Business'),
+            'education' => __('Education'),
+            'medical' => __('Medical'),
+            'employment' => __('Medical'),
+            'religion' => __('Religion'),
+            'family' => __('Settlement/Family'),
+            'tourism' => __('Tourism'),
+            'others' => __('Others'),
+        ];
+    }
 
     public function newUrl($params = [])
     {
@@ -78,11 +92,7 @@ class EVisa extends BaseModule implements ModuleInterface
             case 1:
                 return Validator::make($request->all(), [
                     'country_of_application' => ['required', 'cca2'],
-                    'applicant' => ['required', Rule::in(['self', 'agent', 'child', 'spouse'])]
-                ]);
-
-            case 2:
-                return Validator::make($request->all(), [
+                    'visa_type' => ['required', Rule::in(array_keys(self::getVisaTypes()))],
                     'nationality' => ['required', 'cca2', 'countries_blacklist'],
                     'country_of_residence' => ['required', 'cca2'],
                     'city' => ['required'],
@@ -94,7 +104,7 @@ class EVisa extends BaseModule implements ModuleInterface
                     'nationality.countries_blacklist' => __('Sorry, nationals of this country are not eligible for e-Visa')
                 ]);
 
-            case 3:
+            case 2:
                 return Validator::make($request->all(), [
                     'surname' => ['required'],
                     'other_names' => ['required'],
@@ -105,38 +115,38 @@ class EVisa extends BaseModule implements ModuleInterface
                     'occupation' => ['required'],
                     'fathers_name' => ['required'],
                     'mothers_name' => ['required'],
-                    'spouse_name' => ['required']
-                ], ['date_of_birth.before' => __('validation.before_today')
-                ]);
-
-            case 4:
-                return Validator::make($request->all(), [
+                    'spouse_name' => ['required'],
                     'passport_number' => ['required'],
                     'passport_place_of_issue' => ['required'],
                     'passport_date_of_issue' => ['required', 'date', "before:{$tomorrow}"],
                     'passport_date_of_expiry' => ['required', "after:{$today}"],
                     'passport_issued_by' => ['required']
+
                 ], [
                     'passport_date_of_issue.before' => __('validation.before_tomorrow'),
                     'passport_date_of_expiry.after' => __('validation.after_today'),
+                    'date_of_birth.before' => __('validation.before_today')
                 ]);
 
-            case 5:
+            case 3:
                 return Validator::make($request->all(), [
                     'travel_reason' => ['required'],
+                    'other_travel_reason' => ['required_if:travel_reason,others'],
                     'date_of_entry' => ['required', 'date', "after:{$today}"],
                     'date_of_departure' => ['required', 'date', "after:{$today}"],
                     'travel_email' => ['required', 'email'],
                     'travel_phone_number' => ['required', 'full_phone'],
-                    'arrival_by' => ['required', 'in:sea,road,air'],
-                    'entry_point' => ['required'],
+                    'arrival_by' => ['required', 'in:ship,road,air'],
+                    'entry_point' => ['bail', 'required', Rule::exists('e_visa_entry_points', 'id')->where(function($query) use($request){
+                        $query->where('type', $request->arrival_by);
+                    })],
                 ], [
                     'travel_phone_number.full_phone' => __('validation.intl_phone'),
                     'date_of_entry.after' => __('validation.after_today'),
                     'date_of_departure.after' => __('validation.after_today'),
                 ]);
 
-            case 6:
+            case 4:
                 return Validator::make($request->all(), [
                     'places_to_visit' => ['required', 'array', 'min:1'],
                     'places_to_visit.*.type' => ['required', 'in:hotel,firm,relative,other'],
@@ -147,7 +157,7 @@ class EVisa extends BaseModule implements ModuleInterface
                     'places_to_visit.*.*.required' => __('e-visa::validation.nested_required')
                 ]);
 
-            case 7:
+            case 5:
                 return Validator::make($request->all(), [
                     'other_recent_visits' => ['array'],
                     'other_recent_visits.*.country' => ['required', 'cca2'],
@@ -173,13 +183,20 @@ class EVisa extends BaseModule implements ModuleInterface
                     '*.required_if' => __('This field is required')
                 ]);
 
-            case 8:
+            case 6:
                 return Validator::make($request->all(), [
                     'passport_bio' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
                     'passport_photo' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
                     'additional_documents' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg']
                 ]);
         }
+    }
+
+    public static function getVisaTypes()
+    {
+        return [
+            'single_entry' => __('e-visa::common.single_entry_visa')
+        ];
     }
 
     public function handle_task(Task $task, $action, $comments = null)

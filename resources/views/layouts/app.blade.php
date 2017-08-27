@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('fonts/font-awesome.min.css') }}" rel="stylesheet">
@@ -24,8 +23,13 @@
 </div>
 
 <!-- Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+
+<script>
+    $('.carousel').carousel({
+        interval: 10000
+    });
+</script>
 
 @stack('page_js')
 @stack('javascripts')

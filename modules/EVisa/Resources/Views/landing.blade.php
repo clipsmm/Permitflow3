@@ -53,7 +53,12 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container margin-top">
+
+
+
+
+
         <div class="row">
             <div class="col-md-12">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -64,12 +69,41 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img src="images/landing2.jpg" alt="First slide">
+                            <img src="images/landing7.jpg" alt="First slide">
                             <div class="carousel-caption">
-                                <h3>Welcome to eVisa</h3>
-                                <h2>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya and pay securely using your VISA card or Mastercard.</h2>
-                                <a href="{{ $module->newUrl() }}" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
+                                <h4>Get your evisa in 3 easy steps!</h4>
+                                <h2>1. Apply   2. Make Payment   3. Download</h2>
+
+                                <a href="#" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
+
                             </div>
+                        </div>
+
+
+
+
+                        <div class="item">
+                            <img src="images/landing11.jpg" alt="Second slide">
+                            <div class="carousel-caption">
+                                <h3>get your evisa online, across all devices!</h3>
+                                <!--  <h2> wheather you choose a timeless location or an elegant wedding, being in kenya feels like a faraway place</h2> -->
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="item">
+                            <img src="images/landing8.jpg" alt="Second slide">
+                            <div class="carousel-caption">
+                                <h3>THINK FUTURE, THINK KENYA</h3>
+                                <h2> wheather you wish to take a magical holiday or undertake business in kenya</h2>
+                                <a href="single.html" class="btn btn-primary apply-button" title="Enlace">WATCH VIDEO</a>
+                            </div>
+
+
                         </div>
                         <div class="item">
                             <img src="images/landing4.jpg" alt="Second slide">
@@ -78,80 +112,137 @@
                                 <h2> This is one of the remarkable wildlife attractions that make’s Kenya one of the best wildlife destinations in the world</h2>
                             </div>
                         </div>
-                        <div class="item">
-                            <img src="images/landing.jpg" alt="Third slide">
-                            <div class="carousel-caption">
-                                <h3>Dhow Safaris</h3>
-                                <h2>A day spent at sea on a Dhow Safari is a wonderful experience and a fantastic way to explore Kenya’s pristine coastline</h2>
-                            </div>
-                        </div>
+                        <!--     <div class="item">
+                                <img src="images/landing.jpg" alt="Third slide">
+                                <div class="carousel-caption">
+                                   <h3>Dhow Safaris</h3>
+                                   <h2>A day spent at sea on a Dhow Safari is a wonderful experience and a fantastic way to explore Kenya’s pristine coastline</h2>
+                                </div>
+                            </div> -->
                     </div>
                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left"></span></a><a class="right carousel-control"
                                                                                      href="#carousel-example-generic" data-slide="next"><span class="glyphicon glyphicon-chevron-right">
-        </span></a>
+                        </span></a>
                 </div>
+
             </div>
         </div>
+
+
+
+
+
         <div class="row">
+
+
             <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+
+
                 <div class="panel visa-types">
+
                     <div class="panel-heading m-t-50">
-                        <h3>Types of Visa</h3>
-                        <p>As defined by the Kenyan constitution and Visa Regulations, and relates to the purpose of your travel.</p>
+                        <h3>Welcome to eVisa</h3>
+                        <p>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya and pay securely using your VISA card or Mastercard.</p>
+
                     </div>
+
+
                     <div class="panel-body p-t-0">
+
                         <div class="row box">
+
                             <div class="col-md-4">
+
                                 <div>
-                                    <img src="images/icon1.png">
-                                    <h2>Single Entry Visa</h2>
-                                    <p>Issued for single entry to persons whose nationalities require visa to enter kenya either for business,tourism or medical reasons.</p>
+                                    <div class="box-images">  <img class="img-responsive" src="images/apply.jpg" alt="Second slide"></div>
+                                    <p>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya</p>
                                     <div class="learn-more">
-                                        <a href="#" class="btn btn-primary apply-button white-bg" title="Enlace">LEARN MORE</a>
-                                        <a href="{{ $module->newUrl() }}" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
+                                        <!--  <a href="single.html" class="btn btn-primary apply-button white-bg" title="Enlace">LEARN MORE</a> -->
+                                        <a href="landing.html" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
+
                                     </div>
                                 </div>
+
                             </div>
+
+
                             <div class="col-md-4">
+
                                 <div>
-                                    <img src="images/icon1.png">
-                                    <h2>Transit Visa</h2>
-                                    <p>Issued to persons connecting through Kenya to other destinations for a period not exceeding 72 hours. </p>
+                                    <div class="box-images">  <img class="img-responsive" src="images/ongoing.jpg" alt="Second slide"></div>
+                                    <p>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya</p>
                                     <div class="learn-more">
-                                        <a href="#" class="btn btn-primary apply-button white-bg" title="Enlace">LEARN MORE</a>
-                                        <a href="{{ $module->newUrl() }}" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
+                                        <a href="ongoing.html" class="btn btn-primary apply-button white-bg" title="Enlace">I HAVE AN ONGOING APPLICATION</a>
+
+
                                     </div>
                                 </div>
+
                             </div>
+
+
+
                             <div class="col-md-4">
+
                                 <div>
-                                    <img src="images/icon1.png">
-                                    <h2>Courtesy Visa!</h2>
-                                    <p>This is a visa issued to Diplomatic, Official and Service passport holders coming into the country on official duties.</p>
+                                    <div class="box-images">  <img class="img-responsive" src="images/requirements.jpg" alt="Second slide"></div>
+                                    <p>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya</p>
                                     <div class="learn-more">
-                                        <a href="#" class="btn btn-primary apply-button white-bg" title="Enlace">LEARN MORE</a>
-                                        <a href="{{ $module->newUrl() }}" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
+                                        <!--  <a href="single.html" class="btn btn-primary apply-button white-bg" title="Enlace">LEARN MORE</a> -->
+                                        <a href="single.html" class="btn btn-primary apply-button" title="Enlace">VISA REQUIREMENTS </a>
+
                                     </div>
                                 </div>
+
                             </div>
-                            <div class="col-md-12 text-center m-t-45">
-                                    <a href="{{ route('e-visa.retrieve_existing') }}" style="border-radius: 30px;" class="btn btn-info apply-button padding-15" title="Enlace">
-                                        @lang('e-visa::common.retrieve_existing_application')
-                                    </a>
-                            </div>
+
+
+
                         </div>
                     </div>
+
+
+
+
                 </div>
+
+
+
+
+
+
             </div>
+
+
         </div>
-    </div>
-    <!-- /container -->
+
+
+
+
+
+
+
+
+
+
+
+    </div> <!-- /container -->
+
+
+
     <footer>
+
+
+
         <div class="footer-bottom">
+
             <div class="container">
                 <p class=""> © 2017 - Republic of Kenya - All Rights Reserved / Terms of Use </p>
+
             </div>
         </div>
+
     </footer>
+
 @endsection

@@ -56,6 +56,8 @@ Vue.component('confirmed-action', {
         },
     }
 });
+
+
 const app = new Vue({
     el: '#app'
 });
