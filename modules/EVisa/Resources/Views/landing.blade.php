@@ -54,11 +54,6 @@
         </nav>
     </header>
     <div class="container margin-top">
-
-
-
-
-
         <div class="row">
             <div class="col-md-12">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -129,18 +124,9 @@
             </div>
         </div>
 
-
-
-
-
         <div class="row">
-
-
             <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
-
-
                 <div class="panel visa-types">
-
                     <div class="panel-heading m-t-50">
                         <h3>Welcome to eVisa</h3>
                         <p>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya and pay securely using your VISA card or Mastercard.</p>
@@ -149,23 +135,18 @@
 
 
                     <div class="panel-body p-t-0">
-
                         <div class="row box">
-
                             <div class="col-md-4">
-
                                 <div>
                                     <div class="box-images">  <img class="img-responsive" src="images/apply.jpg" alt="Second slide"></div>
                                     <p>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya</p>
                                     <div class="learn-more">
                                         <!--  <a href="single.html" class="btn btn-primary apply-button white-bg" title="Enlace">LEARN MORE</a> -->
-                                        <a href="landing.html" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
+                                        <a href="{{ $module->newUrl() }}" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
 
                                     </div>
                                 </div>
-
                             </div>
-
 
                             <div class="col-md-4">
 
@@ -173,16 +154,12 @@
                                     <div class="box-images">  <img class="img-responsive" src="images/ongoing.jpg" alt="Second slide"></div>
                                     <p>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya</p>
                                     <div class="learn-more">
-                                        <a href="ongoing.html" class="btn btn-primary apply-button white-bg" title="Enlace">I HAVE AN ONGOING APPLICATION</a>
-
+                                        <a href="{{ route('e-visa.retrieve_existing') }}" class="btn btn-primary apply-button white-bg" title="Enlace">I HAVE AN ONGOING APPLICATION</a>
 
                                     </div>
                                 </div>
 
                             </div>
-
-
-
                             <div class="col-md-4">
 
                                 <div>
@@ -190,47 +167,21 @@
                                     <p>Apply for a Single entry visa, Transit visa or Courtesy visa to Kenya</p>
                                     <div class="learn-more">
                                         <!--  <a href="single.html" class="btn btn-primary apply-button white-bg" title="Enlace">LEARN MORE</a> -->
-                                        <a href="single.html" class="btn btn-primary apply-button" title="Enlace">VISA REQUIREMENTS </a>
+                                        <a href="{{ route('e-visa.requirements') }}" class="btn btn-primary apply-button" title="Enlace">VISA REQUIREMENTS </a>
 
                                     </div>
                                 </div>
 
                             </div>
 
-
-
                         </div>
                     </div>
-
-
-
-
                 </div>
 
-
-
-
-
-
             </div>
-
-
         </div>
 
-
-
-
-
-
-
-
-
-
-
     </div> <!-- /container -->
-
-
-
     <footer>
 
 

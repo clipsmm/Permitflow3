@@ -258,5 +258,10 @@ class ApplicationController extends Controller
         return view('e-visa::retrieve_existing_success', ['application' => $application]);
     }
 
+    public function getRequirements()
+    {
+        return view("e-visa::requirements");
+    }
+
 
 }
