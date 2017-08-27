@@ -772,7 +772,7 @@ if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
             'amountExpected' => $invoice->amount,
             'callBackURLOnSuccess' => route('payment.success', [ $invoice->id]),
             'pictureURL' => $user->getAvatar(),
-            'notificationURL' => route('payment.notification', [ $invoice->id]),
+            'notificationURL' => route('payment.notification'),
             'callBackURLOnFail' => route('payment.failed', [ $invoice->id, 'status' =>'fail']),
         ];
     }
