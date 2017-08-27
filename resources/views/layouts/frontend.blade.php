@@ -27,14 +27,7 @@
                             </ul>
                         </div>
                         <div class="left-nav hidden-xs">
-                            <ul class="nav">
-                                <li>
-                                    <a href="{{ route('frontend.applications.index') }}"><i class="fa fa-print"></i> @lang('labels.my_applications')</a>
-                                </li>
-                                <li>
-                                    <a href=""><i class="fa fa-money"></i> @lang('labels.my_payments')</a>
-                                </li>
-                            </ul>
+
                         </div>
                     </div>
                 </div>

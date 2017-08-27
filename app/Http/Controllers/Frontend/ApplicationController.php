@@ -129,7 +129,7 @@ class ApplicationController extends Controller
 
     public function show(Request $request, $module, $app_id)
     {
-        $application = Application::with(['user', 'outputs', 'outputs.output'])
+        $application = Application::with(['user','invoices', 'outputs', 'outputs.output'])
             ->forModule($module)
             ->find($app_id);
 
