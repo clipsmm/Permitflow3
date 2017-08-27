@@ -16,7 +16,7 @@
         <div id="step1">
 
 
-            <h4 class="col-sm-12">@lang('NATIONALITY AND RESIDENCE')</h4>
+            <h3 class="p-l-20">@lang('NATIONALITY AND RESIDENCE')</h3>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'visa_type')}}">
                     <label>

@@ -70,71 +70,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
-                <!--
-                   <div class="panel visa-types m-b-0 requirement">
 
-                        <div class="panel-heading m-t-50">
-                           <h3>Types of Visa</h3>
-                            <p>As defined by the Kenyan constitution and Visa Regulations, and relates to the purpose of your travel.</p>
-
-                         </div>
-
-
-                             <div class="panel-body p-t-0 p-b-0">
-
-                                           <div class="row box">
-                                             <div class="col-md-4">
-                                                 <div>
-                                                   <span class="fa-stack fa-3x">
-                                                                                     <i class="fa fa-circle fa-stack-2x icon-background3"></i>
-                                                                                     <i class="fa fa-clock-o fa-stack-1x icon-color"></i>
-                                                                           </span>
-
-                                                 <h2>Single Entry Visa</h2>
-                                                 <p>Issued for single entry to persons whose nationalities require visa to enter Kenya either for business, tourism or medical reasons.</p>
-
-
-                                               </div>
-                                             </div>
-
-                                               <div class="col-md-4">
-                                                 <div>
-
-                                                  <span class="fa-stack fa-3x">
-                                                                                   <i class="fa fa-circle fa-stack-2x icon-background2"></i>
-                                                                                   <i class="fa fa-refresh fa-stack-1x icon-color"></i>
-                                                                         </span>
-
-                                                 <h2>Transit Visa</h2>
-                                                 <p>Issued to persons connecting through Kenya to other destinations for a period not exceeding 72 hours. Those connecting flights directly without leaving the airport dont need to apply for Transit visas.</p>
-
-
-                                               </div>
-                                             </div>
-
-
-                                                <div class="col-md-4">
-                                                 <div>
-
-                                                  <span class="fa-stack fa-3x">
-                                                     <i class="fa fa-circle fa-stack-2x icon-background2"></i>
-                                                     <i class="fa fa-refresh fa-stack-1x icon-color"></i>
-                                               </span>
-
-                                                 <h2>Courtesy Visa!</h2>
-                                                 <p>Your stay period may be renewed for a further 90 days at the immigration headquarters in Nairobi. The maximum number of days a visitor may stay in Kenya is 6 months. </p>
-
-
-                                               </div>
-                                             </div>
-
-
-                                           </div>
-                               </div>
-
-                           </div>
-                   -->
-                <!-- pannel -->
                 <div class="panel visa-types requirement2">
                     <div class="panel-heading m-t-50">
                         <h3>Requirements and all you need to Know</h3>
