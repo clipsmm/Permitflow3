@@ -14,6 +14,8 @@ try {
 
     require('jquery-confirm');
 
+    require('bootstrap-datepicker');
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });

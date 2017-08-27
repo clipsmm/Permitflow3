@@ -128,7 +128,7 @@
                     <label for="name_search_type">
                         @lang('Date Of Birth')
                     </label>
-                    {!! Form::date('date_of_birth', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    <date-picker value="{{old('date_of_birth', $model->date_of_birth)}}" name="date_of_birth"></date-picker>
                     {!! error_tag($errors, 'date_of_birth') !!}
                 </div>
             </div>
@@ -213,7 +213,7 @@
                     <label for="name_search_type">
                         @lang('Date Of Issue')
                     </label>
-                    {!! Form::date('passport_date_of_issue', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    <date-picker value="{{old('passport_date_of_issue', $model->passport_date_of_issue)}}" name="passport_date_of_issue"></date-picker>
                     {!! error_tag($errors, 'passport_date_of_issue') !!}
                 </div>
             </div>
@@ -222,7 +222,7 @@
                     <label for="name_search_type">
                         @lang('Expiry Date')
                     </label>
-                    {!! Form::date('passport_date_of_expiry', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    <date-picker value="{{old('passport_date_of_expiry', $model->passport_date_of_expiry)}}" name="passport_date_of_expiry"></date-picker>
                     {!! error_tag($errors, 'passport_date_of_expiry') !!}
                 </div>
             </div>
@@ -302,7 +302,7 @@
                 <label for="name_search_type">
                     @lang('Proposed Date Of Entry')
                 </label>
-                {!! Form::date('date_of_entry', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                <date-picker value="{{old('date_of_entry', $model->date_of_entry)}}" name="date_of_entry"></date-picker>
                 {!! error_tag($errors, 'date_of_entry') !!}
             </div>
         </div>
@@ -311,7 +311,7 @@
                 <label for="name_search_type">
                     @lang('Proposed Date Of Departure from Kenya')
                 </label>
-                {!! Form::date('date_of_departure', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                <date-picker value="{{old('date_of_departure', $model->date_of_departure)}}" name="date_of_departure"></date-picker>
                 {!! error_tag($errors, 'date_of_departure') !!}
             </div>
         </div>
@@ -462,7 +462,7 @@
                                     <label for="name_search_type">
                                         @lang('Date Of Visit')
                                     </label>
-                                    {!! Form::date(null, '', ['class' => 'form-control text-black','maxlength'=>'160', 'v-model' => 'visit.date', 'v-bind:name' => "'other_recent_visits[' + i + '][date]'"]) !!}
+                                    <date-picker v-model="visit.date" :name="'other_recent_visits[' + i + '][date]'"></date-picker>
                                     <span class="help-block">
                 @{{(form_errors['other_recent_visits.'+i+'.date'] || [])[0]}}
                 </span>
@@ -509,7 +509,7 @@
                                     <label for="name_search_type">
                                         @lang('Date Of Visit')
                                     </label>
-                                    {!! Form::date(null, '', ['class' => 'form-control text-black','maxlength'=>'160', 'v-model' => 'visit.date', 'v-bind:name' => "'recent_visits[' + i + '][date]'"]) !!}
+                                    <date-picker v-model="visit.date" :name="'recent_visits[' + i + '][date]'"></date-picker>
                                     <span class="help-block">
                 @{{(form_errors['recent_visits.'+i+'.date'] || [])[0]}}
                 </span>
@@ -673,7 +673,6 @@
             <div class="clearfix"></div>
         </div>
         <?php break; ?>
-
         <?php } ?>
     </div>
 </e-visa-application-form>
