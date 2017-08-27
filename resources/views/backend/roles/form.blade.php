@@ -1,15 +1,14 @@
-<h4 class="form-section">
-    @lang('Role Name')
-</h4>
 <div class="col-sm-12 {{ error_class($errors, 'name') }}">
+    <label>@lang('Role Name')</label>
     {!! Form::text('name', null, ['class' => 'form-control input-sm']) !!}
     {!! error_tag($errors, 'name') !!}
 </div>
 <div class="clearfix"></div>
 <br>
-<h4 class="form-section">
+<h5 class="">
     @lang('System Permissions')
-</h4>
+</h5>
+<hr>
 <div class="col-sm-12">
     @foreach($permissions->get('system', []) as $perm)
         <div class="col-sm-4">
@@ -26,14 +25,13 @@
 </div>
 <div class="clearfix"></div>
 <br>
-<h4 class="form-section">
-    @lang('Module Based Permissions')
-</h4>
+
 @foreach($module_permissions as $slug => $perms)
     <div class="col-sm-12">
-        <h5 clas="form-section">
+        <h5 class="">
             {{\App\Modules\BaseModule::instance_from_slug($slug)->name}}
         </h5>
+        <hr>
     </div>
     @foreach($perms as $perm)
         <div class="col-sm-3">
