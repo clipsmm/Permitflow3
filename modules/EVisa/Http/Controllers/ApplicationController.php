@@ -15,6 +15,7 @@ use App\Modules\BaseModule;
 use GuzzleHttp\Client;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
+use Modules\EVisa\Models\EntryPoint;
 use Modules\EVisa\Models\EVisa;
 use Validator;
 
@@ -24,7 +25,7 @@ class ApplicationController extends Controller
     protected $guest_app_session_key = 'mod_e_visa_guest_application';
     protected $guest_app_id = 'mod_e_visa_guest_application_id';
     protected $current_step;
-    protected $max_temp_steps = 2;
+    protected $max_temp_steps = 1;
 
     public function __construct(Request $request)
     {
@@ -38,7 +39,8 @@ class ApplicationController extends Controller
         return view('e-visa::create', [
             'step' => $this->current_step,
             'model' => $this->getOrCreateFromSession(),
-            'country_codes' => \Countries::all()->sortBy('name')->pluck('name.common', 'cca2')
+            'country_codes' => \Countries::all()->sortBy('name')->pluck('name.common', 'cca2'),
+            'entry_points' => EntryPoint::all(),
         ]);
     }
 
@@ -58,12 +60,11 @@ class ApplicationController extends Controller
 
         $data = $this->module->toFormData($request->all());
         $form_data = array_merge(session()->get($this->guest_app_session_key, []), $data);
-        $this->saveTemp($form_data);
 
         if ($this->current_step < $this->max_temp_steps) {
+            $this->saveTemp($form_data);
             return redirect($this->module->newUrl(['step' => $this->current_step + 1]));
         }
-
         //create dummy user account
         $user = User::firstOrCreate(['email' => array_get($form_data, 'email')]);
         $data = $this->mergeWithPreviousApplication($form_data, $user);
@@ -155,13 +156,13 @@ class ApplicationController extends Controller
 
     public function edit(Application $application, Request $request)
     {
-
         $model = $this->module->fromFormData($application->form_data);
         return view($this->module->view('edit'), [
             'application' => $application,
             'step' => $request->get('step', 1),
             'module' => $this->module,
             'model' => $model,
+            'entry_points' => EntryPoint::all(),
             'country_codes' => \Countries::all()->sortBy('name')->pluck('name.common', 'cca2')
 
         ]);
@@ -256,8 +257,6 @@ class ApplicationController extends Controller
 
         return view('e-visa::retrieve_existing_success', ['application' => $application]);
     }
-
-
 
 
 }
