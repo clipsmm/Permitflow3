@@ -197,6 +197,7 @@
                     {!! error_tag($errors, 'passport_number') !!}
                 </div>
             </div>
+
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_place_of_issue')}}">
                     <label for="name_search_type">
@@ -206,6 +207,7 @@
                     {!! error_tag($errors, 'passport_place_of_issue') !!}
                 </div>
             </div>
+
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_date_of_issue')}}">
                     <label for="name_search_type">
@@ -224,13 +226,52 @@
                     {!! error_tag($errors, 'passport_date_of_expiry') !!}
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_issued_by')}}">
                     <label for="name_search_type">
                         @lang('Issued By')
                     </label>
                     {!! Form::text('passport_issued_by', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
                     {!! error_tag($errors, 'passport_issued_by') !!}
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-xs-12">
+
+                <div class="form-group {{error_class($errors, 'passport_bio')}}">
+                    <label>
+                        @lang('e-visa::forms.passport_bio')
+                    </label>
+                    <div class="alert alert-info">
+                        @lang('e-visa::help_blocks.passport_bio')
+                    </div>
+                    {!! Form::file('passport_bio', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    {!! error_tag($errors, 'passport_bio') !!}
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12">
+            <div class="form-group {{error_class($errors, 'passport_photo')}}">
+                <label>
+                    @lang('e-visa::forms.passport_photo')
+                </label>
+                <div class="alert alert-info">
+                    @lang('e-visa::help_blocks.passport_photo')
+                </div>
+                {!! Form::file('passport_photo', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                {!! error_tag($errors, 'passport_photo') !!}
+            </div>
+
+            </div>
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-group {{error_class($errors, 'additional_documents')}}">
+                    <label>
+                        @lang('e-visa::forms.additional_documents')
+                    </label>
+                    <div class="alert alert-info">
+                        @lang('e-visa::help_blocks.additional_documents')
+                    </div>
+                    {!! Form::file('additional_documents', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    {!! error_tag($errors, 'additional_documents') !!}
                 </div>
             </div>
         </div>
@@ -633,51 +674,6 @@
         </div>
         <?php break; ?>
 
-        <?php case 6: ?>
-        <div class="col-sm-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    @lang('Supporting Documents')
-                </div>
-                <div class="panel-body">
-                    <div class="form-group {{error_class($errors, 'passport_bio')}}">
-                        <label>
-                            @lang('e-visa::forms.passport_bio')
-                        </label>
-                        <div class="alert alert-info">
-                            @lang('e-visa::help_blocks.passport_bio')
-                        </div>
-                        {!! Form::file('passport_bio', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                        {!! error_tag($errors, 'passport_bio') !!}
-                    </div>
-                    <br>
-                    <br>
-                    <div class="form-group {{error_class($errors, 'passport_photo')}}">
-                        <label>
-                            @lang('e-visa::forms.passport_photo')
-                        </label>
-                        <div class="alert alert-info">
-                            @lang('e-visa::help_blocks.passport_photo')
-                        </div>
-                        {!! Form::file('passport_photo', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                        {!! error_tag($errors, 'passport_photo') !!}
-                    </div>
-                    <br>
-                    <br>
-                    <div class="form-group {{error_class($errors, 'additional_documents')}}">
-                        <label>
-                            @lang('e-visa::forms.additional_documents')
-                        </label>
-                        <div class="alert alert-info">
-                            @lang('e-visa::help_blocks.additional_documents')
-                        </div>
-                        {!! Form::file('additional_documents', ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                        {!! error_tag($errors, 'additional_documents') !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php break; ?>
         <?php } ?>
     </div>
 </e-visa-application-form>
