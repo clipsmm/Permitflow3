@@ -14,7 +14,7 @@ export default Vue.component('date-picker', {
                 autoclose: true,
                 todayBtn: 'linked'
             }).on('changeDate', function(e){
-                component.$emit('input', e.date);
+                component.$emit('input', moment(e.date).format('YYYY-MM-DD'));
             });
     }
 });
