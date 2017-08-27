@@ -763,7 +763,7 @@ if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
             'secureHash' => $invoice->get_payment_signature(),
             'currency' => $currency,
             'billDesc' => $invoice->description,
-            'billRefNumber' => $invoice->bill_ref,
+            'billRefNumber' => $invoice->pk,
             'serviceID' => $config['apiServiceId'],
             'clientMSISDN' => $user->phone_number,
             'clientName' => $user->full_name,
