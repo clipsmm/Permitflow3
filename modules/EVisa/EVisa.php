@@ -239,6 +239,11 @@ class EVisa extends BaseModule implements ModuleInterface
                 'name' => __('e-visa::menus.settings'),
                 'action' => route('e-visa.settings.all'),
                 'icon' => 'fa fa-cogs'
+            ],
+            [
+                'name' => __('labels.outputs'),
+                'action' => route("backend.outputs.index", $this->slug),
+                'icon' => 'fa fa-newspaper-o'
             ]
         ];
     }

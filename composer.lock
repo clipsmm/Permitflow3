@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "96f7b794c5631598227b883088fba72a",
+    "content-hash": "06e762c59cb5c8f7758a888502b3374a",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -412,6 +412,49 @@
                 "string"
             ],
             "time": "2017-07-22T12:18:28+00:00"
+        },
+        {
+            "name": "dust-php/dust-php",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cretz/dust-php.git",
+                "reference": "09380864ea8d96afdf5ad1d8ea778d09db1869af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cretz/dust-php/zipball/09380864ea8d96afdf5ad1d8ea778d09db1869af",
+                "reference": "09380864ea8d96afdf5ad1d8ea778d09db1869af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Dust": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chad Retz"
+                }
+            ],
+            "description": "A templating engine for PHP based on Dust JS",
+            "homepage": "http://cretz.github.com/dust-php",
+            "keywords": [
+                "dust",
+                "templating"
+            ],
+            "time": "2013-02-16T18:40:40+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -2300,7 +2343,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jean-Fran??ois Simon",
+                    "name": "Jean-François Simon",
                     "email": "jeanfrancois.simon@sensiolabs.com"
                 },
                 {
@@ -3315,7 +3358,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fran??ois Zaninotto"
+                    "name": "François Zaninotto"
                 }
             ],
             "description": "Faker is a PHP library that generates fake data for you.",
@@ -3460,7 +3503,7 @@
             ],
             "authors": [
                 {
-                    "name": "P??draic Brady",
+                    "name": "Pádraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },

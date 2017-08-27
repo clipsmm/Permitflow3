@@ -87,6 +87,9 @@ class TaskHandler {
             $application->complete  =  true;
             $application->status  = 'corrections';
             $application->save();
+
+            # generate output
+            $application->add_output('EVISA-OUTPUT', $task->id);
         });
 
         return $task;
