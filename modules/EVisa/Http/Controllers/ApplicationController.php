@@ -34,6 +34,9 @@ class ApplicationController extends Controller
     public function __construct(Request $request)
     {
         parent::__construct();
+
+        $this->middleware('auth', ['only' => 'edit', 'update']);
+
         $this->current_step = $request->get('step', 1);
         $this->module = BaseModule::instance_from_slug('e-visa');
     }
@@ -121,7 +124,7 @@ class ApplicationController extends Controller
     {
         $return_code = $request->route('return_code');
 
-        $this->authorizeApplicationResume($request);
+        $this->authorizeResumption($request);
         return view('e-visa::retrieve_guest', compact('return_code'));
     }
 
@@ -130,7 +133,7 @@ class ApplicationController extends Controller
         $app_number = trim($request->application_number);
         $recaptcha = $request->get('g-recaptcha-response');
 
-        $application = $this->authorizeApplicationResume($request);
+        $application = $this->authorizeResumption($request);
 
         $validator = Validator::make($request->all(), [])
             ->after(function ($v) use ($application, $app_number) {
@@ -159,7 +162,7 @@ class ApplicationController extends Controller
         return redirect()->route('e-visa.application.edit', ['application_id' => $application->id, 'step' => 1]);
     }
 
-    private function authorizeApplicationResume($request)
+    private function authorizeResumption($request)
     {
         $return_code = $request->route('return_code');
         $app_id = \Hashids::decode($return_code);
@@ -264,10 +267,9 @@ class ApplicationController extends Controller
                 ->withInput();
         }
 
+        auth()->login($application->user);
 
-        session()->put('e-visa-retrieved-application-id', $application->id);
-
-        return redirect()->route('e-visa.retrieve_existing_success');
+        return redirect()->route('application.show', [$this->module->slug, $application->id]);
     }
 
     public function retrieveExistingApplicationSuccess()
@@ -283,6 +285,5 @@ class ApplicationController extends Controller
     {
         return view("e-visa::requirements");
     }
-
 
 }
