@@ -1,13 +1,8 @@
-{{--<li class="active"><a href="#tab11default" data-toggle="tab">@lang('e-visa::common.single_entry_visa')</a></li>--}}
-{{--<li><a href="#tab22default" data-toggle="tab"></a></li>--}}
-{{--<li><a href="#tab33default" data-toggle="tab"></a></li>--}}
-{{--<li><a href="#tab44default" data-toggle="tab"></a></li>--}}
-{{--<li><a href="#tab55default" data-toggle="tab"></a></li>--}}
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">@lang('e-visa::common.single_entry_visa')</h3>
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
     <table class="table table-special m-b-0 ">
         <tbody>
         <tr class=' '>
@@ -30,7 +25,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">@lang('e-visa::common.traveler_info')</h3>
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
     <table class="table table-special m-b-0 ">
         <tbody>
         <tr class=' '>
@@ -117,7 +112,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">@lang('Nationality and Residence')</h3>
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
     <table class="table table-special m-b-0 ">
         <tbody>
         <tr class=' '>
@@ -172,7 +167,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">@lang('Passport / Travel Documents')</h3>
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
     <table class="table table-special m-b-0 ">
         <tbody>
         <tr class=' '>
@@ -219,7 +214,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">@lang('Travel Information')</h3>
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
     <table class="table table-special m-b-0 ">
         <tbody>
         <tr class=' '>
@@ -282,7 +277,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">@lang('Travel History')</h3>
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
     <table class="table table-special m-b-0 ">
         <tbody>
         <tr class=' '>
@@ -361,7 +356,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">@lang('Supporting Documents')</h3>
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
     <table class="table table-special m-b-0 ">
         <tbody>
         <tr class=' '>

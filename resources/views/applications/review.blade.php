@@ -7,7 +7,7 @@
             <br>
         Ref: <strong>{{$application->application_number}}</strong>
         </div>
-        <div class="panel-body padding-0">
+        <div class="panel-body">
             {!! $module->render_application_view($application) !!}
         </div>
         <div class="panel-footer">
