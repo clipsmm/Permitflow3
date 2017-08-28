@@ -15,4 +15,6 @@ return [
     'landing_page' => "Landing Page",
     'update_settings' => "Update Settings"
 
+
+
 ];
