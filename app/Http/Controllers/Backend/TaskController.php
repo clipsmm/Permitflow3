@@ -47,7 +47,7 @@ class TaskController extends Controller
         //todo: ensure user has view rights and only load tasks from modules he/she has permissions on
         $tasks  = $this->tasks->with(['application'])
             ->module($module->slug)
-            ->queued()
+            ->queued($module->slug)
             ->paginate(20);
 
 //        $filtered = array_filter($tasks->items(), function($task){
