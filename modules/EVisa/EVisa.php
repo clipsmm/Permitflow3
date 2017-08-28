@@ -50,7 +50,7 @@ class EVisa extends BaseModule implements ModuleInterface
     ];
 
 
-    public $numSteps = 5;
+    public $numSteps = 4;
 
     public static function getTravelReasons()
     {
@@ -143,24 +143,19 @@ class EVisa extends BaseModule implements ModuleInterface
                     'entry_point' => ['bail', 'required', Rule::exists('e_visa_entry_points', 'id')->where(function($query) use($request){
                         $query->where('type', $request->arrival_by);
                     })],
-                ], [
-                    'travel_phone_number.full_phone' => __('validation.intl_phone'),
-                    'date_of_entry.after' => __('validation.after_today'),
-                    'date_of_departure.after' => __('validation.after_today'),
-                ]);
-
-            case 4:
-                return Validator::make($request->all(), [
                     'places_to_visit' => ['required', 'array', 'min:1'],
                     'places_to_visit.*.type' => ['required', 'in:hotel,firm,relative,other'],
                     'places_to_visit.*.address' => ['required'],
                     'places_to_visit.*.name' => ['required']
                 ], [
+                    'travel_phone_number.full_phone' => __('validation.intl_phone'),
+                    'date_of_entry.after' => __('validation.after_today'),
+                    'date_of_departure.after' => __('validation.after_today'),
                     'places_to_visit.required' => __('e-visa::validation.custom.places_to_visit.required'),
                     'places_to_visit.*.*.required' => __('e-visa::validation.nested_required')
                 ]);
 
-            case 5:
+            case 4:
                 return Validator::make($request->all(), [
                     'other_recent_visits' => ['array'],
                     'other_recent_visits.*.country' => ['required', 'cca2'],

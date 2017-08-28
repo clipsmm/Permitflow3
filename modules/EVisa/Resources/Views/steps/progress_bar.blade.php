@@ -30,12 +30,4 @@
         </div>
         <a href="#" class="bs-wizard-dot"></a>
     </div>
-    <div class="col-md-1 bs-wizard-step {{ request('step') == 5 ? 'active' : request('step') > 5 ? 'complete'  : 'disabled'}} p-l-0 p-r-0 m-r-0 m-l-0">
-        <!-- active -->
-        <div class="text-center bs-wizard-stepnum">Step 5</div>
-        <div class="progress">
-            <div class="progress-bar"></div>
-        </div>
-        <a href="#" class="bs-wizard-dot"></a>
-    </div>
 </div>
