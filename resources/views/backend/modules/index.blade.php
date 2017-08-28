@@ -8,13 +8,14 @@
                     <div class="panel-heading">
                         @include('backend.settings._backend_settings_menu')
                     </div>
-                    <div class="panel-body padding-0">
+                    <div class="panel panel-default">
+                    <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1default">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                           Manage    Modules
+                                           Manage Modules
                                         </h3>
                                     </div>
                                     <div class="panel-body">
@@ -52,10 +53,10 @@
                                 </div>
                             </div>
                         </div>
+                      </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection
