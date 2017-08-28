@@ -3,7 +3,11 @@
 @section('body')
     <div class="panel panel-default">
         <div class="panel-heading p-t-10">
-            @lang('Module Users')
+           <h3 class="pull-left"> @lang('Module Users')</h3>
+            <div class="pull-right">
+                <a href="{{ route('backend.modules.add_user', $module->slug) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang("Add") </a>
+            </div>
+            <div class="clearfix"></div>
         </div>
         <div class="panel-body padding-0">
             <div class="tab-content">

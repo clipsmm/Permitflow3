@@ -46,6 +46,34 @@ class ModuleController extends Controller
         ]);
     }
 
+    public function addUser(Request $request, $module)
+    {
+        $user  =  null;
+
+        if ($request->id_number){
+            $user  = get_user_by_id_number($request->id_number);
+        }
+
+        $permissions  =  Permission::query()->whereOwner($module->slug)->get();
+
+        return view('backend.modules.add_user',[
+            'permissions' => $permissions,
+            'module' => $module,
+            'user' => $user
+        ]);
+    }
+
+    public function storeUser(Request $request, $module)
+    {
+        $this->validate($request, [
+            'id_number' => "required",
+            'first_name' => "required",
+            'last_name' => "required",
+            'surname' => "required",
+            'email' => "required|email",
+        ]);
+    }
+
     public function editUser(Request $request, $module, User $user)
     {
         $user->load(['permissions']);

@@ -85,4 +85,9 @@ class User extends Authenticatable
      {
         return $this->phone_number;
      }
+
+     public static function find_by_id_number($id_number)
+     {
+         return self::whereIdNumber($id_number)->first();
+     }
 }
