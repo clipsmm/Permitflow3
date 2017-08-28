@@ -1,8 +1,8 @@
 <e-visa-application-form inline-template
-                         :returning_to_country="{{json_encode(old('returning_to_country', $model->returning_to_country))}}"
-                         :denied_entry_before="{{json_encode(old('denied_entry_before', $model->denied_entry_before))}}"
-                         :denied_entry_others="{{json_encode(old('denied_entry_others', $model->denied_entry_others))}}"
-                         :convicted_before="{{json_encode(old('convicted_before', $model->convicted_before))}}"
+                         :returning_to_country="{{old('returning_to_country', $model->returning_to_country) ?: 0}}"
+                         :denied_entry_before="{{old('denied_entry_before', $model->denied_entry_before) ?: 0}}"
+                         :denied_entry_others="{{old('denied_entry_others', $model->denied_entry_others) ?: 0}}"
+                         :convicted_before="{{old('convicted_before', $model->convicted_before) ?: 0}}"
                          :other_recent_visits="{{json_encode(old('other_recent_visits', $model->other_recent_visits))}}"
                          :recent_visits="{{json_encode(old('recent_visits', $model->recent_visits))}}"
                          :places_to_visit="{{json_encode(old('places_to_visit', $model->places_to_visit))}}"
