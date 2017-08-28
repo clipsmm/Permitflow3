@@ -5,8 +5,10 @@
 @section('body')
     <div class="col-md-12">
         {!! Form::model($role, ['url' => route('backend.roles.store')]) !!}
-        <div class="panel panel-default panel-form">
-            <div class="panel-heading">@lang("Add Role")</div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@lang("Add Role")</h3>
+            </div>
             <div class="panel-body">
                 @include('backend.roles.form')
             </div>

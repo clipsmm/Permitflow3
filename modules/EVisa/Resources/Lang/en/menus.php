@@ -2,5 +2,6 @@
 
 return [
     'tasks' => 'Tasks',
-    'settings' => 'Settings'
+    'settings' => 'Settings',
+    'applications' => "Applications"
 ];

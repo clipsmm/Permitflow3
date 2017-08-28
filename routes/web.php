@@ -43,6 +43,11 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
     });
 
     Route::group(['prefix' => '{module}'], function () {
+        Route::group(['prefix' => 'applications', 'as' => 'applications.'], function () {
+            Route::get('', 'ApplicationController@indexModuleApplications')->name('index');
+            Route::get('{application_id}/details', 'ApplicationController@viewModuleApplication')->name('show');
+        });
+
         Route::group(['prefix' => 'tasks', 'as' => 'tasks.'], function () {
             Route::get('', 'TaskController@myQueue')->name('queue');
             Route::get('pick', 'TaskController@pickTask')->name('pick');

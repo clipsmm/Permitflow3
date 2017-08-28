@@ -428,8 +428,7 @@
                     </button>
                 </div>
             </div>
-
-
+            
         <?php break; ?>
         <?php  case 4: ?>
             <div class="panel panel-default">

@@ -285,7 +285,7 @@
                 <h1>Dates and Duration of recent visits to other countries in the last 3 months</h1>
             </td>
             <td class="hidden-xs hidden-sm">
-                @foreach(array_get($application->form_data, 'recent_visits') as $visit)
+                @foreach($application->get_data('recent_visits',[]) as $visit)
                     <ul style="list-style-type:none">
                         <li>Duration:  <a href="#" class="btn btn-xs btn-default">{{  $visit['duration'] }} days</a></li><br/>
                         <li>Date:      <a href="#" class="btn btn-xs btn-default">{{  $visit['date'] }}</a></li><br/>
@@ -301,7 +301,7 @@
                 <h1>Dates and Duration of previous visits to Kenya</h1>
             </td>
             <td class="hidden-xs hidden-sm">
-                @foreach(array_get($application->form_data, 'other_recent_visits') as $visit)
+                @foreach($application->get_data('other_recent_visits',[]) as $visit)
                     <ul style="list-style-type:none">
                         <li>Duration: <a href="#" class="btn btn-xs btn-default">{{  $visit['duration'] }} days</a></li><br/>
                         <li>Date:     <a href="#" class="btn btn-xs btn-default">{{  $visit['date'] }}</a></li><br/>

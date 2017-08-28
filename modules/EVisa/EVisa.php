@@ -131,7 +131,15 @@ class EVisa extends BaseModule implements ModuleInterface
         if ($application->submitted_at) {
             return null;
         }
-        return Invoice::create_invoice($application->id, [['amount' => 20, 'description' => 'foo']], 'bar');
+
+        $cost = settings($this->slug.".costs.".$application->get_data('visa_type'), 0);
+
+        if (!$cost){
+            Task::create_task($application->id, "Evisa Review Task",'review','pending');
+            return null;
+        }
+
+        return Invoice::create_invoice($application->id, [['amount' => $cost, 'description' => 'foo']], "Application No {$application->application_number}");
     }
 
     public function get_permissions()
@@ -153,18 +161,27 @@ class EVisa extends BaseModule implements ModuleInterface
             [
                 'name' => __('e-visa::menus.tasks'),
                 'action' => route('backend.tasks.queue', $this->slug),
-                'icon' => 'fa fa-tasks'
+                'icon' => 'fa fa-tasks',
+                'type' => 'success'
             ],
             [
-                'name' => __('e-visa::menus.settings'),
-                'action' => route('e-visa.settings.all'),
-                'icon' => 'fa fa-cogs'
+                'name' => __('e-visa::menus.applications'),
+                'action' => route('backend.applications.index', $this->slug),
+                'icon' => 'fa fa-pencil-square-o',
+                'type' => 'primary'
             ],
             [
                 'name' => __('labels.outputs'),
                 'action' => route("backend.outputs.index", $this->slug),
-                'icon' => 'fa fa-newspaper-o'
-            ]
+                'icon' => 'fa fa-newspaper-o',
+                'type' => 'danger'
+            ],
+            [
+                'name' => __('e-visa::menus.settings'),
+                'action' => route('e-visa.settings.all'),
+                'icon' => 'fa fa-cogs',
+                'type' => 'info'
+            ],
         ];
     }
 

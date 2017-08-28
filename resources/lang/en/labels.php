@@ -12,6 +12,9 @@ return [
     "output_template_field" => "Template",
     "cancel" => "Cancel",
     'save' => "Save",
-    'landing_page' => "Landing Page"
+    'landing_page' => "Landing Page",
+    'update_settings' => "Update Settings"
+
+
 
 ];

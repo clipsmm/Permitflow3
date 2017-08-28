@@ -5,10 +5,9 @@
 </div>
 <div class="clearfix"></div>
 <br>
-<h5 class="">
-    @lang('System Permissions')
-</h5>
-<hr>
+<div class="panel panel-default">
+<div class="panel-heading"> <h3 class="panel-title">@lang('System Permissions')</h3></div>
+<div class="panel-body">
 <div class="col-sm-12">
     @foreach($permissions->get('system', []) as $perm)
         <div class="col-sm-4">
@@ -23,28 +22,35 @@
         </div>
     @endforeach
 </div>
+</div>
+</div>
 <div class="clearfix"></div>
 <br>
 
-@foreach($module_permissions as $slug => $perms)
-    <div class="col-sm-12">
-        <h5 class="">
-            {{\App\Modules\BaseModule::instance_from_slug($slug)->name}}
-        </h5>
-        <hr>
-    </div>
-    @foreach($perms as $perm)
-        <div class="col-sm-3">
-            <div class="checkbox">
-                <label class="text-capitalize">
-                    {!! Form::checkbox('permissions[]', $perm->id,
-                        in_array($perm->id, old('permissions', [])) || in_array($perm->id, $role->permissions->pluck('id')->toArray()))
-                    !!}
-                    {{$perm->label}}
-                </label>
-            </div>
-        </div>
-    @endforeach
-@endforeach
+{{--@foreach($module_permissions as $slug => $perms)--}}
+    {{--<div class="panel panel-default">--}}
+    {{--<div class="panel-heading">--}}
+        {{--<h3 class="panel-title">--}}
+            {{--{{\App\Modules\BaseModule::instance_from_slug($slug)->name}}--}}
+        {{--</h3>--}}
+    {{--</div>--}}
+        {{--<div class="panel-body">--}}
+            {{--<div class="col-sm-12">--}}
+    {{--@foreach($perms as $perm)--}}
+        {{--<div class="col-sm-3">--}}
+            {{--<div class="checkbox">--}}
+                {{--<label class="text-capitalize">--}}
+                    {{--{!! Form::checkbox('permissions[]', $perm->id,--}}
+                        {{--in_array($perm->id, old('permissions', [])) || in_array($perm->id, $role->permissions->pluck('id')->toArray()))--}}
+                    {{--!!}--}}
+                    {{--{{$perm->label}}--}}
+                {{--</label>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--@endforeach--}}
+    {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--@endforeach--}}
 
 <div class="clearfix"></div>

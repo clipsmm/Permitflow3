@@ -1,13 +1,12 @@
-@extends('layouts.backend')
+@extends('layouts.module')
 
 @section('body')
     <div class="panel with-nav-tabs panel-default m-b-0">
         <div class="panel-heading p-t-10">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab11default" data-toggle="tab">
-                        @lang('e-visa::labels.general_settings')</a>
+                        @lang('General Settings')</a>
                 </li>
-
             </ul>
         </div>
         <div class="panel-body padding-0">
@@ -18,13 +17,19 @@
                             <form class="form-horizontal" method="post" action="{{ route('e-visa.settings.save') }}">
                                 {!! csrf_field() !!}
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2"> @lang('e-visa::labels.cost') </label>
+                                    <label class="control-label col-sm-2"> @lang('Single Entry Visa Cost') </label>
                                     <div class="col-sm-5">
-                                        {!! Form::number('e-visa[cost]', settings('e-visa.cost'), [ 'class' => 'form-control']) !!}
+                                        {!! Form::number('e-visa[costs][single_entry]', settings('e-visa.costs.single_entry'), [ 'class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('Transit Visa Cost') </label>
+                                    <div class="col-sm-5">
+                                        {!! Form::number('e-visa[costs][transit_visa]', settings('e-visa.costs.transit_visa'), [ 'class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary"> @lang('e-visa::labels.update_settings') </button>
+                                    <button type="submit" class="btn btn-primary"> @lang('Update Settings') </button>
                                 </div>
                             </form>
                         </div>
