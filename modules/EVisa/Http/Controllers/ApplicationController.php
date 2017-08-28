@@ -9,12 +9,15 @@
 namespace Modules\EVisa\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\DefaultMail;
 use App\Models\Application;
 use App\Models\User;
 use App\Modules\BaseModule;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
-use Hashids\Hashids;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Modules\EVisa\Models\EntryPoint;
 use Modules\EVisa\Models\EVisa;
 use Validator;
@@ -26,10 +29,14 @@ class ApplicationController extends Controller
     protected $guest_app_id = 'mod_e_visa_guest_application_id';
     protected $current_step;
     protected $max_temp_steps = 1;
+    protected $expiry_time = 1;
 
     public function __construct(Request $request)
     {
         parent::__construct();
+
+        $this->middleware(['auth', 'e-visa.validate_past_steps'], ['only' => 'edit', 'update']);
+
         $this->current_step = $request->get('step', 1);
         $this->module = BaseModule::instance_from_slug('e-visa');
     }
@@ -92,7 +99,7 @@ class ApplicationController extends Controller
 
         if ($application) {
             $previous_data = array_except($application->form_data, ['travel_reason', 'date_of_entry',
-                'date_of_departure', 'arrival_by', 'entry_point', 'places_to_visit', 'passport_bio']);
+                'date_of_departure', 'arrival_by', 'entry_point', 'places_to_visit', 'passport_bio', 'passport_photo', 'additional_documents']);
             $form_data = array_merge($previous_data, $form_data);
         }
         return $this->module->toFormData($form_data);
@@ -100,7 +107,8 @@ class ApplicationController extends Controller
 
     private function sendEmailToUser($user, $application)
     {
-
+        $hash = \Hashids::encode($application->id);
+        Mail::to($user)->send(new DefaultMail('e-visa::emails.initial_application', compact('hash', 'application')));
     }
 
     public function completeGuestApplication(Request $request, Application $application)
@@ -115,7 +123,8 @@ class ApplicationController extends Controller
     public function retrieveGuestApplication(Request $request)
     {
         $return_code = $request->route('return_code');
-        //todo: check if the application is older than 1hr
+
+        $this->authorizeResumption($request);
         return view('e-visa::retrieve_guest', compact('return_code'));
     }
 
@@ -124,8 +133,7 @@ class ApplicationController extends Controller
         $app_number = trim($request->application_number);
         $recaptcha = $request->get('g-recaptcha-response');
 
-        $app_id = head(\Hashids::decode($request->route('return_code')));
-        $application = Application::with('user')->find($app_id);
+        $application = $this->authorizeResumption($request);
 
         $validator = Validator::make($request->all(), [])
             ->after(function ($v) use ($application, $app_number) {
@@ -151,7 +159,22 @@ class ApplicationController extends Controller
 
         //login this user then let him edit the appliction
         auth()->login($application->user);
-        return redirect()->route('e-visa.application.edit', ['application_id' => $app_id, 'step' => $this->max_temp_steps + 1]);
+        return redirect()->route('e-visa.application.edit', ['application_id' => $application->id, 'step' => 1]);
+    }
+
+    private function authorizeResumption($request)
+    {
+        $return_code = $request->route('return_code');
+        $app_id = \Hashids::decode($return_code);
+        $application = Application::findOrFail($app_id[0]);
+        $expiry = $application->created_at->addHours($this->expiry_time);
+
+        if ($expiry->lt(Carbon::now())) {
+            $application->delete();
+            abort(Response::HTTP_FORBIDDEN, __('e-visa::common.link_expired'));
+        }
+
+        return $application;
     }
 
     public function edit(Application $application, Request $request)
@@ -244,10 +267,9 @@ class ApplicationController extends Controller
                 ->withInput();
         }
 
+        auth()->login($application->user);
 
-        session()->put('e-visa-retrieved-application-id', $application->id);
-
-        return redirect()->route('e-visa.retrieve_existing_success');
+        return redirect()->route('application.show', [$this->module->slug, $application->id]);
     }
 
     public function retrieveExistingApplicationSuccess()
@@ -263,6 +285,5 @@ class ApplicationController extends Controller
     {
         return view("e-visa::requirements");
     }
-
 
 }

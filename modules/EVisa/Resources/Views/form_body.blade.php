@@ -1,8 +1,8 @@
 <e-visa-application-form inline-template
-                         :returning_to_country="{{json_encode(old('returning_to_country', $model->returning_to_country))}}"
-                         :denied_entry_before="{{json_encode(old('denied_entry_before', $model->denied_entry_before))}}"
-                         :denied_entry_others="{{json_encode(old('denied_entry_others', $model->denied_entry_others))}}"
-                         :convicted_before="{{json_encode(old('convicted_before', $model->convicted_before))}}"
+                         :returning_to_country="{{old('returning_to_country', $model->returning_to_country) ?: 0}}"
+                         :denied_entry_before="{{old('denied_entry_before', $model->denied_entry_before) ?: 0}}"
+                         :denied_entry_others="{{old('denied_entry_others', $model->denied_entry_others) ?: 0}}"
+                         :convicted_before="{{old('convicted_before', $model->convicted_before) ?: 0}}"
                          :other_recent_visits="{{json_encode(old('other_recent_visits', $model->other_recent_visits))}}"
                          :recent_visits="{{json_encode(old('recent_visits', $model->recent_visits))}}"
                          :places_to_visit="{{json_encode(old('places_to_visit', $model->places_to_visit))}}"
@@ -130,7 +130,8 @@
                     <label for="name_search_type">
                         @lang('Date Of Birth')
                     </label>
-                    {!! Form::date('date_of_birth', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    <date-picker value="{{old('date_of_birth', $model->date_of_birth)}}"
+                                 name="date_of_birth"></date-picker>
                     {!! error_tag($errors, 'date_of_birth') !!}
                 </div>
             </div>
@@ -212,28 +213,30 @@
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_date_of_issue')}}">
-                    <label for="name_search_type">
+                    <label>
                         @lang('Date Of Issue')
                     </label>
-                    {!! Form::date('passport_date_of_issue', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    <date-picker value="{{old('passport_date_of_issue', $model->passport_date_of_issue)}}"
+                                 name="passport_date_of_issue"></date-picker>
                     {!! error_tag($errors, 'passport_date_of_issue') !!}
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_date_of_expiry')}}">
-                    <label for="name_search_type">
+                    <label>
                         @lang('Expiry Date')
                     </label>
-                    {!! Form::date('passport_date_of_expiry', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    <date-picker value="{{old('passport_date_of_expiry', $model->passport_date_of_expiry)}}"
+                                 name="passport_date_of_expiry"></date-picker>
                     {!! error_tag($errors, 'passport_date_of_expiry') !!}
                 </div>
             </div>
             <div class="col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_issued_by')}}">
-                    <label for="name_search_type">
+                    <label>
                         @lang('Issued By')
                     </label>
-                    {!! Form::text('passport_issued_by', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    {!! Form::text('passport_issued_by', NULL, ['class' => 'form-control text-black']) !!}
                     {!! error_tag($errors, 'passport_issued_by') !!}
                 </div>
             </div>
@@ -247,21 +250,23 @@
                     <div class="alert alert-info">
                         @lang('e-visa::help_blocks.passport_bio')
                     </div>
-                    <file-upload field="passport_bio" :val="{{json_encode(old('passport_bio', $model->passport_bio))}}"></file-upload>
+                    <file-upload field="passport_bio"
+                                 :val="{{json_encode(old('passport_bio', $model->passport_bio))}}"></file-upload>
                     {!! error_tag($errors, 'passport_bio') !!}
                 </div>
             </div>
             <div class="col-sm-12 col-xs-12">
-            <div class="form-group {{error_class($errors, 'passport_photo')}}">
-                <label>
-                    @lang('e-visa::forms.passport_photo')
-                </label>
-                <div class="alert alert-info">
-                    @lang('e-visa::help_blocks.passport_photo')
+                <div class="form-group {{error_class($errors, 'passport_photo')}}">
+                    <label>
+                        @lang('e-visa::forms.passport_photo')
+                    </label>
+                    <div class="alert alert-info">
+                        @lang('e-visa::help_blocks.passport_photo')
+                    </div>
+                    <file-upload field="passport_photo"
+                                 :val="{{json_encode(old('passport_photo', $model->passport_photo))}}"></file-upload>
+                    {!! error_tag($errors, 'passport_photo') !!}
                 </div>
-                <file-upload field="passport_photo" :val="{{json_encode(old('passport_photo', $model->passport_photo))}}"></file-upload>
-                {!! error_tag($errors, 'passport_photo') !!}
-            </div>
 
             </div>
             <div class="col-sm-12 col-xs-12">
@@ -272,7 +277,8 @@
                     <div class="alert alert-info">
                         @lang('e-visa::help_blocks.additional_documents')
                     </div>
-                    <file-upload field="additional_documents" :val="{{json_encode(old('additional_documents', $model->additional_documents))}}"></file-upload>
+                    <file-upload field="additional_documents"
+                                 :val="{{json_encode(old('additional_documents', $model->additional_documents))}}"></file-upload>
                     {!! error_tag($errors, 'additional_documents') !!}
                 </div>
             </div>
@@ -286,7 +292,7 @@
             </div>
         <div class="col-sm-12">
             <div class="form-group {{error_class($errors, 'travel_reason')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Travel Reason')
                 </label>
                 {!! Form::select('travel_reason', Modules\Evisa::getTravelReasons(), null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'rows' => '3', 'v-model'=>'travelReason']) !!}
@@ -298,49 +304,50 @@
                 <label>
                     @lang('Give Travel Reason if Other')
                 </label>
-                {!! Form::textarea('other_travel_reason', null, ['class' => 'form-control text-black', 'rows' => '3', 'maxlength'=>'160']) !!}
+                {!! Form::textarea('other_travel_reason', null, ['class' => 'form-control text-black', 'rows' => '3']) !!}
                 {!! error_tag($errors, 'other_travel_reason') !!}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'date_of_entry')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Proposed Date Of Entry')
                 </label>
-                {!! Form::date('date_of_entry', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                <date-picker value="{{old('date_of_entry', $model->date_of_entry)}}" name="date_of_entry"></date-picker>
                 {!! error_tag($errors, 'date_of_entry') !!}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'date_of_departure')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Proposed Date Of Departure from Kenya')
                 </label>
-                {!! Form::date('date_of_departure', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                <date-picker value="{{old('date_of_departure', $model->date_of_departure)}}"
+                             name="date_of_departure"></date-picker>
                 {!! error_tag($errors, 'date_of_departure') !!}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'travel_email')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Email Address while in Kenya')
                 </label>
-                {!! Form::text('travel_email', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                {!! Form::text('travel_email', null, ['class' => 'form-control text-black']) !!}
                 {!! error_tag($errors, 'travel_email') !!}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'travel_phone_number')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Phone Number while in Kenya')
                 </label>
-                {!! Form::text('travel_phone_number', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                {!! Form::text('travel_phone_number', null, ['class' => 'form-control text-black']) !!}
                 {!! error_tag($errors, 'travel_phone_number') !!}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'arrival_by')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Arrival By')
                 </label>
                 {!! Form::select('arrival_by', ['air' => __('Air'), 'ship' => __('Ship'), 'road' => __('Road')],  null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'v-model'=>'arrivalBy']) !!}
@@ -364,81 +371,78 @@
                 {!! error_tag($errors, 'entry_point') !!}
             </div>
         </div>
-       </div>
-        <?php break; ?>
-        <?php  case 4: ?>
-        <div class="panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">@lang('DETAILS OF PLACES TO VISIT IN KENYA')</h3>
-            </div>
-            <div class="col-sm-12">
-                <div class="row" v-for="(place, i) in placesToVisit">
-                    <div class="col-sm-12 text-right">
+            <div class="clearfix"></div>
+
+        <h4 class="col-sm-12 m-t-75">
+            @lang('DETAILS OF PLACES TO VISIT IN KENYA')
+        </h4>
+        <div class="col-sm-12">
+            <div class="row" v-for="(place, i) in placesToVisit">
+                <div class="col-sm-12 text-right">
           <span @click.close="placesToVisit.splice(i, 1)" class="close">
           <span class="fa fa-times-circle"></span>
           </span>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.type']}">
-                            <label for="name_search_type">
-                                @lang('Type')
-                            </label>
-                            {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['class' => 'form-control text-black',
-                            ':name' => "'places_to_visit[' + i + '][type]'", 'v-model' => 'place.type', 'maxlength'=>'160']) !!}
-                            <span class="help-block">
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.type']}">
+                        <label for="name_search_type">
+                            @lang('Type')
+                        </label>
+                        {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['class' => 'form-control text-black',
+                        ':name' => "'places_to_visit[' + i + '][type]'", 'v-model' => 'place.type', 'maxlength'=>'160']) !!}
+                        <span class="help-block">
             @{{(form_errors['places_to_visit.'+i+'.type'] || [])[0]}}
             </span>
-                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.name']}">
-                            <label for="name_search_type">
-                                @lang('Name Of Place/Person')
-                            </label>
-                            {!! Form::text(null, '', ['v-model' => 'place.name', 'class' => 'form-control text-black', 'maxlength'=>'160', ':name' => "'places_to_visit[' + i + '][name]'",]) !!}
-                            <span class="help-block">
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.name']}">
+                        <label for="name_search_type">
+                            @lang('Name Of Place/Person')
+                        </label>
+                        {!! Form::text(null, '', ['v-model' => 'place.name', 'class' => 'form-control text-black', 'maxlength'=>'160', ':name' => "'places_to_visit[' + i + '][name]'",]) !!}
+                        <span class="help-block">
             @{{(form_errors['places_to_visit.'+i+'.name'] || [])[0]}}
             </span>
-                        </div>
                     </div>
-                    <div class="col-sm-5">
-                        <div class="form-group"
-                             :class="{'has-error' : form_errors['places_to_visit.'+i+'.address']}">
-                            <label for="name_search_type">
-                                @lang('Physical Address')
-                            </label>
-                            {!! Form::text(null, '', ['v-model' => 'place.address', 'class' => 'form-control text-black','maxlength'=>'160', ':name' => "'places_to_visit[' + i + '][address]'",]) !!}
-                            <span class="help-block">
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group"
+                         :class="{'has-error' : form_errors['places_to_visit.'+i+'.address']}">
+                        <label for="name_search_type">
+                            @lang('Physical Address')
+                        </label>
+                        {!! Form::text(null, '', ['v-model' => 'place.address', 'class' => 'form-control text-black','maxlength'=>'160', ':name' => "'places_to_visit[' + i + '][address]'",]) !!}
+                        <span class="help-block">
             @{{(form_errors['places_to_visit.'+i+'.address'] || [])[0]}}
             </span>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="form-group {{error_class($errors, 'places_to_visit')}}">
-                    <button @click.prevent="placesToVisit.push({type: '', name: '', address: ''})"
-                            class="btn-sm btn btn-primary">
-                        <span class="fa fa-plus"></span>
-                        @lang('Add')
-                    </button>
-                    <br>
-                    {!! error_tag($errors, 'places_to_visit') !!}
-                </div>
-            </div>
-            <div class="col-sm-12">
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group {{error_class($errors, 'places_to_visit')}}">
+                <button @click.prevent="placesToVisit.push({type: '', name: '', address: ''})"
+                        class="btn-sm btn btn-primary">
+                    <span class="fa fa-plus"></span>
+                    @lang('Add')
+                </button>
                 <br>
+                {!! error_tag($errors, 'places_to_visit') !!}
             </div>
         </div>
-        <?php break; ?>
+        <div class="col-sm-12">
+            <br>
+        </div>
 
-        <?php  case 5: ?>
+        <?php break; ?>
+        <?php  case 4: ?>
+
         <div class="panel panel-default">
 
             <div class="panel-heading">
                 <h3 class="panel-title">@lang('TRAVEL HISTORY')</h3>
             </div>
-
 
             <div class="col-sm-12">
                 <div class="panel panel-default">
@@ -471,7 +475,8 @@
                                     <label for="name_search_type">
                                         @lang('Date Of Visit')
                                     </label>
-                                    {!! Form::date(null, '', ['class' => 'form-control text-black','maxlength'=>'160', 'v-model' => 'visit.date', 'v-bind:name' => "'other_recent_visits[' + i + '][date]'"]) !!}
+                                    <date-picker v-model="visit.date"
+                                                 :name="'other_recent_visits[' + i + '][date]'"></date-picker>
                                     <span class="help-block">
                 @{{(form_errors['other_recent_visits.'+i+'.date'] || [])[0]}}
                 </span>
@@ -518,7 +523,8 @@
                                     <label for="name_search_type">
                                         @lang('Date Of Visit')
                                     </label>
-                                    {!! Form::date(null, '', ['class' => 'form-control text-black','maxlength'=>'160', 'v-model' => 'visit.date', 'v-bind:name' => "'recent_visits[' + i + '][date]'"]) !!}
+                                    <date-picker v-model="visit.date"
+                                                 :name="'recent_visits[' + i + '][date]'"></date-picker>
                                     <span class="help-block">
                 @{{(form_errors['recent_visits.'+i+'.date'] || [])[0]}}
                 </span>
@@ -682,7 +688,6 @@
             <div class="clearfix"></div>
         </div>
         <?php break; ?>
-
         <?php } ?>
     </div>
 </e-visa-application-form>
