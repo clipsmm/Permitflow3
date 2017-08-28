@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\ModuleUser;
 use DB;
 use App\Models\Permission;
 use App\Models\User;
@@ -44,6 +45,64 @@ class ModuleController extends Controller
             'users' => $users,
             'module' => $module
         ]);
+    }
+
+    public function addUser(Request $request, $module)
+    {
+        $user  =  null;
+
+        if ($request->id_number){
+            $user  = get_user_by_id_number($request->id_number);
+        }
+
+        $permissions  =  Permission::query()->whereOwner($module->slug)->get();
+
+        return view('backend.modules.add_user',[
+            'permissions' => $permissions,
+            'module' => $module,
+            'user' => $user
+        ]);
+    }
+
+    public function storeUser(Request $request, $module)
+    {
+        $this->validate($request, [
+            'id_number' => "required",
+        ]);
+
+        $user = get_user_by_id_number($request->id_number);
+
+        if(is_null($user)){
+            return redirect()->back()->withInput()->withErrors(['id_number' => 'Id number not found']);
+        }
+
+        $user = is_array($user) ? (Object)$user : $user;
+
+        DB::transaction(function() use ($user, $request){
+            $module = $request->route('module');
+
+            $user_model = User::firstOrcreate([
+                'id_number' => $user->id_number,
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'surname' => property_exists($user, 'surname') ? $user->surname : $user->other_name,
+                'gender' => $user->gender[0],
+                'dob' => $user->dob,
+                'id_type' => User::id_type($user),
+                'email' => property_exists($user, 'email') ? $user->email : null,
+                'phone_number' => property_exists($user, 'phone_number') ? $user->phone_number : null
+            ]);
+
+            $user_model->permissions()->sync($request->get('permissions', []));
+            ModuleUser::firstOrCreate(['user_id' => $user_model->id, 'module_slug' => $module->slug]);
+
+        });
+
+
+        return redirect()->route('backend.modules.users', [$module->slug])
+            ->with('alerts', [
+                ['type' => 'success', 'message' => __("Changes saved successfully")]
+            ]);
     }
 
     public function editUser(Request $request, $module, User $user)

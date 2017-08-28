@@ -45,6 +45,8 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
         Route::get("", 'ModuleController@index')->name("index");
         Route::get("{module}/manage", "ModuleController@show")->name("manage");
         Route::get("{module}/users", "ModuleController@users")->name("users");
+        Route::get("{module}/users/add", "ModuleController@addUser")->name("add_user");
+        Route::post("{module}/users/add", "ModuleController@storeUser")->name("add_user");
         Route::get("{module}/users/{user}", "ModuleController@editUser")->name("edit_user");
         Route::post("{module}/users/{user}", "ModuleController@updateUserPermissions")->name("update_user");
         Route::get("{module}/users/{user}/remove", "ModuleController@removeUser")->name("remove_user");

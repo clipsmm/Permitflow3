@@ -28,6 +28,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function id_type($user)
+    {
+        if(property_exists($user, 'id_type')){
+            return $user->id_type;
+        }else if(property_exists($user, 'citizenship')){
+            switch($user->citizenship){
+                case "Kenyan":
+                    return 'citizen';
+                case "Foreigner":
+                    return 'visitor';
+                case 'Alien':
+                    return 'alein';
+            }
+        }
+
+        return null;
+    }
+
 
     public function applications()
     {
