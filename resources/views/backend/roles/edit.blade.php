@@ -5,8 +5,10 @@
 @section('body')
     <div class="col-md-12">
         {!! Form::model($role, ['method' => 'PUT', 'url' => route('backend.roles.update', $role->id)]) !!}
-        <div class="panel panel-default panel-form">
-            <div class="panel-heading">@lang("Edit Role")</div>
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@lang("Edit Role")</h3>
+                </div>
             <div class="panel-body">
                 @include('backend.roles.form')
             </div>

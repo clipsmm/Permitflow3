@@ -9,13 +9,16 @@
                     <div class="panel-heading p-t-10">
                         @include('backend.settings._backend_settings_menu')
                     </div>
-                    <div class="panel-body padding-0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           <h3 class="panel-title"><a href="{{ route('backend.roles.create') }}" class="btn btn-primary"> New</a></h3>
+                        </div>
+                    <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1default">
                                 <div class="panel panel-form m-r-10 m-l-10 m-t-0 m-b-0">
                                     <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
-                                        <a href="{{ route('backend.roles.create') }}" class="btn btn-primary"> New</a>
-                                        <table class="table table-responsive table-bordered table-hover table-striped m-t-10" style="width: 92%;">
+                                        <table class="table table-hover table-special table-striped">
                                             <thead class="thead-default">
                                             <tr>
                                                 <th>Role Name</th>
@@ -27,7 +30,7 @@
                                                 <tr>
                                                     <td>{{ $role->name }}</td>
                                                     <td>
-                                                        <a href="/backend/roles/{{ $role->id }}/edit" class="btn btn-sm btn-default">Edit</a>
+                                                        <a href="/backend/roles/{{ $role->id }}/edit" class="btn btn-sm btn-default">  <span class="fa fa-pencil"></span> Edit</a>
                                                         {{--<a href="/backend/roles/{{ $role->id }}/delete" class="btn btn-sm btn-primary">Delete</a>--}}
                                                     </td>
                                                 </tr>
@@ -37,6 +40,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

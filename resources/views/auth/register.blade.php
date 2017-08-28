@@ -1,15 +1,73 @@
 @extends('layouts.app')
 
 @section('content')
+    <header>
+        <nav class="navbar navbar-inverse    navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'eVisa') }}
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            @include('layouts.partials.topnave2')
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Profile</a></li>
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-default navbar-fixed-top"  style="margin-top: 50px; background-color: #FFF; z-index: 900;">
+            <div class="container">
+                <div class="navbar-header">
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav tp-icon">
+                        <li><a href="#"><strong>Overview</strong></a></li>
+                        <li><a href="{{ route('eligibility') }}">Eligibility</a></li>
+                        <li><a href="{{ route('faq') }}">FAQs</a></li>
+                        <li><a href="contacts.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
     <div class="container">
         <div class="row m-t-0">
             <div class="col-md-12">
                 <div class="panel panel-default panel-form m-r-10 m-l-10">
                     <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
-                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                            <h3 class="p-l-20">Register</h3>
-                            <form method="POST" action="{{ route('register') }}">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Register</h3>
+                        </div>
+                        <form method="POST" action="{{ route('register') }}">
+
                         <div class="panel-body">
                             {{ csrf_field() }}
                             <div class="col-md-6">
@@ -82,13 +140,13 @@
                                 </div>
                             </div>
 
-                            {{--<div class="col-md-6">--}}
-                                {{--<div class="form-group{{ error_class($errors, "dob") }}">--}}
-                                    {{--<label for="dob" class="control-label">@lang("Date Of Birth")</label>--}}
-                                    {{--{{Form::date("dob", \Carbon\Carbon::today(), ['class' => 'form-control']) }}--}}
-                                    {{--{!! error_tag($errors, "dob") !!}--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="col-md-6">
+                                <div class="form-group{{ error_class($errors, "dob") }}">
+                                    <label for="dob" class="control-label">@lang("Date Of Birth")</label>
+                                    {{Form::date("dob", \Carbon\Carbon::today(), ['class' => 'form-control']) }}
+                                    {!! error_tag($errors, "dob") !!}
+                                </div>
+                            </div>
 
                             <div class="col-md-6">
                                 <div class="form-group{{ error_class($errors, "password") }}">
@@ -107,6 +165,7 @@
                                  </div>
                             </div>
                         </div>
+
                         <div class="panel-footer text-right">
                                 <span class="pull-left">Already have an account? <a href="{{ url('login') }}">Sign In</a>  </span>
 
@@ -118,27 +177,10 @@
                                 @lang("Register")
                             </button>
                         </div>
-                    </div>
-                </form>
+                         </form>
+                     </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="panel m-b-0 m-t-0">
-                                <div class="panel-body p-t-0 p-l-5 p-r-5 p-b-0">
-                                    <div class="alert alert_sucess_custom" role="alert">
-                                        <i class="fa fa-lg" aria-hidden="true"></i>
-                                        <strong>Registration Process !</strong>    </br></br>
-                                        Please, type the date you plan to enter Kenya to the related field.</br></br>
-                                        The validity period of your e-Visa will begin as of the date you enter Kenya.
-                                        </br></br>
-                                        Please note that the validity period is different than the period of stay. The period of stay cannot exceed the duration stated on the left-hand side. If you wish to stay longer, you must apply to your local Police Station for a residency permit.
-                                        </br></br>
-                                        If you exceed the duration stated on the left-hand side on a single entry without having a residency permit, you may be required to pay fines, deported, or banned from future travel to Kenya for a period of time.
-                                        </br></br>
-                                        The e-Visa system does not inform you the number of days you stay in Kenya. It is your responsibility to make sure that you do not overstay your visa.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                  </div>
             </div>
