@@ -363,19 +363,19 @@
             <td class="big-data width-40">
                 <h1>Scaned Passport</h1>
             </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('passport_photo.first_name') }}</td>
+            <td class="hidden-xs hidden-sm">{{ $application->get_data('passport_photo.file_name') }}</td>
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
                 <h1> Scaned Invitation Letter</h1>
             </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('additional_documents.first_name') }}</td>
+            <td class="hidden-xs hidden-sm">{{ $application->get_data('additional_documents.file_name') }}</td>
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
                 <h1>Scaned Host ID card</h1>
             </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('passport_bio.first_name')}}</td>
+            <td class="hidden-xs hidden-sm">{{ $application->get_data('passport_bio.file_name')}}</td>
 
         </tr>
         </tbody>
