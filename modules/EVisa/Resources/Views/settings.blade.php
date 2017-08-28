@@ -28,6 +28,13 @@
                                         {!! Form::number('e-visa[costs][transit_visa]', settings('e-visa.costs.transit_visa'), [ 'class' => 'form-control']) !!}
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('Visa Validity (Days)') </label>
+                                    <div class="col-sm-5">
+                                        {!! Form::number('e-visa[validity_days]', settings('e-visa.visa_validity'), [ 'class' => 'form-control', 'min' => 1]) !!}
+                                    </div>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary"> @lang('Update Settings') </button>
                                 </div>

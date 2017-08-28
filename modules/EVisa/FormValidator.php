@@ -66,11 +66,14 @@ class FormValidator
                 ]);
 
             case 3:
+                $visa_validity = Carbon::now()->addDay(settings('e-visa.visa_validity', 90));
+                $date_of_entry = new Carbon(array_get($data,'date_of_entry'));
+
                 return Validator::make($data, [
                     'travel_reason' => ['required'],
                     'other_travel_reason' => ['required_if:travel_reason,others'],
-                    'date_of_entry' => ['required', 'date', "after:{$today}"],
-                    'date_of_departure' => ['required', 'date', "after:{$today}"],
+                    'date_of_entry' => ['required', 'date', "after:{$today}", "before:{$visa_validity}"],
+                    'date_of_departure' => ['required', 'date', "after_or_equal:{$date_of_entry}"],
                     'travel_email' => ['required', 'email'],
                     'travel_phone_number' => ['required', 'full_phone'],
                     'arrival_by' => ['required', 'in:ship,road,air'],
@@ -84,7 +87,7 @@ class FormValidator
                 ], [
                     'travel_phone_number.full_phone' => __('validation.intl_phone'),
                     'date_of_entry.after' => __('validation.after_today'),
-                    'date_of_departure.after' => __('validation.after_today'),
+                    'date_of_departure.after' => __('e-visa::validation.after_date_entry'),
                     'places_to_visit.required' => __('e-visa::validation.custom.places_to_visit.required'),
                     'places_to_visit.*.*.required' => __('e-visa::validation.nested_required')
                 ]);
