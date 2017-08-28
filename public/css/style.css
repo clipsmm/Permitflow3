@@ -11,6 +11,10 @@
     border-top-right-radius: 3px;
 }
 
+.datepicker{
+    z-index: 6875667!important;
+}
+
 .panel.with-nav-tabs>.panel-heading {
     padding: 15px 5px 0 5px !important;
 }

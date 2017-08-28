@@ -287,285 +287,256 @@
         <?php break; ?>
         <?php  case 3: ?>
             <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">@lang('TRAVEL INFORMATION')</h3>
+                <div class="panel-heading">
+                    <h3 class="panel-title">@lang('TRAVEL INFORMATION')</h3>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group {{error_class($errors, 'travel_reason')}}">
+                        <label>
+                            @lang('Travel Reason')
+                        </label>
+                        {!! Form::select('travel_reason', Modules\Evisa::getTravelReasons(), null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'rows' => '3', 'v-model'=>'travelReason']) !!}
+                        {!! error_tag($errors, 'travel_reason') !!}
+                    </div>
+                </div>
+                <div v-if="travelReason == 'others'" class="col-sm-12">
+                    <div class="form-group {{error_class($errors, 'other_travel_reason')}}">
+                        <label>
+                            @lang('Give Travel Reason if Other')
+                        </label>
+                        {!! Form::textarea('other_travel_reason', null, ['class' => 'form-control text-black', 'rows' => '3']) !!}
+                        {!! error_tag($errors, 'other_travel_reason') !!}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'date_of_entry')}}">
+                        <label>
+                            @lang('Proposed Date Of Entry')
+                        </label>
+                        <date-picker value="{{old('date_of_entry', $model->date_of_entry)}}" name="date_of_entry"></date-picker>
+                        {!! error_tag($errors, 'date_of_entry') !!}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'date_of_departure')}}">
+                        <label>
+                            @lang('Proposed Date Of Departure from Kenya')
+                        </label>
+                        <date-picker value="{{old('date_of_departure', $model->date_of_departure)}}"
+                                     name="date_of_departure"></date-picker>
+                        {!! error_tag($errors, 'date_of_departure') !!}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'travel_email')}}">
+                        <label>
+                            @lang('Email Address while in Kenya')
+                        </label>
+                        {!! Form::text('travel_email', null, ['class' => 'form-control text-black']) !!}
+                        {!! error_tag($errors, 'travel_email') !!}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'travel_phone_number')}}">
+                        <label>
+                            @lang('Phone Number while in Kenya')
+                        </label>
+                        {!! Form::text('travel_phone_number', null, ['class' => 'form-control text-black']) !!}
+                        {!! error_tag($errors, 'travel_phone_number') !!}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'arrival_by')}}">
+                        <label>
+                            @lang('Arrival By')
+                        </label>
+                        {!! Form::select('arrival_by', ['air' => __('Air'), 'ship' => __('Ship'), 'road' => __('Road')],  null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'v-model'=>'arrivalBy']) !!}
+                        {!! error_tag($errors, 'arrival_by') !!}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'entry_point')}}">
+                        <label for="name_search_type">
+                            @lang('Entry Point into Kenya')
+                        </label>
+                        <template v-if="arrivalBy == 'air'">
+                            {!! Form::select('entry_point', $entry_points->where('type', 'air')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        </template>
+                        <template v-if="arrivalBy == 'road'">
+                            {!! Form::select('entry_point', $entry_points->where('type', 'road')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        </template>
+                        <template v-if="arrivalBy == 'ship'">
+                            {!! Form::select('entry_point', $entry_points->where('type', 'ship')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        </template>
+                        {!! error_tag($errors, 'entry_point') !!}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
             </div>
-        <div class="col-sm-12">
-            <div class="form-group {{error_class($errors, 'travel_reason')}}">
-                <label>
-                    @lang('Travel Reason')
-                </label>
-                {!! Form::select('travel_reason', Modules\Evisa::getTravelReasons(), null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'rows' => '3', 'v-model'=>'travelReason']) !!}
-                {!! error_tag($errors, 'travel_reason') !!}
-            </div>
-        </div>
-        <div v-if="travelReason == 'others'" class="col-sm-12">
-            <div class="form-group {{error_class($errors, 'other_travel_reason')}}">
-                <label>
-                    @lang('Give Travel Reason if Other')
-                </label>
-                {!! Form::textarea('other_travel_reason', null, ['class' => 'form-control text-black', 'rows' => '3']) !!}
-                {!! error_tag($errors, 'other_travel_reason') !!}
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group {{error_class($errors, 'date_of_entry')}}">
-                <label>
-                    @lang('Proposed Date Of Entry')
-                </label>
-                <date-picker value="{{old('date_of_entry', $model->date_of_entry)}}" name="date_of_entry"></date-picker>
-                {!! error_tag($errors, 'date_of_entry') !!}
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group {{error_class($errors, 'date_of_departure')}}">
-                <label>
-                    @lang('Proposed Date Of Departure from Kenya')
-                </label>
-                <date-picker value="{{old('date_of_departure', $model->date_of_departure)}}"
-                             name="date_of_departure"></date-picker>
-                {!! error_tag($errors, 'date_of_departure') !!}
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group {{error_class($errors, 'travel_email')}}">
-                <label>
-                    @lang('Email Address while in Kenya')
-                </label>
-                {!! Form::text('travel_email', null, ['class' => 'form-control text-black']) !!}
-                {!! error_tag($errors, 'travel_email') !!}
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group {{error_class($errors, 'travel_phone_number')}}">
-                <label>
-                    @lang('Phone Number while in Kenya')
-                </label>
-                {!! Form::text('travel_phone_number', null, ['class' => 'form-control text-black']) !!}
-                {!! error_tag($errors, 'travel_phone_number') !!}
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group {{error_class($errors, 'arrival_by')}}">
-                <label>
-                    @lang('Arrival By')
-                </label>
-                {!! Form::select('arrival_by', ['air' => __('Air'), 'ship' => __('Ship'), 'road' => __('Road')],  null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'v-model'=>'arrivalBy']) !!}
-                {!! error_tag($errors, 'arrival_by') !!}
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group {{error_class($errors, 'entry_point')}}">
-                <label for="name_search_type">
-                    @lang('Entry Point into Kenya')
-                </label>
-                <template v-if="arrivalBy == 'air'">
-                    {!! Form::select('entry_point', $entry_points->where('type', 'air')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                </template>
-                <template v-if="arrivalBy == 'road'">
-                    {!! Form::select('entry_point', $entry_points->where('type', 'road')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                </template>
-                <template v-if="arrivalBy == 'ship'">
-                    {!! Form::select('entry_point', $entry_points->where('type', 'ship')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                </template>
-                {!! error_tag($errors, 'entry_point') !!}
-            </div>
-        </div>
-            <div class="clearfix"></div>
 
-        <h4 class="col-sm-12 m-t-75">
-            @lang('DETAILS OF PLACES TO VISIT IN KENYA')
-        </h4>
-        <div class="col-sm-12">
-            <div class="row" v-for="(place, i) in placesToVisit">
-                <div class="col-sm-12 text-right">
-          <span @click.close="placesToVisit.splice(i, 1)" class="close">
-          <span class="fa fa-times-circle"></span>
-          </span>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        @lang('DETAILS OF PLACES TO VISIT IN KENYA')
+                    </h3>
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.type']}">
-                        <label for="name_search_type">
-                            @lang('Type')
-                        </label>
-                        {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['class' => 'form-control text-black',
-                        ':name' => "'places_to_visit[' + i + '][type]'", 'v-model' => 'place.type', 'maxlength'=>'160']) !!}
-                        <span class="help-block">
-            @{{(form_errors['places_to_visit.'+i+'.type'] || [])[0]}}
-            </span>
+                <div class="panel-body">
+                    <div class="form-group {{error_class($errors, 'places_to_visit')}}">
+                        {!! error_tag($errors, 'places_to_visit') !!}
+                    </div>
+                    <div class="form-group" v-for="(place, i) in placesToVisit">
+                        <div class="col-sm-12 text-right">
+                            <span @click.close="placesToVisit.splice(i, 1)" class="close">
+                                <span class="fa fa-times-circle"></span>
+                            </span>
+                        </div>
+                        <div class="col-sm-4" :class="{'has-error' : form_errors['places_to_visit.'+i+'.type']}">
+                            <label>
+                                @lang('Type')
+                            </label>
+                            {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['class' => 'form-control text-black',
+                            ':name' => "'places_to_visit[' + i + '][type]'", 'v-model' => 'place.type']) !!}
+                            <span class="help-block">
+                                @{{(form_errors['places_to_visit.'+i+'.type'] || [])[0]}}
+                            </span>
+                        </div>
+                        <div class="col-sm-4" :class="{'has-error' : form_errors['places_to_visit.'+i+'.name']}">
+                            <label>
+                                @lang('Name Of Place/Person')
+                            </label>
+                            {!! Form::text(null, '', ['v-model' => 'place.name', 'class' => 'form-control text-black', ':name' => "'places_to_visit[' + i + '][name]'",]) !!}
+                            <span class="help-block">
+                                @{{(form_errors['places_to_visit.'+i+'.name'] || [])[0]}}
+                            </span>
+                        </div>
+                        <div class="col-sm-4" :class="{'has-error' : form_errors['places_to_visit.'+i+'.address']}">
+                            <label for="name_search_type">
+                                @lang('Physical Address')
+                            </label>
+                            {!! Form::text(null, '', ['v-model' => 'place.address', 'class' => 'form-control text-black', ':name' => "'places_to_visit[' + i + '][address]'",]) !!}
+                            <span class="help-block">
+                                @{{(form_errors['places_to_visit.'+i+'.address'] || [])[0]}}
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group" :class="{'has-error' : form_errors['places_to_visit.'+i+'.name']}">
-                        <label for="name_search_type">
-                            @lang('Name Of Place/Person')
-                        </label>
-                        {!! Form::text(null, '', ['v-model' => 'place.name', 'class' => 'form-control text-black', 'maxlength'=>'160', ':name' => "'places_to_visit[' + i + '][name]'",]) !!}
-                        <span class="help-block">
-            @{{(form_errors['places_to_visit.'+i+'.name'] || [])[0]}}
-            </span>
-                    </div>
+                <div class="panel-footer">
+                    <button @click.prevent="placesToVisit.push({type: '', name: '', address: ''})"
+                            class="btn-sm btn btn-primary">
+                        <span class="fa fa-plus"></span>
+                        @lang('Add')
+                    </button>
                 </div>
-                <div class="col-sm-5">
-                    <div class="form-group"
-                         :class="{'has-error' : form_errors['places_to_visit.'+i+'.address']}">
-                        <label for="name_search_type">
-                            @lang('Physical Address')
+            </div>
+
+        <?php break; ?>
+        <?php  case 4: ?>
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                @lang('Details of countries visited in last 3 months ')
+            </div>
+            <div class="panel-body">
+                <div class="form-group" v-for="(visit, i)  in otherRecentVisits" key="visit.date">
+                    <div class="col-sm-12 text-right">
+                        <span @click.close="otherRecentVisits.splice(i, 1)" class="close">
+                            <span class="fa fa-times-circle"></span>
+                        </span>
+                    </div>
+                    <div class="col-sm-4" :class="{'has-error' : form_errors['other_recent_visits.'+i+'.country']}">
+                        <label>
+                            @lang('Country Visited')
                         </label>
-                        {!! Form::text(null, '', ['v-model' => 'place.address', 'class' => 'form-control text-black','maxlength'=>'160', ':name' => "'places_to_visit[' + i + '][address]'",]) !!}
+                        {!! Form::select(null, $country_codes, '', ['class' => 'form-control input-sm', 'value' => '',
+                        'v-model' => 'visit.country', 'v-bind:name' => "'other_recent_visits[' + i + '][country]'"]) !!}
                         <span class="help-block">
-            @{{(form_errors['places_to_visit.'+i+'.address'] || [])[0]}}
-            </span>
+                            @{{(form_errors['other_recent_visits.'+i+'.country'] || [])[0]}}
+                        </span>
+                    </div>
+
+                    <div class="col-sm-3" :class="{'has-error' : form_errors['other_recent_visits.'+i+'.date']}">
+                        <label>
+                            @lang('Date Of Visit')
+                        </label>
+                        <date-picker v-model="visit.date"
+                                     :name="'other_recent_visits[' + i + '][date]'"></date-picker>
+                        <span class="help-block">
+                            @{{(form_errors['other_recent_visits.'+i+'.date'] || [])[0]}}
+                        </span>
+                    </div>
+
+                    <div class="col-sm-5" :class="{'has-error' : form_errors['other_recent_visits.'+i+'.duration']}">
+                        <label for="name_search_type">
+                            @lang('Duration Of Visit(Days)')
+                        </label>
+                        {!! Form::number(null, '', ['class' => 'form-control input-sm', 'maxlength'=>'160', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'other_recent_visits[' + i + '][duration]'"]) !!}
+                        <span class="help-block">
+                            @{{(form_errors['other_recent_visits.'+i+'.duration'] || [])[0]}}
+                        </span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="form-group {{error_class($errors, 'places_to_visit')}}">
-                <button @click.prevent="placesToVisit.push({type: '', name: '', address: ''})"
+            <div class="panel-footer">
+                <button @click.prevent="otherRecentVisits.push({country: '', date: '', duration: ''})"
                         class="btn-sm btn btn-primary">
                     <span class="fa fa-plus"></span>
                     @lang('Add')
                 </button>
-                <br>
-                {!! error_tag($errors, 'places_to_visit') !!}
             </div>
         </div>
-        <div class="col-sm-12">
-            <br>
-        </div>
 
-        <?php break; ?>
-        <?php  case 4: ?>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @lang('Dates and Duration of previous visits to Kenya')
+                </div>
+                <div class="panel-body">
+                    <div class="form-group" v-for="(visit, i) in recentVisits" key="visit.date">
+                        <div class="col-sm-12 text-right">
+                            <span @click.close="recentVisits.splice(i, 1)" class="close">
+                                <span class="fa fa-times-circle"></span>
+                            </span>
+                        </div>
+                        <div class="col-sm-4" :class="{'has-error' : form_errors['recent_visits.'+i+'.date']}">
+                            <label>
+                                @lang('Date Of Visit')
+                            </label>
+                            <date-picker v-model="visit.date"
+                                         :name="'recent_visits[' + i + '][date]'"></date-picker>
+                            <span class="help-block">
+                                @{{(form_errors['recent_visits.'+i+'.date'] || [])[0]}}
+                            </span>
+                        </div>
 
-        <div class="panel panel-default">
+                        <div class="col-sm-4" :class="{'has-error' : form_errors['recent_visits.'+i+'.duration']}">
+                            <label>
+                                @lang('Duration Of Visit')
+                            </label>
+                            {!! Form::number(null, '', ['class' => 'form-control input-sm', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'recent_visits[' + i + '][duration]'"]) !!}
+                            <span class="help-block">
+                                @{{(form_errors['recent_visits.'+i+'.duration'] || [])[0]}}
+                            </span>
+                        </div>
 
-            <div class="panel-heading">
-                <h3 class="panel-title">@lang('TRAVEL HISTORY')</h3>
-            </div>
-
-            <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        @lang('Details of countries visited in last 3 months ')
-                    </div>
-                    <div class="panel-body">
-                        <div class="col-sm-12" v-for="(visit, i)  in otherRecentVisits" key="visit.date">
-                            <div class="col-sm-12 text-right">
-              <span @click.close="otherRecentVisits.splice(i, 1)" class="close">
-              <span class="fa fa-times-circle"></span>
-              </span>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group"
-                                     :class="{'has-error' : form_errors['other_recent_visits.'+i+'.country']}">
-                                    <label for="name_search_type">
-                                        @lang('Country Visited')
-                                    </label>
-                                    {!! Form::select(null, $country_codes, '', ['class' => 'form-control text-black', 'maxlength'=>'160', 'value' => '',
-                                    'v-model' => 'visit.country', 'v-bind:name' => "'other_recent_visits[' + i + '][country]'"]) !!}
-                                    <span class="help-block">
-                @{{(form_errors['other_recent_visits.'+i+'.country'] || [])[0]}}
-                </span>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group"
-                                     :class="{'has-error' : form_errors['other_recent_visits.'+i+'.date']}">
-                                    <label for="name_search_type">
-                                        @lang('Date Of Visit')
-                                    </label>
-                                    <date-picker v-model="visit.date"
-                                                 :name="'other_recent_visits[' + i + '][date]'"></date-picker>
-                                    <span class="help-block">
-                @{{(form_errors['other_recent_visits.'+i+'.date'] || [])[0]}}
-                </span>
-                                </div>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="form-group"
-                                     :class="{'has-error' : form_errors['other_recent_visits.'+i+'.duration']}">
-                                    <label for="name_search_type">
-                                        @lang('Duration Of Visit(Days)')
-                                    </label>
-                                    {!! Form::number(null, '', ['class' => 'form-control text-black', 'maxlength'=>'160', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'other_recent_visits[' + i + '][duration]'"]) !!}
-                                    <span class="help-block">
-                @{{(form_errors['other_recent_visits.'+i+'.duration'] || [])[0]}}
-                </span>
-                                </div>
-                            </div>
+                        <div class="col-sm-4" :class="{'has-error' : form_errors['recent_visits.'+i+'.duration_type']}">
+                            <label>
+                                @lang('Duration Type')
+                            </label>
+                            {!! Form::select(null, ['days' => __('Days'), 'months' => __('Months'), 'years' => __('Years')], '',
+                            ['class' => 'form-control input-sm', 'placeholder' => __('--Select--'), 'v-model' => 'visit.duration_type', 'v-bind:name' => "'recent_visits[' + i + '][duration_type]'"]) !!}
+                            <span class="help-block">
+                                @{{(form_errors['recent_visits.'+i+'.duration_type'] || [])[0]}}
+                            </span>
                         </div>
                     </div>
-                    <div class="panel-footer">
-                        <button @click.prevent="otherRecentVisits.push({country: '', date: '', duration: ''})"
-                                class="btn-sm btn btn-primary">
-                            <span class="fa fa-plus"></span>
-                            @lang('Add')
-                        </button>
-                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button @click.prevent="recentVisits.push({duration_type: '', date: '', duration: ''})"
+                            class="btn-sm btn btn-primary">
+                        <span class="fa fa-plus"></span>
+                        @lang('Add')
+                    </button>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        @lang('Dates and Duration of previous visits to Kenya')
-                    </div>
-                    <div class="panel-body">
-                        <div class="col-sm-12" v-for="(visit, i) in recentVisits" key="visit.date">
-                            <div class="col-sm-12 text-right">
-              <span @click.close="recentVisits.splice(i, 1)" class="close">
-              <span class="fa fa-times-circle"></span>
-              </span>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group"
-                                     :class="{'has-error' : form_errors['recent_visits.'+i+'.date']}">
-                                    <label for="name_search_type">
-                                        @lang('Date Of Visit')
-                                    </label>
-                                    <date-picker v-model="visit.date"
-                                                 :name="'recent_visits[' + i + '][date]'"></date-picker>
-                                    <span class="help-block">
-                @{{(form_errors['recent_visits.'+i+'.date'] || [])[0]}}
-                </span>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="name_search_type">
-                                        @lang('Duration Of Visit')
-                                    </label>
-                                    <div class="row col-sm-12">
-                                        <div class="col-sm-7"
-                                             :class="{'has-error' : form_errors['recent_visits.'+i+'.duration']}">
-                                            {!! Form::number(null, '', ['class' => 'form-control text-black', 'maxlength'=>'160', 'min' => 1, 'v-model' => 'visit.duration', 'v-bind:name' => "'recent_visits[' + i + '][duration]'"]) !!}
-                                            <span class="help-block">
-                    @{{(form_errors['recent_visits.'+i+'.duration'] || [])[0]}}
-                    </span>
-                                        </div>
-                                        <div class="col-sm-5"
-                                             :class="{'has-error' : form_errors['recent_visits.'+i+'.duration_type']}">
-                                            {!! Form::select(null, ['days' => __('Days'), 'months' => __('Months'), 'years' => __('Years')], '',
-                                            ['class' => 'form-control text-black', 'maxlength'=>'160', 'placeholder' => __('--Select--'), 'v-model' => 'visit.duration_type', 'v-bind:name' => "'recent_visits[' + i + '][duration_type]'"]) !!}
-                                            <span class="help-block">
-                    @{{(form_errors['recent_visits.'+i+'.duration_type'] || [])[0]}}
-                    </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                        <button @click.prevent="recentVisits.push({duration_type: '', date: '', duration: ''})"
-                                class="btn-sm btn btn-primary">
-                            <span class="fa fa-plus"></span>
-                            @lang('Add')
-                        </button>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'returning_to_country')}}">
                     <label for="name_search_type">
@@ -595,6 +566,7 @@
                     {!! error_tag($errors, 'no_return_reason') !!}
                 </div>
             </div>
+
             <div class="clearfix"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'denied_entry_before')}}">
@@ -686,7 +658,7 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-        </div>
+
         <?php break; ?>
         <?php } ?>
     </div>

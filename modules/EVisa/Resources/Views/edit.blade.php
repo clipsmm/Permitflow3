@@ -17,11 +17,7 @@
                     </div>
                     {!! Form::model($model, ['files' => true, 'url' => route('e-visa.application.update', ['application' => $application, 'step' => $step])]) !!}
                     <div class="panel-body">
-                        <div class="panel panel-default">
-                            <div class="panel-body p-t-0 p-r-0 p-b-0 p-l-0">
                                 @include('e-visa::form_body')
-                            </div>
-                        </div>
                     </div>
                     <div class="panel-footer text-right">
                         @if($step > 1)
