@@ -131,7 +131,15 @@ class EVisa extends BaseModule implements ModuleInterface
         if ($application->submitted_at) {
             return null;
         }
-        return Invoice::create_invoice($application->id, [['amount' => 20, 'description' => 'foo']], 'bar');
+
+        $cost = settings($this->slug.".costs.".$application->get_data('visa_type'), 0);
+
+        if (!$cost){
+            Task::create_task($application->id, "Evisa Review Task",'review','pending');
+            return null;
+        }
+
+        return Invoice::create_invoice($application->id, [['amount' => $cost, 'description' => 'foo']], "Application No {$application->application_number}");
     }
 
     public function get_permissions()
