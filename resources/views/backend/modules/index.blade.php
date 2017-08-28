@@ -37,8 +37,7 @@
                                                     </td>
                                                     <td class="hidden-xs hidden-sm">{!! $module->enabled ? '<span class="label label-success">Enabled</span>' : '<span class="label label-danger">Disabled</span>'  !!} </td>
                                                     <td>
-                                                        <a href="#" class="" title="Access Management"><i class="fa fa-users"></i> </a>
-                                                        <a href="{{ route('backend.modules.manage', $module->slug) }}" class="" title="Settings"><i class="fa fa-cog"></i> </a>
+                                                        <a href="{{ route('backend.modules.users', $module->slug) }}" class="" title="Access Management"><i class="fa fa-users"></i> </a>
                                                     </td>
                                                 </tr>
                                             @empty
