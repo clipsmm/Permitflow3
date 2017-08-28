@@ -33,7 +33,7 @@ Route::group(['prefix' => 'applications', 'namespace' => 'Frontend', 'as' => 'fr
 /*
  * Backend routes
  */
-Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.', 'middleware' => ['backend']], function () {
     Route::get('', 'DashboardController@index');
 
     Route::group(['prefix' => 'modules', 'as' => 'modules.'], function () {

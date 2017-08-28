@@ -121,9 +121,9 @@ class EVisa extends BaseModule implements ModuleInterface
                     'passport_date_of_issue' => ['required', 'date', "before:{$tomorrow}"],
                     'passport_date_of_expiry' => ['required', "after:{$today}"],
                     'passport_issued_by' => ['required'],
-                    'passport_bio' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
-                    'passport_photo' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg'],
-                    'additional_documents' => ['required', 'file', 'max:2048', 'mimes:pdf,png,jpg,jpeg']
+                    'passport_bio' => ['required', 'file-upload:pdf jpg jpeg,2048'],
+                    'passport_photo' => ['required', 'file-upload:pdf jpg jpeg,2048'],
+                    'additional_documents' => ['required', 'file-upload:pdf jpg jpeg,2048']
 
                 ], [
                     'passport_date_of_issue.before' => __('validation.before_tomorrow'),
@@ -231,8 +231,8 @@ class EVisa extends BaseModule implements ModuleInterface
     public function get_permissions()
     {
         return [
-            ['name' => 'approve_application', 'label' => 'Approve Application', 'guard' => 'web'],
-            ['name' => 'reject_application', 'label' => 'Reject Application', 'guard' => 'web']
+            ['name' => 'review.approve', 'label' => 'Approve Application', 'guard' => 'web'],
+            ['name' => 'review.reject', 'label' => 'Reject Application', 'guard' => 'web']
         ];
     }
 

@@ -1,15 +1,18 @@
 import Vue from 'vue';
 
-module.exports = Vue.component('file-upload', {
+export default Vue.component('file-upload', {
     template: `
   <div>
   <template v-if="isInvalid()">
-    <input type="hidden" :name="field" value="remove">
+    <input type="hidden" :name="field" :value="null">
     <input :name="field" type="file" class="form-control-file form-control input-sm">
   </template>
   <template v-else>
-    <input type="hidden" :name="field" :value="JSON.stringify(value)">
-    <p class="form-control-static">{{ value.file_name }} (<a href="#" @click.prevent="value = \'remove\'">{{ label }}</a>)</p>\
+    <input type="hidden" :name="pathField()" :value="(value.path)">
+    <input type="hidden" :name="nameField()" :value="(value.file_name)">
+    <p class="form-control form-control-static padding-10">
+   {{ value.file_name }} (<a href="#" @click.prevent="value = 'remove'">{{ label }}</a>)
+</p>
   </template>
   </div>
   `,
@@ -28,7 +31,13 @@ module.exports = Vue.component('file-upload', {
          * path, filename and content_type
          */
         isInvalid: function () {
-            return !this.value || (this.value && (this.value == 'remove' || !!this.value.path))
+            return !this.value || (this.value && (this.value === 'remove' || !this.value.path))
+        },
+        pathField(){
+            return this.field + '[path]';
+        },
+        nameField(){
+            return this.field + '[file_name]';
         }
     }
 });

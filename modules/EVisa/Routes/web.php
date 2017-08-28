@@ -26,7 +26,7 @@ Route::group(['prefix' => 'e-visa', 'as' => 'e-visa.'], function () {
     Route::get('/applications/{application}/edit', 'ApplicationController@edit')->name('application.edit');
     Route::post('/applications/{application}/update', 'ApplicationController@update')->name('application.update');
 
-    Route::get('backend/settings', 'SettingsController@allSettings')->name('settings.all');
-    Route::post('backend/settings', 'SettingsController@saveSettings')->name('settings.save');
+    Route::get('backend/settings', 'SettingsController@allSettings')->name('settings.all')->middleware('backend');
+    Route::post('backend/settings', 'SettingsController@saveSettings')->name('settings.save')->middleware('backend');
 });
 
