@@ -19,8 +19,10 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "bootstrap-datepicker": "^1.7.1",
     "browser-sync": "^2.18.13",
     "browser-sync-webpack-plugin": "^1.2.0",
-    "jquery-confirm": "^3.3.2"
+    "jquery-confirm": "^3.3.2",
+    "moment": "^2.18.1"
   }
 }

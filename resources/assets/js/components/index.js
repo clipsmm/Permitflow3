@@ -5,3 +5,4 @@
 
 require('./confirmed-action.vue');
 require('./file-upload.vue');
+require('./datepicker.vue');

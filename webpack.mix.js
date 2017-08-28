@@ -12,7 +12,12 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .styles(['node_modules/jquery-confirm/dist/jquery-confirm.min.css', 'resources/assets/brs_assets/brs.css'], 'public/css/app.css');
+   .styles([
+       'node_modules/jquery-confirm/dist/jquery-confirm.min.css',
+       'resources/assets/brs_assets/brs.css',
+       'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+       ],
+       'public/css/app.css');
 
 if (mix.inProduction()) {
     mix.version();
