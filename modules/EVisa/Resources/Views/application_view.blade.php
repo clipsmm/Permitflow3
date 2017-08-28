@@ -340,13 +340,13 @@
         <tbody>
         <tr class=' '>
             <td class="big-data width-40">
-                <h1>Will you be returning to your Country of Residence/Domicile?</h1>
+                <h5>Will you be returning to your Country of Residence/Domicile?</h5>
             </td>
             <td class="hidden-xs hidden-sm"><a href="#" class="btn btn-xs btn-default">{{ $application->get_data('returning_to_country') ? 'YES' : 'NO' }}</a></td>
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
-                <h1>Have you been previously denied entry into Kenya? If yes state when and give reasons for denial</h1>
+                <h5>Have you been previously denied entry into Kenya? If yes state when and give reasons for denial</h5>
             </td>
             <td>
                 <a href="#" class="btn btn-xs btn-default">
@@ -356,7 +356,7 @@
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
-                <h1>Have you been previously denied entry into another Country? If yes state when and give reasons for denial</h1>
+                <h5>Have you been previously denied entry into another Country? If yes state when and give reasons for denial</h5>
             </td>
             <td>
                 <a href="#" class="btn btn-xs btn-default">
@@ -366,7 +366,7 @@
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
-                <h1>Have you ever been convicted of any offence under any system of law? If yes give offense and penalty?</h1>
+                <h5>Have you ever been convicted of any offence under any system of law? If yes give offense and penalty?</h5>
             </td>
             <td>
                 <a href="#" class="btn btn-xs btn-default">
