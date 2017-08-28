@@ -247,18 +247,27 @@ class EVisa extends BaseModule implements ModuleInterface
             [
                 'name' => __('e-visa::menus.tasks'),
                 'action' => route('backend.tasks.queue', $this->slug),
-                'icon' => 'fa fa-tasks'
+                'icon' => 'fa fa-tasks',
+                'type' => 'success'
             ],
             [
-                'name' => __('e-visa::menus.settings'),
-                'action' => route('e-visa.settings.all'),
-                'icon' => 'fa fa-cogs'
+                'name' => __('e-visa::menus.applications'),
+                'action' => route('backend.applications.index', $this->slug),
+                'icon' => 'fa fa-pencil-square-o',
+                'type' => 'primary'
             ],
             [
                 'name' => __('labels.outputs'),
                 'action' => route("backend.outputs.index", $this->slug),
-                'icon' => 'fa fa-newspaper-o'
-            ]
+                'icon' => 'fa fa-newspaper-o',
+                'type' => 'danger'
+            ],
+            [
+                'name' => __('e-visa::menus.settings'),
+                'action' => route('e-visa.settings.all'),
+                'icon' => 'fa fa-cogs',
+                'type' => 'info'
+            ],
         ];
     }
 

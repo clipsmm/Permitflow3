@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.module')
 
 @section('body')
     <div class="panel with-nav-tabs panel-default m-b-0">

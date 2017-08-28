@@ -10,3 +10,7 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
+
+.panel.with-nav-tabs>.panel-heading {
+    padding: 15px 5px 0 5px !important;
+}
