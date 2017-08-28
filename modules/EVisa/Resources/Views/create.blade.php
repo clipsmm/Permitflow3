@@ -5,28 +5,20 @@
     }
 @endphp
 @section('body')
+    <div class="container">
     <div class="row m-t-0">
-        <div class="col-md-12">
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
             <div class="panel panel-default panel-form">
+                <div class="panel-heading">
+                <h3 class="panel-title">
+                    @lang('e-visa::common.kenyan_visa')
+                </h3>
+                </div>
                 {!! Form::model($model, ['files' => true, 'url' => route('e-visa.application.new', ['step' => $step])]) !!}
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h4>
-                                @lang('e-visa::common.kenyan_visa')
-                            </h4>
-                            <hr>
-                            <div>
-                                @include('e-visa::steps.progress_bar')
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body p-t-0 p-r-0 p-b-0 p-l-0">
                             @include('e-visa::form_body')
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="panel m-b-0 m-t-0">
-                                @include('e-visa::steps.side_info')
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,5 +39,6 @@
                 {!! Form::close() !!}
             </div>
         </div>
+    </div>
     </div>
 @stop

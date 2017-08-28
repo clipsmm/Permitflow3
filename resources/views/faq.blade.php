@@ -24,7 +24,7 @@
                                     <li>
                                         <a href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
-                                   document.getElementById('logout-form').submit();">
+                           document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -53,13 +53,12 @@
                             <div class="panel panel-default ">
                                 <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question0">
                                     <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: What is Lorem Ipsum?</a>
+                                        <a href="#" class="ing">Q: Do I need an e-visa to visit Kenya?</a>
                                     </h4>
                                 </div>
                                 <div id="question0" class="panel-collapse collapse" style="height: 0px;">
                                     <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five <a href="http://jquery2dotnet.com/" class="label label-success">http://jquery2dotnet.com/</a> centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                        <p><strong>A: </strong>  All foreign citizens wishing to travel to Kenya will need an evisa, except citizens from countries who are exempt. Click HERE for a list of exempted countries.
                                         </p>
                                     </div>
                                 </div>
@@ -67,260 +66,148 @@
                             <div class="panel panel-default ">
                                 <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
                                     <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
+                                        <a href="#" class="ing">Q: Who needs to obtain an e-visa?</a>
                                     </h4>
                                 </div>
                                 <div id="question1" class="panel-collapse collapse" style="height: 0px;">
                                     <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                    <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Why do we use it?</a>
-                                    </h4>
-                                </div>
-                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                                        <p><strong>A: </strong> The e-visa is only available to passport holders from 148 evisa eligible countries. Click HERE for a list of eligible nationalities.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel panel-default ">
                                 <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question2">
                                     <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Where does it come from?</a>
+                                        <a href="#" class="ing">Q:  What types of visas are available for those visiting the Republic of Kenya?</a>
                                     </h4>
                                 </div>
                                 <div id="question2" class="panel-collapse collapse" style="height: 0px;">
                                     <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                                        <p><strong>A: </strong> There are three e-visa types for people traveling to the Republic of Kenya temporarily.<br/><br/>
+                                            <strong>Single Entry visa - </strong> Issued for single entry to persons whose nationalities require a visa to enter Kenya either for business, tourism or medical reasons.<br/><br/>
+                                            <strong>Transit visa - </strong> Issued to persons connecting through Kenya to other destinations for a period not exceeding 72 hours. Those connecting flights directly without leaving the airport dont need to apply for Transit visas.<br/><br/>
+                                            <strong>Courtesy visa - </strong> Issued to Diplomatic, Official and Service passport holders coming into the country on official duties, or transiting through Kenya to a third country for official business or duties. It is also issued to government officials and dignitaries on official duties but holding ordinary passports. It is issued free of charge / gratis.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel panel-default ">
                                 <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question3">
                                     <h4 class="panel-title">
-                                        <a href="#" class="ing">Q: Where can I get some?</a>
+                                        <a href="#" class="ing">Q: How much is the e-visa??</a>
                                     </h4>
                                 </div>
                                 <div id="question3" class="panel-collapse collapse" style="height: 0px;">
                                     <div class="panel-body">
-                                        <h5><span class="label label-primary">Answer</span></h5>
-                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. </p>
+                                        <p><strong>A: </strong>  1: Single entry visa USD $51.<br/>Transit visa USD $21.<br/>Courtesy visa No Charge.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question4">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q: Who DOES NOT qualify to apply for an evisa??</a>
+                                    </h4>
+                                </div>
+                                <div id="question4" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> If you are a passport holder of the CATEGORY THREE COUNTRIES, you will be required to submit a paper based application for a visa to the Department of Immigration services.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question5">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q:  How long does it take to get an e-Visa for Kenya??</a>
+                                    </h4>
+                                </div>
+                                <div id="question5" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> The processing time is 2 business days.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question6">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q:  What should I do after I apply for my e-Visa?</a>
+                                    </h4>
+                                </div>
+                                <div id="question6" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> Once the it is approved, the evisa will be made available to your evisa account. You must print a copy to carry with your passport and bring it along when you travel to Kenya. When you arrive in Kenya, you must have your evisa printout with your passport.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question7">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q: When will my eVisa expire?</a>
+                                    </h4>
+                                </div>
+                                <div id="question7" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> An evisa to Kenya once issued is valid for 3 months before you travel. Once you present yourself to immigration control at the port of entry, you may be issued with a stay period not exceeding 90 days, which may be renewed for a further 90 days at the immigration headquarters.<br/>The maximum number of days a visitor may stay in Kenya is 6 months.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question8">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q:  If my e-Visa application is denied by the Kenyan government will my fees be refunded?</a>
+                                    </h4>
+                                </div>
+                                <div id="question8" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> No, once the application has been submitted to the Kenyan government, the e-Visa application fees are non-refundable.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question9">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q:  I have already visited Kenya one time using my single entry visa, do I need to apply for another e-Visa?</a>
+                                    </h4>
+                                </div>
+                                <div id="question9" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> Yes, when your visa is used or expired you need to apply for another visa in order to travel to Kenya again.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question10">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q: Can i extend my stay in Kenya??</a>
+                                    </h4>
+                                </div>
+                                <div id="question10" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> After the initial days allocated by the immigration control at the port of entry have elapsed, you renew your visa at the immigration headquarters in Nairobi. The maximum number of days a visitor may stay in Kenya is 6 months.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question11">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q: If I cancel my online order will my fees be refunded?</a>
+                                    </h4>
+                                </div>
+                                <div id="question11" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> Once the application is in process, the e-Visa application fees are non-refundable.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question12">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Q:  Is my personal information secure to submit online??</a>
+                                    </h4>
+                                </div>
+                                <div id="question12" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p><strong>A: </strong> Yes, when you complete your application for a Kenyan e-Visa, your information is secure and is submitted directly to the Kenyan government. Your personal information will be processed only for the purpose of making a decision on your visa application. <br/>Protection of the personal data provided in the application form will be the responsibility of the Kenyan government.</p>
                                     </div>
                                 </div>
                             </div>

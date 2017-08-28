@@ -78,9 +78,31 @@ class Task extends Model
         return $query->where('tasks.user_id', $user ? : user()->id);
     }
 
-    public function scopeQueued($query)
+    public function scopeQueued($query, $module = null)
     {
-        return $query->whereNull('tasks.user_id')->whereNull("tasks.assigned_at");
+        if($module)
+            return $query->whereNull('tasks.user_id')->whereNull("tasks.assigned_at");
+
+        $perms = [];
+
+        // fetch permitted stages from user module permissions
+        user()->permissions()->where('owner', $module)
+            ->get()
+            ->each(function($i) use (&$perms){
+                $stripped  = explode('.',$i->name);
+
+                // always assume that module permission is in the form of module.stage.permission for task
+                // related permission
+                $stage  = array_get($stripped,1);
+
+                $perms[] = $stage;
+            })->toArray();
+
+
+        // only query for tasks in permitted stages
+        return $query->whereNull('tasks.user_id')
+            ->whereNull("tasks.assigned_at")
+            ->whereIn('tasks.stage', $perms);
     }
 
     public function scopeInCorrections($query)

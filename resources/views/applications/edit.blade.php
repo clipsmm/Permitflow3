@@ -3,7 +3,7 @@
     {!! Form::open(['url' => route('application.save', ['module_slug' => $module->slug])]) !!}
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('Edit Application')
+            <h3 class="panel-title">@lang('Edit Application')</h3>
         </div>
         <div class="panel-body">
              @yield('form-body')

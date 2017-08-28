@@ -47,6 +47,7 @@ class Permission extends Model implements \Spatie\Permission\Contracts\Permissio
 
     public static function constructName($name, $prefix)
     {
-        return snake_case(implode('_', [studly_case($prefix), $name]));
+        return $prefix.".".$name;
+        //return snake_case(implode('_', [studly_case($prefix), $name]));
     }
 }
