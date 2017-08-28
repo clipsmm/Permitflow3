@@ -46,4 +46,13 @@ Route::bind('application_output', function ($value) {
     }
 });
 
+Route::bind('user', function ($value) {
+    try {
+        return App\Models\User::whereId($value)
+            ->firstOrFail();
+    } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        abort(404, "Page not found");
+    }
+});
+
 

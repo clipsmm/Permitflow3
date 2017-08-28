@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Modules\BaseModule;
+use Caffeinated\Modules\Facades\Module;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
@@ -35,6 +37,15 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes["password"] = bcrypt($password);
+    }
+
+    public function modules()
+    {
+        $access  = \DB::table('module_user')->selectRaw("module_slug")->where('user_id', $this->id)->get();
+
+        return BaseModule::get_all_modules()->filter(function($m) use ($access){
+            return in_array($m->slug, $access->pluck('module_slug')->toArray());
+        });
     }
 
     /**

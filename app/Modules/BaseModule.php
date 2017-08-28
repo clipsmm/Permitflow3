@@ -11,7 +11,9 @@ namespace App\Modules;
 
 use App\Models\Application;
 use App\Models\Task;
+use App\Models\User;
 use Caffeinated\Modules\Facades\Module;
+use Illuminate\Support\Collection;
 
 class BaseModule
 {
@@ -30,6 +32,9 @@ class BaseModule
         });
     }
 
+    /**
+     * @return Collection
+     */
     public static function get_all_modules()
     {
         return Module::all()->map(function($item){
@@ -37,6 +42,10 @@ class BaseModule
         });
     }
 
+    /**
+     * @param $slug
+     * @return BaseModule
+     */
     public static function instance_from_slug($slug)
     {
         $attrs = Module::where('slug', $slug);
@@ -114,5 +123,11 @@ class BaseModule
     public function authorizeTask($task, $user)
     {
         return true;
+    }
+
+    public function users()
+    {
+        $user_ids  =  \DB::table('module_user')->selectRaw("user_id")->where('module_slug', $this->slug)->get();
+        return User::query()->whereIn('id', $user_ids->pluck('user_id')->toArray());
     }
 }

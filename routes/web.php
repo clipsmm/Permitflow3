@@ -12,6 +12,11 @@
 */
 
 
+Route::get('rock', function(){
+    $e  =  \App\Modules\BaseModule::instance_from_slug('e-visa');
+
+    return $e->users()->get();
+});
 
 Route::get('/', 'LandingPageController@index')->name('welcome');
 Route::get('/faq', 'LandingPageController@faq')->name('faq');
@@ -39,7 +44,10 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
     Route::group(['prefix' => 'modules', 'as' => 'modules.'], function () {
         Route::get("", 'ModuleController@index')->name("index");
         Route::get("{module}/manage", "ModuleController@show")->name("manage");
-        Route::get("{module}/permissions", "ModuleController@managePermissions")->name("permissions");
+        Route::get("{module}/users", "ModuleController@users")->name("users");
+        Route::get("{module}/users/{user}", "ModuleController@editUser")->name("edit_user");
+        Route::post("{module}/users/{user}", "ModuleController@updateUserPermissions")->name("update_user");
+        Route::get("{module}/users/{user}/remove", "ModuleController@removeUser")->name("remove_user");
     });
 
     Route::group(['prefix' => '{module}'], function () {
