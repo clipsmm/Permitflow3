@@ -14,7 +14,7 @@
                             <div class="tab-pane fade in active" id="tab1default">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Reset Landing Page</h3>
+                                        <h3 class="panel-title">Set Page</h3>
                                     </div>
                                     <form class="form-horizontal" method="post" action="{{ route('e-visa.settings.save') }}">
                                     <div class="panel-body">

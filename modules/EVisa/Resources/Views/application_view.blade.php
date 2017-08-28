@@ -3,7 +3,7 @@
         <h3 class="panel-title">@lang('e-visa::common.single_entry_visa')</h3>
     </div>
     <div class="panel-body">
-    <table class="table table-special m-b-0 ">
+     <table class="table table-hover table-special table-striped">
         <tbody>
         <tr class=' '>
             <td class="big-data width-40">
@@ -26,7 +26,7 @@
         <h3 class="panel-title">@lang('e-visa::common.traveler_info')</h3>
     </div>
     <div class="panel-body">
-    <table class="table table-special m-b-0 ">
+     <table class="table table-hover table-special table-striped">
         <tbody>
         <tr class=' '>
             <td class="big-data width-40">
@@ -113,7 +113,7 @@
         <h3 class="panel-title">@lang('Nationality and Residence')</h3>
     </div>
     <div class="panel-body">
-    <table class="table table-special m-b-0 ">
+     <table class="table table-hover table-special table-striped">
         <tbody>
         <tr class=' '>
             <td class="big-data width-40">
@@ -168,7 +168,7 @@
         <h3 class="panel-title">@lang('Passport / Travel Documents')</h3>
     </div>
     <div class="panel-body">
-    <table class="table table-special m-b-0 ">
+     <table class="table table-hover table-special table-striped">
         <tbody>
         <tr class=' '>
             <td class="big-data width-40">
@@ -215,7 +215,7 @@
         <h3 class="panel-title">@lang('Travel Information')</h3>
     </div>
     <div class="panel-body">
-    <table class="table table-special m-b-0 ">
+     <table class="table table-hover table-special table-striped">
         <tbody>
         <tr class=' '>
             <td class="big-data width-40">
@@ -278,7 +278,7 @@
         <h3 class="panel-title">@lang('Travel History')</h3>
     </div>
     <div class="panel-body">
-    <table class="table table-special m-b-0 ">
+     <table class="table table-hover table-special table-striped">
         <tbody>
         <tr class=' '>
             <td class="big-data width-40">
@@ -357,7 +357,7 @@
         <h3 class="panel-title">@lang('Supporting Documents')</h3>
     </div>
     <div class="panel-body">
-    <table class="table table-special m-b-0 ">
+     <table class="table table-hover table-special table-striped">
         <tbody>
         <tr class=' '>
             <td class="big-data width-40">
