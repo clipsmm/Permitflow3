@@ -9,13 +9,7 @@
             <td class="big-data width-40">
                 <h1>Where are you making this application from?</h1>
             </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('country_of_application') }}</td>
-        </tr>
-        <tr class=' '>
-            <td class="big-data width-40">
-                <h1>applying for yourself or for your Child:</h1>
-            </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('applicant') }}</td>
+            <td class="hidden-xs hidden-sm">{{ array_get($lookup_data['country_codes'], $model->country_of_application) }}</td>
         </tr>
         </tbody>
     </table>
@@ -69,7 +63,7 @@
                 <h1>Country of Birth</h1>
             </td>
             <td>
-                {{ $application->get_data('country_of_birth') }}
+                {{ array_get($lookup_data['country_codes'], $model->country_of_birth)  }}
             </td>
         </tr>
         <tr class=' '>
@@ -119,13 +113,17 @@
             <td class="big-data width-40">
                 <h1>Current Nationality</h1>
             </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('nationality') }}</td>
+            <td class="hidden-xs hidden-sm">
+                {{ array_get($lookup_data['country_codes'], $model->nationality)  }}
+            </td>
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
                 <h1>Country of Residence</h1>
             </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('country_of_residence') }}</td>
+            <td class="hidden-xs hidden-sm">
+                {{ array_get($lookup_data['country_codes'], $model->country_of_residence)  }}
+            </td>
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
@@ -174,7 +172,9 @@
             <td class="big-data width-40">
                 <h1>Passport Number </h1>
             </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('passport_number') }}</td>
+            <td class="hidden-xs">
+                {{ $model->passport_number }}
+            </td>
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
@@ -221,8 +221,20 @@
             <td class="big-data width-40">
                 <h1>Reason For Travel </h1>
             </td>
-            <td class="hidden-xs hidden-sm">{{ $application->get_data('travel_reason') }}</td>
+            <td class="hidden-xs hidden-sm">
+                {{ array_get($lookup_data['travel_reasons'], $model->travel_reason)  }}
+            </td>
         </tr>
+        @if($model->travel_reason == 'other')
+        <tr class=' '>
+            <td class="big-data width-40">
+                <h1>Reason For Travel(If Other)</h1>
+            </td>
+            <td class="hidden-xs hidden-sm">
+                {{ $model->other_travel_reason  }}
+            </td>
+        </tr>
+        @endif
         <tr class=' '>
             <td class="big-data width-40">
                 <h1>Proposed Date of Entry</h1>
@@ -234,16 +246,6 @@
                 <h1>Proposed Date of Departure from Kenya</h1>
             </td>
             <td class="hidden-xs hidden-sm">{{ $application->get_data('date_of_departure') }}</td>
-        </tr>
-        <tr class=' '>
-            <td class="big-data width-40">
-                <h1>Full names and Physical address of Hotels / Places / Firms / Friends or Relatives to be visited in Kenya</h1>
-            </td>
-            <td>
-                <a href="#" class="btn btn-xs btn-default">
-                {{ $application->get_data('date_of_departure') }}
-                </a>
-            </td>
         </tr>
         <tr class=' '>
             <td class="big-data width-40">
@@ -271,6 +273,27 @@
         </tr>
         </tbody>
     </table>
+    <h5>Full names and Physical address of Hotels / Places / Firms / Friends or Relatives to be visited in Kenya</h5>
+    @foreach($application->get_data('places_to_visit', []) as $place)
+        <div class="col-sm-4">
+            <strong>
+                Type:
+            </strong> {{$place['type']}}
+        </div>
+        <div class="col-sm-4">
+            <strong>
+                Name:
+            </strong>
+            {{$place['name']}}
+        </div>
+        <div class="col-sm-4">
+            <strong>
+                Address:
+            </strong>
+            {{$place['address']}}
+        </div>
+        <div class="clearfix"></div>
+    @endforeach
     </div>
 </div>
 <div class="panel panel-default">
@@ -278,40 +301,43 @@
         <h3 class="panel-title">@lang('Travel History')</h3>
     </div>
     <div class="panel-body">
+        <h5>Dates and Duration of recent visits to other countries in the last 3 months</h5>
+        @foreach($application->get_data('other_recent_visits', []) as $visit)
+            <div class="col-sm-4">
+                <strong>
+                    Date:
+                </strong> {{$visit['date']}}
+            </div>
+            <div class="col-sm-4">
+                <strong>
+                    Country:
+                </strong> {{ array_get($lookup_data['country_codes'], $visit['country']) }}
+            </div>
+            <div class="col-sm-4">
+                <strong>
+                    Duration:
+                </strong> {{ $visit['duration'] }} Day(s)
+            </div>
+            <div class="clearfix"></div>
+        @endforeach
+        <br>
+        <h5>Dates and Duration of previous visits to Kenya</h5>
+        @foreach($application->get_data('recent_visits', []) as $visit)
+            <div class="col-sm-4">
+                <strong>
+                    Date:
+                </strong> {{$visit['date']}}
+            </div>
+            <div class="col-sm-4">
+                <strong>
+                    Duration:
+                </strong> {{ $visit['duration'] }} {{ $visit['duration_type'] }}
+            </div>
+            <div class="clearfix"></div>
+        @endforeach
+
     <table class="table table-special m-b-0 ">
         <tbody>
-        <tr class=' '>
-            <td class="big-data width-40">
-                <h1>Dates and Duration of recent visits to other countries in the last 3 months</h1>
-            </td>
-            <td class="hidden-xs hidden-sm">
-                @foreach($application->get_data('recent_visits',[]) as $visit)
-                    <ul style="list-style-type:none">
-                        <li>Duration:  <a href="#" class="btn btn-xs btn-default">{{  $visit['duration'] }} days</a></li><br/>
-                        <li>Date:      <a href="#" class="btn btn-xs btn-default">{{  $visit['date'] }}</a></li><br/>
-                        <li>Duration Type :  <a href="#" class="btn btn-xs btn-default">{{  $visit['duration_type'] }}</a></li>
-                    </ul>
-
-                @endforeach
-            </td>
-
-        </tr>
-        <tr class=' '>
-            <td class="big-data width-40">
-                <h1>Dates and Duration of previous visits to Kenya</h1>
-            </td>
-            <td class="hidden-xs hidden-sm">
-                @foreach($application->get_data('other_recent_visits',[]) as $visit)
-                    <ul style="list-style-type:none">
-                        <li>Duration: <a href="#" class="btn btn-xs btn-default">{{  $visit['duration'] }} days</a></li><br/>
-                        <li>Date:     <a href="#" class="btn btn-xs btn-default">{{  $visit['date'] }}</a></li><br/>
-                        <li>Country : <a href="#" class="btn btn-xs btn-default">{{  $visit['country'] }}</a></li>
-                    </ul>
-
-                @endforeach
-
-            </td>
-        </tr>
         <tr class=' '>
             <td class="big-data width-40">
                 <h1>Will you be returning to your Country of Residence/Domicile?</h1>

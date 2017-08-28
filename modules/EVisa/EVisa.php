@@ -80,7 +80,8 @@ class EVisa extends BaseModule implements ModuleInterface
     public function loadLookupData($model)
     {
         return [
-            'country_codes' => \Countries::all()->pluck('name.common', 'cca2')
+            'country_codes' => \Countries::all()->pluck('name.common', 'cca2'),
+            'travel_reasons' => self::getTravelReasons()
         ];
     }
 
