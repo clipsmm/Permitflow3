@@ -1,5 +1,4 @@
 @extends('layouts.backend')
-
 @section('body')
     <div class="container">
         <div class="row">
