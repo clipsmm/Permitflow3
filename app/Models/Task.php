@@ -133,7 +133,7 @@ class Task extends Model
         \DB::transaction(function () use (&$task, $task_id, $module) {
 
             $task  = self::query()
-                ->queued()
+                ->queued($module)
                 ->module($module)
                 ->hasAccess()
                 ->orderBy('tasks.created_at','ASC')

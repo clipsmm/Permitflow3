@@ -7,7 +7,7 @@
         </div>
         <div class="panel-body padding-0">
             <div class="m-t-10">
-                <form accept-charset="UTF-8" action="{{route('backend.modules.add_user', [$module->slug])}}" method="get" class="col-sm-6">
+                <form accept-charset="UTF-8" action="" method="get" class="col-sm-6">
                     <input name="_utf8" type="hidden" value="✓">
                     <div class="input-group" id="adv-search">
                         <input class="form-control" id="search_q" name="id_number"

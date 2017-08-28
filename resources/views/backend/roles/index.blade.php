@@ -6,18 +6,21 @@
         <div class="row">
                 <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
                 <div class="panel with-nav-tabs panel-default">
-                    <div class="panel-heading p-t-10">
+                    <div class="panel-heading">
                         @include('backend.settings._backend_settings_menu')
                     </div>
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                           <h3 class="panel-title"><a href="{{ route('backend.roles.create') }}" class="btn btn-primary"> New</a></h3>
-                        </div>
+
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1default">
-                                <div class="panel panel-form m-r-10 m-l-10 m-t-0 m-b-0">
-                                    <div class="panel-body p-t-10 p-b-10 p-l-0 p-r-0">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            View Roles  <a href="{{ route('backend.roles.create') }}" class="btn btn-primary pull-right" style="color: white; text-decoration: none;"> New</a>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
                                         <table class="table table-hover table-special table-striped">
                                             <thead class="thead-default">
                                             <tr>
