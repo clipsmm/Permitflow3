@@ -81,7 +81,8 @@
                         </div>
                         <br>
 
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
@@ -122,14 +123,9 @@
                             <br>
                 </div>
                     <div class="panel-footer text-right">
-
-                        <a href="{{config('app.ss-on-url')}}" type="submit" class="btn btn-default">
-                            @lang('Register via eCitizen')
-                        </a>
-
-                        <button type="submit" class="btn btn-primary">
-                            @lang("Register")
-                        </button>
+                        <div class="clearfix">
+                            <span class="pull-left clearfix">You don't have an account? <a href="{{ url('register') }}">Register</a>  </span>
+                        </div>
                     </div>
                     </form>
             </div>
