@@ -211,7 +211,7 @@
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_date_of_issue')}}">
-                    <label for="name_search_type">
+                    <label>
                         @lang('Date Of Issue')
                     </label>
                     <date-picker value="{{old('passport_date_of_issue', $model->passport_date_of_issue)}}"
@@ -221,7 +221,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_date_of_expiry')}}">
-                    <label for="name_search_type">
+                    <label>
                         @lang('Expiry Date')
                     </label>
                     <date-picker value="{{old('passport_date_of_expiry', $model->passport_date_of_expiry)}}"
@@ -231,10 +231,10 @@
             </div>
             <div class="col-sm-12 col-xs-12">
                 <div class="form-group {{error_class($errors, 'passport_issued_by')}}">
-                    <label for="name_search_type">
+                    <label>
                         @lang('Issued By')
                     </label>
-                    {!! Form::text('passport_issued_by', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                    {!! Form::text('passport_issued_by', NULL, ['class' => 'form-control text-black']) !!}
                     {!! error_tag($errors, 'passport_issued_by') !!}
                 </div>
             </div>
@@ -287,7 +287,7 @@
         <h4 class="col-sm-12">@lang('TRAVEL INFORMATION')</h4>
         <div class="col-sm-12">
             <div class="form-group {{error_class($errors, 'travel_reason')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Travel Reason')
                 </label>
                 {!! Form::select('travel_reason', Modules\Evisa::getTravelReasons(), null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'rows' => '3', 'v-model'=>'travelReason']) !!}
@@ -299,13 +299,13 @@
                 <label>
                     @lang('Give Travel Reason if Other')
                 </label>
-                {!! Form::textarea('other_travel_reason', null, ['class' => 'form-control text-black', 'rows' => '3', 'maxlength'=>'160']) !!}
+                {!! Form::textarea('other_travel_reason', null, ['class' => 'form-control text-black', 'rows' => '3']) !!}
                 {!! error_tag($errors, 'other_travel_reason') !!}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'date_of_entry')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Proposed Date Of Entry')
                 </label>
                 <date-picker value="{{old('date_of_entry', $model->date_of_entry)}}" name="date_of_entry"></date-picker>
@@ -314,7 +314,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'date_of_departure')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Proposed Date Of Departure from Kenya')
                 </label>
                 <date-picker value="{{old('date_of_departure', $model->date_of_departure)}}"
@@ -324,25 +324,25 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'travel_email')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Email Address while in Kenya')
                 </label>
-                {!! Form::text('travel_email', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                {!! Form::text('travel_email', null, ['class' => 'form-control text-black']) !!}
                 {!! error_tag($errors, 'travel_email') !!}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'travel_phone_number')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Phone Number while in Kenya')
                 </label>
-                {!! Form::text('travel_phone_number', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                {!! Form::text('travel_phone_number', null, ['class' => 'form-control text-black']) !!}
                 {!! error_tag($errors, 'travel_phone_number') !!}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group {{error_class($errors, 'arrival_by')}}">
-                <label for="name_search_type">
+                <label>
                     @lang('Arrival By')
                 </label>
                 {!! Form::select('arrival_by', ['air' => __('Air'), 'ship' => __('Ship'), 'road' => __('Road')],  null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'v-model'=>'arrivalBy']) !!}

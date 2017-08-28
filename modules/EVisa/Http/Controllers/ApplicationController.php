@@ -35,7 +35,7 @@ class ApplicationController extends Controller
     {
         parent::__construct();
 
-        $this->middleware('auth', ['only' => 'edit', 'update']);
+        $this->middleware(['auth', 'e-visa.validate_past_steps'], ['only' => 'edit', 'update']);
 
         $this->current_step = $request->get('step', 1);
         $this->module = BaseModule::instance_from_slug('e-visa');
