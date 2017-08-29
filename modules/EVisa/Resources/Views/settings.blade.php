@@ -32,9 +32,30 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Visa Validity (Days)') </label>
                                     <div class="col-sm-5">
-                                        {!! Form::number('e-visa[validity_days]', settings('e-visa.visa_validity'), [ 'class' => 'form-control', 'min' => 1]) !!}
+                                        {!! Form::number('e-visa[visa_validity]', settings('e-visa.visa_validity'), [ 'class' => 'form-control', 'min' => 1]) !!}
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('Blacklisted Countries') </label>
+                                    <div class="col-sm-5">
+                                        <select-2-input :selected="{{json_encode(settings('e-visa.blacklisted_countries'))}}" name="e-visa[blacklisted_countries]" :multiple="true" :options="{{json_encode($country_codes)}}"></select-2-input>
+                                        <span class="help-block">
+                                            @lang('e-visa::help_blocks.blacklist')
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('Whitelisted Countries') </label>
+                                    <div class="col-sm-5">
+                                        <select-2-input :selected="{{json_encode(settings('e-visa.whitelisted_countries'))}}" :multiple="true" :options="{{json_encode($country_codes)}}" name="e-visa[whitelisted_countries]"></select-2-input>
+                                        <span class="help-block">
+                                            @lang('e-visa::help_blocks.whitelist')
+                                        </span>
+                                    </div>
+                                </div>
+
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary"> @lang('Update Settings') </button>
                                 </div>

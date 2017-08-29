@@ -27,15 +27,16 @@ class FormValidator
                 return Validator::make($data, [
                     'country_of_application' => ['required', 'cca2'],
                     'visa_type' => ['required', Rule::in(array_keys(EVisa::getVisaTypes()))],
-                    'nationality' => ['required', 'cca2', 'countries_blacklist'],
+                    'nationality' => ['required', 'cca2', 'blacklist_countries', 'whitelist_countries'],
                     'country_of_residence' => ['required', 'cca2'],
                     'city' => ['required'],
                     'physical_address' => ['required'],
                     'phone_number' => ['required', 'full_phone'],
                     'email' => ['required', 'email'],
                 ], [
-                    'phone_number.full_phone' => __('Use +2547********* format'),
-                    'nationality.countries_blacklist' => __('Sorry, nationals of this country are not eligible for e-Visa')
+                    'phone_number.full_phone' => __('Use 2547********* format'),
+                    'nationality.blacklist_countries' => __('Sorry, nationals of this country are not eligible for e-Visa'),
+                    'nationality.whitelist_countries' => __('Citizens of this country are allowed entry without visa'),
                 ]);
 
             case 2:

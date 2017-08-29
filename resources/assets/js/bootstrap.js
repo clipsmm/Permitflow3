@@ -18,6 +18,8 @@ try {
 
     require('bootstrap-datepicker');
 
+    require('select2');
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });

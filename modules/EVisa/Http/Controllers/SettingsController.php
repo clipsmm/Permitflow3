@@ -21,7 +21,9 @@ class SettingsController extends Controller
 
     public function allSettings(Request $request)
     {
-        return view('e-visa::settings')
+        $country_codes = \Countries::all()->pluck('name.common', 'cca2')->toArray();
+
+        return view('e-visa::settings', ['country_codes' => $country_codes])
             ->with('page_tile', __('e-visa::labels.settings_page_title'));
     }
 

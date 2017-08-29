@@ -1,5 +1,7 @@
 <?php
 return [
+    'blacklist' => 'Countries whose citizens are not eligible for e-visa',
+    'whitelist' => 'Countries whose citizens are allowed entry without visas',
     'retrieve_existing_success' => 'An email has been sent to the address you provided. Click on the link in the email to retrieve your application.',
     'passport_bio' => "The following are guidelines that will help prevent delays from an unacceptable passport upload;
      Do: 1. Scan your original passport (don't scan a photocopy of your passport), 

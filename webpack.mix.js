@@ -15,7 +15,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .styles([
        'node_modules/jquery-confirm/dist/jquery-confirm.min.css',
        'resources/assets/brs_assets/brs.css',
-       'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css'
+       'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
+       'node_modules/select2/dist/css/select2.css'
        ],
        'public/css/app.css');
 

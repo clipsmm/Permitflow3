@@ -10,9 +10,6 @@ use Modules\Evisa\Http\Middleware\ValidatePreviousSteps;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    //todo: load from module settings
-    private $blacklisted_countries = ['AF'];
-
     /**
      * Bootstrap the module services.
      *
@@ -40,8 +37,15 @@ class ModuleServiceProvider extends ServiceProvider
 
     private function addCustomValidators()
     {
-        Validator::extend('countries_blacklist', function ($attribute, $value, $parameters, $validator) {
-            return !in_array($value, $this->blacklisted_countries);
+        $blacklist = settings('e-visa.blacklisted_countries', []);
+        $whitelist = settings('e-visa.whitelisted_countries', []);
+
+        Validator::extend('blacklist_countries', function ($attribute, $value, $parameters, $validator) use ($blacklist){
+            return !in_array($value, $blacklist);
+        });
+
+        Validator::extend('whitelist_countries', function ($attribute, $value, $parameters, $validator) use ($whitelist) {
+            return !in_array($value, $whitelist);
         });
 
         Validator::extend('full_phone', function ($attribute, $value, $parameters, $validator) {
