@@ -57,6 +57,11 @@ class User extends Authenticatable
         $this->attributes["password"] = bcrypt($password);
     }
 
+    public function setPhoneNumberAttribute($value)
+    {
+        $this->attributes['phone_number'] = !is_empty($value) ? encode_phone_number($value) : null;
+    }
+
     public function modules()
     {
         $access  = \DB::table('module_user')->selectRaw("module_slug")->where('user_id', $this->id)->get();
