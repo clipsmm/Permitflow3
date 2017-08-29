@@ -14,6 +14,8 @@ use App\Models\Task;
 
 interface ModuleInterface
 {
+    public function getServiceName();
+
     public function newUrl($params = []);
 
     public function toFormData($data);

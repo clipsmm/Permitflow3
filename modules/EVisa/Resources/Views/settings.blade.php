@@ -19,13 +19,24 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Single Entry Visa Cost') </label>
                                     <div class="col-sm-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            USD
+                                        </span>
                                         {!! Form::number('e-visa[costs][single_entry]', settings('e-visa.costs.single_entry'), [ 'class' => 'form-control']) !!}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Transit Visa Cost') </label>
                                     <div class="col-sm-5">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            USD
+                                        </span>
                                         {!! Form::number('e-visa[costs][transit_visa]', settings('e-visa.costs.transit_visa'), [ 'class' => 'form-control']) !!}
+                                    </div>
+
                                     </div>
                                 </div>
 

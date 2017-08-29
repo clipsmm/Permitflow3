@@ -12,9 +12,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav tp-icon">
-                <li><a href="#"><strong>
-                            @lang('Make Application')
-                        </strong></a></li>
+                <li>
+                    <a href="{{route('frontend_services')}}">
+                        <strong>
+                            @lang('Make Application')</strong>
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav">
                 <li class=""><a href="{{ route('frontend.applications.index') }}">@lang('labels.my_applications')</a></li>

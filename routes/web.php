@@ -20,12 +20,12 @@ Route::get('/eligibility', 'LandingPageController@eligibility')->name('eligibili
 Route::get('auth/sso', 'Auth\SsoController@ssoRedirect')->name('auth.sso_redirect');
 Route::get('auth/sso/authorize', 'Auth\SsoController@authorizeSso')->name('auth.sso_authorize');
 
-
 Auth::routes();
 
 Route::get('/home', 'FrontendController@index')->name('home');
 
 Route::get('/frontend', 'FrontendController@index')->name('frontend');
+Route::get('/services', 'FrontendController@services')->name('frontend_services');
 
 Route::group(['prefix' => 'applications', 'namespace' => 'Frontend', 'as' => 'frontend.', 'middleware' => ['auth']], function (){
     Route::get('/', 'ApplicationController@myApplications')->name("applications.index");

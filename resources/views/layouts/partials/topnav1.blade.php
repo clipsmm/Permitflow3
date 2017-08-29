@@ -14,18 +14,6 @@
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <div id="searchbar" class="col-sm-3 col-md-6">
-                <form accept-charset="UTF-8" action="" class="navbar-form navbar-left" method="get" role="search">
-                    <input name="_utf8" type="hidden" value="✓">
-                    <div class="input-group">
-                        <input class="form-control" id="search_q" name="search[q]" placeholder="Search" type="text">  <span class="input-group-btn">
-            <button class="btn btn-default">
-            <span class="fa fa-search"></span>
-            </button>
-            </span>
-                    </div>
-                </form>
-            </div>
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

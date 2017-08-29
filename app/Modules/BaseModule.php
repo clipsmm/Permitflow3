@@ -54,6 +54,11 @@ class BaseModule
         return $class ? new $class($attrs->toArray()) : null;
     }
 
+    public function getServiceName()
+    {
+        return $this->name;
+    }
+
     public function toFormData($data) {
         $class = $this->modelClass;
         return array_only($data,   $class::$fields);

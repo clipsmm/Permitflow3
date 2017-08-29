@@ -15,8 +15,7 @@
                     <div class="side-bar">
                         <div class="side-profile-menu m-b-10">
                             <div class="thumbnail">
-                                <img class="img-responsive hidden-xs"
-                                     src="https://accounts.ecitizen.go.ke/profile-picture/25272520?t=citizen">
+                                <img class="img-responsive hidden-xs" src="{{url('images/avatar.png')}}">
                             </div>
                             <div class="profile-info">
                                 <h4 class="profile-name">{{ user()->full_name }} </h4>

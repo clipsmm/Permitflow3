@@ -3103,12 +3103,12 @@ h4.modal-header {
 }
 
 .panel-form .form-control {
-    background: #f2f2f2;
+    /*background: #f2f2f2;*/
     box-shadow: none;
  /*   -webkit-border-radius: 2px !important;
     -moz-border-radius: 2px !important;
     border-radius: 2px !important;*/
-        color: #999aa6;
+        /*color: #999aa6;*/
 }
 
 .panel-form .form-control:focus {

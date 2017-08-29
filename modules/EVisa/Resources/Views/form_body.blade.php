@@ -167,34 +167,6 @@
                         {!! error_tag($errors, 'occupation') !!}
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group {{error_class($errors, 'fathers_name')}}">
-                        <label for="name_search_type">
-                            @lang("Father's Name")
-                        </label>
-                        {!! Form::text('fathers_name', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                        {!! error_tag($errors, 'fathers_name') !!}
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group {{error_class($errors, 'mothers_name')}}">
-                        <label for="name_search_type">
-                            @lang("Mother's Name")
-                        </label>
-                        {!! Form::text('mothers_name', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                        {!! error_tag($errors, 'mothers_name') !!}
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-group {{error_class($errors, 'spouse_name')}}">
-                        <label for="name_search_type">
-                            @lang("Spouse's Name")
-                        </label>
-                        {!! Form::text('spouse_name', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
-                        {!! error_tag($errors, 'spouse_name') !!}
-                    </div>
-                </div>
-
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group {{error_class($errors, 'passport_number')}}">
@@ -226,6 +198,9 @@
                         {!! error_tag($errors, 'passport_date_of_issue') !!}
                     </div>
                 </div>
+
+                <div class="clearfix"></div>
+
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group {{error_class($errors, 'passport_date_of_expiry')}}">
                         <label>
@@ -236,7 +211,9 @@
                         {!! error_tag($errors, 'passport_date_of_expiry') !!}
                     </div>
                 </div>
-                <div class="col-sm-12 col-xs-12">
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group {{error_class($errors, 'passport_issued_by')}}">
                         <label>
                             @lang('Issued By')
@@ -246,6 +223,54 @@
                     </div>
                 </div>
 
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    @lang('Additional Information')
+                </h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'mothers_name')}}">
+                        <label for="name_search_type">
+                            @lang("Mother's Name")
+                        </label>
+                        {!! Form::text('mothers_name', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! error_tag($errors, 'mothers_name') !!}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'spouse_name')}}">
+                        <label for="name_search_type">
+                            @lang("Spouse's Name")
+                        </label>
+                        {!! Form::text('spouse_name', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! error_tag($errors, 'spouse_name') !!}
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'fathers_name')}}">
+                        <label for="name_search_type">
+                            @lang("Father's Name")
+                        </label>
+                        {!! Form::text('fathers_name', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! error_tag($errors, 'fathers_name') !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@lang('Attachments')</h3>
+            </div>
+            <div class="panel-body">
                 <div class="col-sm-12 col-xs-12">
 
                     <div class="form-group {{error_class($errors, 'passport_bio')}}">
@@ -275,6 +300,7 @@
 
                 </div>
             </div>
+
         </div>
 
         <?php break; ?>
@@ -404,27 +430,26 @@
                 </button>
             </div>
         </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        @lang('e-visa::forms.additional_documents')
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-12 col-xs-12">
-                        <div class="form-group {{error_class($errors, 'additional_documents')}}">
-                            <div class="alert alert-info">
-                                @lang('e-visa::help_blocks.additional_documents')
-                            </div>
-                            <br>
-                            <file-upload field="additional_documents"
-                                         :val="{{json_encode(old('additional_documents', $model->additional_documents))}}"></file-upload>
-                            {!! error_tag($errors, 'additional_documents') !!}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    @lang('e-visa::forms.additional_documents')
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group {{error_class($errors, 'additional_documents')}}">
+                        <div class="alert alert-info">
+                            @lang('e-visa::help_blocks.additional_documents')
                         </div>
+                        <br>
+                        <file-upload field="additional_documents"
+                                     :val="{{json_encode(old('additional_documents', $model->additional_documents))}}"></file-upload>
+                        {!! error_tag($errors, 'additional_documents') !!}
                     </div>
                 </div>
             </div>
-
+        </div>
         <?php break; ?>
         <?php  case 4: ?>
         <div class="panel panel-default">

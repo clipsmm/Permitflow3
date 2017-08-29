@@ -14,7 +14,7 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
    .styles([
        'node_modules/jquery-confirm/dist/jquery-confirm.min.css',
-       'resources/assets/brs_assets/brs.css',
+       'resources/assets/css/app.css',
        'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
        'node_modules/select2/dist/css/select2.css'
        ],

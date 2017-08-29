@@ -67,6 +67,11 @@ class EVisa extends BaseModule implements ModuleInterface
         ];
     }
 
+    public function getServiceName()
+    {
+        return 'Visa Application';
+    }
+
     public function newUrl($params = [])
     {
         return route('e-visa.application.new', $params);
