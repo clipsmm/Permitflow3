@@ -4115,6 +4115,17 @@ h4.modal-title {
   }
 }
 
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+    color: #5e5e5e !important;
+    background-color: transparent !important;
+}
+
+.green-border{background: #fff;
+    border: 1px solid #5cb85c !important;
+    font-size: 15px;
+    color: #797979;
+}
+
 
 
 
