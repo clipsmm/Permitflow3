@@ -3488,9 +3488,3 @@ h4.modal-header {
 .application-form-data .form-field .field-label {
     font-weight: 600;
 }
-
-
-.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
-    color: #5e5e5e !important;
-    background-color: transparent !important;
-}
