@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE','UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -184,6 +184,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
 
         /*

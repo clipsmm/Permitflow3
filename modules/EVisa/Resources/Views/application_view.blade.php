@@ -222,7 +222,7 @@
                 <h1>Reason For Travel </h1>
             </td>
             <td class="hidden-xs hidden-sm">
-                {{ array_get($lookup_data['travel_reasons'], $model->travel_reason)  }}
+                {{ $application->get_data('travel_reason') ? array_get($lookup_data['travel_reasons'], $application->get_data('travel_reason')) : ''  }}
             </td>
         </tr>
         @if($model->travel_reason == 'other')
