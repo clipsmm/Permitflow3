@@ -3,9 +3,14 @@
     {!! Form::open(['url' => route('application.review.submit', ['module_slug' => $module->slug, 'application' => $application->id])]) !!}
     <div class="panel panel-default">
         <div class="panel-heading">
+            <h3 class="panel-title pull-left">
             @lang('Review Application Details')
-            <br>
-        Ref: <strong>{{$application->application_number}}</strong>
+            </h3>
+            <h3 class="panel-title pull-right">
+                Step: @lang('Review')
+            </h3>
+            <div class="clearfix"></div>
+            Ref: <strong>{{$application->application_number}}</strong>
         </div>
         <div class="panel-body">
             {!! $module->render_application_view($application) !!}

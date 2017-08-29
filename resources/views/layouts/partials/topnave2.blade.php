@@ -16,6 +16,9 @@
                             @lang('Make Application')
                         </strong></a></li>
             </ul>
+            <ul class="nav navbar-nav">
+                <li class=""><a href="{{ route('frontend.applications.index') }}">@lang('labels.my_applications')</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right hidden-xs">
                 @if(user())
                     <li class="#">

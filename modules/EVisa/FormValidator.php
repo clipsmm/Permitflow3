@@ -58,8 +58,6 @@ class FormValidator
                     'passport_issued_by' => ['required'],
                     'passport_bio' => ['required', 'file-upload:pdf jpg jpeg,2048'],
                     'passport_photo' => ['required', 'file-upload:pdf jpg jpeg,2048'],
-                    'additional_documents' => ['required', 'file-upload:pdf jpg jpeg,2048']
-
                 ], [
                     'passport_date_of_issue.before' => __('validation.before_tomorrow'),
                     'passport_date_of_expiry.after' => __('validation.after_today'),
@@ -75,8 +73,6 @@ class FormValidator
                     'other_travel_reason' => ['required_if:travel_reason,others'],
                     'date_of_entry' => ['required', 'date', "after:{$today}", "before:{$visa_validity}"],
                     'date_of_departure' => ['required', 'date', "after_or_equal:{$date_of_entry}"],
-                    'travel_email' => ['required', 'email'],
-                    'travel_phone_number' => ['required', 'full_phone'],
                     'arrival_by' => ['required', 'in:ship,road,air'],
                     'entry_point' => ['bail', 'required', Rule::exists('e_visa_entry_points', 'id')->where(function ($query) use ($data) {
                         $query->where('type', $data['arrival_by']);
@@ -84,7 +80,8 @@ class FormValidator
                     'places_to_visit' => ['required', 'array', 'min:1'],
                     'places_to_visit.*.type' => ['required', 'in:hotel,firm,relative,other'],
                     'places_to_visit.*.address' => ['required'],
-                    'places_to_visit.*.name' => ['required']
+                    'places_to_visit.*.name' => ['required'],
+                    'additional_documents' => ['required', 'file-upload:pdf jpg jpeg,2048']
                 ], [
                     'travel_phone_number.full_phone' => __('validation.intl_phone'),
                     'date_of_entry.after' => __('validation.after_today'),

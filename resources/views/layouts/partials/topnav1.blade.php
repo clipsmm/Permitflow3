@@ -14,9 +14,6 @@
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class=""><a href="{{ route('frontend.applications.index') }}">@lang('labels.my_applications')</a></li>
-            </ul>
             <div id="searchbar" class="col-sm-3 col-md-6">
                 <form accept-charset="UTF-8" action="" class="navbar-form navbar-left" method="get" role="search">
                     <input name="_utf8" type="hidden" value="✓">

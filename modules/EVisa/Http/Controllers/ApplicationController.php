@@ -159,7 +159,7 @@ class ApplicationController extends Controller
 
         //login this user then let him edit the appliction
         auth()->login($application->user);
-        return redirect()->route('e-visa.application.edit', ['application_id' => $application->id, 'step' => 1]);
+        return redirect()->route('e-visa.application.edit', ['application_id' => $application->id, 'step' => $this->max_temp_steps + 1]);
     }
 
     private function authorizeResumption($request)

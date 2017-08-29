@@ -3,7 +3,7 @@
 return [
 
 
-    'my_applications' => 'My Applications',
+    'my_applications' => 'Applications History',
     'my_payments' => "My Payments",
     'downloads' => 'Downloads',
     'outputs' => 'Outputs',

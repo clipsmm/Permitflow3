@@ -163,4 +163,9 @@ class ApplicationController extends Controller
             'content' => $output
         ]);
     }
+
+    public function downloadAttachment(Request $request)
+    {
+        return "coming soon";
+    }
 }

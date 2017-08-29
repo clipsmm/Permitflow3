@@ -29,6 +29,7 @@ Route::get('/frontend', 'FrontendController@index')->name('frontend');
 
 Route::group(['prefix' => 'applications', 'namespace' => 'Frontend', 'as' => 'frontend.', 'middleware' => ['auth']], function (){
     Route::get('/', 'ApplicationController@myApplications')->name("applications.index");
+    Route::get('/attachments', 'ApplicationController@downloadAttachment')->name('applications.download_attachment');
 });
 
 /*
