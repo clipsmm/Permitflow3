@@ -12,11 +12,7 @@
 */
 
 
-Route::get('rock', function(){
-    $e  =  \App\Modules\BaseModule::instance_from_slug('e-visa');
-
-    return $e->users()->get();
-});
+Route::get('notes', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 Route::get('/', 'LandingPageController@index')->name('welcome');
 Route::get('/faq', 'LandingPageController@faq')->name('faq');
