@@ -141,14 +141,6 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group{{ error_class($errors, "dob") }}">
-                                    <label for="dob" class="control-label">@lang("Date Of Birth")</label>
-                                    {{Form::date("dob", \Carbon\Carbon::today(), ['class' => 'form-control']) }}
-                                    {!! error_tag($errors, "dob") !!}
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
                                 <div class="form-group{{ error_class($errors, "password") }}">
                                     <label for="password" class="control-label">@lang("Password")</label>
                                     {{Form::password("password", ['class' => 'form-control']) }}
