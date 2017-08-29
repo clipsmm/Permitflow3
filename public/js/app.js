@@ -36731,7 +36731,7 @@ __webpack_require__(156);
 __webpack_require__(161);
 
 var app = new Vue({
-  el: '#app'
+  el: '#vue-root'
 });
 
 /***/ }),

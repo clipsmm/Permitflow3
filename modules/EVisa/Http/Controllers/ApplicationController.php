@@ -65,6 +65,14 @@ class ApplicationController extends Controller
                 ->withInput();
         }
 
+        if($this->current_step == 1){
+            $this->validate($request, [
+                'g-recaptcha-response' => ['required', 'captcha']
+            ], [
+                'g-recaptcha-response.*' => __('Invalid Captcha')
+            ]);
+        }
+
         $data = $this->module->toFormData($request->all());
         $form_data = array_merge(session()->get($this->guest_app_session_key, []), $data);
 
