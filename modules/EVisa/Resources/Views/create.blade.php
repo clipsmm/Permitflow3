@@ -10,12 +10,13 @@
         <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
             <div class="panel panel-default panel-form">
                 <div class="panel-heading">
-                <h3 class="panel-title">
-                    @lang('e-visa::common.kenyan_visa')
-                </h3>
-                    <h4>
-                        Step 4
-                    </h4>
+                    <h3 class="panel-title pull-left">
+                        @lang('e-visa::common.kenyan_visa'):
+                    </h3>
+                    <h3 class="panel-title pull-right">
+                        Step {{$step}}
+                    </h3>
+                    <div class="clearfix"></div>
                 </div>
                 {!! Form::model($model, ['files' => true, 'url' => route('e-visa.application.new', ['step' => $step])]) !!}
                 <div class="panel-body">
