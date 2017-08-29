@@ -22,6 +22,9 @@
                         </div>
                     </div>
                 </form>
+                <br>
+                <br>
+                <br>
                 <div class="clearfix"></div>
             </div>
 
@@ -33,24 +36,61 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#">
-                                        <img class="media-object" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="...">
+                                        <img style="border-radius: 50%" class="media-object"
+                                             src="http://api.adorable.io/avatar/100/{{$user->first_name}}"
+                                             alt="...">
                                     </a>
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading">{{ $user->full_name }}</h4>
-                                    <strong>Email: </strong> {{ property_exists($user,'email') ? $user->email : '' }} <br>
-                                    <strong>Phone: </strong> {{ property_exists($user,'phone_number') ? $user->phone_number : '' }} <br>
+                                    <div class="form-group"></div>
+                                    <strong>Email: </strong> {{ property_exists($user,'email') ? $user->email : '' }}
+                                    <br>
+                                    <strong>Phone: </strong> {{ property_exists($user,'phone_number') ? $user->phone_number : '' }}
+                                    <br>
+                                    @if($user->registered)
+                                        <strong>
+                                         @lang('Registered')
+                                            <span class="fa fa-check-circle text-success"></span>
+                                        </strong><br>
+                                    @else
+                                        <strong>
+                                            @lang('Not Registered')
+                                            <span class="fa fa-times-circle text-danger"></span>
+                                        </strong><br>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         {!! csrf_field() !!}
                         <div class="panel-body">
+                            @if(!$user->registered)
+                                <div class="col-sm-6">
+                                    <div class="form-group {{error_class($errors, 'email')}}">
+                                        <label>
+                                            @lang('forms.email_address')
+                                        </label>
+                                        {!! Form::email('email', old('email', (property_exists($user,'email') ? $user->email : '')), ['class' => 'form-control input-sm']) !!}
+                                        {!! error_tag($errors, 'email') !!}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group {{error_class($errors, 'phone_number')}}">
+                                        <label>
+                                            @lang('forms.phone_number')
+                                        </label>
+                                        {!! Form::text('phone_number', old('phone_number', (property_exists($user,'phone_number') ? $user->phone_number : '')), ['class' => 'form-control input-sm']) !!}
+                                        {!! error_tag($errors, 'phone_number') !!}
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="clearfix"></div>
                             @foreach($permissions as $perm)
                                 <div class="col-sm-4">
                                     <div class="checkbox">
                                         <label class="text-capitalize">
                                             {!! Form::checkbox('permissions[]', $perm->id,
-                                                in_array($perm->id, old('permissions', [])))
+                                                in_array($perm->id, old('permissions', $user_permissions)))
                                             !!}
                                             {{$perm->label}}
                                         </label>
@@ -59,7 +99,8 @@
                             @endforeach
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-default" href="{{ route('backend.modules.users', $module->slug) }}">@lang('Back')</a>
+                            <a class="btn btn-default"
+                               href="{{ route('backend.modules.users', $module->slug) }}">@lang('Back')</a>
                             <button type="submit" class="btn btn-primary">@lang('Add')</button>
                         </div>
                     </form>

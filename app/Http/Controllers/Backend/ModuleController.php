@@ -50,9 +50,15 @@ class ModuleController extends Controller
     public function addUser(Request $request, $module)
     {
         $user  =  null;
+        $user_permissions = [];
 
         if ($request->id_number){
             $user  = get_user_by_id_number($request->id_number);
+        }
+
+        if($user && property_exists($user, 'email')){
+            $user_model = User::whereEmail($user->email)->with('permissions')->first();
+            $user_permissions = $user_model ? $user_model->permissions->pluck('id')->toArray() : [];
         }
 
         $permissions  =  Permission::query()->whereOwner($module->slug)->get();
@@ -60,7 +66,8 @@ class ModuleController extends Controller
         return view('backend.modules.add_user',[
             'permissions' => $permissions,
             'module' => $module,
-            'user' => $user
+            'user' => $user,
+            'user_permissions' => $user_permissions
         ]);
     }
 
@@ -71,6 +78,13 @@ class ModuleController extends Controller
         ]);
 
         $user = get_user_by_id_number($request->id_number);
+
+        if(!$user->registered){
+            $this->validate($request, [
+                'email' => ['required', 'email', 'unique:users'],
+                'phone_number' => ['required'],
+            ]);
+        }
 
         if(is_null($user)){
             return redirect()->back()->withInput()->withErrors(['id_number' => 'Id number not found']);
@@ -89,8 +103,8 @@ class ModuleController extends Controller
                 'gender' => $user->gender[0],
                 'dob' => $user->dob,
                 'id_type' => User::id_type($user),
-                'email' => property_exists($user, 'email') ? $user->email : null,
-                'phone_number' => property_exists($user, 'phone_number') ? $user->phone_number : null
+                'email' => property_exists($user, 'email') ? $user->email : $request->email,
+                'phone_number' => property_exists($user, 'phone_number') ? $user->phone_number : $request->phone_number
             ]);
 
             $user_model->permissions()->sync($request->get('permissions', []));
