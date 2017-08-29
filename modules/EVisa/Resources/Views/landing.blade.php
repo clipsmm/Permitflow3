@@ -69,7 +69,7 @@
                                 <h4>Get your evisa in 3 easy steps!</h4>
                                 <h2>1. Apply   2. Make Payment   3. Download</h2>
 
-                                <a href="#" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
+                                <a href="{{ $module->newUrl() }}" class="btn btn-primary apply-button" title="Enlace">APPLY NOW</a>
 
                             </div>
                         </div>
