@@ -23,7 +23,7 @@
                         <label>
                             @lang('e-visa::forms.visa_type')
                         </label>
-                        {!! Form::select('visa_type', Modules\Evisa::getVisaTypes(), NULL, ['class' => 'form-control text-black input-sm']) !!}
+                        {!! Form::select('visa_type', Modules\Evisa::getVisaTypes(), NULL, ['class' => 'form-control text-black input-sm', 'placeholder' => __('--Select--')]) !!}
                         {!! error_tag($errors, 'visa_type') !!}
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <label for="name_search_type">
                             @lang('Current Nationality')
                         </label>
-                        {!! Form::select('nationality', $country_codes, NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! Form::select('nationality', $country_codes, NULL, ['class' => 'form-control text-black', 'placeholder' => __('--Select--')]) !!}
                         {!! error_tag($errors, 'nationality') !!}
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <label for="name_search_type">
                             @lang('Country of Residence')
                         </label>
-                        {!! Form::select('country_of_residence', $country_codes, NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! Form::select('country_of_residence', $country_codes, NULL, ['class' => 'form-control text-black', 'placeholder' => __('--Select--')]) !!}
                         {!! error_tag($errors, 'country_of_residence') !!}
                     </div>
                 </div>
@@ -362,13 +362,13 @@
                         @lang('Entry Point into Kenya')
                     </label>
                     <template v-if="arrivalBy == 'air'">
-                        {!! Form::select('entry_point', $entry_points->where('type', 'air')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! Form::select('entry_point', $entry_points->where('type', 'air')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'placeholder' => __('--Select--')]) !!}
                     </template>
                     <template v-if="arrivalBy == 'road'">
-                        {!! Form::select('entry_point', $entry_points->where('type', 'road')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! Form::select('entry_point', $entry_points->where('type', 'road')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'placeholder' => __('--Select--')]) !!}
                     </template>
                     <template v-if="arrivalBy == 'ship'">
-                        {!! Form::select('entry_point', $entry_points->where('type', 'ship')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                        {!! Form::select('entry_point', $entry_points->where('type', 'ship')->pluck('name', 'id'), null, ['class' => 'form-control text-black', 'placeholder' => __('--Select--')]) !!}
                     </template>
                     {!! error_tag($errors, 'entry_point') !!}
                 </div>
@@ -396,7 +396,7 @@
                         <label>
                             @lang('Type')
                         </label>
-                        {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['class' => 'form-control text-black',
+                        {!! Form::select(null, ['hotel' => __('Hotel'), 'firm' => __('Firm'), 'relative' => __('Relative/Friend'), 'other' => 'Other'],  '', ['placeholder' => __('--Select--'), 'class' => 'form-control text-black',
                         ':name' => "'places_to_visit[' + i + '][type]'", 'v-model' => 'place.type']) !!}
                         <span class="help-block">
                                 @{{(form_errors['places_to_visit.'+i+'.type'] || [])[0]}}
@@ -468,7 +468,7 @@
                             @lang('Country Visited')
                         </label>
                         {!! Form::select(null, $country_codes, '', ['class' => 'form-control input-sm', 'value' => '',
-                        'v-model' => 'visit.country', 'v-bind:name' => "'other_recent_visits[' + i + '][country]'"]) !!}
+                        'v-model' => 'visit.country', 'v-bind:name' => "'other_recent_visits[' + i + '][country]'", 'placeholder' => __('--Select--')]) !!}
                         <span class="help-block">
                             @{{(form_errors['other_recent_visits.'+i+'.country'] || [])[0]}}
                         </span>
