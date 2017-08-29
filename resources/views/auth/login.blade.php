@@ -17,7 +17,8 @@
                         @else
                             @include('layouts.partials.topnave2')
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
@@ -28,7 +29,8 @@
                                    document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
@@ -39,7 +41,8 @@
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-default navbar-fixed-top"  style="margin-top: 50px; background-color: #FFF; z-index: 900;">
+        <nav class="navbar navbar-default navbar-fixed-top"
+             style="margin-top: 50px; background-color: #FFF; z-index: 900;">
             <div class="container">
                 <div class="navbar-header">
                 </div>
@@ -62,7 +65,7 @@
                         <h3 class="panel-title">Login</h3>
                     </div>
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                    <div class="panel-body">
+                        <div class="panel-body">
 
                             {{ csrf_field() }}
 
@@ -70,19 +73,20 @@
                                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input id="email" type="email" class="form-control" name="email"
+                                           value="{{ old('email') }}" required autofocus>
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <br>
+                            <br>
 
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
@@ -96,40 +100,42 @@
                                 </div>
                             </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            Forgot Your Password?
-                                        </a>
-                                    </label>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"
+                                                   name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                Forgot Your Password?
+                                            </a>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
+                            <br>
 
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <a class="btn btn-default" href="{{ route('auth.sso_redirect') }}">
-                                    Login with eCitizen
-                                </a>
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <a class="btn btn-default" href="{{ route('auth.sso_redirect') }}">
+                                        Login with eCitizen
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="panel-footer text-right">
+                            <div class="clearfix">
+                                <span class="pull-left clearfix">You don't have an account? <a
+                                            href="{{ url('register') }}">Register</a>  </span>
                             </div>
                         </div>
-                            <br>
-                </div>
-                    <div class="panel-footer text-right">
-                        <div class="clearfix">
-                            <span class="pull-left clearfix">You don't have an account? <a href="{{ url('register') }}">Register</a>  </span>
-                        </div>
-                    </div>
                     </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
