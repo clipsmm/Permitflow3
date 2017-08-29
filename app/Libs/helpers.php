@@ -603,10 +603,14 @@ if (!function_exists('settings'))
      */
     function settings($key,$default = null)
     {
-        if (is_array($key)) {
-            return save_settings($key);
+        try {
+            if (is_array($key)) {
+                return save_settings($key);
+            }
+            return \Setting::get($key,$default);
+        } catch (Exception $exception){
+            return $default;
         }
-        return \Setting::get($key,$default);
     }
 }
 
