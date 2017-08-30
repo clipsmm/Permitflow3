@@ -129,7 +129,7 @@ class Application extends Model
 
     public function isEditable()
     {
-        return in_array($this->status, [self::DRAFT]);
+        return in_array($this->status, [self::DRAFT]) || $this->in_corrections;
     }
 
     public function canBeDeleted()
