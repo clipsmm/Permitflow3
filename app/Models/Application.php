@@ -11,6 +11,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Application extends Model
 {
     const DRAFT = 'draft';
+    const SUBMITTED = 'submitted';
 
     protected $fillable = ['application_number', 'form_data', 'module_slug', 'status', 'submitted_at', 'in_corrections'];
 
@@ -144,6 +145,11 @@ class Application extends Model
     public function submit()
     {
         $this->submitted_at = Carbon::now();
+
+        if($this->status == self::DRAFT){
+            $this->status = self::SUBMITTED;
+        }
+
         $this->in_corrections = false;
         $this->save();
     }
