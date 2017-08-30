@@ -157,6 +157,9 @@ if (!function_exists('encode_phone_number')){
      */
     function encode_phone_number($number,$code = '254')
     {
+        //strip spaces
+        $number = str_replace(' ','',$number);
+
         // remove preceding plus if it exists
         $number = preg_replace('/^\+/', '', $number);
 
