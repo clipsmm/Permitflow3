@@ -67,6 +67,16 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('Currency') </label>
+                                    <div class="col-sm-5">
+                                        <select-2-input :selected="{{json_encode(settings('e-visa.currency'))}}" name="e-visa[currency]" :multiple="false" :options="{{json_encode(['KES' => "Kenya Shilling", "USD" => "US Dollar"])}}"></select-2-input>
+                                        <span class="help-block">
+                                            @lang('e-visa::help_blocks.currency')
+                                        </span>
+                                    </div>
+                                </div>
+
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary"> @lang('Update Settings') </button>
                                 </div>

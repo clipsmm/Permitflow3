@@ -758,7 +758,7 @@ if (!function_exists('create_pesaflow_bill')){
 
 if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
 
-    function get_pesaflow_checkout_data_from_invoice(\App\Models\Invoice $invoice, $currency = 'KES')
+    function get_pesaflow_checkout_data_from_invoice(\App\Models\Invoice $invoice)
     {
         $config  = \App\Libs\PaymentManager::get_default_manager_settings();
         $user =  $invoice->application->user;
@@ -768,7 +768,7 @@ if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
             'url' => $config['url'],
             'apiClientID' => $config['apiClientId'],
             'secureHash' => $invoice->get_payment_signature(),
-            'currency' => $currency,
+            'currency' => $invoice->currency,
             'billDesc' => $invoice->description,
             'billRefNumber' => $invoice->pk,
             'serviceID' => $config['apiServiceId'],

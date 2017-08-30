@@ -53,7 +53,7 @@ class Invoice extends Model
                 'bill_ref' => generate_random_string(),
                 'description' => $description
             ]);
-
+            $invoice->currency = settings('e-visa.currency', 'KES');
             $invoice->save();
 
             $invoice_items  =  self::parse_items($items, $invoice);
@@ -70,7 +70,7 @@ class Invoice extends Model
 
     public function get_pesaflow_bill_ref()
     {
-        $ref  = create_pesaflow_bill($this->pk, intval(round($this->amount)), $this->description, $this->application->user);
+        $ref  = create_pesaflow_bill($this->pk, intval(round($this->amount)), $this->description, $this->application->user, $this->currency);
         $this->bill_ref =  $ref;
         $this->save();
 
@@ -91,14 +91,14 @@ class Invoice extends Model
         }, $items);
     }
 
-    public function get_payment_signature($currency = 'KES')
+    public function get_payment_signature()
     {
         $config = \App\Libs\PaymentManager::get_default_manager_settings();
         $user  =  $this->application->user;
 
         return sign_pesaflow_payload([
             $config['apiClientId'], intval(round($this->amount)), $config['apiServiceId'], $user->id_number,
-            $currency, $this->pk, $this->description, $user->full_name, $config['apiSecret']
+            $this->currency, $this->pk, $this->description, $user->full_name, $config['apiSecret']
         ], $config['apiKey']);
     }
 
