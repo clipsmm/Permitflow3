@@ -1,4 +1,7 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/app.js": "/js/app.js?id=23a64acf805b4f021da4",
+    "/css/app.css": "/css/app.css?id=5d53ae3b77fb3a8c7a2c",
+    "/css/chosen-sprite.png": "/css/chosen-sprite.png?id=68b7f3b803eaa08cb319",
+    "/css/chosen-sprite@2x.png": "/css/chosen-sprite@2x.png?id=25dede496bc6dd015966",
+    "/js/intl-tel-input-util.js": "/js/intl-tel-input-util.js?id=1848415e65fb8461816e"
 }

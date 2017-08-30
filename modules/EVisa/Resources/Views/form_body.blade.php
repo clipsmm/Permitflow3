@@ -80,7 +80,7 @@
                             <label for="name_search_type">
                                 @lang('Phone Number')
                             </label>
-                            {!! Form::text('phone_number', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <intl-telephone-input value="{{old('phone_number', $model->phone_number)}}" name="phone_number" ></intl-telephone-input>
                             {!! error_tag($errors, 'phone_number') !!}
                         </div>
                     </div>
