@@ -19,5 +19,6 @@ return [
       or hairline. If you normally wear prescription glasses, a hearing device, wig or similar articles,
        they should be worn for your picture. Dark glasses or nonprescription glasses with tinted lenses
         are not acceptable unless you need them for medical reasons. A medical certificate may be required',
-    'additional_documents' => 'Business Visits 1. Invitation Letters from company / Invitation letter for business visits 2. Copies of registration of the company Family visits 3. Invitation Letters from family. 4. Identity card / Passport / Alien card / Entry permit of the host. Tourists 5. Travel itinerary (Details about places to visit if going as tourist). 6. Hotel bookings. Identity Documents 1. Clear Passport bio data page. 2. A clear photograph'
+    'additional_documents' => 'Business Visits 1. Invitation Letters from company / Invitation letter for business visits 2. Copies of registration of the company Family visits 3. Invitation Letters from family. 4. Identity card / Passport / Alien card / Entry permit of the host. Tourists 5. Travel itinerary (Details about places to visit if going as tourist). 6. Hotel bookings. Identity Documents 1. Clear Passport bio data page. 2. A clear photograph',
+    'currency' => "Choose the default currency"
 ];

@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone_number' => 'required|string',
             'gender' => 'required|string|in:M,F,other',
-            'dob' => 'required|date',
+            //'dob' => 'required|date',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
             'gender' => $data['gender'],
-            'dob' => $data['dob'],
+            //'dob' => $data['dob'],
             'password' => $data['password']
         ]);
     }

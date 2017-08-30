@@ -14,6 +14,17 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
+     * Controller constructor.
+     */
+    public function __construct()
+    {
+        //load current module for views
+        if($module  = $this->is_a_module_route()){
+            view()->share('current_module', BaseModule::instance_from_slug($module->slug));
+        }
+    }
+
+    /**
      * Abort if permission(s) fail
      * @param string|array $permission
      * @param int $status
@@ -32,7 +43,7 @@ class Controller extends BaseController
      */
     public function _can($permission, $closure, $status = 403)
     {
-        if ((!user()-can($permission)) || !$closure() )
+        if ((!user()->can($permission)) || !$closure() )
             abort($status, "Access Denied");
     }
 
@@ -47,14 +58,9 @@ class Controller extends BaseController
             abort($status, "Access Denied");
     }
 
-    public function __construct()
-    {
-        //load current module for views
-        if($module  = $this->is_a_module_route()){
-            view()->share('current_module', BaseModule::instance_from_slug($module->slug));
-        }
-    }
-
+    /**
+     * @return null
+     */
     private function is_a_module_route()
     {
         $result = null;

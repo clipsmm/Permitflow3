@@ -157,6 +157,9 @@ if (!function_exists('encode_phone_number')){
      */
     function encode_phone_number($number,$code = '254')
     {
+        //strip spaces
+        $number = str_replace(' ','',$number);
+
         // remove preceding plus if it exists
         $number = preg_replace('/^\+/', '', $number);
 
@@ -603,10 +606,14 @@ if (!function_exists('settings'))
      */
     function settings($key,$default = null)
     {
-        if (is_array($key)) {
-            return save_settings($key);
+        try {
+            if (is_array($key)) {
+                return save_settings($key);
+            }
+            return \Setting::get($key,$default);
+        } catch (Exception $exception){
+            return $default;
         }
-        return \Setting::get($key,$default);
     }
 }
 
@@ -751,7 +758,7 @@ if (!function_exists('create_pesaflow_bill')){
 
 if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
 
-    function get_pesaflow_checkout_data_from_invoice(\App\Models\Invoice $invoice, $currency = 'KES')
+    function get_pesaflow_checkout_data_from_invoice(\App\Models\Invoice $invoice)
     {
         $config  = \App\Libs\PaymentManager::get_default_manager_settings();
         $user =  $invoice->application->user;
@@ -761,7 +768,7 @@ if(!function_exists('get_pesaflow_checkout_data_from_invoice')){
             'url' => $config['url'],
             'apiClientID' => $config['apiClientId'],
             'secureHash' => $invoice->get_payment_signature(),
-            'currency' => $currency,
+            'currency' => $invoice->currency,
             'billDesc' => $invoice->description,
             'billRefNumber' => $invoice->pk,
             'serviceID' => $config['apiServiceId'],

@@ -80,7 +80,7 @@ class Task extends Model
 
     public function scopeQueued($query, $module = null)
     {
-        if($module)
+        if(!$module)
             return $query->whereNull('tasks.user_id')->whereNull("tasks.assigned_at");
 
         $perms = [];
