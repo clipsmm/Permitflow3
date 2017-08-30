@@ -16,6 +16,10 @@ require('./components');
 
 require('../../../modules');
 
-new Vue({
-    el: '#vue-root'
-});
+let root = document.getElementById('vue-root');
+if (root) {
+    new Vue({
+        el: root
+    });
+}
+

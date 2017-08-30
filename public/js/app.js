@@ -36730,9 +36730,12 @@ __webpack_require__(156);
 
 __webpack_require__(161);
 
-var app = new Vue({
-  el: '#vue-root'
-});
+var root = document.getElementById('vue-root');
+if (root) {
+  new Vue({
+    el: root
+  });
+}
 
 /***/ }),
 /* 129 */
