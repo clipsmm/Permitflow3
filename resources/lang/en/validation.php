@@ -102,7 +102,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
+    'full_phone' => "The phone number format you entered is incorrect.",
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
