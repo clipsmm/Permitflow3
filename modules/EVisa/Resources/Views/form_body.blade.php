@@ -7,7 +7,7 @@
                              :other_recent_visits="{{json_encode(old('other_recent_visits', $model->other_recent_visits))}}"
                              :recent_visits="{{json_encode(old('recent_visits', $model->recent_visits))}}"
                              :places_to_visit="{{json_encode(old('places_to_visit', $model->places_to_visit))}}"
-                             :additional_documents="{{json_encode(old('additional_documents', $model->additional_documents))}}"
+                             :additional_documents="{{json_encode(old('additional_documents', $model->additional_documents ?: []))}}"
                              travel_reason="{{old('travel_reason', $model->travel_reason)}}"
                              arrival_by="{{old('arrival_by', $model->arrival_by)}}"
                              :form_errors="{{json_encode($errors->messages())}}"
