@@ -13,6 +13,7 @@ use App\Models\Output;
 use App\Modules\BaseModule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
 {
@@ -166,6 +167,10 @@ class ApplicationController extends Controller
 
     public function downloadAttachment(Request $request)
     {
-        return "coming soon";
+        if($request->has('attachment')){
+            $file = $request->get('attachment');
+            return response()->file(storage_path('app'.DIRECTORY_SEPARATOR.$file));
+        }
+        abort(404);
     }
 }
