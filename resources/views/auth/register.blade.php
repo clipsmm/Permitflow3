@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
     <header>
         <nav class="navbar navbar-inverse    navbar-fixed-top">
@@ -179,3 +180,25 @@
         </div>
     </div>
 @endsection
+
+@push('page_js')
+
+<script type="text/javascript">
+    $(function(){
+        $("#phone_number").intlTelInput({
+            nationalMode: false,
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            separateDialCode: false,
+            autoPlaceholder: "aggressive",
+            formatOnDisplay: true,
+            utilsScript: "/js/utils.js"
+        });
+    })
+</script>
+@endpush
