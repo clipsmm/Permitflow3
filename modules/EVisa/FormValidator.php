@@ -93,10 +93,12 @@ class FormValidator
                 ]);
 
             case 4:
+                $three_months_ago = Carbon::now()->subMonths(3);
+
                 return Validator::make($data, [
                     'other_recent_visits' => ['array'],
                     'other_recent_visits.*.country' => ['required', 'cca2'],
-                    'other_recent_visits.*.date' => ['required', 'date', "before:{$today}"],
+                    'other_recent_visits.*.date' => ['required', 'date', "before:{$today}", "after_or_equal:{$three_months_ago}"],
                     'other_recent_visits.*.duration' => ['required', 'integer', 'min:1'],
                     'recent_visits' => ['array'],
                     'recent_visits.*.date' => ['required', 'date', "before:{$today}"],
@@ -113,6 +115,7 @@ class FormValidator
                 ], [
                     'other_recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     'other_recent_visits.*.date.before' => __('validation.before_today'),
+                    'other_recent_visits.*.date.after_or_equal' => __("Must not be more than 3 months ago ({$three_months_ago->toDateString()})"),
                     'recent_visits.*.date.before' => __('validation.before_today'),
                     'recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     '*.required_if' => __('This field is required')
