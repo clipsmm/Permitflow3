@@ -15,6 +15,7 @@ class SystemRolesSeeder extends Seeder
      */
     protected $permissions =
         [
+            'manage_settings' => 'Manage System Configs',
             'manage_modules' => 'Manage Modules',
             'edit_users' => 'Edit Users',
             'edit_user_roles' => 'Edit User Roles'

@@ -7,5 +7,6 @@
  */
 
 return [
-    'application_not_editable' => 'This application is not editable at this time'
+    'application_not_editable' => 'This application is not editable at this time',
+    'access_denied' => "Access Denied"
 ];

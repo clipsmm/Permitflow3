@@ -40,18 +40,20 @@
                     </div>
 
                 @endisset
-                <div class="side-profile-menu">
-                    <div class="sidebar-nav">
-                        <div class="profile-info">
-                            <h4 class="profile-name">Modules</h4>
+                @isset($my_modules)
+                    <div class="side-profile-menu">
+                        <div class="sidebar-nav">
+                            <div class="profile-info">
+                                <h4 class="profile-name">Modules</h4>
+                            </div>
+                            <ul class="nav">
+                                @foreach($active_modules as $mod)
+                                    <li><a href="{{ route("backend.tasks.queue", $mod->slug)    }}">{{ $mod->name }}</a></li>
+                                @endforeach
+                            </ul>
                         </div>
-                        <ul class="nav">
-                            @foreach($active_modules as $mod)
-                                <li><a href="{{ route("backend.tasks.queue", $mod->slug)    }}">{{ $mod->name }}</a></li>
-                            @endforeach
-                        </ul>
                     </div>
-                </div>
+                @endisset
             </div>
             <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
                 @include('partials.notifier')

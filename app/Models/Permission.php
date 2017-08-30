@@ -42,7 +42,7 @@ class Permission extends Model implements \Spatie\Permission\Contracts\Permissio
      */
     public static function findByName(string $name, $guardName): \Spatie\Permission\Contracts\Permission
     {
-        return self::whereName($name)->whereGuard($guardName)->first();
+        return self::whereName($name)->whereGuardName($guardName)->first();
     }
 
     public static function constructName($name, $prefix)

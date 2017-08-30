@@ -25,18 +25,20 @@
                                     <li class="truncate">{{ user()->email }}</li>
                                 </ul>
                             </div>
+                            @isset($my_modules)
                             <div class="left-nav hidden-xs">
                                 <div class="sidebar-nav">
                                     <div class="profile-info">
                                         <h4 class="profile-name">Modules</h4>
                                     </div>
                                     <ul class="nav">
-                                        @foreach($active_modules as $mod)
+                                        @foreach($my_modules as $mod)
                                             <li><a href="{{ route("backend.tasks.queue", $mod->slug)    }}">{{ $mod->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
                             </div>
+                            @endisset
                         </div>
                     </div>
 

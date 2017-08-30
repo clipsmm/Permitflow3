@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
 class Controller extends BaseController
@@ -22,6 +23,19 @@ class Controller extends BaseController
         if($module  = $this->is_a_module_route()){
             view()->share('current_module', BaseModule::instance_from_slug($module->slug));
         }
+
+        $this->middleware(function ($request, $next) {
+
+            // get user's permitted modules
+            if (Auth::user()){
+                view()->share('my_modules', user()->modules()->where('enabled', true));
+            }
+
+            $this->block_unauthorized_backend();
+
+            return $next($request);
+        });
+
     }
 
     /**
@@ -73,4 +87,27 @@ class Controller extends BaseController
         return $result;
 
     }
+
+    private function is_backend_route()
+    {
+        return \request()->is('*backend*');
+    }
+
+    private function block_unauthorized_backend()
+    {
+        // user is access a backend module route and is not an admin who can manage modules, ensure has access to the module
+        if ($this->is_backend_route() && $this->is_a_module_route() && user() && !user()->can('system.manage_modules')){
+
+            $module  =  $this->is_a_module_route();
+
+            if (!user()->modules()->where('slug', $module->slug)->count())
+                abort(403, __("messages.access_denied"));
+
+            return;
+
+        }
+
+        return;
+    }
+
 }

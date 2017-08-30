@@ -16,6 +16,8 @@ class ModuleController extends Controller
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->modules = Module::all();
     }
 

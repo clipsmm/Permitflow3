@@ -16,7 +16,7 @@
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Set Landing Page</h3>
                                     </div>
-                                    <form class="form-horizontal" method="post" action="{{ route('e-visa.settings.save') }}">
+                                    <form class="form-horizontal" method="post" action="">
                                     <div class="panel-body">
                                             {!! csrf_field() !!}
                                             <div class="form-group m-b-10">

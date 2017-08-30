@@ -8,7 +8,7 @@ use App\Models\Role;
 use App\Modules\BaseModule;
 use Illuminate\Http\Request;
 
-class RolesController extends BaseController
+class RolesController extends Controller
 {
     /**
      * Display a listing of the resource.
