@@ -9,16 +9,16 @@ Vue.component('intl-telephone-input', {
         $(this.$el).intlTelInput({
             nationalMode: false,
             initialCountry: "auto",
-            geoIpLookup: function (callback) {
-                $.get('https://ipinfo.io', function () {
-                }, "jsonp").always(function (resp) {
+            geoIpLookup: function(callback) {
+                $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
                     var countryCode = (resp && resp.country) ? resp.country : "";
                     callback(countryCode);
                 });
             },
             separateDialCode: false,
-            formatOnDisplay: false,
-            utilsScript: "/js/intl-tel-input-util.js"
+            autoPlaceholder: "aggressive",
+            formatOnDisplay: true,
+            utilsScript: "/js/utils.js"
         });
     }
 });
