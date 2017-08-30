@@ -18,7 +18,9 @@ try {
 
     require('bootstrap-datepicker');
 
-    require('select2');
+    require('chosen-js');
+
+    require('intl-tel-input');
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

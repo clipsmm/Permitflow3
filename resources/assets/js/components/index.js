@@ -6,4 +6,5 @@
 require('./confirmed-action.vue');
 require('./file-upload.vue');
 require('./datepicker.vue');
-require('./select2.vue');
+require('./select-input.vue');
+require('./telephone-input.vue');

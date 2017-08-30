@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Blacklisted Countries') </label>
                                     <div class="col-sm-5">
-                                        <select-2-input :selected="{{json_encode(settings('e-visa.blacklisted_countries'))}}" name="e-visa[blacklisted_countries]" :multiple="true" :options="{{json_encode($country_codes)}}"></select-2-input>
+                                        <select-input placeholder="{{__('--Select Countries--')}}" :selected="{{json_encode(settings('e-visa.blacklisted_countries'))}}" name="e-visa[blacklisted_countries]" :multiple="true" :options="{{json_encode($country_codes)}}"></select-input>
                                         <span class="help-block">
                                             @lang('e-visa::help_blocks.blacklist')
                                         </span>
@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Whitelisted Countries') </label>
                                     <div class="col-sm-5">
-                                        <select-2-input :selected="{{json_encode(settings('e-visa.whitelisted_countries'))}}" :multiple="true" :options="{{json_encode($country_codes)}}" name="e-visa[whitelisted_countries]"></select-2-input>
+                                        <select-input placeholder="{{__('--Select Countries--')}}" :selected="{{json_encode(settings('e-visa.whitelisted_countries'))}}" :multiple="true" :options="{{json_encode($country_codes)}}" name="e-visa[whitelisted_countries]"></select-input>
                                         <span class="help-block">
                                             @lang('e-visa::help_blocks.whitelist')
                                         </span>
@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Currency') </label>
                                     <div class="col-sm-5">
-                                        <select-2-input :selected="{{json_encode(settings('e-visa.currency'))}}" name="e-visa[currency]" :multiple="false" :options="{{json_encode(['KES' => "Kenya Shilling", "USD" => "US Dollar"])}}"></select-2-input>
+                                        <select-input :selected="{{json_encode(settings('e-visa.currency'))}}" name="e-visa[currency]" :multiple="false" :options="{{json_encode(['KES' => "Kenya Shilling", "USD" => "US Dollar"])}}"></select-input>
                                         <span class="help-block">
                                             @lang('e-visa::help_blocks.currency')
                                         </span>
