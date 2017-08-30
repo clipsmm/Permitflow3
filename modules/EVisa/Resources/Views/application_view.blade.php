@@ -393,7 +393,9 @@
             <tbody>
             <tr class=' '>
                 <td class="big-data width-40">
-                    <h1>Scaned Passport</h1>
+                    <h1>
+                        @lang('Scanned Passport')
+                    </h1>
                 </td>
                 <td class="hidden-xs hidden-sm">
                     <a href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_photo.path')])}}">
@@ -403,17 +405,24 @@
             </tr>
             <tr class=' '>
                 <td class="big-data width-40">
-                    <h1> Scaned Invitation Letter</h1>
+                    <h1>
+                        @lang('Scaned Invitation Letters/Additional Documents')
+                    </h1>
                 </td>
                 <td class="hidden-xs hidden-sm">
-                    <a href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('additional_documents.path')])}}">
-                        {{ $application->get_data('additional_documents.file_name') }}
-                    </a>
+                    @foreach($application->get_data('additional_documents', []) as $doc)
+                        <a href="{{route('frontend.applications.download_attachment', ['attachment' => $doc['path']])}}">
+                            {{ $doc['file_name'] }}
+                        </a>
+                        <br>
+                    @endforeach
                 </td>
             </tr>
             <tr class=' '>
                 <td class="big-data width-40">
-                    <h1>Scaned Host ID card</h1>
+                    <h1>
+                        @lang('Scanned Host ID card')
+                    </h1>
                 </td>
                 <td class="hidden-xs hidden-sm">
                     <a href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_bio.path')])}}">

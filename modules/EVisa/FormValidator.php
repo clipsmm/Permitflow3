@@ -81,8 +81,10 @@ class FormValidator
                     'places_to_visit.*.type' => ['required', 'in:hotel,firm,relative,other'],
                     'places_to_visit.*.address' => ['required'],
                     'places_to_visit.*.name' => ['required'],
-                    'additional_documents' => ['required', 'file-upload:pdf jpg jpeg,2048']
+                    'additional_documents' => ['array', 'required'],
+                    'additional_documents.*' => ['required', 'file-upload:pdf png jpg jpeg,2048']
                 ], [
+                    'additional_documents.*.required' => __("This field is required"),
                     'travel_phone_number.full_phone' => __('validation.intl_phone'),
                     'date_of_entry.after' => __('validation.after_today'),
                     'date_of_departure.after' => __('e-visa::validation.after_date_entry'),

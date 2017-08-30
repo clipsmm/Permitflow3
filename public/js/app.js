@@ -65552,7 +65552,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 
 /* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('e-visa-application-form', {
-    props: ['returning_to_country', 'denied_entry_before', 'denied_entry_others', 'convicted_before', 'other_recent_visits', 'recent_visits', 'places_to_visit', 'form_errors', 'travel_reason', 'arrival_by'],
+    props: ['returning_to_country', 'denied_entry_before', 'denied_entry_others', 'convicted_before', 'other_recent_visits', 'recent_visits', 'places_to_visit', 'form_errors', 'travel_reason', 'arrival_by', 'additional_documents'],
     data: function data() {
         return {
             returningToCountry: this.returning_to_country,
@@ -65563,7 +65563,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             recentVisits: this.recent_visits || [],
             placesToVisit: this.places_to_visit || [],
             travelReason: this.travel_reason,
-            arrivalBy: this.arrival_by
+            arrivalBy: this.arrival_by,
+            additionalDocuments: this.additional_documents.length > 0 ? this.additional_documents : [{ file_name: '', path: '' }]
         };
     }
 }));

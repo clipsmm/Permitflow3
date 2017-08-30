@@ -41,14 +41,25 @@ class Application extends Model
             $form_data = [];
 
             foreach ($app->form_data as $key => $value) {
-                if ($value instanceof UploadedFile) {
-                    $value = $app->saveUpload($value, $key);
-                }
-                $form_data[$key] = $value;
+                $form_data[$key] = $app->processValue($key, $value);
             }
 
             $app->attributes['form_data'] = json_encode($form_data);
         });
+    }
+
+    private function processValue($key, $value)
+    {
+        if ($value instanceof UploadedFile) {
+            return $this->saveUpload($value, $key);
+        }else if(is_array($value)){
+            foreach ($value as $k => $v){
+                $value[$k] = $this->processValue($key.'.'.$k, $v);
+            }
+            return $value;
+        }
+
+        return $value;
     }
 
     public function saveUpload(UploadedFile $upload, $field_name)
