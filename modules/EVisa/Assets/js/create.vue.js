@@ -2,7 +2,7 @@ import Vue from 'vue';
 export default Vue.component('e-visa-application-form', {
     props: ['returning_to_country', 'denied_entry_before', 'denied_entry_others',
         'convicted_before', 'other_recent_visits', 'recent_visits', 'places_to_visit',
-        'form_errors', 'travel_reason', 'arrival_by'],
+        'form_errors', 'travel_reason', 'arrival_by', 'additional_documents'],
     data: function(){
         return {
             returningToCountry: this.returning_to_country,
@@ -13,7 +13,8 @@ export default Vue.component('e-visa-application-form', {
             recentVisits: this.recent_visits || [],
             placesToVisit: this.places_to_visit || [],
             travelReason: this.travel_reason,
-            arrivalBy: this.arrival_by
+            arrivalBy: this.arrival_by,
+            additionalDocuments: this.additional_documents.length > 0 ? this.additional_documents : [{file_name: '', path: ''}]
         }
     }
 });

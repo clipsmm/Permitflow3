@@ -59,7 +59,7 @@ class EVisa extends BaseModule implements ModuleInterface
             'business' => __('Business'),
             'education' => __('Education'),
             'medical' => __('Medical'),
-            'employment' => __('Medical'),
+            'employment' => __('Employment'),
             'religion' => __('Religion'),
             'family' => __('Settlement/Family'),
             'tourism' => __('Tourism'),

@@ -7,6 +7,7 @@
                              :other_recent_visits="{{json_encode(old('other_recent_visits', $model->other_recent_visits))}}"
                              :recent_visits="{{json_encode(old('recent_visits', $model->recent_visits))}}"
                              :places_to_visit="{{json_encode(old('places_to_visit', $model->places_to_visit))}}"
+                             :additional_documents="{{json_encode(old('additional_documents', $model->additional_documents))}}"
                              travel_reason="{{old('travel_reason', $model->travel_reason)}}"
                              arrival_by="{{old('arrival_by', $model->arrival_by)}}"
                              :form_errors="{{json_encode($errors->messages())}}"
@@ -389,7 +390,7 @@
                     </div>
                     <div class="form-group" v-for="(place, i) in placesToVisit">
                         <div class="col-sm-12 text-right">
-                            <span @click.close="placesToVisit.splice(i, 1)" class="close">
+                            <span @click.prevent="placesToVisit.splice(i, 1)" class="close">
                                 <span class="fa fa-times-circle"></span>
                             </span>
                         </div>
@@ -443,12 +444,25 @@
                             <div class="alert alert-info">
                                 @lang('e-visa::help_blocks.additional_documents')
                             </div>
-                            <br>
-                            <file-upload field="additional_documents"
-                                         :val="{{json_encode(old('additional_documents', $model->additional_documents))}}"></file-upload>
-                            {!! error_tag($errors, 'additional_documents') !!}
+                            <div v-for="(doc, i) in additionalDocuments" :class="{'has-error' : form_errors['additional_documents.'+i]}"
+                                 class="m-t-20" :key="doc ? doc.file_name : ''">
+                                <span v-if="additionalDocuments.length > 1" class="close">
+                                    <span @click.prevent="additionalDocuments.splice(i, 1)" class="fa fa-times-circle"></span>
+                                </span>
+                                <file-upload :field="'additional_documents['+ i +']'" :val="doc"></file-upload>
+                                <span class="help-block">
+                                    @{{(form_errors['additional_documents.'+i] || [])[0]}}
+                                </span>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="panel-footer">
+                    <button @click.prevent="additionalDocuments.push({file_name: new Date().getTime(), path: ''})"
+                            class="btn-sm btn btn-primary">
+                        <span class="fa fa-plus"></span>
+                        @lang('Add')
+                    </button>
                 </div>
             </div>
             <?php break; ?>
@@ -460,7 +474,7 @@
                 <div class="panel-body">
                     <div class="form-group" v-for="(visit, i)  in otherRecentVisits" key="visit.date">
                         <div class="col-sm-12 text-right">
-                        <span @click.close="otherRecentVisits.splice(i, 1)" class="close">
+                        <span @click.prevent="otherRecentVisits.splice(i, 1)" class="close">
                             <span class="fa fa-times-circle"></span>
                         </span>
                         </div>
@@ -514,7 +528,7 @@
                 <div class="panel-body">
                     <div class="form-group" v-for="(visit, i) in recentVisits" key="visit.date">
                         <div class="col-sm-12 text-right">
-                            <span @click.close="recentVisits.splice(i, 1)" class="close">
+                            <span @click.prevent="recentVisits.splice(i, 1)" class="close">
                                 <span class="fa fa-times-circle"></span>
                             </span>
                         </div>

@@ -81,8 +81,10 @@ class FormValidator
                     'places_to_visit.*.type' => ['required', 'in:hotel,firm,relative,other'],
                     'places_to_visit.*.address' => ['required'],
                     'places_to_visit.*.name' => ['required'],
-                    'additional_documents' => ['required', 'file-upload:pdf jpg jpeg,2048']
+                    'additional_documents' => ['array', 'required'],
+                    'additional_documents.*' => ['required', 'file-upload:pdf png jpg jpeg,2048']
                 ], [
+                    'additional_documents.*.required' => __("This field is required"),
                     'travel_phone_number.full_phone' => __('validation.intl_phone'),
                     'date_of_entry.after' => __('validation.after_today'),
                     'date_of_departure.after' => __('e-visa::validation.after_date_entry'),
@@ -91,10 +93,12 @@ class FormValidator
                 ]);
 
             case 4:
+                $three_months_ago = Carbon::now()->subMonths(3);
+
                 return Validator::make($data, [
                     'other_recent_visits' => ['array'],
                     'other_recent_visits.*.country' => ['required', 'cca2'],
-                    'other_recent_visits.*.date' => ['required', 'date', "before:{$today}"],
+                    'other_recent_visits.*.date' => ['required', 'date', "before:{$today}", "after_or_equal:{$three_months_ago}"],
                     'other_recent_visits.*.duration' => ['required', 'integer', 'min:1'],
                     'recent_visits' => ['array'],
                     'recent_visits.*.date' => ['required', 'date', "before:{$today}"],
@@ -111,6 +115,7 @@ class FormValidator
                 ], [
                     'other_recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     'other_recent_visits.*.date.before' => __('validation.before_today'),
+                    'other_recent_visits.*.date.after_or_equal' => __("Must not be more than 3 months ago ({$three_months_ago->toDateString()})"),
                     'recent_visits.*.date.before' => __('validation.before_today'),
                     'recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     '*.required_if' => __('This field is required')
