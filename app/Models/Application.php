@@ -17,7 +17,7 @@ class Application extends Model
 
     public static function insertRecord($module, $data, User $user)
     {
-        $application = new self(['module_slug' => $module->slug, 'application_number' => self::generateApplicationNumber($module)]);
+        $application = new self(['module_slug' => $module->slug, 'application_number' => self::generateApplicationNumber($module, $user)]);
         $application->form_data = $data;
         $application->user()->associate($user)
             ->save();
@@ -25,9 +25,12 @@ class Application extends Model
         return $application;
     }
 
-    public static function generateApplicationNumber($module)
+    public static function generateApplicationNumber($module, $user)
     {
-        return implode("-", [$module->prefix, Hashids::encode($module->getUpdatedCounter())]);
+        $last_id = self::latest('id')->pluck('id')->first();
+        $last_id = is_null($last_id) ? 0 : $last_id;
+        $num = $last_id + time() + $user->id;
+        return implode("-", [$module->prefix, Hashids::encode($num)]);
     }
 
     public function user()
