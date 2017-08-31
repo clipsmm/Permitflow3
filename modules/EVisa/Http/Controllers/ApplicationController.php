@@ -83,7 +83,6 @@ class ApplicationController extends Controller
         }
         //create dummy user account
         $user = User::firstOrCreate(['email' => array_get($form_data, 'email')]);
-        $data = $this->mergeWithPreviousApplication($form_data, $user);
 
         //save application and send notification
         $application = Application::insertRecord($this->module, $data, $user, Application::TEMPORARY);
@@ -111,6 +110,7 @@ class ApplicationController extends Controller
                 'date_of_departure', 'arrival_by', 'entry_point', 'places_to_visit', 'passport_bio', 'passport_photo', 'additional_documents']);
             $form_data = array_merge($previous_data, $form_data);
         }
+
         return $this->module->toFormData($form_data);
     }
 
@@ -140,6 +140,7 @@ class ApplicationController extends Controller
     public function resumeGuestApplication(Request $request)
     {
         $app_number = trim($request->application_number);
+        $import = $request->get('import_existing', false);
 
         $application = Application::getByHashId($request->route('return_code'));
 
@@ -158,8 +159,13 @@ class ApplicationController extends Controller
         //login this user then let him edit the appliction
         auth()->login($application->user);
 
-        //change application from temporary to draft
-        $application->update(['status' => Application::DRAFT]);
+        //update the application
+        $form_data = $application->form_data;
+        if($import){
+            $form_data = $this->mergeWithPreviousApplication($form_data, $application->user);
+        }
+
+        $application->update(['status' => Application::DRAFT, 'form_data' => $form_data]);
         return redirect()->route('e-visa.application.edit', ['application_id' => $application->id, 'step' => $this->max_temp_steps + 1]);
     }
 
