@@ -54,7 +54,7 @@
                                             {{ $invoice->id }}
                                         </td>
                                         <td>
-                                            KES {{ $invoice->amount }}
+                                            {{ money($invoice->amount, $invoice->currency) }}
                                         </td>
                                         <td>
                                             {{ $invoice->created_at }}
