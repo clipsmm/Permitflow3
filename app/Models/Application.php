@@ -11,7 +11,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Application extends Model
 {
     const DRAFT = 'draft';
-    const SUBMITTED = 'submitted';
+    const PENDING = 'pending';
     const TEMPORARY = 'temporary';
 
     protected $fillable = ['application_number', 'form_data', 'module_slug', 'status', 'submitted_at', 'in_corrections'];
@@ -151,7 +151,7 @@ class Application extends Model
         $this->submitted_at = Carbon::now();
 
         if($this->status == self::DRAFT){
-            $this->status = self::SUBMITTED;
+            $this->status = self::PENDING;
         }
 
         $this->in_corrections = false;
