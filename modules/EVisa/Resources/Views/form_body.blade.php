@@ -110,6 +110,9 @@
                                 @lang('Surname/Family Name')
                             </label>
                             {!! Form::text('surname', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'surname') !!}
                         </div>
                     </div>
@@ -119,6 +122,9 @@
                                 @lang('Other Names in full')
                             </label>
                             {!! Form::text('other_names', null, ['class' => 'form-control text-black',  'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'other_names') !!}
                         </div>
                     </div>
@@ -128,6 +134,9 @@
                                 @lang('Gender')
                             </label>
                             {!! Form::select('gender', ['M' => __('Male'), 'F' => __('Female'), 'other' => __('Other')], null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'gender') !!}
                         </div>
                     </div>
@@ -138,6 +147,9 @@
                             </label>
                             <date-picker value="{{old('date_of_birth', $model->date_of_birth)}}"
                                          name="date_of_birth"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'date_of_birth') !!}
                         </div>
                     </div>
@@ -149,6 +161,9 @@
                                 @lang('Country Of Birth')
                             </label>
                             {!! Form::select('country_of_birth', $country_codes, NULL, ['class' => 'form-control text-black', 'placeholder' => __('--Select--'), 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'country_of_birth') !!}
                         </div>
                     </div>
@@ -158,6 +173,9 @@
                                 @lang('Place Of Birth')
                             </label>
                             {!! Form::text('place_of_birth', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'place_of_birth') !!}
                         </div>
                     </div>
@@ -167,6 +185,9 @@
                                 @lang('Current Occupation')
                             </label>
                             {!! Form::text('occupation', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'occupation') !!}
                         </div>
                     </div>
@@ -177,6 +198,9 @@
                                 @lang('Passport Number')
                             </label>
                             {!! Form::text('passport_number', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_number') !!}
                         </div>
                     </div>
@@ -187,6 +211,9 @@
                                 @lang('Place Of Issue')
                             </label>
                             {!! Form::text('passport_place_of_issue', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_place_of_issue') !!}
                         </div>
                     </div>
@@ -198,6 +225,9 @@
                             </label>
                             <date-picker value="{{old('passport_date_of_issue', $model->passport_date_of_issue)}}"
                                          name="passport_date_of_issue"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_date_of_issue') !!}
                         </div>
                     </div>
@@ -211,6 +241,9 @@
                             </label>
                             <date-picker value="{{old('passport_date_of_expiry', $model->passport_date_of_expiry)}}"
                                          name="passport_date_of_expiry"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_date_of_expiry') !!}
                         </div>
                     </div>
@@ -222,6 +255,9 @@
                                 @lang('Issued By')
                             </label>
                             {!! Form::text('passport_issued_by', NULL, ['class' => 'form-control text-black']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_issued_by') !!}
                         </div>
                     </div>
