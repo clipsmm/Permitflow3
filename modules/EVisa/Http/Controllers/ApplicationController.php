@@ -114,6 +114,14 @@ class ApplicationController extends Controller
         return $this->module->toFormData($form_data);
     }
 
+    public function resendEmail(Request $request)
+    {
+        $application = Application::with('user')->findOrFail(session($this->guest_app_id));
+        $this->sendEmailToUser($application->user, $application);
+
+        return response()->json(['status' => 'ok']);
+    }
+
     private function sendEmailToUser($user, $application)
     {
         $hash = \Hashids::encode($application->id);
