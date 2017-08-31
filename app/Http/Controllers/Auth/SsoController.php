@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use \App\Models\User;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SsoController extends Controller
 {
+    use RedirectsUsers;
+
     /**
      * Redirect to sso authorize url
      *
@@ -80,7 +83,7 @@ class SsoController extends Controller
             // finally login user
             Auth::loginUsingId($user->id);
 
-            return redirect()->route('home');
+            return redirect()->intended($this->redirectPath());
         }
 
         

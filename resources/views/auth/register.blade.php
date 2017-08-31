@@ -55,7 +55,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div id="vue-root" class="container">
         <div class="row m-t-0">
             <div class="col-md-12">
                 <div class="panel panel-default panel-form m-r-10 m-l-10">
@@ -110,8 +110,7 @@
                             <div class="col-md-6">
                                 <div class="form-group{{ error_class($errors, "phone_number") }}">
                                     <label for="phone_number" class="control-label">@lang("Phone Number")</label>
-                                    <input id="phone_number" type="text" class="form-control" name="phone_number"
-                                           value="{{ old('phone_number') }}">
+                                    <intl-telephone-input value="{{old('phone_number')}}" name="phone_number" ></intl-telephone-input>
                                     {!! error_tag($errors, "phone_number") !!}
                                 </div>
                             </div>
@@ -180,25 +179,3 @@
         </div>
     </div>
 @endsection
-
-@push('page_js')
-
-<script type="text/javascript">
-    $(function(){
-        $("#phone_number").intlTelInput({
-            nationalMode: false,
-            initialCountry: "auto",
-            geoIpLookup: function(callback) {
-                $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
-                    var countryCode = (resp && resp.country) ? resp.country : "";
-                    callback(countryCode);
-                });
-            },
-            separateDialCode: false,
-            autoPlaceholder: "aggressive",
-            formatOnDisplay: true,
-            utilsScript: "/js/utils.js"
-        });
-    })
-</script>
-@endpush

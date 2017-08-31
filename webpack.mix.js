@@ -13,24 +13,24 @@ let mix = require('laravel-mix');
 
 mix.js([
     'resources/assets/js/app.js',
-    'resources/assets/js/intlTelInput.min.js'
-    ], 'public/js')
+    //'resources/assets/js/intlTelInput.min.js'
+], 'public/js')
     .styles([
             'node_modules/jquery-confirm/dist/jquery-confirm.min.css',
             'resources/assets/css/app.css',
             'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
             'node_modules/chosen-js/chosen.css',
-            'resources/assets/css/intlTelInput.css'
+            'node_modules/intl-tel-input/build/css/intlTelInput.css'
         ],
-        'public/css/app.css');
+        'public/css/app.css')
 
-    /*.copyDirectory('node_modules/intl-tel-input/build/img', 'public/images')
+    .copyDirectory('node_modules/intl-tel-input/build/img', 'public/images')
     .copy([
             'node_modules/chosen-js/chosen-sprite.png',
             'node_modules/chosen-js/chosen-sprite@2x.png'],
         'public/css')
-    .copy(['node_modules/intl-tel-input/build/js/utils.js'],
-        'public/js/intl-tel-input-util.js'); */
+    .copy('node_modules/intl-tel-input/build/js/utils.js',
+        'public/js/intl-tel-input-util.js');
 
 if (mix.inProduction()) {
     mix.version();

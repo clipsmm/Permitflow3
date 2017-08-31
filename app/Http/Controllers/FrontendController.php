@@ -10,7 +10,16 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    public function index()
+    /**
+     * FrontendController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('auth');
+    }
+
+    public function index(Request $request)
     {
         $applications = user()->applications()->whereInCorrections(false)->limit(5)->with(['current_invoice'])->get();
         $corrections = user()->applications()->whereInCorrections(true)->limit(5)->with(['current_invoice'])->get();
