@@ -1,11 +1,13 @@
 @extends('layouts.frontend')
 @section('body')
+
     <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"> {{$current_module->name}}: @lang('e-visa::common.retrieve_existing_application')</h3>
+        </div>
         <div class="panel-body">
             <div class="col-sm-4 col-sm-offset-4">
-                <h4>
-                    {{$current_module->name}}: @lang('e-visa::common.retrieve_existing_application')
-                </h4>
+
                 <hr>
                 {!! Form::open(['url' => route('e-visa.retrieve_existing.submit')]) !!}
                 <div class="form-group {{error_class($errors, 'application_number')}}">
@@ -36,6 +38,9 @@
                 </div>
                 {!! Form::close() !!}
             </div>
+        </div>
+        <div class="panel-footer">
+            <a href="{{ $current_module->newUrl() }}">Or create a new application</a>
         </div>
     </div>
 
