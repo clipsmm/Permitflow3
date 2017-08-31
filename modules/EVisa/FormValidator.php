@@ -31,10 +31,9 @@ class FormValidator
                     'country_of_residence' => ['required', 'cca2'],
                     'city' => ['required'],
                     'physical_address' => ['required'],
-                    'phone_number' => ['required', 'full_phone'],
+                    'phone_number' => ['required', 'phone:AUTO,KE'],
                     'email' => ['required', 'email'],
                 ], [
-                    'phone_number.full_phone' => __('Use 2547********* format'),
                     'nationality.blacklist_countries' => __('Sorry, nationals of this country are not eligible for e-Visa'),
                     'nationality.whitelist_countries' => __('Citizens of this country are allowed entry without visa'),
                 ]);

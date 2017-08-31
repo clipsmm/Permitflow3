@@ -155,7 +155,7 @@ if (!function_exists('encode_phone_number')){
      * @param string $code
      * @return mixed|string
      */
-    function encode_phone_number($number,$code = '254')
+    function encode_phone_number($number,$code = 'KE')
     {
         //strip spaces
         $number = str_replace(' ','',$number);
@@ -163,15 +163,13 @@ if (!function_exists('encode_phone_number')){
         // remove preceding plus if it exists
         $number = preg_replace('/^\+/', '', $number);
 
-        if (starts_with($number,$code))
-            return $number;
+        $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+        $phone = $phoneUtil->parse($number, $code);
 
-        if (starts_with($number,'07')){
-            $real = substr($number,1);
-            return $code.$real;
-        }else{
-            return $code.$number;
-        }
+        if(!$phoneUtil->isValidNumber($phone))
+            return null;
+
+        return $phone->getCountryCode().$phone->getNationalNumber();
     }
 }
 
