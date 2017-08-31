@@ -411,8 +411,8 @@
                 </td>
                 <td class="hidden-xs hidden-sm">
                     @foreach($application->get_data('additional_documents', []) as $doc)
-                        <a href="{{route('frontend.applications.download_attachment', ['attachment' => $doc['path']])}}">
-                            {{ $doc['file_name'] }}
+                        <a href="{{route('frontend.applications.download_attachment', ['attachment' => array_get($doc, 'path')])}}">
+                            {{ array_get($doc, 'file_name') }}
                         </a>
                         <br>
                     @endforeach
