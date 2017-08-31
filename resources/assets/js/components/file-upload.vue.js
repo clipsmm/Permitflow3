@@ -10,7 +10,7 @@ export default Vue.component('file-upload', {
   <template v-else>
     <input type="hidden" :name="pathField()" :value="(value.path)">
     <input type="hidden" :name="nameField()" :value="(value.file_name)">
-    <p class="form-control form-control-static padding-10">
+    <p class="form-control input-sm padding-5">
    {{ value.file_name }} (<a href="#" @click.prevent="value = 'remove'">{{ label }}</a>)
 </p>
   </template>

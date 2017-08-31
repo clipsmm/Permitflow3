@@ -62434,7 +62434,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('file-upload', {
-    template: '\n  <div>\n  <template v-if="isInvalid()">\n    <input type="hidden" :name="field" :value="null">\n    <input :name="field" type="file" class="form-control-file form-control input-sm">\n  </template>\n  <template v-else>\n    <input type="hidden" :name="pathField()" :value="(value.path)">\n    <input type="hidden" :name="nameField()" :value="(value.file_name)">\n    <p class="form-control form-control-static padding-10">\n   {{ value.file_name }} (<a href="#" @click.prevent="value = \'remove\'">{{ label }}</a>)\n</p>\n  </template>\n  </div>\n  ',
+    template: '\n  <div>\n  <template v-if="isInvalid()">\n    <input type="hidden" :name="field" :value="null">\n    <input :name="field" type="file" class="form-control-file form-control input-sm">\n  </template>\n  <template v-else>\n    <input type="hidden" :name="pathField()" :value="(value.path)">\n    <input type="hidden" :name="nameField()" :value="(value.file_name)">\n    <p class="form-control input-sm padding-5">\n   {{ value.file_name }} (<a href="#" @click.prevent="value = \'remove\'">{{ label }}</a>)\n</p>\n  </template>\n  </div>\n  ',
     props: ["field", "_value", "removeLabel", "val"],
     data: function data() {
         return {
@@ -62566,6 +62566,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 
+
 /* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('e-visa-application-form', {
     props: ['returning_to_country', 'denied_entry_before', 'denied_entry_others', 'convicted_before', 'other_recent_visits', 'recent_visits', 'places_to_visit', 'form_errors', 'travel_reason', 'arrival_by', 'additional_documents'],
     data: function data() {
@@ -62579,8 +62580,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             placesToVisit: this.places_to_visit || [],
             travelReason: this.travel_reason,
             arrivalBy: this.arrival_by,
-            additionalDocuments: this.additional_documents.length > 0 ? this.additional_documents : [{ file_name: '', path: '' }]
+            additionalDocuments: function (docs) {
+                if (!docs) {
+                    return [];
+                }
+
+                return docs.map(function (d) {
+                    if (!d) {
+                        return {
+                            name: '',
+                            file: {
+                                file_name: '',
+                                path: ''
+                            }
+                        };
+                    }
+
+                    d['name'] = d['name'] || '';
+                    d['file'] = d['file'] || { file_name: '', path: '' };
+
+                    return d;
+                });
+            }(this.additional_documents)
         };
+    },
+    methods: {
+        addDocument: function addDocument() {
+            this.additionalDocuments.push({
+                name: '',
+                file: {
+                    file_name: new Date().getTime(),
+                    path: ''
+                }
+            });
+        }
     }
 }));
 

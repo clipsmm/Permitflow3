@@ -80,7 +80,8 @@
                             <label for="name_search_type">
                                 @lang('Phone Number')
                             </label>
-                            <intl-telephone-input value="{{old('phone_number', $model->phone_number)}}" name="phone_number" ></intl-telephone-input>
+                            <intl-telephone-input value="{{old('phone_number', $model->phone_number)}}"
+                                                  name="phone_number"></intl-telephone-input>
                             {!! error_tag($errors, 'phone_number') !!}
                         </div>
                     </div>
@@ -444,21 +445,33 @@
                             <div class="alert alert-info">
                                 @lang('e-visa::help_blocks.additional_documents')
                             </div>
-                            <div v-for="(doc, i) in additionalDocuments" :class="{'has-error' : form_errors['additional_documents.'+i]}"
-                                 class="m-t-20" :key="doc ? doc.file_name : ''">
-                                <span v-if="additionalDocuments.length > 1" class="close">
-                                    <span @click.prevent="additionalDocuments.splice(i, 1)" class="fa fa-times-circle"></span>
-                                </span>
-                                <file-upload :field="'additional_documents['+ i +']'" :val="doc"></file-upload>
-                                <span class="help-block">
-                                    @{{(form_errors['additional_documents.'+i] || [])[0]}}
-                                </span>
+                            <div v-for="(doc, i) in additionalDocuments"
+                                 class="m-t-20" :key="doc ? doc.file.file_name : ''">
+                                <div class="col-sm-12">
+                                    <span v-if="additionalDocuments.length > 1" class="close">
+                                        <span @click.prevent="additionalDocuments.splice(i, 1)"
+                                              class="fa fa-times-circle"></span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-6" :class="{'has-error' : form_errors['additional_documents.'+i+'.name']}">
+                                    <input class="form-control input-sm" placeholder="{{__('Attachment Name')}}" type="text" :name="'additional_documents['+ i +'][name]'" v-model="doc.name">
+                                    <span class="help-block">
+                                        @{{(form_errors['additional_documents.'+i+'.name'] || [])[0]}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-6" :class="{'has-error' : form_errors['additional_documents.'+i+'.file']}">
+                                    <file-upload :field="'additional_documents['+ i +'][file]'" :val="doc.file"></file-upload>
+                                    <span class="help-block">
+                                        @{{(form_errors['additional_documents.'+i+'.file'] || [])[0]}}
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <button @click.prevent="additionalDocuments.push({file_name: new Date().getTime(), path: ''})"
+                    <button @click.prevent="addDocument()"
                             class="btn-sm btn btn-primary">
                         <span class="fa fa-plus"></span>
                         @lang('Add')
