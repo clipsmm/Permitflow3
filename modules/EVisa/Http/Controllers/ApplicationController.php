@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Modules\EVisa\Models\EntryPoint;
 use Modules\EVisa\Models\EVisa;
@@ -85,7 +86,7 @@ class ApplicationController extends Controller
         $data = $this->mergeWithPreviousApplication($form_data, $user);
 
         //save application and send notification
-        $application = Application::insertRecord($this->module, $data, $user);
+        $application = Application::insertRecord($this->module, $data, $user, Application::TEMPORARY);
         $this->sendEmailToUser($user, $application);
 
         session()->put($this->guest_app_id, $application->id);
@@ -139,25 +140,14 @@ class ApplicationController extends Controller
     public function resumeGuestApplication(Request $request)
     {
         $app_number = trim($request->application_number);
-        $recaptcha = $request->get('g-recaptcha-response');
 
-        $application = $this->authorizeResumption($request);
+        $application = Application::getByHashId($request->route('return_code'));
 
         $validator = Validator::make($request->all(), [])
             ->after(function ($v) use ($application, $app_number) {
                 //validate application number
                 if (strtolower($app_number) != strtolower($application->application_number)) {
                     $v->errors()->add('application_number', __('Application Reference Number not matching'));
-                }
-            })
-            ->after(function ($v) use ($recaptcha, $request) {
-                $user_pi = $request->ip();
-                //validate recaptcha
-                $client = new Client();
-                $response = json_decode($client->post(config('app.recaptcha_api'), ['response' => $recaptcha,
-                    'secret' => env('RECAPTCHA_SECRET'), 'remoteip' => $user_pi])->getBody());
-                if (!$response->success) {
-                    //$v->errors()->add('recaptcha', 'Recaptcha validation failed');
                 }
             });
 
@@ -167,14 +157,16 @@ class ApplicationController extends Controller
 
         //login this user then let him edit the appliction
         auth()->login($application->user);
+
+        //change application from temporary to draft
+        $application->update(['status' => Application::DRAFT]);
         return redirect()->route('e-visa.application.edit', ['application_id' => $application->id, 'step' => $this->max_temp_steps + 1]);
     }
 
     private function authorizeResumption($request)
     {
         $return_code = $request->route('return_code');
-        $app_id = \Hashids::decode($return_code);
-        $application = Application::findOrFail($app_id[0]);
+        $application = Application::getByHashId($return_code, Application::whereStatus(Application::TEMPORARY));
         $expiry = $application->created_at->addHours($this->expiry_time);
 
         if ($expiry->lt(Carbon::now())) {

@@ -12,12 +12,13 @@ class Application extends Model
 {
     const DRAFT = 'draft';
     const SUBMITTED = 'submitted';
+    const TEMPORARY = 'temporary';
 
     protected $fillable = ['application_number', 'form_data', 'module_slug', 'status', 'submitted_at', 'in_corrections'];
 
-    public static function insertRecord($module, $data, User $user)
+    public static function insertRecord($module, $data, User $user, $status = self::DRAFT)
     {
-        $application = new self(['module_slug' => $module->slug, 'application_number' => self::generateApplicationNumber($module, $user)]);
+        $application = new self(['module_slug' => $module->slug, 'status' => $status, 'application_number' => self::generateApplicationNumber($module, $user)]);
         $application->form_data = $data;
         $application->user()->associate($user)
             ->save();
@@ -173,6 +174,14 @@ class Application extends Model
     public function add_output($code, $task_id)
     {
         return ApplicationOutput::add_application_output($this->id, $code, $task_id);
+    }
+
+
+    public static function getByHashId($hash_id, $query = null)
+    {
+        $query = is_null($query) ? self::query() : $query;
+        $app_id = \Hashids::decode($hash_id);
+        return $query->findOrFail($app_id[0]);
     }
 
 }
