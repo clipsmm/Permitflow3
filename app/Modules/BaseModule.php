@@ -85,13 +85,6 @@ class BaseModule
         return [];
     }
 
-    public function getUpdatedCounter(){
-        $counter = Module::get("{$this->slug}::counter", 0);
-        Module::set("{$this->slug}::counter", $counter + 1);
-
-        return $counter + 1;
-    }
-
 
     public function get_task_actions(Task $task)
     {

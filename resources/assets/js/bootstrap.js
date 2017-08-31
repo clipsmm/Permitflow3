@@ -1,7 +1,8 @@
-
 window._ = require('lodash');
 
 window.moment = require('moment');
+
+window.Cookies = require('js-cookie');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10,6 +11,7 @@ window.moment = require('moment');
  */
 
 try {
+
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
@@ -26,7 +28,18 @@ try {
         $('[data-toggle="tooltip"]').tooltip()
     });
 
-} catch (e) {}
+    $.ajaxPrefilter(function (options) {
+        if (options.headers) {
+            options.headers['X-XSRF-TOKEN'] = Cookies.get('XSRF-TOKEN');
+        } else {
+            options.headers = {
+                'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
+            }
+        }
+    });
+
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

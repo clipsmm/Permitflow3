@@ -21,6 +21,7 @@ Route::group(['prefix' => 'e-visa', 'as' => 'e-visa.'], function () {
     Route::get('/guest/complete', 'ApplicationController@completeGuestApplication')->name('guest.complete');
     Route::get('/guests/{return_code}/retrieve', 'ApplicationController@retrieveGuestApplication')->name('guest.retrieve');
     Route::post('/guests/{return_code}/retrieve', 'ApplicationController@resumeGuestApplication')->name('guest.resume');
+    Route::post('/guests/complete/resend-email', 'ApplicationController@resendEmail')->name('guest.resend_email');
 
     Route::get('/applications/{application}/edit', 'ApplicationController@edit')->name('application.edit');
     Route::post('/applications/{application}/update', 'ApplicationController@update')->name('application.update');
