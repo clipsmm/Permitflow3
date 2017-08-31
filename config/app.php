@@ -186,6 +186,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Propaganistas\LaravelPhone\PhoneServiceProvider::class,
 
 
         /*

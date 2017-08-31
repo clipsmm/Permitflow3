@@ -103,6 +103,7 @@ return [
     |
     */
     'full_phone' => "The phone number format you entered is incorrect.",
+    "phone" => "The :attribute field contains an invalid number.",
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',

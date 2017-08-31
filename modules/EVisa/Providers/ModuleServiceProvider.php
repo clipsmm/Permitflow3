@@ -47,18 +47,6 @@ class ModuleServiceProvider extends ServiceProvider
         Validator::extend('whitelist_countries', function ($attribute, $value, $parameters, $validator) use ($whitelist) {
             return !in_array($value, $whitelist);
         });
-
-        Validator::extend('full_phone', function ($attribute, $value, $parameters, $validator) {
-            try {
-                //ensure phone number is numeric
-                if (!is_numeric($value)) return false;
-
-                $code_phone_no = encode_phone_number($value);
-                return strlen($code_phone_no) == 12;
-            } catch (\Exception $ex) {
-                return false;
-            }
-        });
     }
 
     private function registerModuleMiddleware()
