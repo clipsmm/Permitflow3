@@ -104,6 +104,7 @@ Route::prefix('applications/{module_slug}')
         Route::get('/{application}/checkout/{invoice_pk}', 'ApplicationController@checkout')->name('application.checkout');
         Route::post('/{application}/submit', 'ApplicationController@submit')->name('application.review.submit');
         Route::get('/{application}/submitted', 'ApplicationController@submitted')->name('application.submitted');
+        Route::delete('/{application}/delete', 'ApplicationController@delete')->name('application.delete');
     });
 
 /*

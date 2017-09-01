@@ -7,7 +7,7 @@
                              :other_recent_visits="{{json_encode(old('other_recent_visits', $model->other_recent_visits))}}"
                              :recent_visits="{{json_encode(old('recent_visits', $model->recent_visits))}}"
                              :places_to_visit="{{json_encode(old('places_to_visit', $model->places_to_visit))}}"
-                             :additional_documents="{{json_encode(old('additional_documents', $model->additional_documents ?: []))}}"
+                             :additional_documents="{{json_encode(old('additional_documents', $model->additional_documents))}}"
                              travel_reason="{{old('travel_reason', $model->travel_reason)}}"
                              arrival_by="{{old('arrival_by', $model->arrival_by)}}"
                              :form_errors="{{json_encode($errors->messages())}}"
@@ -80,7 +80,8 @@
                             <label for="name_search_type">
                                 @lang('Phone Number')
                             </label>
-                            <intl-telephone-input value="{{old('phone_number', $model->phone_number)}}" name="phone_number" ></intl-telephone-input>
+                            <intl-telephone-input value="{{old('phone_number', $model->phone_number)}}"
+                                                  name="phone_number"></intl-telephone-input>
                             {!! error_tag($errors, 'phone_number') !!}
                         </div>
                     </div>
@@ -109,6 +110,9 @@
                                 @lang('Surname/Family Name')
                             </label>
                             {!! Form::text('surname', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'surname') !!}
                         </div>
                     </div>
@@ -118,6 +122,9 @@
                                 @lang('Other Names in full')
                             </label>
                             {!! Form::text('other_names', null, ['class' => 'form-control text-black',  'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'other_names') !!}
                         </div>
                     </div>
@@ -127,6 +134,9 @@
                                 @lang('Gender')
                             </label>
                             {!! Form::select('gender', ['M' => __('Male'), 'F' => __('Female'), 'other' => __('Other')], null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'gender') !!}
                         </div>
                     </div>
@@ -137,6 +147,9 @@
                             </label>
                             <date-picker value="{{old('date_of_birth', $model->date_of_birth)}}"
                                          name="date_of_birth"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'date_of_birth') !!}
                         </div>
                     </div>
@@ -148,6 +161,9 @@
                                 @lang('Country Of Birth')
                             </label>
                             {!! Form::select('country_of_birth', $country_codes, NULL, ['class' => 'form-control text-black', 'placeholder' => __('--Select--'), 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'country_of_birth') !!}
                         </div>
                     </div>
@@ -157,6 +173,9 @@
                                 @lang('Place Of Birth')
                             </label>
                             {!! Form::text('place_of_birth', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'place_of_birth') !!}
                         </div>
                     </div>
@@ -166,6 +185,9 @@
                                 @lang('Current Occupation')
                             </label>
                             {!! Form::text('occupation', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'occupation') !!}
                         </div>
                     </div>
@@ -176,6 +198,9 @@
                                 @lang('Passport Number')
                             </label>
                             {!! Form::text('passport_number', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_number') !!}
                         </div>
                     </div>
@@ -186,6 +211,9 @@
                                 @lang('Place Of Issue')
                             </label>
                             {!! Form::text('passport_place_of_issue', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_place_of_issue') !!}
                         </div>
                     </div>
@@ -197,6 +225,9 @@
                             </label>
                             <date-picker value="{{old('passport_date_of_issue', $model->passport_date_of_issue)}}"
                                          name="passport_date_of_issue"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_date_of_issue') !!}
                         </div>
                     </div>
@@ -210,6 +241,9 @@
                             </label>
                             <date-picker value="{{old('passport_date_of_expiry', $model->passport_date_of_expiry)}}"
                                          name="passport_date_of_expiry"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_date_of_expiry') !!}
                         </div>
                     </div>
@@ -221,6 +255,9 @@
                                 @lang('Issued By')
                             </label>
                             {!! Form::text('passport_issued_by', NULL, ['class' => 'form-control text-black']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_issued_by') !!}
                         </div>
                     </div>
@@ -444,21 +481,34 @@
                             <div class="alert alert-info">
                                 @lang('e-visa::help_blocks.additional_documents')
                             </div>
-                            <div v-for="(doc, i) in additionalDocuments" :class="{'has-error' : form_errors['additional_documents.'+i]}"
-                                 class="m-t-20" :key="doc ? doc.file_name : ''">
-                                <span v-if="additionalDocuments.length > 1" class="close">
-                                    <span @click.prevent="additionalDocuments.splice(i, 1)" class="fa fa-times-circle"></span>
-                                </span>
-                                <file-upload :field="'additional_documents['+ i +']'" :val="doc"></file-upload>
-                                <span class="help-block">
-                                    @{{(form_errors['additional_documents.'+i] || [])[0]}}
-                                </span>
+                            <div v-for="(doc, i) in additionalDocuments"
+                                 class="m-t-20" :key="doc ? doc.file.file_name : ''">
+                                <div class="col-sm-12">
+                                    <span v-if="additionalDocuments.length > 1" class="close">
+                                        <span @click.prevent="additionalDocuments.splice(i, 1)"
+                                              class="fa fa-times-circle"></span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-6" :class="{'has-error' : form_errors['additional_documents.'+i+'.name']}">
+                                    <input class="form-control input-sm" placeholder="{{__('Attachment Name')}}" type="text" :name="'additional_documents['+ i +'][name]'" v-model="doc.name">
+                                    <span class="help-block">
+                                        @{{(form_errors['additional_documents.'+i+'.name'] || [])[0]}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-6" :class="{'has-error' : form_errors['additional_documents.'+i+'.file']}">
+                                    <file-upload :field="'additional_documents['+ i +'][file]'" :val="doc.file"></file-upload>
+                                    <span class="help-block">
+                                        @{{(form_errors['additional_documents.'+i+'.file'] || [])[0]}}
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
+                            {!! error_tag($errors, 'additional_documents') !!}
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <button @click.prevent="additionalDocuments.push({file_name: new Date().getTime(), path: ''})"
+                    <button @click.prevent="addDocument()"
                             class="btn-sm btn btn-primary">
                         <span class="fa fa-plus"></span>
                         @lang('Add')

@@ -398,7 +398,7 @@
                     </h1>
                 </td>
                 <td class="hidden-xs hidden-sm">
-                    <a href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_photo.path')])}}">
+                    <a target="_blank" href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_photo.path')])}}">
                         {{ $application->get_data('passport_photo.file_name') }}
                     </a>
                 </td>
@@ -411,8 +411,9 @@
                 </td>
                 <td class="hidden-xs hidden-sm">
                     @foreach($application->get_data('additional_documents', []) as $doc)
-                        <a href="{{route('frontend.applications.download_attachment', ['attachment' => array_get($doc, 'path')])}}">
-                            {{ array_get($doc, 'file_name') }}
+                        {{array_get($doc, 'name')}}:
+                        <a target="_blank" href="{{route('frontend.applications.download_attachment', ['attachment' => array_get($doc, 'file.path')])}}">
+                            {{ array_get($doc, 'file.file_name') }}
                         </a>
                         <br>
                     @endforeach
@@ -425,7 +426,7 @@
                     </h1>
                 </td>
                 <td class="hidden-xs hidden-sm">
-                    <a href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_bio.path')])}}">
+                    <a target="_blank" href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_bio.path')])}}">
                         {{ $application->get_data('passport_bio.file_name')}}
                     </a>
                 </td>

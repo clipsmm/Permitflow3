@@ -11,7 +11,7 @@
 |
 */
 Route::group(['prefix' => 'e-visa', 'as' => 'e-visa.'], function () {
-    Route::get('requirements','ApplicationController@getRequirements')->name('requirements');
+    Route::get('requirements', 'ApplicationController@getRequirements')->name('requirements');
     Route::get('retrieve', 'ApplicationController@getExistingApplication')->name('retrieve_existing');
     Route::post('retrieve', 'ApplicationController@retrieveExistingApplication')->name('retrieve_existing.submit');
 
@@ -23,8 +23,10 @@ Route::group(['prefix' => 'e-visa', 'as' => 'e-visa.'], function () {
     Route::post('/guests/{return_code}/retrieve', 'ApplicationController@resumeGuestApplication')->name('guest.resume');
     Route::post('/guests/complete/resend-email', 'ApplicationController@resendEmail')->name('guest.resend_email');
 
-    Route::get('/applications/{application}/edit', 'ApplicationController@edit')->name('application.edit');
-    Route::post('/applications/{application}/update', 'ApplicationController@update')->name('application.update');
+    Route::group(['middleware' => ['auth', 'e-visa.validate_past_steps', 'application_editable', 'application_owner']], function () {
+        Route::get('/applications/{application}/edit', 'ApplicationController@edit')->name('application.edit');
+        Route::post('/applications/{application}/update', 'ApplicationController@update')->name('application.update');
+    });
 
     Route::get('backend/settings', 'SettingsController@allSettings')->name('settings.all')->middleware('backend');
     Route::post('backend/settings', 'SettingsController@saveSettings')->name('settings.save')->middleware('backend');
