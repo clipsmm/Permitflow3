@@ -12,8 +12,8 @@ use App\Models\Module;
 use App\Models\Output;
 use App\Modules\BaseModule;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
 {
@@ -24,6 +24,7 @@ class ApplicationController extends Controller
         //todo: add middleware to check if module is activated
         $this->module = BaseModule::instance_from_slug($request->route('module_slug'));
         $this->middleware(['application_editable', 'application_owner'], ['only' => ['edit', 'review', 'submit', 'update']]);
+        $this->middleware(['application_deletable'], ['only' => ['delete']]);
     }
 
     public function create()
@@ -82,6 +83,19 @@ class ApplicationController extends Controller
         ]);
     }
 
+
+    public function delete($module, Application $application)
+    {
+        if ($application->doDelete()) {
+            return redirect()->route('frontend.applications.index')->with([
+                'alerts' => ['type' => 'info', 'message' => 'Application Deleted successfully']
+            ]);
+
+        } else {
+            abort(Response::HTTP_UNPROCESSABLE_ENTITY, 'Application could not be deleted');
+        }
+    }
+
     public function review($module, Application $application)
     {
         return view('applications.review', ['application' => $application, 'module' => $this->module]);
@@ -91,21 +105,21 @@ class ApplicationController extends Controller
     {
         $invoice = null;
 
-        DB::transaction(function() use($application, &$invoice){
+        DB::transaction(function () use ($application, &$invoice) {
             $invoice = $this->module->create_invoice($application);
             $in_corrections = $application->in_corrections;
 
             $application->submit();
 
-            if($in_corrections){
+            if ($in_corrections) {
                 event(new ApplicationResubmitted($application));
-            }else{
+            } else {
                 event(new ApplicationSubmitted($application));
             }
 
         });
 
-        if(is_null($invoice)){
+        if (is_null($invoice)) {
             return redirect()->route('application.submitted', ['module_slug' => $this->module->slug, 'application' => $application->id]);
         }
 
@@ -119,7 +133,7 @@ class ApplicationController extends Controller
 
     public function checkout(Request $request, $module_slug, Application $application, Invoice $invoice)
     {
-        if(!$invoice->bill_ref){
+        if (!$invoice->bill_ref) {
             $invoice->get_pesaflow_bill_ref();
             $invoice->fresh();
         }
@@ -135,7 +149,7 @@ class ApplicationController extends Controller
 
     public function show(Request $request, $module, $app_id)
     {
-        $application = Application::with(['user','invoices', 'outputs', 'outputs.output'])
+        $application = Application::with(['user', 'invoices', 'outputs', 'outputs.output'])
             ->forModule($module)
             ->find($app_id);
 
@@ -144,10 +158,10 @@ class ApplicationController extends Controller
 
     public function myApplications(Request $request)
     {
-        $user  =  user();
+        $user = user();
         $applications = $user->applications()->with(['current_invoice'])->paginate(20);
 
-        return view('frontend.my_applications',[
+        return view('frontend.my_applications', [
             'applications' => $applications
         ]);
     }
@@ -156,7 +170,7 @@ class ApplicationController extends Controller
     {
         $applicationOutput->load(['application', 'task', 'task.user']);
 
-        $output  = Output::render_output($applicationOutput->output, [
+        $output = Output::render_output($applicationOutput->output, [
             'application' => $applicationOutput->application,
             'task' => $applicationOutput->task
         ]);
@@ -168,9 +182,9 @@ class ApplicationController extends Controller
 
     public function downloadAttachment(Request $request)
     {
-        if($request->has('attachment')){
+        if ($request->has('attachment')) {
             $file = $request->get('attachment');
-            return response()->file(storage_path('app'.DIRECTORY_SEPARATOR.$file));
+            return response()->file(storage_path('app' . DIRECTORY_SEPARATOR . $file));
         }
         abort(404);
     }

@@ -184,4 +184,14 @@ class Application extends Model
         return $query->findOrFail($app_id[0]);
     }
 
+
+    public function doDelete()
+    {
+        if($this->module->deleteApplication($this)){
+            $this->delete();
+            return true;
+        };
+
+        return false;
+    }
 }

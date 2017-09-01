@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('body')
-    <div class="container">
+    <div id="vue-root" class="container">
         <div class="row">
             <div class="col-sm-10 col-md-10 col-lg-10 col-xs-12">
                 <div class="panel with-nav-tabs panel-default">
