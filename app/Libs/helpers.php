@@ -514,29 +514,32 @@ if (!function_exists('current_route_is')){
     }
 }
 
-if (!function_exists('organiser')){
+if (!function_exists('module')){
 
     /**
-     * Get the current organiser from route. If route is not a organiser route, return null
+     * Get the current module from route. If route is not a module route, return null
      *
      * @param null $key
      *
-     * @return \App\Models\Organiser|null|mixed
+     * @return \App\Modules\BaseModule
      */
-    function organiser($key = null)
+    function module($key = null)
     {
-        if(!current_route_is(['organiser.*','agent.*']))
+        $module = null;
+
+        \App\Modules\BaseModule::get_enabled_modules()->each(function ($m)use (&$module){
+            if(request()->is("*{$m->slug}*"))
+                $module = $m;
+        });
+
+        // current route is not a module route
+        if(!$module)
             return null;
 
-        if(current_route_is('organiser.*'))
-            $merchant= request()->route('organiser');
-        elseif(current_route_is('agent.*'))
-            $merchant= request()->route('agent');
-
         if ($key)
-            return $merchant->$key;
+            return $module->$key;
 
-        return $merchant;
+        return $module;
     }
 }
 
