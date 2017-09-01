@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\BackendAccess;
+use App\Http\Middleware\CurrentUserOwnsApplication;
 use App\Http\Middleware\RedirectIfApplicationNotEditable;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -59,6 +60,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'backend' => BackendAccess::class,
-        'application_editable' => RedirectIfApplicationNotEditable::class
+        'application_editable' => RedirectIfApplicationNotEditable::class,
+        'application_owner' => CurrentUserOwnsApplication::class
     ];
 }

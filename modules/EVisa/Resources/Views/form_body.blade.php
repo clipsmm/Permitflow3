@@ -503,6 +503,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
+                            {!! error_tag($errors, 'additional_documents') !!}
                         </div>
                     </div>
                 </div>

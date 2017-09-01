@@ -23,7 +23,7 @@ class ApplicationController extends Controller
     {
         //todo: add middleware to check if module is activated
         $this->module = BaseModule::instance_from_slug($request->route('module_slug'));
-        $this->middleware(['application_editable'], ['only' => ['edit', 'review', 'submit', 'update']]);
+        $this->middleware(['application_editable', 'application_owner'], ['only' => ['edit', 'review', 'submit', 'update']]);
     }
 
     public function create()
