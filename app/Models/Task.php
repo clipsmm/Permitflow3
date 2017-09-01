@@ -75,7 +75,7 @@ class Task extends Model
 
     public function scopeMyTasks($query, User $user = null)
     {
-        return $query->where('tasks.user_id', $user ? : user()->id);
+        return $query->where('tasks.user_id', $user ? $user->id : user()->id);
     }
 
     public function scopeQueued($query, $module = null)

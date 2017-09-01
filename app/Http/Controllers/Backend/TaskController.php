@@ -11,12 +11,32 @@ class TaskController extends Controller
 {
     protected $tasks;
     protected $modules;
+    protected $stats = [];
 
     public function __construct(Task $task)
     {
         parent::__construct();
 
         $this->tasks = $task;
+
+        $module  =  module();
+
+        $this->middleware(function ($request, $next) use($module) {
+            $this->user  = user();
+
+            $this->stats = [
+                'queue' => $this->tasks->module($module->slug)->queued()->count(),
+                'inbox' => $this->tasks->module($module->slug)->myTasks($this->user)->processing()->count(),
+                'corrections' => $this->tasks->module($module->slug)->myTasks($this->user)->processing()->inCorrections()->count(),
+                'completed' => $this->tasks->module($module->slug)->myTasks($this->user)->completed()->count(),
+            ];
+
+            view()->share('task_stats', $this->stats);;
+
+            return $next($request);
+        });
+
+
     }
 
     public function index()

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Request;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public $user;
 
     /**
      * Controller constructor.
@@ -25,7 +26,7 @@ class Controller extends BaseController
         }
 
         $this->middleware(function ($request, $next) {
-
+            $this->user  = user();
             // get user's permitted modules
             if (Auth::user()){
                 view()->share('my_modules', user()->modules()->where('enabled', true));
