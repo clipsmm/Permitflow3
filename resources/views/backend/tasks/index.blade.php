@@ -52,6 +52,8 @@
                                     <tr>
                                         <th>Service</th>
                                         <th class="hidden-xs hidden-sm">Ref no.</th>
+                                        <th>@lang('Submitted By')</th>
+                                        <th>@lang('Date Submitted')</th>
                                         <th class="hidden-xs">Action</th>
                                     </tr>
                                     </thead>
@@ -64,6 +66,8 @@
                                                 <small class="hidden-md hidden-lg">{{ $task->application->application_number }}</small>
                                             </td>
                                             <td class="hidden-xs hidden-sm">{{ $task->application->application_number }}</td>
+                                            <td>{{ $task->application->user }}</td>
+                                            <td>{{ $task->application->submitted_at }}</td>
                                             <td>
                                                 <a href="{{ route('backend.tasks.show',[$module->slug, $task->id]) }}"
                                                    class="btn btn-xs btn-primary">
