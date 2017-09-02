@@ -13,8 +13,7 @@ return [
     "cancel" => "Cancel",
     'save' => "Save",
     'landing_page' => "Landing Page",
-    'update_settings' => "Update Settings"
-
-
+    'update_settings' => "Update Settings",
+    'reason_for' => "Reason"
 
 ];
