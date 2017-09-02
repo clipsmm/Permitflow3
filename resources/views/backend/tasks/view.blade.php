@@ -160,7 +160,7 @@
                         <tr>
                             <td>{{ $task->application->application_number }}</td>
                             <td>{{ $task->name }}</td>
-                            <td> {{ $task->created_at }}</td>
+                            <td> {{ $task->completed_at }}</td>
                             <td><span class="label label-default">{{ $task->application->status }}</span></td>
                             <td>{{ $task->user }}</td>
                         </tr>
@@ -270,9 +270,11 @@
                                         {{ $task->user }}
                                     </td>
                                     <td>
+                                        {{ $task->assigned_at }}
+                                    </td>
+                                    <td>
                                         {{ $task->completed_at }}
                                     </td>
-                                    <td></td>
                                     <td></td>
                                 </tr>
                             @empty
