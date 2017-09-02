@@ -825,3 +825,17 @@ if(!function_exists('send_sms')){
     }
 }
 
+if (!function_exists('carbon')){
+    /**
+     * @param $timestamp
+     * @return \Carbon\Carbon
+     */
+    function carbon($timestamp = null)
+    {
+        if(!$timestamp)
+            return \Carbon\Carbon::now();
+
+        return \Carbon\Carbon::parse($timestamp);
+    }
+}
+

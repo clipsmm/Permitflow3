@@ -12,7 +12,7 @@
                         <span class="fa fa-arrow-left"></span> @lang('common.back_to_tasks')
                     </a>
 
-                    @if(!$task->application->complete)
+                    @if(!$task->application->complete && $task->user_id  == user()->id)
                         @foreach($actions as $action => $props)
                             @if(array_get($props,'feedback',false))
                                 <button type="button" class="btn btn-sm btn-{{array_get($props,'color')}}"
@@ -118,7 +118,7 @@
 
                                     <td>
                                         <a href="#" class="btn btn-xs btn-default">
-                                            23 Days
+                                            {{ carbon($task->application->submitted_at)->diffInDays($task->application->complete ? $task->application->completed_at : null) }}
                                         </a>
                                     </td>
                                 </tr>

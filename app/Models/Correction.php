@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Correction extends Model
 {
-    protected $table = 'corrections';
+    protected $table = 'application_corrections';
 
     protected $fillable = [ 'application_id', 'task_id', 'comment', 'completed_at' ];
 
