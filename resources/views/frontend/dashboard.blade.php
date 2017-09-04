@@ -2,7 +2,7 @@
 
 @section('body')
     <div id="vue-root">
-        <div class="panel panel-default">
+        <div class="panel panel-danger">
             <div class="panel-heading">
                 <h3 class="panel-title">@lang('Corrections')</h3>
             </div>
