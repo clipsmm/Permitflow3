@@ -214,12 +214,14 @@ class EVisa extends BaseModule implements ModuleInterface
     public function loadOutputData($output)
     {
         switch($output->code){
-            case 'single-entry-visa':
+            case 'EVISA-OUTPUT':
                 return [
                     'entry_points' => EntryPoint::all(),
                     'country_codes' => \Countries::all()->pluck('name.common', 'cca2'),
                     'travel_reasons' => self::getTravelReasons()
                 ];
         }
+
+        return [];
     }
 }

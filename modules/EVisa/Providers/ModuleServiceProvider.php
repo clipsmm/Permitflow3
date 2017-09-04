@@ -2,7 +2,6 @@
 
 namespace Modules\EVisa\Providers;
 
-use App\Modules\BaseModule;
 use Caffeinated\Modules\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;

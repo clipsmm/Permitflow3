@@ -2,7 +2,6 @@
 
 namespace Modules\EVisa\Providers;
 
-use App\Events\ApplicationSubmitted;
 use App\Events\PaymentCompleted;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\Evisa\Listeners\EvisaApplicationSubmittedHandler;
