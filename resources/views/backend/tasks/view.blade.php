@@ -12,7 +12,7 @@
                         <span class="fa fa-arrow-left"></span> @lang('common.back_to_tasks')
                     </a>
 
-                    @if(!$task->application->complete && $task->user_id  == user()->id)
+                    @if(!$task->application->complete && $task->user_id  == user()->id && !$task->application->in_corrections)
                         @foreach($actions as $action => $props)
                             @if(array_get($props,'feedback',false))
                                 <button type="button" class="btn btn-sm btn-{{array_get($props,'color')}}"
