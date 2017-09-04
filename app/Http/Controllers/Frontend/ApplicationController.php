@@ -169,7 +169,7 @@ class ApplicationController extends Controller
         $output->load(['application', 'task', 'task.user']);
         $output_data = $application->module->loadOutputData($output);
         $html = app('blade-extensions')->compileString($output->output->template, array_merge(['application' => $application,  'task' => $output->task], $output_data));
-        return PDF::loadHTML($html)->download("{$output->name}.pdf");
+        return PDF::loadHTML($html)->download("{$output->output->name}.pdf");
     }
 
     public function downloadAttachment(Request $request)

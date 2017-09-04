@@ -6,6 +6,7 @@ use App\Modules\BaseModule;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use \DNS1D;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Application extends Model
@@ -193,5 +194,10 @@ class Application extends Model
         };
 
         return false;
+    }
+
+    public function getBarcode()
+    {
+        return "data:image/png;base64,". DNS1D::getBarcodePNG($this->application_number, "C128B");
     }
 }

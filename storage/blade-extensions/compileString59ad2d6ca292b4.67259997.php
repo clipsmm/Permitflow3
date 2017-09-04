@@ -20,7 +20,7 @@
 
             <p style="font-family: 'Roboto', sans-serif; font-size:15px; padding:0px; margin:0;margin-right:10px;margin-top:4px;line-height:0;line-height:1.0em;padding-bottom:10px;">
                 <strong style="line-height: 1em;">
-                    <img src="{{$application->getBarcode()}}" alt="barcode"   />
+                    <img src="data:image/png;base64,<?php echo e(\DNS1D::getBarcodePNG($application->application_number, "PHARMA2T")); ?>" alt="barcode"   />
                 </strong>
             </p>
         </td>
@@ -56,22 +56,23 @@
     </tr>
     <tr>
         <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">{{$application->application_number}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><?php echo e($application->application_number); ?></p>
         </td>
         <td style="text-align:left;border-bottom:1px solid; border-right:1px solid; padding:5px;">
             <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">Single Entry</p>
         </td>
         <td style="text-align:left;border-bottom:1px solid;border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">{{$task->completed_at}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><?php echo e($task->completed_at); ?></p>
         </td>
         <td style="text-align:left;border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">{{$application->get_data('date_of_entry')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><?php echo e($application->get_data('date_of_entry')); ?></p>
         </td>
     </tr>
     <tr>
         <td colspan="4" style="padding:5px;background:#f9f9f9">
             <p style="font-family: 'Roboto', sans-serif; font-size:11px; text-align:center; padding:0px; margin:0;line-height:1.0em;"><strong>NOTE:</strong> Your stay period in <strong>Kenya</strong> will be determined at the <strong>
-                    {{$entry_points->find($application->get_data('entry_point'))->name}}
+                    <?php echo e($entry_points->find($application->get_data('entry_point'))->name); ?>
+
                 </strong> entry point
             </p>
         </td>
@@ -93,40 +94,41 @@
     <tbody>
     <tr>
         <td colspan="2" style="text-align:left; border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:15px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>FULL NAME:</strong> {{$application->get_data('surname')}}, {{$application->get_data('other_names')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:15px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>FULL NAME:</strong> <?php echo e($application->get_data('surname')); ?>, <?php echo e($application->get_data('other_names')); ?></p>
         </td>
     </tr>
     <tr>
         <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>DATE OF BIRTH:</strong> {{$application->get_data('date_of_birth')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>DATE OF BIRTH:</strong> <?php echo e($application->get_data('date_of_birth')); ?></p>
         </td>
         <td style="text-align:left;border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Gender:</strong> {{$application->get_data('gender')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Gender:</strong> <?php echo e($application->get_data('gender')); ?></p>
         </td>
     </tr>
     <tr>
         <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>PASSPORT NO.:</strong> {{$application->get_data('passport_number')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>PASSPORT NO.:</strong> <?php echo e($application->get_data('passport_number')); ?></p>
         </td>
         <td style="text-align:left;border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Place of issue:</strong> {{$application->get_data('passport_place_of_issue')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Place of issue:</strong> <?php echo e($application->get_data('passport_place_of_issue')); ?></p>
         </td>
     </tr>
     <tr>
         <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Date of Issue:</strong> {{$application->get_data('passport_date_of_issue')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Date of Issue:</strong> <?php echo e($application->get_data('passport_date_of_issue')); ?></p>
         </td>
         <td style="text-align:left;border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Expiry Date:</strong> {{$application->get_data('passport_date_of_expiry')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Expiry Date:</strong> <?php echo e($application->get_data('passport_date_of_expiry')); ?></p>
         </td>
     </tr>
     <tr>
         <td style="text-align:left;border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Nationality:</strong>{{array_get($country_codes, $application->get_data('nationality'))}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Nationality:</strong><?php echo e(array_get($country_codes, $application->get_data('nationality'))); ?></p>
         </td>
         <td style="text-align:left; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Reason For Travel:</strong> {{array_get($travel_reasons, $application->get_data('travel_reason'))}}&nbsp;
-                {{$application->get_data('other_travel_reason')}}
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Reason For Travel:</strong> <?php echo e(array_get($travel_reasons, $application->get_data('travel_reason'))); ?>&nbsp;
+                <?php echo e($application->get_data('other_travel_reason')); ?>
+
             </p>
         </td>
     </tr>
@@ -147,7 +149,7 @@
     <tbody>
     <tr>
         <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Home phone number:</strong>{{$application->get_data('phone_number')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Home phone number:</strong><?php echo e($application->get_data('phone_number')); ?></p>
         </td>
         <td style="text-align:left;border-bottom:1px solid; padding:5px;">
             <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Kenyan phone number:</strong></p>
@@ -155,7 +157,7 @@
     </tr>
     <tr>
         <td style="text-align:left;border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>EMAIL ADDRESS:</strong> {{$application->get_data('email')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>EMAIL ADDRESS:</strong> <?php echo e($application->get_data('email')); ?></p>
         </td>
         <td style="text-align:left; padding:5px;">
             <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">&nbsp;</p>
