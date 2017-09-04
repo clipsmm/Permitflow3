@@ -70,7 +70,7 @@
                             @if($application->canBeDeleted())
                                 <li>
                                     {!! render_action(['label' => __('Delete'),
-                                        'confirm' => __('common.confirm_action'),
+                                        'confirm' => __('common.confirm_delete_application'),
                                         'icon' => 'fa fa-trash',
                                         'url' => route('application.delete', [$application->module_slug, $application->id]),
                                         'color' => 'danger',

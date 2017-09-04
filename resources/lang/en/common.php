@@ -20,5 +20,6 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'in_corrections' => 'Has Corrections',
-    'no_recent_applications' => "No recent applications"
+    'no_recent_applications' => "No recent applications",
+    'confirm_delete_application' => "Are your sure you want to delete this application? "
 ];
