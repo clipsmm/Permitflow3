@@ -125,6 +125,13 @@ class Application extends Model
         return $this->hasMany(ApplicationCorrection::class);
     }
 
+    public function active_correction()
+    {
+        return $this->hasOne(Correction::class, 'application_id')
+            ->whereNull('completed_at')
+            ->latest('application_corrections.created_at');
+    }
+
     public function updateFormData($data)
     {
         $this->form_data = array_merge($this->form_data, $data);

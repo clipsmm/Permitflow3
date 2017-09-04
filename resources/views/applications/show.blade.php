@@ -22,6 +22,33 @@
             <div class="clearfix"></div>
         </div>
         <div class="panel-body">
+            @if($application->in_corrections && $correction = $application->active_correction)
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <div class="panel-title">@lang("Pending Correction")</div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-special m-b-0 b-b-0">
+                            <thead>
+                            <tr>
+                                <th colspan="3">
+                                    @lang("Comments")
+                                </th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="3">{!!  $correction->comment !!} </td>
+                                <td>
+                                    <a class="btn btn-sm btn-danger" href="{{$application->module->get_edit_url($application)}}"><i class="fa fa-pencil-square-o"></i> Edit </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
             {!! $module->render_application_view($application) !!}
 
             <!--Payment Details-->
