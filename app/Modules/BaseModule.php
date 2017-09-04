@@ -85,6 +85,11 @@ class BaseModule
         return [];
     }
 
+    public function loadOutputDat($output)
+    {
+        return [];
+    }
+
 
     public function get_task_actions(Task $task)
     {

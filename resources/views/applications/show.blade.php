@@ -12,7 +12,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         @forelse($application->outputs as $output)
-                            <li><a target="_blank" href="{{ route('application.download', [$application->module->slug, $application->id, $output->id]) }}">{{ $output->output->name }}</a> </li>
+                            <li><a target="_blank" href="{{ route('application.download', [$application->module_slug, $application->id, $output->id]) }}">{{ $output->output->name }}</a> </li>
                         @empty
                             <li><a href="#">@lang('labels.no_downloads')</a> </li>
                         @endforelse

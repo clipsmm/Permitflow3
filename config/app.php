@@ -186,7 +186,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
-
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Radic\BladeExtensions\BladeExtensionsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -254,6 +255,7 @@ return [
         'Countries'=> PragmaRX\Countries\Facade::class,
         'Setting' => anlutro\LaravelSettings\Facade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 
