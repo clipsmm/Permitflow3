@@ -88,9 +88,10 @@ class ApplicationController extends Controller
     public function delete($module, Application $application)
     {
         if ($application->doDelete()) {
-            return redirect()->route('frontend.applications.index')->with([
-                'alerts' => ['type' => 'info', 'message' => 'Application Deleted successfully']
-            ]);
+            return redirect()->route('frontend.applications.index')
+                ->with('alerts', [
+                    ['type' => 'success', 'message' =>__("Application deted successfully!")]
+                ]);
 
         } else {
             abort(Response::HTTP_UNPROCESSABLE_ENTITY, 'Application could not be deleted');
