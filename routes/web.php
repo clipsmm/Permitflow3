@@ -95,7 +95,7 @@ Route::prefix('applications/{module_slug}')
     ->namespace('Frontend')
     ->group(function () {
         Route::get('/{application}', 'ApplicationController@show')->name('application.show');
-        Route::get('/{application_id}/download/{application_output}', 'ApplicationController@downloadOutput')->name('application.download');
+        Route::get('/{application}/download/{application_output}', 'ApplicationController@downloadOutput')->name('application.download');
 
         Route::get('/new', 'ApplicationController@create')->name('application.create');
         Route::post('/create', 'ApplicationController@save')->name('application.save');

@@ -5,8 +5,6 @@ namespace Modules\Evisa\Listeners;
 use App\Events\ApplicationSubmitted;
 use App\Events\PaymentCompleted;
 use App\Models\Task;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class EvisaApplicationSubmittedHandler
 {
