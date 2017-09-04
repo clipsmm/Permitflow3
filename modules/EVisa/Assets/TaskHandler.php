@@ -62,6 +62,7 @@ class TaskHandler {
             Correction::add_correction($application->id, $task->id, $comments);
 
             $application->in_corrections  = true;
+            $application->status  = 'corrections';
             $application->save();
 
             \Mail::to($application->user)
