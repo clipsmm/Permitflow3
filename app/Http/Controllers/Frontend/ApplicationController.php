@@ -159,7 +159,9 @@ class ApplicationController extends Controller
     public function myApplications(Request $request)
     {
         $user = user();
-        $applications = $user->applications()->with(['current_invoice'])->paginate(20);
+        $applications = $user->applications()->with(['current_invoice'])
+            ->latest('applications.created_at')
+            ->paginate(20);
 
         return view('frontend.my_applications', [
             'applications' => $applications
