@@ -6,11 +6,9 @@ use App\Events\ApplicationResubmitted;
 use App\Events\ApplicationSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
-use App\Models\ApplicationOutput;
 use App\Models\Invoice;
-use App\Models\Module;
-use App\Models\Output;
 use App\Modules\BaseModule;
+use \PDF;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -173,18 +171,12 @@ class ApplicationController extends Controller
         ]);
     }
 
-    public function downloadOutput(Request $request, $module, Application $application, ApplicationOutput $applicationOutput)
+    public function downloadOutput(Request $request, $module, Application $application, $output)
     {
-        $applicationOutput->load(['application', 'task', 'task.user']);
-
-        $output = Output::render_output($applicationOutput->output, [
-            'application' => $applicationOutput->application,
-            'task' => $applicationOutput->task
-        ]);
-
-        return view('blank', [
-            'content' => $output
-        ]);
+        $output->load(['application', 'task', 'task.user']);
+        $output_data = $application->module->loadOutputData($output);
+        $html = app('blade-extensions')->compileString($output->output->template, array_merge(['application' => $application,  'task' => $output->task], $output_data));
+        return PDF::loadHTML($html)->download("{$output->output->name}.pdf");
     }
 
     public function downloadAttachment(Request $request)

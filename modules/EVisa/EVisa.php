@@ -18,6 +18,7 @@ use App\Modules\BaseModule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Modules\EVisa\FormValidator;
+use Modules\EVisa\Models\EntryPoint;
 use Modules\EVisa\TaskHandler;
 use Modules\Evisa\Listeners\EvisaApplicationSubmittedHandler;
 
@@ -208,12 +209,17 @@ class EVisa extends BaseModule implements ModuleInterface
     public function authorizeTask($task, $user)
     {
         return true;
-//        switch ($task->stage) {
-//            case 'review':
-//                return $user->hasAnyPermission([
-//                    permission_name('approve_application', 'e-visa'),
-//                    permission_name('reject_application', 'e-visa')
-//                ]);
-//        }
+    }
+
+    public function loadOutputData($output)
+    {
+        switch($output->code){
+            case 'single-entry-visa':
+                return [
+                    'entry_points' => EntryPoint::all(),
+                    'country_codes' => \Countries::all()->pluck('name.common', 'cca2'),
+                    'travel_reasons' => self::getTravelReasons()
+                ];
+        }
     }
 }
