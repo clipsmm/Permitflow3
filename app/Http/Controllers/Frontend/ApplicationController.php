@@ -107,13 +107,14 @@ class ApplicationController extends Controller
     {
         $invoice = null;
 
-        DB::transaction(function () use ($application, &$invoice) {
+        DB::transaction(function () use (&$application, &$invoice) {
             $invoice = $this->module->create_invoice($application);
             $in_corrections = $application->in_corrections;
 
             $application->submit();
 
             if ($in_corrections) {
+                //change task status to review
                 event(new ApplicationResubmitted($application));
             } else {
                 event(new ApplicationSubmitted($application));

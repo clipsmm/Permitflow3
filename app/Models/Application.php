@@ -99,6 +99,13 @@ class Application extends Model
         return $this->hasMany(Task::class, 'application_id');
     }
 
+    public function current_task()
+    {
+        return $this->hasOne(Task::class, 'application_id')
+            ->whereNull('completed_at')
+            ->latest('tasks.created_at');
+    }
+
     public function invoices()
     {
         return $this->hasMany(Invoice::class, 'application_id');

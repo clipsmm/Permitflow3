@@ -26,7 +26,7 @@ class TaskController extends Controller
 
             $this->stats = [
                 'queue' => $this->tasks->module($module->slug)->queued()->count(),
-                'inbox' => $this->tasks->module($module->slug)->myTasks($this->user)->processing()->count(),
+                'inbox' => $this->tasks->module($module->slug)->myTasks($this->user)->processing()->inCorrections(false)->count(),
                 'corrections' => $this->tasks->module($module->slug)->myTasks($this->user)->processing()->inCorrections()->count(),
                 'completed' => $this->tasks->module($module->slug)->myTasks($this->user)->completed()->count(),
             ];
@@ -89,6 +89,7 @@ class TaskController extends Controller
             ->module($module->slug)
             ->myTasks()
             ->processing()
+            ->inCorrections(false)
             ->paginate(20);
 
         return view('backend.tasks.index', [
