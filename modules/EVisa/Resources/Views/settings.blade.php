@@ -48,7 +48,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2"> @lang('Maximum Stay Period For Transport Visa (Days)') </label>
+                                    <label class="control-label col-sm-2"> @lang('Maximum Stay Period For Transit Visa (Days)') </label>
                                     <div class="col-sm-5">
                                         {!! Form::number('e-visa[transit_visa_stay_period]', settings('e-visa.transit_visa_stay_period'), [ 'class' => 'form-control', 'min' => 1]) !!}
                                     </div>

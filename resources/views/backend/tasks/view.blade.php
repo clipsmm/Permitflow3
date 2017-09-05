@@ -2,16 +2,9 @@
 
 @section('body')
 
-    <div class="panel panel-default panel-form m-r-10 m-l-10">
+    <div id="vue-root" class="panel panel-default panel-form m-r-10 m-l-10">
         <div class="panel-heading clearfix">
             <div class="pull-right" role="">
-                <form method="post">
-                    {!! csrf_field() !!}
-                    <a href="{{ route('backend.tasks.queue', [$module->slug]) }}"
-                       class="btn btn-sm btn-default">
-                        <span class="fa fa-arrow-left"></span> @lang('common.back_to_tasks')
-                    </a>
-
                     @if(!$task->application->complete && $task->user_id  == user()->id && !$task->application->in_corrections)
                         @foreach($actions as $action => $props)
                             @if(array_get($props,'feedback',false))
@@ -55,16 +48,11 @@
                                     </div>
                                 @endpush
                             @else
-                                <button type="submit" class="btn btn-sm btn-success" value="{{ $action }}"
-                                        name="action">
-                                    <span class="fa fa-{{ array_get($props,'icon') }}"></span> {{array_get($props,'name')}}
-                                </button>
+                                {!! render_action($props) !!}
                             @endif
 
                         @endforeach
                     @endif
-                </form>
-
 
             </div>
             <h3 class="panel-title"></h3>

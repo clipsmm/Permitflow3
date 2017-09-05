@@ -9,6 +9,7 @@
 namespace Modules;
 
 use App\Events\ApplicationSubmitted;
+use App\Models\Application;
 use App\Models\Invoice;
 use App\Models\Task;
 use Carbon\Carbon;
@@ -45,8 +46,15 @@ class EVisa extends BaseModule implements ModuleInterface
                 'feedback' => true
             ],
             'approve' => [
-                'color' => 'primary',
-                'name' => 'Approve',
+                'method' => 'post',
+                'label' => 'Approve',
+                'icon' => 'fa fa-check',
+                'confirm' => 'Are you sure you want to approve application?',
+                'classes' => 'btn btn-sm btn-primary',
+                'data' => [
+                    'action' => 'approve'
+                ],
+                'url' => ''
             ]
         ]
     ];
@@ -223,5 +231,9 @@ class EVisa extends BaseModule implements ModuleInterface
         }
 
         return [];
+    }
+
+    public function canDeleteApplication($application){
+        return $application->status == Application::TEMPORARY;
     }
 }
