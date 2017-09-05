@@ -134,6 +134,10 @@ class BaseModule
         return User::query()->whereIn('id', $user_ids->pluck('user_id')->toArray());
     }
 
+    public function canDeleteApplication($application){
+        return false;
+    }
+
     public function deleteApplication($application)
     {
         if($application->module_slug != $this->slug){
