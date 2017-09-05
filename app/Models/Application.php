@@ -153,7 +153,7 @@ class Application extends Model
 
     public function canBeDeleted()
     {
-        return $this->status == self::DRAFT;
+        return $this->status == self::DRAFT || $this->module->canDeleteApplication($this);
     }
 
     public function getActions()
