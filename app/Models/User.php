@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Application::class, 'user_id');
     }
 
+    public function outputs()
+    {
+        return $this->hasManyThrough(ApplicationOutput::class,Application::class,'user_id','application_id');
+    }
+
     public function setPasswordAttribute($password)
     {
         $this->attributes["password"] = bcrypt($password);

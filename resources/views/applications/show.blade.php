@@ -6,22 +6,43 @@
                 @lang('Application Details')
             </h4>
             <div class="pull-right">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @lang('labels.downloads') <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        @forelse($application->outputs as $output)
-                            <li><a target="_blank" href="{{ route('application.download', [$application->module_slug, $application->id, $output->id]) }}">{{ $output->output->name }}</a> </li>
-                        @empty
-                            <li><a href="#">@lang('labels.no_downloads')</a> </li>
-                        @endforelse
-                    </ul>
-                </div>
+
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="panel-body">
+            @if($application->outputs->count())
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <div class="panel-title">@lang("Downloads")</div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-special m-b-0 b-b-0">
+                            <thead>
+                            <tr>
+                                <th colspan="2">
+                                    @lang("Name")
+                                </th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($application->outputs as $output)
+                                <tr>
+                                    <td colspan="2">{!!  $output->output->name !!} </td>
+                                    <td>
+                                        <a target="_blank" class="btn btn-success btn-sm" href="{{ route('application.download', [$application->module_slug, $application->id, $output->id]) }}">
+                                            <i class="fa fa-download"></i> Download </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+
             @if($application->in_corrections && $correction = $application->active_correction)
                 <div class="panel panel-danger">
                     <div class="panel-heading">
