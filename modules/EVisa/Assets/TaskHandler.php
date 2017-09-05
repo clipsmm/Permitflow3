@@ -77,7 +77,8 @@ class TaskHandler {
     public function approve_application()
     {
         $task = $this->task;
-        \DB::transaction(function() use (&$task){
+        $download  = null;
+        \DB::transaction(function() use (&$task, &$download){
             $application  =  $task->application;
 
             $task->completed_at  =  Carbon::now();
@@ -95,16 +96,20 @@ class TaskHandler {
             $application->complete  =  true;
             $application->status  = 'issued';
             $application->save();
-
-            # generate output
-            $application->add_output('EVISA-OUTPUT', $task->id);
-
-            \Mail::to($application->user)
-                ->send(new DefaultMail('e-visa::emails.application_approved', [
-                    'application' => $application
-                ]));
         });
 
+        $application =  $task->application;
+
+        # generate output
+        //todo: generate pdf outside the current process..hehe
+        $download = $application->add_output('EVISA-OUTPUT', $task->id, true);
+
+        \Mail::to($application->user)
+            ->send(new DefaultMail('e-visa::emails.application_approved', [
+                'application' => $application
+            ], [
+                ['name' => $download->get_file_name(), 'file' => $download->path]
+            ]));
 
         return $task;
     }

@@ -14,6 +14,7 @@ class DefaultMail extends Mailable
     public $view;
 
     public $payload;
+    public $downloads;
 
     /**
      * Create a new message instance.
@@ -21,10 +22,11 @@ class DefaultMail extends Mailable
      * @param $view
      * @param array|null $payload
      */
-    public function __construct($view, array $payload = null)
+    public function __construct($view, array $payload = null, array $attachments =  [])
     {
         $this->view  =  $view;
         $this->payload = $payload;
+        $this->downloads  = $attachments;
     }
 
     /**
@@ -34,7 +36,15 @@ class DefaultMail extends Mailable
      */
     public function build()
     {
-        $view  = $this->view($this->view, $this->payload);
+        $view  = $this->view($this->view, $this->payload)->subject("Hi");
+
+        collect($this->downloads)->each(function($item) use (&$view){
+            $file  =  $item['file'];
+            $view->attach(storage_path($file), [
+                'as' => "{$item['name']}.pdf",
+                'mime' => 'application/pdf',
+            ]);
+        });
 
         return $view;
     }

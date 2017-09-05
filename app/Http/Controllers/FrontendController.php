@@ -23,7 +23,11 @@ class FrontendController extends Controller
     {
         $applications = user()->applications()->whereInCorrections(false)->limit(5)->with(['current_invoice'])->get();
         $corrections = user()->applications()->whereInCorrections(true)->limit(5)->with(['current_invoice'])->get();
-        return view('frontend.dashboard', compact('applications', 'corrections'));
+
+        //get outputs
+        $downloads  = user()->outputs()->with(['application','output'])->get();
+
+        return view('frontend.dashboard', compact('applications', 'corrections','downloads'));
     }
 
 

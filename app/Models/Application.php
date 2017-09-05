@@ -186,9 +186,9 @@ class Application extends Model
         return json_decode($form_data, true);
     }
 
-    public function add_output($code, $task_id)
+    public function add_output($code, $task_id, $save = false)
     {
-        return ApplicationOutput::add_application_output($this->id, $code, $task_id);
+        return ApplicationOutput::add_application_output($this->id, $code, $task_id, $save);
     }
 
 
