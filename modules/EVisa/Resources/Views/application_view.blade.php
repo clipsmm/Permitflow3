@@ -1,6 +1,8 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">@lang('e-visa::common.single_entry_visa')</h3>
+        <h3 class="panel-title">
+            @lang('Visa Type:') {{array_get(Modules\Evisa::getVisaTypes(), $model->visa_type)}}
+        </h3>
     </div>
     <div class="panel-body">
         <table class="table table-hover table-special table-striped">

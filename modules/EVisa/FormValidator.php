@@ -19,8 +19,8 @@ class FormValidator
 {
     public function make($data, $current_step)
     {
-        $today = Carbon::today();
-        $tomorrow = Carbon::tomorrow();
+        $today = Carbon::today()->toDateString();
+        $tomorrow = Carbon::tomorrow()->toDateString();
 
         switch ($current_step) {
             case 1:
@@ -64,14 +64,15 @@ class FormValidator
                 ]);
 
             case 3:
-                $visa_validity = Carbon::now()->addDay(settings('e-visa.visa_validity', 90));
-                $date_of_entry = new Carbon(array_get($data,'date_of_entry'));
+                $visa_validity = Carbon::now()->addDay(settings('e-visa.visa_validity', 90))->toDateString();
+                $date_of_entry = Carbon::parse(array_get($data,'date_of_entry'))->toDateString();
+                $departure_date = $this->getDepartureDate($data['visa_type'], array_get($data, 'date_of_entry', Carbon::now()->toDateString()));
 
                 return Validator::make($data, [
                     'travel_reason' => ['required'],
                     'other_travel_reason' => ['required_if:travel_reason,others'],
-                    'date_of_entry' => ['required', 'date', "after:{$today}", "before:{$visa_validity}"],
-                    'date_of_departure' => ['required', 'date', "after_or_equal:{$date_of_entry}"],
+                    'date_of_entry' => ['required', 'date', "after_or_equal:{$today}", "before:{$visa_validity}"],
+                    'date_of_departure' => ['required', 'date', "after_or_equal:{$date_of_entry}", "before_or_equal:{$departure_date}"],
                     'arrival_by' => ['required', 'in:ship,road,air'],
                     'entry_point' => ['bail', 'required', Rule::exists('e_visa_entry_points', 'id')->where(function ($query) use ($data) {
                         $query->where('type', $data['arrival_by']);
@@ -93,7 +94,7 @@ class FormValidator
                 ]);
 
             case 4:
-                $three_months_ago = Carbon::now()->subMonths(3);
+                $three_months_ago = Carbon::now()->subMonths(3)->toDateString();
 
                 return Validator::make($data, [
                     'other_recent_visits' => ['array'],
@@ -115,11 +116,19 @@ class FormValidator
                 ], [
                     'other_recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     'other_recent_visits.*.date.before' => __('validation.before_today'),
-                    'other_recent_visits.*.date.after_or_equal' => __("Must not be more than 3 months ago ({$three_months_ago->toDateString()})"),
+                    'other_recent_visits.*.date.after_or_equal' => __("Must not be more than 3 months ago ({$three_months_ago})"),
                     'recent_visits.*.date.before' => __('validation.before_today'),
                     'recent_visits.*.*.required' => __('e-visa::validation.nested_required'),
                     '*.required_if' => __('This field is required')
                 ]);
         }
+    }
+
+    private function getDepartureDate($visa_type, $date_of_entry)
+    {
+        if($visa_type == 'transit_visa'){
+            return Carbon::parse($date_of_entry)->addDays(settings('e-visa.transit_visa_stay_period', 2))->toDateString();
+        }
+        return Carbon::parse($date_of_entry)->addDays(settings('e-visa.visa_validity', 90))->toDateString();
     }
 }

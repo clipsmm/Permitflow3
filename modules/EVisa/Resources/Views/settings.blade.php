@@ -48,6 +48,13 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('Maximum Stay Period For Transport Visa (Days)') </label>
+                                    <div class="col-sm-5">
+                                        {!! Form::number('e-visa[transit_visa_stay_period]', settings('e-visa.transit_visa_stay_period'), [ 'class' => 'form-control', 'min' => 1]) !!}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Blacklisted Countries') </label>
                                     <div class="col-sm-5">
                                         <select-input placeholder="{{__('--Select Countries--')}}" :selected="{{json_encode(settings('e-visa.blacklisted_countries'))}}" name="e-visa[blacklisted_countries]" :multiple="true" :options="{{json_encode($country_codes)}}"></select-input>

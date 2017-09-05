@@ -371,7 +371,7 @@
                         <label>
                             @lang('Proposed Date Of Entry')
                         </label>
-                        <date-picker value="{{old('date_of_entry', $model->date_of_entry)}}"
+                        <date-picker start_date="{{\Carbon\Carbon::today()}}" value="{{old('date_of_entry', $model->date_of_entry)}}"
                                      name="date_of_entry"></date-picker>
                         {!! error_tag($errors, 'date_of_entry') !!}
                     </div>
@@ -381,7 +381,7 @@
                         <label>
                             @lang('Proposed Date Of Departure from Kenya')
                         </label>
-                        <date-picker value="{{old('date_of_departure', $model->date_of_departure)}}"
+                        <date-picker   start_date="{{\Carbon\Carbon::today()}}" value="{{old('date_of_departure', $model->date_of_departure)}}"
                                      name="date_of_departure"></date-picker>
                         {!! error_tag($errors, 'date_of_departure') !!}
                     </div>

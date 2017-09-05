@@ -207,7 +207,8 @@ class ApplicationController extends Controller
 
     public function update(Application $application, Request $request)
     {
-        $validator = $this->module->getValidator($request, $this->current_step);
+        $data = array_merge($application->form_data, $request->all());
+        $validator = $this->module->makeValidator($data, $this->current_step);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }

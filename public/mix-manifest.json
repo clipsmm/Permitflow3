@@ -1,7 +1,7 @@
 {
-    "/js/app.js": "/js/app.js?id=7757427782296c18e17f",
-    "/css/app.css": "/css/app.css?id=48fd2a84277ebc0056c4",
-    "/css/chosen-sprite.png": "/css/chosen-sprite.png?id=68b7f3b803eaa08cb319",
-    "/css/chosen-sprite@2x.png": "/css/chosen-sprite@2x.png?id=25dede496bc6dd015966",
-    "/js/intl-tel-input-util.js": "/js/intl-tel-input-util.js?id=1848415e65fb8461816e"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/css/chosen-sprite.png": "/css/chosen-sprite.png",
+    "/css/chosen-sprite@2x.png": "/css/chosen-sprite@2x.png",
+    "/js/intl-tel-input-util.js": "/js/intl-tel-input-util.js"
 }
