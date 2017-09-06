@@ -88,7 +88,7 @@
                                     <p>Requirements and fees for a kenya visa</p>
                                     <div class="learn-more">
                                         <!--  <a href="single.html" class="btn btn-primary apply-button white-bg" title="Enlace">LEARN MORE</a> -->
-                                        <a href="{{ route('e-visa.requirements') }}single.html" class="btn btn-primary apply-button" title="Enlace">VISA REQUIREMENTS </a>
+                                        <a href="{{ route('e-visa.requirements') }}" class="btn btn-primary apply-button" title="Enlace">VISA REQUIREMENTS </a>
                                     </div>
                                 </div>
                             </div>
