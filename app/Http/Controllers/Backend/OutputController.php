@@ -23,6 +23,8 @@ class OutputController extends Controller
         return view('backend.outputs.new');
     }
 
+
+
     public function store(Request $request, $module)
     {
         $this->validate($request, [
