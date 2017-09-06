@@ -4353,6 +4353,51 @@ p {
 
 
 
+
+
+
+.task-icon{
+text-align: center;
+display: inline-block;
+margin: 0 10px;
+color: #555;
+    font-size: 12px;
+}
+
+.task-img{
+ display: block;
+     padding: 0 0 4px 0;
+}
+
+.task-img img{
+ width: 30px
+}
+
+
+.task-icon2 {
+    float: left;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.task-img2 {
+    display: inline;
+    padding: 0 0 4px 0;
+}
+
+
+.task-img2 img{
+ width: 40px
+}
+
+
+
+
+
+
+
+
 /*@media (min-width: 576px) {
   .panel-title2 {
    color: #555;

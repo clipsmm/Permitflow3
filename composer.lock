@@ -1302,16 +1302,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.8.0",
+            "version": "8.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "54c69fcb45c3a39d9a206398f57fe18809401eda"
+                "reference": "d234fc851e71443f20325501d1b764af488b0a66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/54c69fcb45c3a39d9a206398f57fe18809401eda",
-                "reference": "54c69fcb45c3a39d9a206398f57fe18809401eda",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/d234fc851e71443f20325501d1b764af488b0a66",
+                "reference": "d234fc851e71443f20325501d1b764af488b0a66",
                 "shasum": ""
             },
             "require": {
@@ -1322,7 +1322,7 @@
             "require-dev": {
                 "pear/pear-core-minimal": "^1.9",
                 "pear/pear_exception": "^1.0",
-                "pear/versioncontrol_git": "dev-master",
+                "pear/versioncontrol_git": "^0.5",
                 "phing/phing": "^2.7",
                 "phpunit/phpunit": "^4.8|^5.0",
                 "satooshi/php-coveralls": "^1.0",
@@ -1366,7 +1366,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2017-08-22T10:35:52+00:00"
+            "time": "2017-09-06T08:32:29+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -3437,16 +3437,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "f81348e6fa0194b75527043bcb859e84d06f49b4"
+                "reference": "bec6e19c7da4831040a9161ff7476505293063b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/f81348e6fa0194b75527043bcb859e84d06f49b4",
-                "reference": "f81348e6fa0194b75527043bcb859e84d06f49b4",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/bec6e19c7da4831040a9161ff7476505293063b8",
+                "reference": "bec6e19c7da4831040a9161ff7476505293063b8",
                 "shasum": ""
             },
             "require": {
@@ -3459,7 +3459,7 @@
             "require-dev": {
                 "monolog/monolog": "^1.22",
                 "orchestra/testbench": "~3.4.2|~3.5.0",
-                "phpunit/phpunit": "^6.2"
+                "phpunit/phpunit": "^5.7|6.2"
             },
             "type": "library",
             "extra": {
@@ -3498,7 +3498,7 @@
                 "security",
                 "spatie"
             ],
-            "time": "2017-09-02T10:52:52+00:00"
+            "time": "2017-09-05T06:25:58+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
