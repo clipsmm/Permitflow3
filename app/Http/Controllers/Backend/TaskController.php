@@ -145,6 +145,19 @@ class TaskController extends Controller
 
     public function pickTask(Request $request, $module)
     {
+        //issue: #53: Limit the number of tasks a reviewer can pick to 3 before allowing to pick more tasks
+        //todo: make this configurable
+        if ($this->tasks->with(['application'])
+            ->module($module->slug)
+            ->myTasks()
+            ->processing()
+            ->inCorrections(false)->count()  > 2)
+            return redirect()->back()
+                ->with('alerts', [
+                    ['type' => 'danger', 'message' => __('messages.max_tasks_exceeded')]
+                ]);
+
+        //get any available task
         $task = Task::pick_task($module->slug, $request->get('task_id'));
 
         if (!$task){
