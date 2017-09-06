@@ -28,13 +28,13 @@
                         <div class="item">
                             <img src="images/landing11.jpg" alt="Second slide">
                             <div class="carousel-caption">
-                                <h4>get your evisa online, across all devices!</h4>
+                                <h3>get your evisa online, across all devices!</h3>
                             </div>
                         </div>
                         <div class="item">
                             <img src="images/landing8.jpg" alt="Second slide">
                             <div class="carousel-caption">
-                                <h4>THINK FUTURE, THINK KENYA</h4>
+                                <h3>THINK FUTURE, THINK KENYA</h3>
                                 <h2> wheather you wish to take a magical holiday or undertake business in kenya</h2>
                                 <a href="single.html" class="btn btn-primary apply-button" title="Enlace">WATCH VIDEO</a>
                             </div>
