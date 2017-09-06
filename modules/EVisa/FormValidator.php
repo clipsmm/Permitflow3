@@ -52,7 +52,7 @@ class FormValidator
                     'spouse_name' => ['required','title'],
                     'passport_number' => ['required'],
                     'passport_place_of_issue' => ['required'],
-                    'passport_date_of_issue' => ['required', 'date', "before:{$tomorrow}",'after,date_of_birth'],
+                    'passport_date_of_issue' => ['required', 'date', "before:{$tomorrow}",'after:date_of_birth'],
                     'passport_date_of_expiry' => ['required', "after:{$today}"],
                     'passport_issued_by' => ['required'],
                     'passport_bio' => ['required', 'file-upload:pdf jpg jpeg,2048'],
