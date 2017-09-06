@@ -104,6 +104,7 @@ return [
     */
     'full_phone' => "The phone number format you entered is incorrect.",
     "phone" => "The :attribute field contains an invalid number.",
+    "title" => "The :attribute field must not special characters.",
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',

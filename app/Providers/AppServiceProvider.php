@@ -34,6 +34,12 @@ class AppServiceProvider extends ServiceProvider
                 return false;
             }
         });
+        /**
+         * Validate no special characters
+         */
+        \Validator::extend('title', function($attribute, $value, $parameters, $validator) {
+            return !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬]/', $value);
+        });
     }
 
     public function loadModules()
