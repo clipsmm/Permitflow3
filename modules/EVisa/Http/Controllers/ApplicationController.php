@@ -224,7 +224,8 @@ class ApplicationController extends Controller
             ]);
         }
 
-        $this->updateUserDetails($application);
+        // todo: handle this better
+        //$this->updateUserDetails($application);
 
         return redirect()->route('application.review', ['application' => $application, 'module_slug' => $this->module->slug]);
     }
