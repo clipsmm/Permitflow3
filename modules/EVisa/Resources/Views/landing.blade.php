@@ -78,7 +78,7 @@
                                     <div class="box-images">  <img class="img-responsive" src="images/ongoing.jpg" alt="Second slide"></div>
                                     <p>Requirements and fees for a kenya visa</p>
                                     <div class="learn-more">
-                                        <a href="ongoing.html" class="btn btn-primary apply-button white-bg" title="Enlace">I HAVE AN ONGOING APPLICATION</a>
+                                        <a href="{{ route('e-visa.retrieve_existing') }}" class="btn btn-primary apply-button white-bg" title="Enlace">I HAVE AN ONGOING APPLICATION</a>
                                     </div>
                                 </div>
                             </div>
