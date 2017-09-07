@@ -5,6 +5,34 @@
     <div class="panel-body">
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
         <div class="panel panel-default">
+            <table border-spacing="0" cellpadding="0" cellspacing="0" style="margin-bottom: 15px; border-bottom:1px solid #000; width:100%; font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; text-transform:uppercase;">
+                <tbody>
+                <tr style="text-align:center;">
+                    <td style="vertical-align:center; text-align:left;width:30%;"><img alt="" src="https://immigration.ecitizen.go.ke/asset_uplds/c3cecc9eea393d078906edbb50ecb481949a8257.png" style="margin-top:10px; margin-bottom:10px;" /></td>
+                    <td style="vertical-align:center; text-align:center;width:30%;">
+                        <h1 style="font-size:40px;background:#f2f2f2;padding:10px;line-height:1.0em;"><span style="background:#f2f2f2;">eVisa</span></h1>
+                    </td>
+                    <td style="vertical-align:center; text-align:right;width:30%;">
+                        <p style="margin-bottom:0; padding-bottom:10px; font-family: 'Roboto', sans-serif;font-size:12px; padding-right:20px;"><strong>dis@immigration.go.ke,<br />
+                                www.immigration.go.ke,<br />
+                                +254-20-2222022,<br />
+                                +254-20-2217544,<br />
+                                +254-20-2218833.</strong></p>
+                    </td>
+                </tr>
+                <tr style="text-align:right;">
+                    <td colspan="3" style="text-align:right;border-top:1px solid;padding-top:10px;padding-bottom:10px;padding-right:10px;">
+                        <p style="font-family: 'Roboto', sans-serif; font-size:15px; padding:0px; margin:0;margin-right:10px;line-height:0;line-height:1.0em;"><strong>SELF</strong> Application</p>
+
+                        <p style="font-family: 'Roboto', sans-serif; font-size:15px; padding:0px; margin:0;margin-right:10px;margin-top:4px;line-height:0;line-height:1.0em;padding-bottom:10px;">
+                            <strong style="line-height: 1em;">
+                                <img src="{{$application->getBarcode()}}" alt="barcode"   />
+                            </strong>
+                        </p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             <div class="panel-heading">
                 <h3 class="panel-title">
                     @lang('VISA INFORMATION:')
@@ -100,34 +128,7 @@
                 </table>
             </div>
         </div>
-<table border-spacing="0" cellpadding="0" cellspacing="0" style="margin-bottom: 15px; border-bottom:1px solid #000; width:100%; font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; text-transform:uppercase;">
-    <tbody>
-    <tr style="text-align:center;">
-        <td style="vertical-align:center; text-align:left;width:30%;"><img alt="" src="https://immigration.ecitizen.go.ke/asset_uplds/c3cecc9eea393d078906edbb50ecb481949a8257.png" style="margin-top:10px; margin-bottom:10px;" /></td>
-        <td style="vertical-align:center; text-align:center;width:30%;">
-            <h1 style="font-size:40px;background:#f2f2f2;padding:10px;line-height:1.0em;"><span style="background:#f2f2f2;">eVisa</span></h1>
-        </td>
-        <td style="vertical-align:center; text-align:right;width:30%;">
-            <p style="margin-bottom:0; padding-bottom:10px; font-family: 'Roboto', sans-serif;font-size:12px; padding-right:20px;"><strong>dis@immigration.go.ke,<br />
-                    www.immigration.go.ke,<br />
-                    +254-20-2222022,<br />
-                    +254-20-2217544,<br />
-                    +254-20-2218833.</strong></p>
-        </td>
-    </tr>
-    <tr style="text-align:right;">
-        <td colspan="3" style="text-align:right;border-top:1px solid;padding-top:10px;padding-bottom:10px;padding-right:10px;">
-            <p style="font-family: 'Roboto', sans-serif; font-size:15px; padding:0px; margin:0;margin-right:10px;line-height:0;line-height:1.0em;"><strong>SELF</strong> Application</p>
 
-            <p style="font-family: 'Roboto', sans-serif; font-size:15px; padding:0px; margin:0;margin-right:10px;margin-top:4px;line-height:0;line-height:1.0em;padding-bottom:10px;">
-                <strong style="line-height: 1em;">
-                    <img src="{{$application->getBarcode()}}" alt="barcode"   />
-                </strong>
-            </p>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
 <table border-spacing="0" cellpadding="0" cellspacing="0" style="margin-bottom: 0px; width:100%; font-family: 'Roboto', sans-serif;text-transform:uppercase;">
     <tbody>
@@ -180,59 +181,6 @@
     </tbody>
 </table>
 
-<table border-spacing="0" cellpadding="0" cellspacing="0" style="margin-bottom:0px; width:100%; font-family: 'Roboto', sans-serif;text-transform:uppercase;">
-    <tbody>
-    <tr>
-        <td style="text-align:center;">
-            <h4 style="font-family: 'Roboto', sans-serif; font-weight:bold; font-size:15px; padding:0px; margin:0;line-height:1.0em;">Visitor Information</h4>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<table border-spacing="0" cellpadding="0" cellspacing="0" style="margin:10px; width:100%; font-family: 'Roboto', sans-serif; font-size:13px; text-transform:uppercase;border:1px solid;">
-    <tbody>
-    <tr>
-        <td colspan="2" style="text-align:left; border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:15px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>FULL NAME:</strong> {{$application->get_data('surname')}}, {{$application->get_data('other_names')}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>DATE OF BIRTH:</strong> {{$application->get_data('date_of_birth')}}</p>
-        </td>
-        <td style="text-align:left;border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Gender:</strong> {{$application->get_data('gender')}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>PASSPORT NO.:</strong> {{$application->get_data('passport_number')}}</p>
-        </td>
-        <td style="text-align:left;border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Place of issue:</strong> {{$application->get_data('passport_place_of_issue')}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Date of Issue:</strong> {{$application->get_data('passport_date_of_issue')}}</p>
-        </td>
-        <td style="text-align:left;border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Passport Expiry Date:</strong> {{$application->get_data('passport_date_of_expiry')}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td style="text-align:left;border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Nationality:</strong>{{ $application->get_data('nationality')}}</p>
-        </td>
-        <td style="text-align:left; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><strong>Reason For Travel:</strong> {{$application->get_data('travel_reason')}}&nbsp;
-                {{$application->get_data('other_travel_reason')}}
-            </p>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
 <table border-spacing="0" cellpadding="0" cellspacing="0" style="margin-bottom: 0px; width:100%; font-family: 'Roboto', sans-serif;text-transform:uppercase;">
     <tbody>

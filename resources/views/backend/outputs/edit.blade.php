@@ -9,7 +9,8 @@
                         {!! csrf_field() !!}
                         @include('backend.outputs._output_form')
                         <div class="modal-footer">
-                            <a href="{{ route("backend.outputs.index", $current_module->slug) }}" class="btn btn-default">@lang('labels.cancel')</a>
+                            <a href="{{ route("backend.outputs.preview", $current_module->slug) }}" class="btn btn-default">@lang('labels.preview')</a>
+                            <a href="{{ route("backend.outputs.index", $current_module->slug) }}" class="btn btn-danger">@lang('labels.cancel')</a>
                             <button type="submit" class="btn btn-primary">@lang('labels.save')</button>
                         </div>
                         {!! Form::close() !!}
