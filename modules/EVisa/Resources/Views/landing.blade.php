@@ -6,7 +6,6 @@
     @else
         @include('layouts.partials.topnave2')
     @endif
-
 <div class="container margin-top">
         <div class="row">
             <div class="col-md-12">
