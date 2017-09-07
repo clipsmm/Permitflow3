@@ -112,8 +112,10 @@ class EVisa extends BaseModule implements ModuleInterface
     public static function getVisaTypes()
     {
         return [
-            'single_entry' => __('e-visa::common.single_entry_visa'),
-            'transit_visa' => __('Transit Visa')
+            'multiple_entry_visa' => __("Multiple Entry Visa"),
+            'single_entry' => __('Single Entry Visa'),
+            'transit_visa' => __('Transit Visa'),
+            'tourist_visa' => __('East Africa Tourist Visa'),
         ];
     }
 
@@ -150,7 +152,7 @@ class EVisa extends BaseModule implements ModuleInterface
         $cost = settings($this->slug.".costs.".$application->get_data('visa_type'), 0);
 
         if (!$cost){
-            Task::create_task($application->id, "Evisa Review Task",'review','pending');
+            Task::create_task($application->id, array_get(self::getVisaTypes(), $application->get_data('visa_type')),'review','pending');
             return null;
         }
 
