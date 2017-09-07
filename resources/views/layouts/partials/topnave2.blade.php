@@ -25,8 +25,8 @@
             <ul class="nav navbar-nav navbar-right hidden-xs">
                 @if(user() && user()->hasPermissionTo('system.manage_settings'))
                     <li class="#">
-                        <a href="{{ route('backend.settings.general') }}"><i class="fa fa-cogs"></i>
-                            @lang('Settings')
+                        <a href="{{ route('backend.settings.general') }}"><i class="fa fa-user-secret"></i>
+                            @lang('Administration')
                         </a>
                     </li>
                 @endif

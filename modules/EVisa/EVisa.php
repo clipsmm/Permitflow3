@@ -176,25 +176,25 @@ class EVisa extends BaseModule implements ModuleInterface
             [
                 'name' => __('e-visa::menus.tasks'),
                 'action' => route('backend.tasks.queue', $this->slug),
-                'icon' =>   asset('assets/images/task4.svg'),
+                'icon' =>   asset('images/task4.svg'),
                 'type' => 'task-img'
             ],
             [
                 'name' => __('e-visa::menus.applications'),
                 'action' => route('backend.applications.index', $this->slug),
-                'icon' => asset('images/task4.svg'),
+                'icon' => asset('images/applications.svg'),
                 'type' => 'task-img'
             ],
             [
                 'name' => __('labels.outputs'),
                 'action' => route("backend.outputs.index", $this->slug),
-                'icon' => asset('images/task4.svg'),
+                'icon' => asset('images/reports.svg'),
                 'type' => 'task-img'
             ],
             [
                 'name' => __('e-visa::menus.settings'),
                 'action' => route('e-visa.settings.all'),
-                'icon' => asset('images/task4.svg'),
+                'icon' => asset('images/settings.svg'),
                 'type' => 'task-img'
             ],
 
