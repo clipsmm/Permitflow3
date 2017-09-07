@@ -72,6 +72,7 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
             Route::get('{output}/preview', 'OutputController@show')->name('show');
             Route::get('{output}/edit', 'OutputController@edit')->name('edit');
             Route::post('{output}/edit', 'OutputController@update')->name('update');
+            Route::get('{output}/preview_output', 'OutputController@preview')->name('preview_output');
         });
     });
 

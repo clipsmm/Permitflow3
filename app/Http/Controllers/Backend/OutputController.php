@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Application;
 use App\Models\Output;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -81,5 +82,10 @@ class OutputController extends Controller
             ->with('alerts', [
                 ['type' => 'success', 'message' => __('messages.output_updated')]
             ]);
+    }
+
+    public function preview(Request $request, $module, Application $application)
+    {
+        return view('backend.outputs.preview', ['application' => $application]);
     }
 }
