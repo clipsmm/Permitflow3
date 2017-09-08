@@ -1,4 +1,3 @@
-
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
 <style>
     table {
@@ -18,16 +17,24 @@
     }
     .thumbnail{
         display: block;
+        padding: 4px;
+        margin-bottom: 20px;
         line-height: 1.42857143;
         background-color: #fff;
+        border-radius: 4px;
         -webkit-transition: border .2s ease-in-out;
         -o-transition: border .2s ease-in-out;
         transition: border .2s ease-in-out;
-        width: 100%;
     }
+
+    .thumbnail a>img, .thumbnail>img {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
     .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
         display: block;
-        width: 200px;
+        max-width: 100%;
         height: auto;
     }
 
@@ -35,6 +42,9 @@
         border-radius: 3px 3px 0 0;
     }
 
+    img {
+        vertical-align: middle;
+    }
     img {
         border: 0;
     }
@@ -57,13 +67,12 @@
     }
     .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
         padding: 10px 20px 7px 20px;
-        font-size: 13px;
     }
 </style>
 <table border-spacing="0" cellpadding="0" cellspacing="0" style="margin-bottom: 15px; border-bottom:1px solid #000; width:100%; font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; text-transform:uppercase;">
     <tbody>
     <tr style="text-align:center;">
-        <td style="vertical-align:center; text-align:left;width:30%;"><img alt="" src="{{ asset('images/dis.png') }}" style="margin-top:10px; margin-bottom:10px;" /></td>
+        <td style="vertical-align:center; text-align:left;width:30%;"><img alt="" src="<?php echo e(asset('images/dis.png')); ?>" style="margin-top:10px; margin-bottom:10px;" /></td>
         <td style="vertical-align:center; text-align:center;width:30%;">
             <h1 style="font-size:40px;background:#f2f2f2;padding:10px;line-height:1.0em;"><span style="background:#f2f2f2;">eVisa</span></h1>
         </td>
@@ -81,7 +90,7 @@
 
             <p style="font-family: 'Roboto', sans-serif; font-size:15px; padding:0px; margin:0;margin-right:10px;margin-top:4px;line-height:0;line-height:1.0em;padding-bottom:10px;">
                 <strong style="line-height: 1em;">
-                    <img src="{{$application->getBarcode()}}" alt="barcode"   />
+                    <img src="<?php echo e($application->getBarcode()); ?>" alt="barcode"   />
                 </strong>
             </p>
         </td>
@@ -117,22 +126,22 @@
     </tr>
     <tr>
         <td style="text-align:left; border-bottom:1px solid;  border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">{{$application->application_number}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><?php echo e($application->application_number); ?></p>
         </td>
         <td style="text-align:left;border-bottom:1px solid; border-right:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">{{array_get(Modules\Evisa::getVisaTypes(), $model->visa_type)}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><?php echo e(array_get(Modules\Evisa::getVisaTypes(), $model->visa_type)); ?></p>
         </td>
         <td style="text-align:left;border-bottom:1px solid;border-right:1px solid; padding:5px;">
-            {{--<p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">{{$task->completed_at}}</p>--}}
+            
         </td>
         <td style="text-align:left;border-bottom:1px solid; padding:5px;">
-            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;">{{$application->get_data('date_of_entry')}}</p>
+            <p style="text-align:left;font-family: 'Roboto', sans-serif; font-size:13px; text-align:left; padding:0px; margin:0;line-height:1.0em;"><?php echo e($application->get_data('date_of_entry')); ?></p>
         </td>
     </tr>
     <tr>
         <td colspan="4" style="padding:5px;background:#f9f9f9">
             <p style="font-family: 'Roboto', sans-serif; font-size:11px; text-align:center; padding:0px; margin:0;line-height:1.0em;"><strong>NOTE:</strong> Your stay period in <strong>Kenya</strong> will be determined at the <strong>
-                    {{--                    {{$entry_points->find($application->get_data('entry_point'))->name}}--}}
+                    
                 </strong> entry point
             </p>
         </td>
@@ -158,7 +167,7 @@
         <td width="25%" style="vertical-align: middle">
             <div class="thumbnail no-border m-t-0 m-b-5 m-l-5 m-r-0">
                 <img class="img-responsive hidden-xs"
-                     src="{{ $application->get_data('passport_photo', null) && gettype($application->get_data('passport_photo')) == 'string' ? asset($application->get_data('passport_photo', '')) : asset('images/person.png') }}">
+                     src="<?php echo e($application->get_data('passport_photo', null) && gettype($application->get_data('passport_photo')) == 'string' ? asset($application->get_data('passport_photo', '')) : asset('images/person.png')); ?>">
             </div>
         </td>
         <td width="75%" class="no-padding" style="border-top: 0 !important;">
@@ -166,41 +175,42 @@
                 <tbody>
 
                 <tr class=' '>
-                    <td class="text-uppercase " align="left"><b>@lang("Full Name")
-                            : </b> {{ $application->get_data('other_names') }} {{ $application->get_data('surname') }}
+                    <td class="text-uppercase " align="left"><b><?php echo app('translator')->getFromJson("Full Name"); ?>
+                            : </b> <?php echo e($application->get_data('other_names')); ?> <?php echo e($application->get_data('surname')); ?>
+
                     </td>
                 </tr>
                 <tr class=' '>
-                    <td class="text-uppercase " align="left"><b>@lang("Date of Birth")
-                            : </b> {{ $application->get_data('date_of_birth') }} </td>
+                    <td class="text-uppercase " align="left"><b><?php echo app('translator')->getFromJson("Date of Birth"); ?>
+                            : </b> <?php echo e($application->get_data('date_of_birth')); ?> </td>
                 </tr>
                 <tr class=' '>
-                    <td class="text-uppercase" align="left"><b>@lang("Passport No.")
-                            : </b> {{ $application->get_data('passport_number') }}</td>
+                    <td class="text-uppercase" align="left"><b><?php echo app('translator')->getFromJson("Passport No."); ?>
+                            : </b> <?php echo e($application->get_data('passport_number')); ?></td>
                 </tr>
                 <tr class=' '>
-                    <td class="text-uppercase" align="left"><b>@lang("Nationality")
-                            : </b> {{ array_get($lookup_data['country_codes'], $model->nationality)  }}</td>
+                    <td class="text-uppercase" align="left"><b><?php echo app('translator')->getFromJson("Nationality"); ?>
+                            : </b> <?php echo e(array_get($lookup_data['country_codes'], $model->nationality)); ?></td>
                 </tr>
                 <tr class=' '>
-                    <td class="text-uppercase" align="left"><b>@lang("Gender")
-                            : </b> {{ $application->get_data('gender')  }}</td>
+                    <td class="text-uppercase" align="left"><b><?php echo app('translator')->getFromJson("Gender"); ?>
+                            : </b> <?php echo e($application->get_data('gender')); ?></td>
                 </tr>
                 <tr class=' '>
-                    <td class="text-uppercase" align="left"><b>@lang("Passport Date of Issue")
-                            : </b> {{ $application->get_data('passport_date_of_issue') }}</td>
+                    <td class="text-uppercase" align="left"><b><?php echo app('translator')->getFromJson("Passport Date of Issue"); ?>
+                            : </b> <?php echo e($application->get_data('passport_date_of_issue')); ?></td>
                 </tr>
                 <tr class=' '>
-                    <td class="text-uppercase" align="left"><b>@lang("Passport Place of Issue")
-                            : </b> {{ $application->get_data('passport_place_of_issue')  }}</td>
+                    <td class="text-uppercase" align="left"><b><?php echo app('translator')->getFromJson("Passport Place of Issue"); ?>
+                            : </b> <?php echo e($application->get_data('passport_place_of_issue')); ?></td>
                 </tr>
                 <tr class=' '>
-                    <td class="text-uppercase" align="left"><b>@lang("Passport Expiry Date")
-                            : </b> {{ $application->get_data('passport_date_of_expiry') }}</td>
+                    <td class="text-uppercase" align="left"><b><?php echo app('translator')->getFromJson("Passport Expiry Date"); ?>
+                            : </b> <?php echo e($application->get_data('passport_date_of_expiry')); ?></td>
                 </tr>
                 <tr class=' '>
-                    <td class="text-uppercase" align="left"><b>@lang("Passport Issued By")
-                            : </b> {{ $application->get_data('passport_issued_by') }}</td>
+                    <td class="text-uppercase" align="left"><b><?php echo app('translator')->getFromJson("Passport Issued By"); ?>
+                            : </b> <?php echo e($application->get_data('passport_issued_by')); ?></td>
                 </tr>
 
                 </tbody>

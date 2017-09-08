@@ -91,11 +91,14 @@ class ApplicationOutput extends Model
     public function compile_output()
     {
         $this->load(['application', 'task', 'task.user']);
-        $output_data = $this->application->module->loadOutputData($this);
+        $module = $this->application->module;
+        $output_data = $module->loadOutputData($this);
+        $model  = $module->fromFormData($this->application->form_data);
         $html = app('blade-extensions')->compileString($this->output->template, array_merge([
             'application' => $this->application,
             'task' => $this->task,
-            'model' => $this->application->module->fromFormData($this->application->form_data)
+            'model' => $model,
+            'lookup_data' => $module->loadLookupData($model)
         ], $output_data));
 
         return $html;

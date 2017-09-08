@@ -245,10 +245,13 @@ class EVisa extends BaseModule implements ModuleInterface
 
     public function render_output_preview(ApplicationOutput $sample)
     {
+        $model = $this->fromFormData($sample->application->form_data);
+
         return view("{$this->slug}::outputs.output_preview", [
             'output' => $sample,
             'application' => $sample->application,
-            'model' => $model = $this->fromFormData($sample->application->form_data)
+            'model' => $model,
+            'lookup_data' => $this->loadLookupData($model)
         ]);
     }
 }
