@@ -40,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
         \Validator::extend('title', function($attribute, $value, $parameters, $validator) {
             return !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬]/', $value);
         });
+
+        Validator::extend('file_uploaded', function ($attribute, $value, $parameters, $validator) {
+            return file_exists(public_path($value));
+        });
     }
 
     public function loadModules()

@@ -23,6 +23,7 @@
     "bootstrap-datepicker": "^1.7.1",
     "browser-sync": "^2.18.13",
     "browser-sync-webpack-plugin": "^1.2.0",
+    "cropperjs": "^1.0.0",
     "intl-tel-input": "^12.0.2",
     "jquery-confirm": "^3.3.2",
     "js-cookie": "^2.1.4",

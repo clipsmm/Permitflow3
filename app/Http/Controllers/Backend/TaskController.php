@@ -43,7 +43,7 @@ class TaskController extends Controller
     {
         return view('backend.tasks.dashboard', [
             'tasks' => []
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __('Tasks'));
     }
 
     public function show(Request $request, $module, Task $task)
@@ -59,7 +59,7 @@ class TaskController extends Controller
             'task' => $task,
             'module' => $module,
             'actions' => $actions
-        ]);
+        ])->with('page_title', __('Task Details'));
     }
 
     public function myQueue(Request $request, $module)
@@ -79,7 +79,7 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("Queued Tasks"));
     }
 
     public function myInbox(Request $request, $module)
@@ -95,7 +95,7 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("My Tasks"));
     }
 
     public function myOutbox(Request $request, $module)
@@ -110,7 +110,7 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("Completed Tasks"));
     }
 
     public function myInCorrection(Request $request, $module)
@@ -126,7 +126,7 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("Corrections"));
     }
 
     public function allProcessing(Request $request, $module)
@@ -140,7 +140,7 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("Processing"));
     }
 
     public function pickTask(Request $request, $module)

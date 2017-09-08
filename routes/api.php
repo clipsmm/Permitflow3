@@ -17,4 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('upload-image',"MediaController@updatePhotoCrop");
+
 Route::get('payment-notification', 'PaymentController@paymentNotification')->name('payment.notification');

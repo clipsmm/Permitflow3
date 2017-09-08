@@ -16,7 +16,7 @@ class OutputController extends Controller
 
         return view('backend.outputs.index',[
             'outputs' => $outputs
-        ]);
+        ])->with("page_title", __("Outputs"));
     }
 
     public function create(Request $request, $module)
@@ -57,7 +57,7 @@ class OutputController extends Controller
     {
         return view('backend.outputs.edit', [
             'output' => $output
-        ]);
+        ])->with("page_title", __("Edit Output"));
     }
 
 
