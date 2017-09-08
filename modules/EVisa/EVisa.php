@@ -10,6 +10,7 @@ namespace Modules;
 
 use App\Events\ApplicationSubmitted;
 use App\Models\Application;
+use App\Models\ApplicationOutput;
 use App\Models\Invoice;
 use App\Models\Task;
 use Carbon\Carbon;
@@ -238,5 +239,14 @@ class EVisa extends BaseModule implements ModuleInterface
 
     public function canDeleteApplication($application){
         return $application->status == Application::TEMPORARY;
+    }
+
+    public function render_output_preview(ApplicationOutput $sample)
+    {
+        return view("{$this->slug}::outputs.output_preview", [
+            'output' => $sample,
+            'application' => $sample->application,
+            'model' => $model = $this->fromFormData($sample->application->form_data)
+        ]);
     }
 }

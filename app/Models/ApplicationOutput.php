@@ -92,7 +92,11 @@ class ApplicationOutput extends Model
     {
         $this->load(['application', 'task', 'task.user']);
         $output_data = $this->application->module->loadOutputData($this);
-        $html = app('blade-extensions')->compileString($this->output->template, array_merge(['application' => $this->application,  'task' => $this->task], $output_data));
+        $html = app('blade-extensions')->compileString($this->output->template, array_merge([
+            'application' => $this->application,
+            'task' => $this->task,
+            'model' => $this->application->module->fromFormData($this->application->form_data)
+        ], $output_data));
 
         return $html;
     }

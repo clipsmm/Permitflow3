@@ -84,8 +84,10 @@ class OutputController extends Controller
             ]);
     }
 
-    public function preview(Request $request, $module, Application $application)
+    public function preview(Request $request, $module, Output $output)
     {
-        return view('backend.outputs.preview', ['application' => $application]);
+        $sample  = $output->application_outputs()->whereCode($output->code)->first();
+
+        return $module->render_output_preview($sample);
     }
 }

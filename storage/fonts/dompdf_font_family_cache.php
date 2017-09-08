@@ -80,4 +80,7 @@
   'roboto' => array(
     'normal' => $fontDir . '/d4f5af1014766f1c5898c3a400753a82',
   ),
+  'glyphicons halflings' => array(
+    'normal' => $fontDir . '/22db0b2f4848d3973b520097b212dcc2',
+  ),
 ) ?>

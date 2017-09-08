@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Dust\Dust;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Output extends Model
 {
@@ -23,6 +24,11 @@ class Output extends Model
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function application_outputs()
+    {
+        return $this->hasMany(ApplicationOutput::class, 'code','code');
     }
 
     /**
