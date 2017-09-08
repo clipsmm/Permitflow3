@@ -190,6 +190,7 @@ return [
         Radic\BladeExtensions\BladeExtensionsServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Propaganistas\LaravelPhone\PhoneServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
 
         /*
@@ -201,7 +202,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class
+        Collective\Html\HtmlServiceProvider::class
 
     ],
 
@@ -262,7 +263,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
-
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 

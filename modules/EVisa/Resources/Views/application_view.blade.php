@@ -40,7 +40,7 @@
                 <td width="25%" style="vertical-align: middle !important;">
                     <div class="thumbnail no-border m-t-0 m-b-5 m-l-5 m-r-0">
                         <img class="img-responsive hidden-xs"
-                             src="{{ asset('images/profile.jpg') }}">
+                             src="{{ $application->get_data('passport_photo', null) ? asset($application->get_data('passport_photo', '')) : asset('images/profile.jpg') }}">
                     </div>
                 </td>
                 <td width="75%" class="no-padding" style="border-top: 0 !important;">

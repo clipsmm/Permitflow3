@@ -56,7 +56,8 @@ class FormValidator
                     'passport_date_of_expiry' => ['required', "after:{$today}"],
                     'passport_issued_by' => ['required'],
                     'passport_bio' => ['required', 'file-upload:pdf jpg jpeg,2048'],
-                    'passport_photo' => ['required', 'file-upload:pdf jpg jpeg,2048'],
+                    //'passport_photo' => ['required', 'file-upload:pdf jpg jpeg,2048'],
+                    'passport_photo' => ['required', 'file_uploaded'],
                 ], [
                     'passport_date_of_issue.before' => __('validation.before_tomorrow'),
                     'passport_date_of_issue.after' => __('Date of Issue must be a date after date of birth'),
