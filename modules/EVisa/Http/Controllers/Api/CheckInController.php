@@ -28,12 +28,12 @@ class CheckInController extends Controller
 
         $visa = Visa::whereVisaNumber($request->visa_number)->first();
 
-        $checked_in  = CheckIn::attempt($visa);
+        $check_in  = CheckIn::attempt($visa);
 
-        if($checked_in === true){
+        if($check_in->check_in_successful){
             return response()->json(['checked_in' => true]);
         }
 
-        return response()->json(['checked_in' => false, 'reason' => $checked_in[1]], Response::HTTP_UNAUTHORIZED);
+        return response()->json(['checked_in' => false, 'reason' => $check_in->failure_reason], Response::HTTP_UNAUTHORIZED);
     }
 }

@@ -21,26 +21,14 @@ class CheckIn extends Model
 
     public static function attempt(Visa $visa)
     {
-        if($visa->canCheckIn()){
-            self::create([
-                'visa_id' => $visa->id,
-                'check_in_at' => Carbon::now(),
-                'check_in_successful' => true
-            ]);
-
-            return true;
-        }
-
         $reason = self::getFailureReason($visa);
-        self::create([
+        return self::create([
             'visa_id' => $visa->id,
             'check_in_at' => Carbon::now(),
-            'check_in_successful' => false,
+            'check_in_successful' => $visa->canCheckIn(),
             'failure_reason' => $reason
-            ]);
 
-
-        return [false, $reason];
+        ]);
     }
 
     private static function getFailureReason($visa)

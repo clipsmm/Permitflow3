@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('auth/login', 'Auth\ApiAuthController@login');
 
-Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function(){
+Route::group(['middleware' => ['jwt.auth']], function(){
     //put routes that require api authentication here
 });
 
