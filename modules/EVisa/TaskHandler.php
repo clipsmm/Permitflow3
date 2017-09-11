@@ -7,6 +7,7 @@ use App\Mail\DefaultMail;
 use App\Models\Correction;
 use App\Models\Task;
 use Carbon\Carbon;
+use Modules\EVisa\Models\Visa;
 
 class TaskHandler {
     protected $task;
@@ -96,6 +97,8 @@ class TaskHandler {
             $application->complete  =  true;
             $application->status  = 'issued';
             $application->save();
+
+            Visa::create(['visa_number' => $application->application_number, 'application_id' => $application->id, 'user_id' => $application->user_id]);
         });
 
         $application =  $task->application;
