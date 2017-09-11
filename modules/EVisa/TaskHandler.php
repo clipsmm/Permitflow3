@@ -98,7 +98,8 @@ class TaskHandler {
             $application->status  = 'issued';
             $application->save();
 
-            Visa::create(['visa_number' => $application->application_number, 'application_id' => $application->id, 'user_id' => $application->user_id]);
+            Visa::createFromApplication($application);
+
         });
 
         $application =  $task->application;

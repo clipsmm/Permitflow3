@@ -26,7 +26,7 @@ use Modules\Evisa\Listeners\EvisaApplicationSubmittedHandler;
 
 class EVisa extends BaseModule implements ModuleInterface
 {
-    public $modelClass = \Modules\EVisa\Models\EVisa::class;
+    public $modelClass = \Modules\EVisa\Models\Visa::class;
 
     /**
      * Module specific event /listener pairs

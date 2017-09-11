@@ -3,7 +3,7 @@
 namespace Modules\Evisa\Http\Middleware;
 
 use Closure;
-use Modules\EVisa\Models\EVisa;
+use Modules\EVisa\Models\Visa;
 
 class ValidatePreviousSteps
 {

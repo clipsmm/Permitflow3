@@ -20,7 +20,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Modules\EVisa\Models\EntryPoint;
-use Modules\EVisa\Models\EVisa;
+use Modules\EVisa\Models\Visa;
 use Validator;
 
 class ApplicationController extends Controller
@@ -54,7 +54,7 @@ class ApplicationController extends Controller
 
     protected function getOrCreateFromSession()
     {
-        return new EVisa(session()->get($this->guest_app_session_key, []));
+        return new Visa(session()->get($this->guest_app_session_key, []));
     }
 
     public function save(Request $request)

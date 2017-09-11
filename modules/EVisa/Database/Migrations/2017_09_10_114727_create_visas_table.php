@@ -16,9 +16,11 @@ class CreateVisasTable extends Migration
         Schema::create('visas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('visa_number')->unique();
+            $table->string('type');
             $table->unsignedInteger('application_id');
             $table->unsignedInteger('user_id');
             $table->string('status')->default('active');
+            $table->timestamp('expires_at');
             $table->timestamps();
 
             $table->foreign('application_id')->references('id')->on('applications');

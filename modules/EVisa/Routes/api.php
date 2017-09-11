@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::get('/e-visa', function (Request $request) {
     // return $request->e-visa();
 })->middleware('auth:api');
+
+Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function(){
+    //put routes that require jwt authentication here
+    Route::post('visa', 'CheckInController@getVisaDetails');
+    Route::post('checkin', 'CheckInController@checkin');
+});

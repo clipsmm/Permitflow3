@@ -14,7 +14,7 @@ use App\Models\User;
 use App\Modules\BaseModule;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Modules\EVisa\Models\EVisa;
+use Modules\EVisa\Models\Visa;
 
 class SettingsController extends Controller
 {
