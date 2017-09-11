@@ -4,12 +4,12 @@ namespace Modules\EVisa\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CheckIn extends Model
+class CheckOut extends Model
 {
     protected $guarded = ['id'];
 
-    public function visa()
+    public function checkIn()
     {
-        return $this->belongsTo(Visa::class);
+        return $this->belongsTo(CheckIn::class);
     }
 }
