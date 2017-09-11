@@ -13,11 +13,6 @@ class ApiAuthController extends Controller
 
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required'
-        ]);
-
         try {
             // attempt to verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt(['email' => $request->username, 'password' => $request->password])) {
