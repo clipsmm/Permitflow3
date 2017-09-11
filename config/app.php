@@ -191,6 +191,8 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Propaganistas\LaravelPhone\PhoneServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
 
         /*
@@ -202,8 +204,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class
-
     ],
 
     /*
@@ -264,6 +264,8 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 

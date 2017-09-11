@@ -63,6 +63,8 @@ class Kernel extends HttpKernel
         'backend' => BackendAccess::class,
         'application_editable' => RedirectIfApplicationNotEditable::class,
         'application_owner' => CurrentUserOwnsApplication::class,
-        'application_deletable' => ApplicationDeletable::class
+        'application_deletable' => ApplicationDeletable::class,
+        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class
     ];
 }

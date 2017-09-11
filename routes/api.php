@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('auth/login', 'Auth\ApiAuthController@login');
+
+Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function(){
+    //put routes that require api authentication here
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
