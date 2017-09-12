@@ -28,6 +28,13 @@ class Visa extends Model
 
     protected $guarded = ['id'];
 
+    protected $appends = ['is_checked_in'];
+
+    public function getIsCheckedInAttribute()
+    {
+        return $this->attributes['is_checked_in'] = $this->isCheckedIn();
+    }
+
     public function application()
     {
         return $this->belongsTo(Application::class);
