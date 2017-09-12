@@ -28,7 +28,6 @@ class CheckIn extends Model
             'check_in_at' => Carbon::now(),
             'check_in_successful' => is_null($reason),
             'failure_reason' => $reason
-
         ]);
     }
 
@@ -37,7 +36,7 @@ class CheckIn extends Model
         if($visa->expired()){
             return "VISA EXPIRED";
         }
-        if($visa->hasPendingCheckOut()){
+        if($visa->isCheckedIn()){
             return 'ALREADY CHECKED IN';
         }
         if(!$visa->isValid()){

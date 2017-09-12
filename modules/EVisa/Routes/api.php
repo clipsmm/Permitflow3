@@ -21,4 +21,5 @@ Route::group(['middleware' => ['jwt.auth']], function(){
     //put routes that require jwt authentication here
     Route::post('visa', 'CheckInController@getVisaDetails');
     Route::post('checkin', 'CheckInController@checkin');
+    Route::post('checkout', 'CheckInController@checkout');
 });

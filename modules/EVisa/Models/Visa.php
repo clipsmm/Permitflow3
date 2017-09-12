@@ -47,7 +47,7 @@ class Visa extends Model
     {
         return !$this->expired()
             && $this->isValid()
-            && !$this->hasPendingCheckOut();
+            && !$this->isCheckedIn();
     }
 
     public function expired()
@@ -88,15 +88,17 @@ class Visa extends Model
         return $entry_date->addDays($validity);
     }
 
-    public function hasPendingCheckOut()
+    public function isCheckedIn()
     {
-        $checkIn = $this->checkIns()
+        return !is_null($this->getCheckIn());
+    }
+
+    public function getCheckIn()
+    {
+        return $this->checkIns()
             ->where('check_in_successful', true)
             ->whereDoesntHave('checkOuts', function ($query) {
                 $query->where('check_out_successful', true);
             })->first();
-
-        return !is_null($checkIn);
     }
-
 }

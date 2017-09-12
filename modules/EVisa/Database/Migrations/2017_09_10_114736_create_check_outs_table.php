@@ -22,7 +22,7 @@ class CreateCheckOutsTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('check_in_id')->references('id')->on('check_outs')->onDelete('CASCADE');
+            $table->foreign('check_in_id')->references('id')->on('check_ins')->onDelete('CASCADE');
         });
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\EVisa\Models\CheckIn;
+use Modules\EVisa\Models\CheckOut;
 use Modules\EVisa\Models\Visa;
 
 class CheckInController extends Controller
@@ -35,5 +36,22 @@ class CheckInController extends Controller
         }
 
         return response()->json(['checked_in' => false, 'reason' => $check_in->failure_reason], Response::HTTP_UNAUTHORIZED);
+    }
+
+    public function checkout(Request $request)
+    {
+        $this->validate($request, [
+            'visa_number' => ['required']
+        ]);
+
+        $visa = Visa::whereVisaNumber($request->visa_number)->with(['application'])->first();
+        $check_out = CheckOut::attempt($visa);
+
+        if($check_out->check_out_successful){
+            return response()->json(['checked_out' => true]);
+        }
+
+        return response()->json(['checked_out' => false, 'reason' => $check_out->failure_reason], Response::HTTP_UNAUTHORIZED);
+
     }
 }
