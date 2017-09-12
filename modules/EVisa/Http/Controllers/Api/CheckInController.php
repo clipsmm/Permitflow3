@@ -13,11 +13,11 @@ class CheckInController extends Controller
     public function getVisaDetails(Request $request)
     {
         $this->validate($request, [
-            'visa_number' => ['required', 'exists:visas']
+            'visa_number' => ['required']
         ]);
 
-        $visa = Visa::whereVisaNumber($request->visa_number)->with(['application'])->firstOrFail();
-        return response()->json(['visa' => $visa]);
+        $visa = Visa::whereVisaNumber($request->visa_number)->with(['application'])->first();
+        return response()->json($visa, 200);
     }
 
     public function checkin(Request $request)
