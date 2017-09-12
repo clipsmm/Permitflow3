@@ -43,13 +43,21 @@ class Visa extends Model
         return $this->hasMany(CheckIn::class);
     }
 
-
     public function canCheckIn()
     {
-        //is valid, not expired, has no pending checkout
-        return $this->expires_at > Carbon::now()
-            && $this->status == 'active'
+        return !$this->expired()
+            && $this->isValid()
             && !$this->hasPendingCheckOut();
+    }
+
+    public function expired()
+    {
+        return $this->expires_at < Carbon::now();
+    }
+
+    public function isValid()
+    {
+        return $this->status == 'active';
     }
 
     public static function createFromApplication($application, $status = 'active')
@@ -80,7 +88,7 @@ class Visa extends Model
         return $entry_date->addDays($validity);
     }
 
-    private function hasPendingCheckOut()
+    public function hasPendingCheckOut()
     {
         $checkIn = $this->checkIns()
             ->where('check_in_successful', true)

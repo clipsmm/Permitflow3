@@ -22,18 +22,27 @@ class CheckIn extends Model
     public static function attempt(Visa $visa)
     {
         $reason = self::getFailureReason($visa);
+
         return self::create([
             'visa_id' => $visa->id,
             'check_in_at' => Carbon::now(),
-            'check_in_successful' => $visa->canCheckIn(),
+            'check_in_successful' => is_null($reason),
             'failure_reason' => $reason
 
         ]);
     }
 
-    private static function getFailureReason($visa)
+    private static function getFailureReason(Visa $visa)
     {
-        //todo: return exact failure reason
-        return 'Visa expired, is invalid or already checked in';
+        if($visa->expired()){
+            return "VISA EXPIRED";
+        }
+        if($visa->hasPendingCheckOut()){
+            return 'ALREADY CHECKED IN';
+        }
+        if(!$visa->isValid()){
+            return 'INVALID VISA';
+        }
+        return  null;
     }
 }
