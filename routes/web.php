@@ -21,6 +21,7 @@ Route::get('auth/sso', 'Auth\SsoController@ssoRedirect')->name('auth.sso_redirec
 Route::get('auth/sso/authorize', 'Auth\SsoController@authorizeSso')->name('auth.sso_authorize');
 
 Auth::routes();
+Route::get('auth/login/{token}', 'Auth\LoginController@tokenLogin')->name('auth.token-login');
 
 Route::get('/home', 'FrontendController@index')->name('home');
 
