@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\Invoice;
 use App\Modules\BaseModule;
+use GuzzleHttp\Client;
 use \PDF;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -134,18 +135,35 @@ class ApplicationController extends Controller
 
     public function checkout(Request $request, $module_slug, Application $application, Invoice $invoice)
     {
-        if (!$invoice->bill_ref) {
-            $invoice->get_pesaflow_bill_ref();
-            $invoice->fresh();
-        }
+//        if (!$invoice->bill_ref) {
+//            $invoice->get_pesaflow_bill_ref();
+//            $invoice->fresh();
+//        }
 
-        $checkout_data = get_pesaflow_checkout_data_from_invoice($invoice);
+        $checkout_data = $this->createBill([
+            'service_id' => 1,
+            'client_ref' => $invoice->bill_ref,
+            'client_name' => user()->full_name,
+            "client_email" => user()->email,
+            'client_phone' => user()->phone_number,
+            'notes' => $invoice->description,
+            'amount' => $invoice->amount
+        ]);
 
+//        $checkout_data = get_pesaflow_checkout_data_from_invoice($invoice);
+//
         return view('frontend.checkout', [
             'data' => $checkout_data,
             'module' => $this->module,
             'application' => $application
         ]);
+    }
+
+    private function createBill($params) {
+        $client = new Client();
+        $response  = $client->post('192.168.10.1:4000/api/v1/bills/create', ['form_params' => ['bill' => $params]]);
+
+        return json_decode($response->getBody());
     }
 
     public function show(Request $request, $module, $app_id)
