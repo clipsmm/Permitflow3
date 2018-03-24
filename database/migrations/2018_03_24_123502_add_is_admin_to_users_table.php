@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCompleteToApplications extends Migration
+class AddIsAdminToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddCompleteToApplications extends Migration
      */
     public function up()
     {
-        Schema::table('applications', function (Blueprint $table) {
-            $table->boolean('complete')->default(0);
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_admin')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddCompleteToApplications extends Migration
      */
     public function down()
     {
-        Schema::table('applications', function (Blueprint $table) {
-            $table->dropColumn('complete');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['is_admin']);
         });
     }
 }
