@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.partials.topnav1')
+    @if (Auth::guest())
+        @include('layouts.partials.top_nav_default')
+    @else
+        @include('layouts.partials.topnave2')
+    @endif
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

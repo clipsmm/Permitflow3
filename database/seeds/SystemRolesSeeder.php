@@ -40,7 +40,7 @@ class SystemRolesSeeder extends Seeder
         $permissions = $this->insertPermissions();
 
         foreach ($this->roles as $name => $perm_names) {
-            $role = \App\Models\Role::firstOrCreate(['name' => $name, 'guard_name' => 'web']);
+            $role = \App\Models\Role::query()->firstOrCreate(['name' => $name, 'guard_name' => 'web']);
 
             $perm_names = array_map(function($n){
                 return permission_name($n, 'system');

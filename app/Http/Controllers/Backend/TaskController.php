@@ -11,19 +11,39 @@ class TaskController extends Controller
 {
     protected $tasks;
     protected $modules;
+    protected $stats = [];
 
     public function __construct(Task $task)
     {
         parent::__construct();
 
         $this->tasks = $task;
+
+        $module  =  module();
+
+        $this->middleware(function ($request, $next) use($module) {
+            $this->user  = user();
+
+            $this->stats = [
+                'queue' => $this->tasks->module($module->slug)->queued()->count(),
+                'inbox' => $this->tasks->module($module->slug)->myTasks($this->user)->processing()->inCorrections(false)->count(),
+                'corrections' => $this->tasks->module($module->slug)->myTasks($this->user)->processing()->inCorrections()->count(),
+                'completed' => $this->tasks->module($module->slug)->myTasks($this->user)->completed()->count(),
+            ];
+
+            view()->share('task_stats', $this->stats);;
+
+            return $next($request);
+        });
+
+
     }
 
     public function index()
     {
         return view('backend.tasks.dashboard', [
             'tasks' => []
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __('Tasks'));
     }
 
     public function show(Request $request, $module, Task $task)
@@ -39,7 +59,7 @@ class TaskController extends Controller
             'task' => $task,
             'module' => $module,
             'actions' => $actions
-        ]);
+        ])->with('page_title', __('Task Details'));
     }
 
     public function myQueue(Request $request, $module)
@@ -59,7 +79,7 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("Queued Tasks"));
     }
 
     public function myInbox(Request $request, $module)
@@ -69,12 +89,13 @@ class TaskController extends Controller
             ->module($module->slug)
             ->myTasks()
             ->processing()
+            ->inCorrections(false)
             ->paginate(20);
 
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("My Tasks"));
     }
 
     public function myOutbox(Request $request, $module)
@@ -89,7 +110,7 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("Completed Tasks"));
     }
 
     public function myInCorrection(Request $request, $module)
@@ -105,7 +126,7 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("Corrections"));
     }
 
     public function allProcessing(Request $request, $module)
@@ -119,11 +140,24 @@ class TaskController extends Controller
         return view('backend.tasks.index', [
             'tasks' => $tasks,
             'module' => $module
-        ])->with('page_title', __('pages.tasks_page'));
+        ])->with('page_title', __("Processing"));
     }
 
     public function pickTask(Request $request, $module)
     {
+        //issue: #53: Limit the number of tasks a reviewer can pick to 3 before allowing to pick more tasks
+        //todo: make this configurable
+        if ($this->tasks->with(['application'])
+            ->module($module->slug)
+            ->myTasks()
+            ->processing()
+            ->inCorrections(false)->count()  > 2)
+            return redirect()->back()
+                ->with('alerts', [
+                    ['type' => 'danger', 'message' => __('messages.max_tasks_exceeded')]
+                ]);
+
+        //get any available task
         $task = Task::pick_task($module->slug, $request->get('task_id'));
 
         if (!$task){

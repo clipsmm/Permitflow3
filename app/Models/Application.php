@@ -6,18 +6,20 @@ use App\Modules\BaseModule;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use \DNS1D;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Application extends Model
 {
     const DRAFT = 'draft';
-    const SUBMITTED = 'submitted';
+    const PENDING = 'pending';
+    const TEMPORARY = 'temporary';
 
     protected $fillable = ['application_number', 'form_data', 'module_slug', 'status', 'submitted_at', 'in_corrections'];
 
-    public static function insertRecord($module, $data, User $user)
+    public static function insertRecord($module, $data, User $user, $status = self::DRAFT)
     {
-        $application = new self(['module_slug' => $module->slug, 'application_number' => self::generateApplicationNumber($module)]);
+        $application = new self(['module_slug' => $module->slug, 'status' => $status, 'application_number' => self::generateApplicationNumber($module, $user)]);
         $application->form_data = $data;
         $application->user()->associate($user)
             ->save();
@@ -25,9 +27,12 @@ class Application extends Model
         return $application;
     }
 
-    public static function generateApplicationNumber($module)
+    public static function generateApplicationNumber($module, $user)
     {
-        return implode("-", [$module->prefix, Hashids::encode($module->getUpdatedCounter())]);
+        $last_id = self::latest('id')->pluck('id')->first();
+        $last_id = is_null($last_id) ? 0 : $last_id;
+        $num = $last_id + time() + $user->id;
+        return implode("-", [$module->prefix, Hashids::encode($num)]);
     }
 
     public function user()
@@ -95,6 +100,13 @@ class Application extends Model
         return $this->hasMany(Task::class, 'application_id');
     }
 
+    public function current_task()
+    {
+        return $this->hasOne(Task::class, 'application_id')
+            ->whereNull('completed_at')
+            ->latest('tasks.created_at');
+    }
+
     public function invoices()
     {
         return $this->hasMany(Invoice::class, 'application_id');
@@ -121,6 +133,13 @@ class Application extends Model
         return $this->hasMany(ApplicationCorrection::class);
     }
 
+    public function active_correction()
+    {
+        return $this->hasOne(Correction::class, 'application_id')
+            ->whereNull('completed_at')
+            ->latest('application_corrections.created_at');
+    }
+
     public function updateFormData($data)
     {
         $this->form_data = array_merge($this->form_data, $data);
@@ -134,7 +153,7 @@ class Application extends Model
 
     public function canBeDeleted()
     {
-        return $this->status == self::DRAFT;
+        return $this->status == self::DRAFT || $this->module->canDeleteApplication($this);
     }
 
     public function getActions()
@@ -147,7 +166,7 @@ class Application extends Model
         $this->submitted_at = Carbon::now();
 
         if($this->status == self::DRAFT){
-            $this->status = self::SUBMITTED;
+            $this->status = self::PENDING;
         }
 
         $this->in_corrections = false;
@@ -167,9 +186,32 @@ class Application extends Model
         return json_decode($form_data, true);
     }
 
-    public function add_output($code, $task_id)
+    public function add_output($code, $task_id, $save = false)
     {
-        return ApplicationOutput::add_application_output($this->id, $code, $task_id);
+        return ApplicationOutput::add_application_output($this->id, $code, $task_id, $save);
     }
 
+
+    public static function getByHashId($hash_id, $query = null)
+    {
+        $query = is_null($query) ? self::query() : $query;
+        $app_id = \Hashids::decode($hash_id);
+        return $query->findOrFail($app_id[0]);
+    }
+
+
+    public function doDelete()
+    {
+        if($this->module->deleteApplication($this)){
+            $this->delete();
+            return true;
+        };
+
+        return false;
+    }
+
+    public function getBarcode()
+    {
+        return "data:image/png;base64,". DNS1D::getBarcodePNG($this->application_number, "C128B");
+    }
 }

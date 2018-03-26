@@ -75,7 +75,7 @@ class Task extends Model
 
     public function scopeMyTasks($query, User $user = null)
     {
-        return $query->where('tasks.user_id', $user ? : user()->id);
+        return $query->where('tasks.user_id', $user ? $user->id : user()->id);
     }
 
     public function scopeQueued($query, $module = null)
@@ -105,9 +105,11 @@ class Task extends Model
             ->whereIn('tasks.stage', $perms);
     }
 
-    public function scopeInCorrections($query)
+    public function scopeInCorrections($query, $true  = true)
     {
-        return $query->where('tasks.status','corrections');
+        return $query->whereHas('application', function($q) use($true){
+            $q->where('applications.in_corrections', $true);
+        });
     }
 
     public function scopeCompleted($query)

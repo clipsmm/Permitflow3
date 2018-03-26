@@ -85,11 +85,9 @@ class BaseModule
         return [];
     }
 
-    public function getUpdatedCounter(){
-        $counter = Module::get("{$this->slug}::counter", 0);
-        Module::set("{$this->slug}::counter", $counter + 1);
-
-        return $counter + 1;
+    public function loadOutputDat($output)
+    {
+        return [];
     }
 
 
@@ -134,5 +132,17 @@ class BaseModule
     {
         $user_ids  =  \DB::table('module_user')->selectRaw("user_id")->where('module_slug', $this->slug)->get();
         return User::query()->whereIn('id', $user_ids->pluck('user_id')->toArray());
+    }
+
+    public function canDeleteApplication($application){
+        return false;
+    }
+
+    public function deleteApplication($application)
+    {
+        if($application->module_slug != $this->slug){
+            return false;
+        }
+        return true;
     }
 }

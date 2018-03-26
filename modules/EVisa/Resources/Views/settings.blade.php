@@ -17,25 +17,48 @@
                             <form class="form-horizontal" method="post" action="{{ route('e-visa.settings.save') }}">
                                 {!! csrf_field() !!}
                                 <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('Multiple Entry Visa') </label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            {{ settings('e-visa.currency', 'KES') }}
+                                        </span>
+                                            {!! Form::number('e-visa[costs][multiple_entry_visa]', settings('e-visa.costs.multiple_entry_visa'), [ 'class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Single Entry Visa Cost') </label>
                                     <div class="col-sm-5">
                                         <div class="input-group">
                                             <span class="input-group-addon">
-                                            USD
+                                            {{ settings('e-visa.currency', 'KES') }}
                                         </span>
-                                        {!! Form::number('e-visa[costs][single_entry]', settings('e-visa.costs.single_entry'), [ 'class' => 'form-control']) !!}
+                                            {!! Form::number('e-visa[costs][single_entry]', settings('e-visa.costs.single_entry'), [ 'class' => 'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Transit Visa Cost') </label>
                                     <div class="col-sm-5">
-                                    <div class="input-group">
+                                        <div class="input-group">
                                         <span class="input-group-addon">
-                                            USD
+                                            {{ settings('e-visa.currency', 'KES') }}
                                         </span>
-                                        {!! Form::number('e-visa[costs][transit_visa]', settings('e-visa.costs.transit_visa'), [ 'class' => 'form-control']) !!}
+                                            {!! Form::number('e-visa[costs][transit_visa]', settings('e-visa.costs.transit_visa'), [ 'class' => 'form-control']) !!}
+                                        </div>
+
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('East Africa Tourist Visa') </label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group">
+                                        <span class="input-group-addon">
+                                            {{ settings('e-visa.currency', 'KES') }}
+                                        </span>
+                                            {!! Form::number('e-visa[costs][tourist_visa]', settings('e-visa.costs.tourist_visa'), [ 'class' => 'form-control']) !!}
+                                        </div>
 
                                     </div>
                                 </div>
@@ -48,9 +71,19 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="control-label col-sm-2"> @lang('Maximum Stay Period For Transit Visa (Days)') </label>
+                                    <div class="col-sm-5">
+                                        {!! Form::number('e-visa[transit_visa_stay_period]', settings('e-visa.transit_visa_stay_period'), [ 'class' => 'form-control', 'min' => 1]) !!}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Blacklisted Countries') </label>
                                     <div class="col-sm-5">
-                                        <select-input placeholder="{{__('--Select Countries--')}}" :selected="{{json_encode(settings('e-visa.blacklisted_countries'))}}" name="e-visa[blacklisted_countries]" :multiple="true" :options="{{json_encode($country_codes)}}"></select-input>
+                                        <select-input placeholder="{{__('--Select Countries--')}}"
+                                                      :selected="{{json_encode(settings('e-visa.blacklisted_countries'))}}"
+                                                      name="e-visa[blacklisted_countries]" :multiple="true"
+                                                      :options="{{json_encode($country_codes)}}"></select-input>
                                         <span class="help-block">
                                             @lang('e-visa::help_blocks.blacklist')
                                         </span>
@@ -60,7 +93,10 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Whitelisted Countries') </label>
                                     <div class="col-sm-5">
-                                        <select-input placeholder="{{__('--Select Countries--')}}" :selected="{{json_encode(settings('e-visa.whitelisted_countries'))}}" :multiple="true" :options="{{json_encode($country_codes)}}" name="e-visa[whitelisted_countries]"></select-input>
+                                        <select-input placeholder="{{__('--Select Countries--')}}"
+                                                      :selected="{{json_encode(settings('e-visa.whitelisted_countries'))}}"
+                                                      :multiple="true" :options="{{json_encode($country_codes)}}"
+                                                      name="e-visa[whitelisted_countries]"></select-input>
                                         <span class="help-block">
                                             @lang('e-visa::help_blocks.whitelist')
                                         </span>
@@ -70,7 +106,9 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2"> @lang('Currency') </label>
                                     <div class="col-sm-5">
-                                        <select-input :selected="{{json_encode(settings('e-visa.currency'))}}" name="e-visa[currency]" :multiple="false" :options="{{json_encode(['KES' => "Kenya Shilling", "USD" => "US Dollar"])}}"></select-input>
+                                        <select-input :selected="{{json_encode(settings('e-visa.currency'))}}"
+                                                      name="e-visa[currency]" :multiple="false"
+                                                      :options="{{json_encode(['KES' => "Kenya Shilling", "USD" => "US Dollar"])}}"></select-input>
                                         <span class="help-block">
                                             @lang('e-visa::help_blocks.currency')
                                         </span>

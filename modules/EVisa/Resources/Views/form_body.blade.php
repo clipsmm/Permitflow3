@@ -80,7 +80,8 @@
                             <label for="name_search_type">
                                 @lang('Phone Number')
                             </label>
-                            <intl-telephone-input value="{{old('phone_number', $model->phone_number)}}" name="phone_number" ></intl-telephone-input>
+                            <intl-telephone-input value="{{old('phone_number', $model->phone_number)}}"
+                                                  name="phone_number"></intl-telephone-input>
                             {!! error_tag($errors, 'phone_number') !!}
                         </div>
                     </div>
@@ -109,6 +110,9 @@
                                 @lang('Surname/Family Name')
                             </label>
                             {!! Form::text('surname', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'surname') !!}
                         </div>
                     </div>
@@ -118,6 +122,9 @@
                                 @lang('Other Names in full')
                             </label>
                             {!! Form::text('other_names', null, ['class' => 'form-control text-black',  'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'other_names') !!}
                         </div>
                     </div>
@@ -127,6 +134,9 @@
                                 @lang('Gender')
                             </label>
                             {!! Form::select('gender', ['M' => __('Male'), 'F' => __('Female'), 'other' => __('Other')], null, ['placeholder' => __('--Select--'), 'class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'gender') !!}
                         </div>
                     </div>
@@ -137,6 +147,9 @@
                             </label>
                             <date-picker value="{{old('date_of_birth', $model->date_of_birth)}}"
                                          name="date_of_birth"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'date_of_birth') !!}
                         </div>
                     </div>
@@ -148,6 +161,9 @@
                                 @lang('Country Of Birth')
                             </label>
                             {!! Form::select('country_of_birth', $country_codes, NULL, ['class' => 'form-control text-black', 'placeholder' => __('--Select--'), 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'country_of_birth') !!}
                         </div>
                     </div>
@@ -157,6 +173,9 @@
                                 @lang('Place Of Birth')
                             </label>
                             {!! Form::text('place_of_birth', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'place_of_birth') !!}
                         </div>
                     </div>
@@ -166,6 +185,9 @@
                                 @lang('Current Occupation')
                             </label>
                             {!! Form::text('occupation', null, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'occupation') !!}
                         </div>
                     </div>
@@ -176,6 +198,9 @@
                                 @lang('Passport Number')
                             </label>
                             {!! Form::text('passport_number', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_number') !!}
                         </div>
                     </div>
@@ -186,6 +211,9 @@
                                 @lang('Place Of Issue')
                             </label>
                             {!! Form::text('passport_place_of_issue', NULL, ['class' => 'form-control text-black', 'maxlength'=>'160']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_place_of_issue') !!}
                         </div>
                     </div>
@@ -197,6 +225,9 @@
                             </label>
                             <date-picker value="{{old('passport_date_of_issue', $model->passport_date_of_issue)}}"
                                          name="passport_date_of_issue"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_date_of_issue') !!}
                         </div>
                     </div>
@@ -210,6 +241,9 @@
                             </label>
                             <date-picker value="{{old('passport_date_of_expiry', $model->passport_date_of_expiry)}}"
                                          name="passport_date_of_expiry"></date-picker>
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_date_of_expiry') !!}
                         </div>
                     </div>
@@ -221,6 +255,9 @@
                                 @lang('Issued By')
                             </label>
                             {!! Form::text('passport_issued_by', NULL, ['class' => 'form-control text-black']) !!}
+                            <span class="help-block">
+                                @lang('e-visa::help_blocks.match_passport')
+                            </span>
                             {!! error_tag($errors, 'passport_issued_by') !!}
                         </div>
                     </div>
@@ -287,23 +324,175 @@
                             {!! error_tag($errors, 'passport_bio') !!}
                         </div>
                     </div>
-                    <div class="col-sm-12 col-xs-12">
-                        <div class="form-group {{error_class($errors, 'passport_photo')}}">
-                            <label>
-                                @lang('e-visa::forms.passport_photo')
-                            </label>
-                            <div class="alert alert-info">
-                                @lang('e-visa::help_blocks.passport_photo')
+                    <div class="col-sm-12 col-xs-12 no-padding">
+                        <div class="form-group {{error_class($errors, 'passport_photo')}} no-padding">
+
+                            <div class="col-md-4 col-xs-12 ">
+                                <div class="thumbnail no-border m-t-0 m-b-5 m-l-5 m-r-0">
+                                    <img id="passport_photo_preview" class="img-responsive hidden-xs"
+                                         src="{{ $application->get_data('passport_photo', null) ? asset($application->get_data('passport_photo', '')) : asset('images/profile.jpg') }}">
+                                </div>
+
+                                    <input type="hidden" name="cropped_value" id="cropped_value" value="">
+                                    <input type="file" name="file" id="cropper"/>
+                                    <input type="hidden" value="{{ $application->get_data('passport_photo','') }}" name="passport_photo" id="pp-photo" />
                             </div>
-                            <file-upload field="passport_photo"
-                                         :val="{{json_encode(old('passport_photo', $model->passport_photo))}}"></file-upload>
+                            <div class="col-md-8 col-xs-12 no-padding">
+                                <label>
+                                    @lang('e-visa::forms.passport_photo')
+                                </label>
+                                <div class="alert alert-info">
+                                    @lang('e-visa::help_blocks.passport_photo')
+                                </div>
+                            </div>
                             {!! error_tag($errors, 'passport_photo') !!}
                         </div>
+
 
                     </div>
                 </div>
 
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog" aria-labelledby="modalLabel" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel">Cropper</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="img-container">
+                                <img width="100%" src="" id="image_cropper">
+                                <p class="text-center">
+                                    <button type="button" class="btn btn-primary rotate" data-method="rotate"
+                                            data-option="-30"><i class="fa fa-undo"></i></button>
+                                    <button type="button" class="btn btn-primary rotate" data-method="rotate"
+                                            data-option="30"><i class="fa fa-repeat"></i></button>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input type="button" class="btn btn-primary" id="Save" value="Save">  </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @push('page_js')
+                <script>
+                    $(function () {
+
+                        /////// Cropper Options set
+                        var cropper;
+                        var options = {
+                            aspectRatio: 1,
+                            minContainerWidth: 600,
+                            minContainerHeight: 600,
+                            minCropBoxWidth: 500,
+                            minCropBoxHeight: 500,
+                            rotatable: true,
+                            cropBoxResizable: false,
+                            restore: false,
+                            guides: false,
+                            center: false,
+                            highlight: false,
+                            cropBoxMovable: false,
+                            toggleDragModeOnDblclick: false,
+                            crop: function (e) {
+                                $("#cropped_value").val(parseInt(e.detail.width) + "," + parseInt(e.detail.height) + "," + parseInt(e.detail.x) + "," + parseInt(e.detail.y) + "," + parseInt(e.detail.rotate));
+                            }
+                        };
+
+                        ///// Show cropper on existing Image
+                        $("body").on("click", "#image_source", function () {
+                            var src = $("#image_source").attr("src");
+                            src = src.replace("/thumb", "");
+                            $('#image_cropper').attr('src', src);
+                            $('#image_edit').val("yes");
+                            $("#myModal").modal("show");
+                        });
+
+                        ///// Destroy Cropper on Model Hide
+                        $(".modal").on("hide.bs.modal", function () {
+                            $(".cropper-container").remove();
+                            cropper.destroy();
+                        });
+
+                        /// Show Cropper on Model Show
+                        $(".modal").on("show.bs.modal", function () {
+                            var image = document.getElementById('image_cropper');
+                            cropper = new Cropper(image, options);
+                        });
+
+                        ///// Rotate Image
+                        $("body").on("click", ".rotate", function () {
+                            var degree = $(this).attr("data-option");
+                            cropper.rotate(degree);
+                        });
+
+                        ///// Saving Image with Ajax Call
+                        $("body").on("click", "#Save", function () {
+                            var form_data = $('#cropper').prop('files')[0];
+                            console.log("Form Data =>", form_data)
+                            var data = new FormData();
+                            data.append('file', form_data)
+                            data.append('cropped_value', $('#cropped_value').val())
+                            $.ajax({
+                                url: "{{ url('api/upload-image') }}", // Url to which the request is send
+                                type: "POST",
+                                mimeType: "multipart/form-data",
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }, // Type of request to be send, called as method
+                                data: data,
+                                contentType: false, // The content type used when sending data to the server.
+                                cache: false, // To unable request pages to be cached
+                                processData: false, // To send DOMDocument or non processed data file it is set to false
+                                success: function (res) // A function to be called if request succeeds
+                                {
+                                    var data = JSON.parse(res)
+                                    $('#passport_photo_preview').attr('src', data.image);
+                                    $('#pp-photo').attr('value', data.path);
+                                    $('#myModal').modal('hide')
+                                },
+                                error: function (ex) {
+                                    alert(JSON.stringify(ex.response.data))
+                                }
+                            });
+                        });
+
+                        ////// When user upload image
+                        $(document).on("change", "#cropper", function () {
+                            var imagecheck = $(this).data('imagecheck'),
+                                file = this.files[0],
+                                imagefile = file.type,
+                                _URL = window.URL || window.webkitURL;
+                            img = new Image();
+                            img.src = _URL.createObjectURL(file);
+                            img.onload = function () {
+                                var match = ["image/jpeg", "image/png", "image/jpg"];
+                                if (!((imagefile == match[0]) || (imagefile == match[1]) || (imagefile == match[2]))) {
+                                    alert('Please Select A valid Image File');
+                                    return false;
+                                } else {
+                                    var reader = new FileReader();
+                                    reader.readAsDataURL(file);
+                                    reader.onloadend = function () { // set image data as background of div
+                                        $(document).find('#image_cropper').attr('src', "");
+                                        $(document).find('#image_cropper').attr('src', this.result);
+                                        $('#image_edit').val("")
+                                        $("#myModal").modal("show");
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+            @endpush
 
             <?php break; ?>
             <?php  case 3: ?>
@@ -334,7 +523,8 @@
                         <label>
                             @lang('Proposed Date Of Entry')
                         </label>
-                        <date-picker value="{{old('date_of_entry', $model->date_of_entry)}}"
+                        <date-picker start_date="{{\Carbon\Carbon::today()}}"
+                                     value="{{old('date_of_entry', $model->date_of_entry)}}"
                                      name="date_of_entry"></date-picker>
                         {!! error_tag($errors, 'date_of_entry') !!}
                     </div>
@@ -344,7 +534,8 @@
                         <label>
                             @lang('Proposed Date Of Departure from Kenya')
                         </label>
-                        <date-picker value="{{old('date_of_departure', $model->date_of_departure)}}"
+                        <date-picker start_date="{{\Carbon\Carbon::today()}}"
+                                     value="{{old('date_of_departure', $model->date_of_departure)}}"
                                      name="date_of_departure"></date-picker>
                         {!! error_tag($errors, 'date_of_departure') !!}
                     </div>
@@ -444,21 +635,38 @@
                             <div class="alert alert-info">
                                 @lang('e-visa::help_blocks.additional_documents')
                             </div>
-                            <div v-for="(doc, i) in additionalDocuments" :class="{'has-error' : form_errors['additional_documents.'+i]}"
-                                 class="m-t-20" :key="doc ? doc.file_name : ''">
-                                <span v-if="additionalDocuments.length > 1" class="close">
-                                    <span @click.prevent="additionalDocuments.splice(i, 1)" class="fa fa-times-circle"></span>
-                                </span>
-                                <file-upload :field="'additional_documents['+ i +']'" :val="doc"></file-upload>
-                                <span class="help-block">
-                                    @{{(form_errors['additional_documents.'+i] || [])[0]}}
-                                </span>
+                            <div v-for="(doc, i) in additionalDocuments"
+                                 class="m-t-20" :key="doc ? doc.file.file_name : ''">
+                                <div class="col-sm-12">
+                                    <span v-if="additionalDocuments.length > 1" class="close">
+                                        <span @click.prevent="additionalDocuments.splice(i, 1)"
+                                              class="fa fa-times-circle"></span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-6"
+                                     :class="{'has-error' : form_errors['additional_documents.'+i+'.name']}">
+                                    <input class="form-control input-sm" placeholder="{{__('Attachment Name')}}"
+                                           type="text" :name="'additional_documents['+ i +'][name]'" v-model="doc.name">
+                                    <span class="help-block">
+                                        @{{(form_errors['additional_documents.'+i+'.name'] || [])[0]}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-6"
+                                     :class="{'has-error' : form_errors['additional_documents.'+i+'.file']}">
+                                    <file-upload :field="'additional_documents['+ i +'][file]'"
+                                                 :val="doc.file"></file-upload>
+                                    <span class="help-block">
+                                        @{{(form_errors['additional_documents.'+i+'.file'] || [])[0]}}
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
+                            {!! error_tag($errors, 'additional_documents') !!}
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <button @click.prevent="additionalDocuments.push({file_name: new Date().getTime(), path: ''})"
+                    <button @click.prevent="addDocument()"
                             class="btn-sm btn btn-primary">
                         <span class="fa fa-plus"></span>
                         @lang('Add')

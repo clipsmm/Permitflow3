@@ -14,7 +14,7 @@ use App\Models\User;
 use App\Modules\BaseModule;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Modules\EVisa\Models\EVisa;
+use Modules\EVisa\Models\Visa;
 
 class SettingsController extends Controller
 {
@@ -24,7 +24,7 @@ class SettingsController extends Controller
         $country_codes = \Countries::all()->pluck('name.common', 'cca2')->toArray();
 
         return view('e-visa::settings', ['country_codes' => $country_codes])
-            ->with('page_tile', __('e-visa::labels.settings_page_title'));
+            ->with('page_title', __("General Settings"));
     }
 
     public function saveSettings(Request $request)

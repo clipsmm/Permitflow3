@@ -28,7 +28,7 @@ class ApplicationResubmittedHandler
     public function handle(ApplicationResubmitted $event)
     {
         $correction = $event->application->activeCorrection();
-        DB::transaction(function () use ($correction) {
+        DB::transaction(function () use (&$correction) {
             $correction->complete();
             $correction->task->completeCorrection($correction);
         });

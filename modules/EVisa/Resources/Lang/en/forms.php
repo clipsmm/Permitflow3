@@ -11,5 +11,6 @@ return [
     'country_of_application' => 'Where are you making this application from',
     'passport_photo' => 'Passport-Size Photograph(500px by 500px)',
     'passport_bio' => 'Passport Bio Data Attachment',
-    'additional_documents' => 'Additional Documents'
+    'additional_documents' => 'Additional Documents',
+    'import_existing' => 'Import data from my last application'
 ];

@@ -4,23 +4,23 @@
         <div class="panel-heading p-t-10">
             <ul class="nav nav-tabs">
                 <li class="{{ menu_current_route('backend.tasks.queue') }}"><a
-                            href="{{ route('backend.tasks.queue', [$module->slug]) }}">Queued
-                        <span class="label label-default"> 0</span></a>
+                            href="{{ route('backend.tasks.queue', [$module->slug]) }}"> @lang('Queued')
+                        <span class="label label-default"> {{ array_get($task_stats,'queue',0) }}</span></a>
                 </li>
                 <li class="{{ menu_current_route('backend.tasks.inbox') }}"><a
-                            href="{{ route('backend.tasks.inbox', [$module->slug]) }}">My
-                        Task <span class="label label-default"> 0</span></a>
+                            href="{{ route('backend.tasks.inbox', [$module->slug]) }}"> @lang('My Tasks') <span class="label label-default"> {{ array_get($task_stats,'inbox',0) }} </span></a>
                 </li>
                 <li class="{{ menu_current_route('backend.tasks.corrections') }}"><a
-                            href="{{ route('backend.tasks.corrections', [$module->slug]) }}">Awaiting
-                        Corrections <span class="label label-default"> 0</span></a>
+                            href="{{ route('backend.tasks.corrections', [$module->slug]) }}">
+                        @lang('Awaiting Corrections') <span class="label label-default"> {{ array_get($task_stats,'corrections',0) }} </span></a>
                 </li>
                 <li class="{{ menu_current_route('backend.tasks.outbox') }}"><a
-                            href="{{ route('backend.tasks.outbox', [$module->slug]) }}">completed
-                        <span class="label label-default"> 0</span></a>
+                            href="{{ route('backend.tasks.outbox', [$module->slug]) }}"> @lang('Completed')
+                        <span class="label label-default"> {{ array_get($task_stats,'completed',0) }} </span></a>
                 </li>
             </ul>
         </div>
+
         <div class="panel-body padding-0">
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="tab1default">
@@ -53,6 +53,8 @@
                                     <tr>
                                         <th>Service</th>
                                         <th class="hidden-xs hidden-sm">Ref no.</th>
+                                        <th>@lang('Submitted By')</th>
+                                        <th>@lang('Date Submitted')</th>
                                         <th class="hidden-xs">Action</th>
                                     </tr>
                                     </thead>
@@ -65,6 +67,8 @@
                                                 <small class="hidden-md hidden-lg">{{ $task->application->application_number }}</small>
                                             </td>
                                             <td class="hidden-xs hidden-sm">{{ $task->application->application_number }}</td>
+                                            <td>{{ $task->application->user }}</td>
+                                            <td>{{ $task->application->submitted_at }}</td>
                                             <td>
                                                 <a href="{{ route('backend.tasks.show',[$module->slug, $task->id]) }}"
                                                    class="btn btn-xs btn-primary">

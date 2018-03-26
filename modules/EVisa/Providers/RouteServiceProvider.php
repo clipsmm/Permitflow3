@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'Modules\EVisa\Http\Controllers';
+    protected $api_namespace = 'Modules\EVisa\Http\Controllers\Api';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -52,6 +53,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::group([
+            'as' => 'e-visa.',
+            'prefix' => 'e-visa',
             'middleware' => 'web',
             'namespace'  => $this->namespace,
         ], function ($router) {
@@ -69,9 +72,10 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::group([
+            'as' => 'e-visa.api.',
             'middleware' => 'api',
-            'namespace'  => $this->namespace,
-            'prefix'     => 'api',
+            'namespace'  => $this->api_namespace,
+            'prefix'     => '/e-visa/api',
         ], function ($router) {
             require module_path('e-visa', 'Routes/api.php');
         });

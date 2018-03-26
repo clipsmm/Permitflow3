@@ -58,4 +58,20 @@ class Role extends Model implements \Spatie\Permission\Contracts\Role
         }));
 
     }
+
+    /**
+     * Find a role by its id and guard name.
+     * @param int $id
+     * @param string|null $guardName
+     *
+     * @return \Spatie\Permission\Contracts\Role
+     *
+     * @throws \Spatie\Permission\Exceptions\RoleDoesNotExist
+     */
+    public static function findById(int $id, $guardName): \Spatie\Permission\Contracts\Role
+    {
+        return self::where('id', $id)
+            ->where('guard_name', $guardName)
+            ->first();
+    }
 }

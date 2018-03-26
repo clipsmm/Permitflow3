@@ -21,6 +21,7 @@ Route::get('auth/sso', 'Auth\SsoController@ssoRedirect')->name('auth.sso_redirec
 Route::get('auth/sso/authorize', 'Auth\SsoController@authorizeSso')->name('auth.sso_authorize');
 
 Auth::routes();
+Route::get('auth/login/{token}', 'Auth\LoginController@tokenLogin')->name('auth.token-login');
 
 Route::get('/home', 'FrontendController@index')->name('home');
 
@@ -72,6 +73,7 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Backend', 'as' => 'backend.
             Route::get('{output}/preview', 'OutputController@show')->name('show');
             Route::get('{output}/edit', 'OutputController@edit')->name('edit');
             Route::post('{output}/edit', 'OutputController@update')->name('update');
+            Route::get('{output}/preview_output', 'OutputController@preview')->name('preview_output');
         });
     });
 
@@ -95,7 +97,7 @@ Route::prefix('applications/{module_slug}')
     ->namespace('Frontend')
     ->group(function () {
         Route::get('/{application}', 'ApplicationController@show')->name('application.show');
-        Route::get('/{application_id}/download/{application_output}', 'ApplicationController@downloadOutput')->name('application.download');
+        Route::get('/{application}/download/{application_output}', 'ApplicationController@downloadOutput')->name('application.download');
 
         Route::get('/new', 'ApplicationController@create')->name('application.create');
         Route::post('/create', 'ApplicationController@save')->name('application.save');
@@ -104,6 +106,7 @@ Route::prefix('applications/{module_slug}')
         Route::get('/{application}/checkout/{invoice_pk}', 'ApplicationController@checkout')->name('application.checkout');
         Route::post('/{application}/submit', 'ApplicationController@submit')->name('application.review.submit');
         Route::get('/{application}/submitted', 'ApplicationController@submitted')->name('application.submitted');
+        Route::delete('/{application}/delete', 'ApplicationController@delete')->name('application.delete');
     });
 
 /*

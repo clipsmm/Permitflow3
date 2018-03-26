@@ -5,8 +5,7 @@ namespace Modules\Evisa\Listeners;
 use App\Events\ApplicationSubmitted;
 use App\Events\PaymentCompleted;
 use App\Models\Task;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Modules\EVisa;
 
 class EvisaApplicationSubmittedHandler
 {
@@ -30,6 +29,6 @@ class EvisaApplicationSubmittedHandler
     {
         ///create passport review task
         $application =  $event->payment->invoice->application;
-        Task::create_task($application->id, "Evisa Review Task",'review','pending');
+        Task::create_task($application->id, array_get(Evisa::getVisaTypes(), $application->get_data('visa_type')),'review','pending');
     }
 }

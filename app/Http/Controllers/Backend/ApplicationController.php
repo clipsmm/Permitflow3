@@ -23,7 +23,7 @@ class ApplicationController extends Controller
 
         return view('backend.applications.index',[
             'applications' => $applications
-        ]);
+        ])->with('page_title', __('Applications'));
     }
 
     public function viewModuleApplication(Request $request, $module, Application $application)
@@ -33,7 +33,7 @@ class ApplicationController extends Controller
 
         return view('backend.applications.view',[
             'application' => $application
-        ]);
+        ])->with('page_title', $application->application_number.__(" - Application Details"));
 
     }
 }

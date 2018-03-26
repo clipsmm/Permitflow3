@@ -26,7 +26,7 @@ class AddCompleteToApplications extends Migration
     public function down()
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->dropColumn('column');
+            $table->dropColumn('complete');
         });
     }
 }

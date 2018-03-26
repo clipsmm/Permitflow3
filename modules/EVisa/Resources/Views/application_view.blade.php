@@ -1,215 +1,201 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">@lang('e-visa::common.single_entry_visa')</h3>
+        <h3 class="panel-title">
+            @lang('VISA INFORMATION:')
+        </h3>
     </div>
-    <div class="panel-body">
-        <table class="table table-hover table-special table-striped">
+    <div class="panel-body no-padding ">
+        <table class="table table-hover table-special table-striped m-b-0">
+            <thead>
+            <tr>
+                <th>@lang('VISA TYPE')</th>
+                <th>@lang('REF NO')</th>
+                <th>@lang('DATE OF ISSUE')</th>
+                <th>@lang('EXPIRY DATE')</th>
+            </tr>
+            </thead>
             <tbody>
             <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Where are you making this application from?</h1>
-                </td>
-                <td class="hidden-xs hidden-sm">{{ array_get($lookup_data['country_codes'], $model->country_of_application) }}</td>
+                <td>{{array_get(Modules\Evisa::getVisaTypes(), $model->visa_type)}}</td>
+                <td>{{ $application->application_number }}</td>
+                <td>{{ $application->get_data('date_of_issue','') }}</td>
+                <td>{{ $application->get_data('passport_date_of_expiry','') }}</td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            @lang('VISITOR INFORMATION:')
+        </h3>
+    </div>
+    <div class="panel-body no-padding">
+        <table class="table table-bordered m-b-0" style="border-top: 0 !important;">
+
+            <tbody>
+
+            <tr class=' '>
+                <td width="25%" style="vertical-align: middle !important;">
+                    <div class="thumbnail no-border m-t-0 m-b-5 m-l-5 m-r-0">
+                        <img class="img-responsive hidden-xs"
+                             src="{{ $application->get_data('passport_photo', null) && gettype($application->get_data('passport_photo')) == 'string' ? asset($application->get_data('passport_photo', '')) : asset('images/person.png') }}">
+                    </div>
+                </td>
+                <td width="75%" class="no-padding" style="border-top: 0 !important;">
+                    <table class="table m-b-0" >
+                        <tbody>
+
+                        <tr class=' '>
+                            <td class="text-uppercase " align="left"><b>@lang("Full Name")
+                                    : </b> {{ $application->get_data('other_names') }} {{ $application->get_data('surname') }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase " align="left"><b>@lang("Date of Birth")
+                                    : </b> {{ $application->get_data('date_of_birth') }} </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase" align="left"><b>@lang("Passport No.")
+                                    : </b> {{ $application->get_data('passport_number') }}</td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase" align="left"><b>@lang("Nationality")
+                                    : </b> {{ array_get($lookup_data['country_codes'], $model->nationality)  }}</td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase" align="left"><b>@lang("Gender")
+                                    : </b> {{ $application->get_data('gender')  }}</td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase" align="left"><b>@lang("Passport Date of Issue")
+                                    : </b> {{ $application->get_data('passport_date_of_issue') }}</td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase" align="left"><b>@lang("Passport Place of Issue")
+                                    : </b> {{ $application->get_data('passport_place_of_issue')  }}</td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase" align="left"><b>@lang("Passport Expiry Date")
+                                    : </b> {{ $application->get_data('passport_date_of_expiry') }}</td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase" align="left"><b>@lang("Passport Issued By")
+                                    : </b> {{ $application->get_data('passport_issued_by') }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">@lang('e-visa::common.traveler_info')</h3>
     </div>
     <div class="panel-body">
-        <table class="table table-hover table-special table-striped">
+        <table class="table table-bordered">
             <tbody>
             <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Surname / Family Name:</h1>
+                <td class="no-padding" width="50%">
+                    <table class="table m-b-0">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase">@lang("Traveler Information")</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang('Place of Birth'):</b> {{ $application->get_data('place_of_birth') }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Country of Birth")
+                                    :</b> {{ array_get($lookup_data['country_codes'], $model->country_of_birth)  }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Current Occupation")</b> {{ $application->get_data('occupation') }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Father's Name"): </b>{{ $application->get_data('fathers_name') }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Mothers Name"):</b> {{ $application->get_data('mothers_name') }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Spouse Name"):</b> {{ $application->get_data('spouse_name') }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </td>
-                <td class="hidden-xs hidden-sm">{{ $application->get_data('surname') }}</td>
+                <td class="no-padding" width="50%">
+                    <table class="table m-b-0">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase">@lang("Nationality and Residence")</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Current Nationality")
+                                    :</b> {{ array_get($lookup_data['country_codes'], $model->nationality)  }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Country of Residence")
+                                    :</b> {{ array_get($lookup_data['country_codes'], $model->country_of_residence)  }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Residential Address")
+                                    :</b> {{ $application->get_data('physical_address') }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Phone Number"): </b> {{ $application->get_data('phone_number') }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("City / Town"):</b> {{ $application->get_data('city') }}
+                            </td>
+                        </tr>
+                        <tr class=' '>
+                            <td class="text-uppercase">
+                                <b>@lang("Email"): </b> {{$application->get_data('email') }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
             </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Other Names in Full:</h1>
-                </td>
-                <td class="hidden-xs hidden-sm">{{ $application->get_data('other_names') }}</td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Gender</h1>
-                </td>
-                <td class="hidden-xs hidden-sm">{{ $application->get_data('gender') }}</td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Date of Birth</h1>
-                </td>
-                <td>
-                    <a href="#" class="btn btn-xs btn-default">
-                        {{ $application->get_data('date_of_birth') }}
-                    </a>
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Place of Birth</h1>
-                </td>
-                <td>
-                    {{ $application->get_data('place_of_birth') }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Country of Birth</h1>
-                </td>
-                <td>
-                    {{ array_get($lookup_data['country_codes'], $model->country_of_birth)  }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Current occupation</h1>
-                </td>
-                <td>
-                    {{ $application->get_data('occupation') }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Fathers Name</h1>
-                </td>
-                <td>
-                    {{ $application->get_data('fathers_name') }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Mothers Name</h1>
-                </td>
-                <td>
-                    {{ $application->get_data('mothers_name') }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Spouse Name</h1>
-                </td>
-                <td>
-                    {{ $application->get_data('spouse_name') }}
-                </td>
-            </tr>
+
             </tbody>
         </table>
     </div>
 </div>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">@lang('Nationality and Residence')</h3>
-    </div>
-    <div class="panel-body">
-        <table class="table table-hover table-special table-striped">
-            <tbody>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Current Nationality</h1>
-                </td>
-                <td class="hidden-xs hidden-sm">
-                    {{ array_get($lookup_data['country_codes'], $model->nationality)  }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Country of Residence</h1>
-                </td>
-                <td class="hidden-xs hidden-sm">
-                    {{ array_get($lookup_data['country_codes'], $model->country_of_residence)  }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Physical address in the Country of Residence</h1>
-                </td>
-                <td class="hidden-xs hidden-sm">{{ $application->get_data('physical_address') }}</td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Phone Number</h1>
-                </td>
-                <td>
-                    <a href="#" class="btn btn-xs btn-default">
-                        {{ $application->get_data('phone_number') }}
-                    </a>
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>City / Town</h1>
-                </td>
-                <td>
-                    {{ $application->get_data('city') }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Email</h1>
-                </td>
-                <td>
-                    {{$application->get_data('email') }}
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">@lang('Passport / Travel Documents')</h3>
-    </div>
-    <div class="panel-body">
-        <table class="table table-hover table-special table-striped">
-            <tbody>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Passport Number </h1>
-                </td>
-                <td class="hidden-xs">
-                    {{ $model->passport_number }}
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Place of issue</h1>
-                </td>
-                <td class="hidden-xs hidden-sm">{{ $application->get_data('passport_place_of_issue') }}</td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Date of Issue</h1>
-                </td>
-                <td class="hidden-xs hidden-sm">{{ $application->get_data('passport_date_of_issue') }}</td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Expiry date</h1>
-                </td>
-                <td>
-                    <a href="#" class="btn btn-xs btn-default">
-                        {{ $application->get_data('passport_date_of_expiry') }}
-                    </a>
-                </td>
-            </tr>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Issued by</h1>
-                </td>
-                <td>
-                    {{  $application->get_data('passport_issued_by')  }}
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">@lang('Travel Information')</h3>
@@ -217,14 +203,16 @@
     <div class="panel-body">
         <table class="table table-hover table-special table-striped">
             <tbody>
-            <tr class=' '>
-                <td class="big-data width-40">
-                    <h1>Reason For Travel </h1>
-                </td>
-                <td class="hidden-xs hidden-sm">
-                    {{ $application->get_data('travel_reason') ? array_get($lookup_data['travel_reasons'], $application->get_data('travel_reason')) : ''  }}
-                </td>
-            </tr>
+            @if($application->get_data('visa_type')  != 'transit_visa')
+                <tr class=' '>
+                    <td class="big-data width-40">
+                        <h1>Reason For Travel </h1>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+                        {{ $application->get_data('travel_reason') ? array_get($lookup_data['travel_reasons'], $application->get_data('travel_reason')) : ''  }}
+                    </td>
+                </tr>
+            @endif
             @if($model->travel_reason == 'other')
                 <tr class=' '>
                     <td class="big-data width-40">
@@ -398,7 +386,8 @@
                     </h1>
                 </td>
                 <td class="hidden-xs hidden-sm">
-                    <a href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_photo.path')])}}">
+                    <a target="_blank"
+                       href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_photo.path')])}}">
                         {{ $application->get_data('passport_photo.file_name') }}
                     </a>
                 </td>
@@ -411,8 +400,10 @@
                 </td>
                 <td class="hidden-xs hidden-sm">
                     @foreach($application->get_data('additional_documents', []) as $doc)
-                        <a href="{{route('frontend.applications.download_attachment', ['attachment' => $doc['path']])}}">
-                            {{ $doc['file_name'] }}
+                        {{array_get($doc, 'name')}}:
+                        <a target="_blank"
+                           href="{{route('frontend.applications.download_attachment', ['attachment' => array_get($doc, 'file.path')])}}">
+                            {{ array_get($doc, 'file.file_name') }}
                         </a>
                         <br>
                     @endforeach
@@ -425,7 +416,8 @@
                     </h1>
                 </td>
                 <td class="hidden-xs hidden-sm">
-                    <a href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_bio.path')])}}">
+                    <a target="_blank"
+                       href="{{route('frontend.applications.download_attachment', ['attachment' => $application->get_data('passport_bio.path')])}}">
                         {{ $application->get_data('passport_bio.file_name')}}
                     </a>
                 </td>

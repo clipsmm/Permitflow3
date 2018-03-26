@@ -17,9 +17,10 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Modules\EVisa\Models\EntryPoint;
-use Modules\EVisa\Models\EVisa;
+use Modules\EVisa\Models\Visa;
 use Validator;
 
 class ApplicationController extends Controller
@@ -53,7 +54,7 @@ class ApplicationController extends Controller
 
     protected function getOrCreateFromSession()
     {
-        return new EVisa(session()->get($this->guest_app_session_key, []));
+        return new Visa(session()->get($this->guest_app_session_key, []));
     }
 
     public function save(Request $request)
@@ -82,10 +83,9 @@ class ApplicationController extends Controller
         }
         //create dummy user account
         $user = User::firstOrCreate(['email' => array_get($form_data, 'email')]);
-        $data = $this->mergeWithPreviousApplication($form_data, $user);
 
         //save application and send notification
-        $application = Application::insertRecord($this->module, $data, $user);
+        $application = Application::insertRecord($this->module, $data, $user, Application::TEMPORARY);
         $this->sendEmailToUser($user, $application);
 
         session()->put($this->guest_app_id, $application->id);
@@ -110,7 +110,16 @@ class ApplicationController extends Controller
                 'date_of_departure', 'arrival_by', 'entry_point', 'places_to_visit', 'passport_bio', 'passport_photo', 'additional_documents']);
             $form_data = array_merge($previous_data, $form_data);
         }
+
         return $this->module->toFormData($form_data);
+    }
+
+    public function resendEmail(Request $request)
+    {
+        $application = Application::with('user')->findOrFail(session($this->guest_app_id));
+        $this->sendEmailToUser($application->user, $application);
+
+        return response()->json(['status' => 'ok']);
     }
 
     private function sendEmailToUser($user, $application)
@@ -139,25 +148,15 @@ class ApplicationController extends Controller
     public function resumeGuestApplication(Request $request)
     {
         $app_number = trim($request->application_number);
-        $recaptcha = $request->get('g-recaptcha-response');
+        $import = $request->get('import_existing', false);
 
-        $application = $this->authorizeResumption($request);
+        $application = Application::getByHashId($request->route('return_code'));
 
         $validator = Validator::make($request->all(), [])
             ->after(function ($v) use ($application, $app_number) {
                 //validate application number
                 if (strtolower($app_number) != strtolower($application->application_number)) {
                     $v->errors()->add('application_number', __('Application Reference Number not matching'));
-                }
-            })
-            ->after(function ($v) use ($recaptcha, $request) {
-                $user_pi = $request->ip();
-                //validate recaptcha
-                $client = new Client();
-                $response = json_decode($client->post(config('app.recaptcha_api'), ['response' => $recaptcha,
-                    'secret' => env('RECAPTCHA_SECRET'), 'remoteip' => $user_pi])->getBody());
-                if (!$response->success) {
-                    //$v->errors()->add('recaptcha', 'Recaptcha validation failed');
                 }
             });
 
@@ -167,14 +166,21 @@ class ApplicationController extends Controller
 
         //login this user then let him edit the appliction
         auth()->login($application->user);
+
+        //update the application
+        $form_data = $application->form_data;
+        if($import){
+            $form_data = $this->mergeWithPreviousApplication($form_data, $application->user);
+        }
+
+        $application->update(['status' => Application::DRAFT, 'form_data' => $form_data]);
         return redirect()->route('e-visa.application.edit', ['application_id' => $application->id, 'step' => $this->max_temp_steps + 1]);
     }
 
     private function authorizeResumption($request)
     {
         $return_code = $request->route('return_code');
-        $app_id = \Hashids::decode($return_code);
-        $application = Application::findOrFail($app_id[0]);
+        $application = Application::getByHashId($return_code, Application::whereStatus(Application::TEMPORARY));
         $expiry = $application->created_at->addHours($this->expiry_time);
 
         if ($expiry->lt(Carbon::now())) {
@@ -201,7 +207,8 @@ class ApplicationController extends Controller
 
     public function update(Application $application, Request $request)
     {
-        $validator = $this->module->getValidator($request, $this->current_step);
+        $data = array_merge($application->form_data, $request->all());
+        $validator = $this->module->makeValidator($data, $this->current_step);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -217,7 +224,8 @@ class ApplicationController extends Controller
             ]);
         }
 
-        $this->updateUserDetails($application);
+        // todo: handle this better
+        //$this->updateUserDetails($application);
 
         return redirect()->route('application.review', ['application' => $application, 'module_slug' => $this->module->slug]);
     }

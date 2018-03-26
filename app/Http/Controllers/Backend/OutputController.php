@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Application;
 use App\Models\Output;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,13 +16,15 @@ class OutputController extends Controller
 
         return view('backend.outputs.index',[
             'outputs' => $outputs
-        ]);
+        ])->with("page_title", __("Outputs"));
     }
 
     public function create(Request $request, $module)
     {
         return view('backend.outputs.new');
     }
+
+
 
     public function store(Request $request, $module)
     {
@@ -54,7 +57,7 @@ class OutputController extends Controller
     {
         return view('backend.outputs.edit', [
             'output' => $output
-        ]);
+        ])->with("page_title", __("Edit Output"));
     }
 
 
@@ -79,5 +82,12 @@ class OutputController extends Controller
             ->with('alerts', [
                 ['type' => 'success', 'message' => __('messages.output_updated')]
             ]);
+    }
+
+    public function preview(Request $request, $module, Output $output)
+    {
+        $sample  = $output->application_outputs()->whereCode($output->code)->first();
+
+        return $module->render_output_preview($sample);
     }
 }

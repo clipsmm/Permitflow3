@@ -103,6 +103,9 @@ return [
     |
     */
     'full_phone' => "The phone number format you entered is incorrect.",
+    "phone" => "The :attribute field contains an invalid number.",
+    "title" => "The :attribute field must not special characters.",
+    "file_exists" => "The :attribute is invalid because the file was not uploaded",
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',

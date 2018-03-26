@@ -186,6 +186,13 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Radic\BladeExtensions\BladeExtensionsServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
+        Propaganistas\LaravelPhone\PhoneServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
 
         /*
@@ -196,8 +203,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\ViewServiceProvider::class
-
+        App\Providers\ViewServiceProvider::class,
     ],
 
     /*
@@ -254,6 +260,12 @@ return [
         'Countries'=> PragmaRX\Countries\Facade::class,
         'Setting' => anlutro\LaravelSettings\Facade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 

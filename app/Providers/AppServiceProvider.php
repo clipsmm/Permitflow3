@@ -21,6 +21,29 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('fileUpload', function ($attribute, $value, $params, $validator) {
             return $this->uploadValidator($attribute, $value, $params, $validator);
         });
+
+        Validator::extend('full_phone', function ($attribute, $value, $parameters, $validator) {
+            try {
+                //ensure phone number is numeric
+                //if (!is_numeric($value)) return false;
+                $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+                $phone  =  $phoneUtil->parse($value, 'KE');
+
+                return $phoneUtil->isValidNumber($phone);
+            } catch (\Exception $ex) {
+                return false;
+            }
+        });
+        /**
+         * Validate no special characters
+         */
+        \Validator::extend('title', function($attribute, $value, $parameters, $validator) {
+            return !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬]/', $value);
+        });
+
+        Validator::extend('file_uploaded', function ($attribute, $value, $parameters, $validator) {
+            return file_exists(public_path($value));
+        });
     }
 
     public function loadModules()

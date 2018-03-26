@@ -13,8 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('auth/login', 'Auth\ApiAuthController@login');
+
+Route::group(['middleware' => ['jwt.auth']], function(){
+    //put routes that require api authentication here
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('upload-image',"MediaController@updatePhotoCrop");
 
 Route::get('payment-notification', 'PaymentController@paymentNotification')->name('payment.notification');

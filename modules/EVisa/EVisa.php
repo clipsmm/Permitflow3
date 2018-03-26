@@ -9,6 +9,8 @@
 namespace Modules;
 
 use App\Events\ApplicationSubmitted;
+use App\Models\Application;
+use App\Models\ApplicationOutput;
 use App\Models\Invoice;
 use App\Models\Task;
 use Carbon\Carbon;
@@ -18,12 +20,13 @@ use App\Modules\BaseModule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Modules\EVisa\FormValidator;
+use Modules\EVisa\Models\EntryPoint;
 use Modules\EVisa\TaskHandler;
 use Modules\Evisa\Listeners\EvisaApplicationSubmittedHandler;
 
 class EVisa extends BaseModule implements ModuleInterface
 {
-    public $modelClass = \Modules\EVisa\Models\EVisa::class;
+    public $modelClass = \Modules\EVisa\Models\Visa::class;
 
     /**
      * Module specific event /listener pairs
@@ -44,8 +47,15 @@ class EVisa extends BaseModule implements ModuleInterface
                 'feedback' => true
             ],
             'approve' => [
-                'color' => 'primary',
-                'name' => 'Approve',
+                'method' => 'post',
+                'label' => 'Approve',
+                'icon' => 'fa fa-check',
+                'confirm' => 'Are you sure you want to approve application?',
+                'classes' => 'btn btn-sm btn-primary',
+                'data' => [
+                    'action' => 'approve'
+                ],
+                'url' => ''
             ]
         ]
     ];
@@ -103,8 +113,10 @@ class EVisa extends BaseModule implements ModuleInterface
     public static function getVisaTypes()
     {
         return [
-            'single_entry' => __('e-visa::common.single_entry_visa'),
-            'transit_visa' => __('Transit Visa')
+            'multiple_entry_visa' => __("Multiple Entry Visa"),
+            'single_entry' => __('Single Entry Visa'),
+            'transit_visa' => __('Transit Visa'),
+            'tourist_visa' => __('East Africa Tourist Visa'),
         ];
     }
 
@@ -141,7 +153,7 @@ class EVisa extends BaseModule implements ModuleInterface
         $cost = settings($this->slug.".costs.".$application->get_data('visa_type'), 0);
 
         if (!$cost){
-            Task::create_task($application->id, "Evisa Review Task",'review','pending');
+            Task::create_task($application->id, array_get(self::getVisaTypes(), $application->get_data('visa_type')),'review','pending');
             return null;
         }
 
@@ -167,27 +179,30 @@ class EVisa extends BaseModule implements ModuleInterface
             [
                 'name' => __('e-visa::menus.tasks'),
                 'action' => route('backend.tasks.queue', $this->slug),
-                'icon' => 'fa fa-tasks',
-                'type' => 'success'
+                'icon' =>   asset('images/task4.svg'),
+                'type' => 'task-img'
             ],
             [
                 'name' => __('e-visa::menus.applications'),
                 'action' => route('backend.applications.index', $this->slug),
-                'icon' => 'fa fa-pencil-square-o',
-                'type' => 'primary'
+                'icon' => asset('images/applications.svg'),
+                'type' => 'task-img'
             ],
             [
                 'name' => __('labels.outputs'),
                 'action' => route("backend.outputs.index", $this->slug),
-                'icon' => 'fa fa-newspaper-o',
-                'type' => 'danger'
+                'icon' => asset('images/reports.svg'),
+                'type' => 'task-img'
             ],
             [
                 'name' => __('e-visa::menus.settings'),
                 'action' => route('e-visa.settings.all'),
-                'icon' => 'fa fa-cogs',
-                'type' => 'info'
+                'icon' => asset('images/settings.svg'),
+                'type' => 'task-img'
             ],
+
+
+
         ];
     }
 
@@ -208,12 +223,35 @@ class EVisa extends BaseModule implements ModuleInterface
     public function authorizeTask($task, $user)
     {
         return true;
-//        switch ($task->stage) {
-//            case 'review':
-//                return $user->hasAnyPermission([
-//                    permission_name('approve_application', 'e-visa'),
-//                    permission_name('reject_application', 'e-visa')
-//                ]);
-//        }
+    }
+
+    public function loadOutputData($output)
+    {
+        switch($output->code){
+            case 'EVISA-OUTPUT':
+                return [
+                    'entry_points' => EntryPoint::all(),
+                    'country_codes' => \Countries::all()->pluck('name.common', 'cca2'),
+                    'travel_reasons' => self::getTravelReasons()
+                ];
+        }
+
+        return [];
+    }
+
+    public function canDeleteApplication($application){
+        return $application->status == Application::TEMPORARY;
+    }
+
+    public function render_output_preview(ApplicationOutput $sample)
+    {
+        $model = $this->fromFormData($sample->application->form_data);
+
+        return view("{$this->slug}::outputs.output_preview", [
+            'output' => $sample,
+            'application' => $sample->application,
+            'model' => $model,
+            'lookup_data' => $this->loadLookupData($model)
+        ]);
     }
 }

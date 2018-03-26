@@ -60,6 +60,7 @@ tr.has-error {
 
 .panel-title {
     margin-top: 3px;
+    font-size: 14px;
 }
 
 h1.applicant-name {
@@ -84,7 +85,7 @@ h1.applicant-name {
 
 
 /*End Permitflow Pro*/
-pm
+
 
 /*-------Modal -----------------------------------------*/
 
@@ -3082,7 +3083,7 @@ h4.modal-header {
 
 .panel-form .form-group, .panel-form .row {
     margin-bottom: 0px;
-    padding: 15px 5px;
+    padding: 15px 20px;
     border-bottom: 1px solid #eee;
 }
 
@@ -3103,12 +3104,12 @@ h4.modal-header {
 }
 
 .panel-form .form-control {
-    /*background: #f2f2f2;*/
+    background: #fff;
     box-shadow: none;
  /*   -webkit-border-radius: 2px !important;
     -moz-border-radius: 2px !important;
     border-radius: 2px !important;*/
-        /*color: #999aa6;*/
+        color: #999aa6;
 }
 
 .panel-form .form-control:focus {
@@ -3460,6 +3461,10 @@ h4.modal-header {
 
 .nav-tabs>li>a {
     font-size: 12px;
+    font-size: 14px;
+    /* letter-spacing: 2px; */
+    /* text-transform: uppercase; */
+    color: #555 !important;
 }
 
 .service-box {
@@ -3524,18 +3529,19 @@ h4.modal-title {
 
 .panel-form h3 {
     margin-top: 0px;
-    font-size: 13px;
-    color: #000;
+    font-size: 14px;
+    color: #555;
     border-bottom: 0px solid #eee;
     padding: 0px 0 0px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    /* text-transform: uppercase; */
+    letter-spacing: 0px;
+    font-weight: 500;
 }
 
 
 .panel-form .form-group, .panel-form .row {
     margin-bottom: 0px;
-    padding: 7px 5px;
+    padding: 7px 10px;
     border-bottom: 1px solid #eee;
 }
 
@@ -3597,22 +3603,41 @@ h4.modal-title {
 
 .visa-types .panel-heading h3 {
     text-align: center;
-    font-weight: 100;
     padding: 0;
-    font-weight: 100;
-    font-size: 21px;
+  color: #555;
+    letter-spacing: 2px;
+    font-size: 20px;
     text-transform: uppercase;
-    color: #000;
+    letter-spacing: 1px;
+    text-shadow: none;
+    font-weight: 900;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
 .visa-types p {
-    font-size: 15px;
+    font-size: 12px;
     letter-spacing: 1px;
-    font-weight: 100;
-    padding: 19px 25px 0px;
-    color: #000;
+    font-weight: 500;
+    padding: 5px 25px 0px;
+    color: #555;
     text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+
+}
+
+
+.visa-types .box p {
+font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    padding: 20px 10px 0px;
+    color: #555;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 1px;
+
 }
 
 
@@ -3730,13 +3755,13 @@ h4.modal-title {
 
 
 .carousel-caption h4 {
-    font-size: 30px;
+   font-size: 22px;
     text-transform: uppercase;
-    letter-spacing: 0px;
-    max-width: 66%;
-    line-height: 39px;
+    letter-spacing: 1px;
+    max-width: 50%;
+    line-height: 28px;
     text-shadow: none;
-    font-weight: 700;
+    font-weight: 900;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -3778,19 +3803,22 @@ h4.modal-title {
 
 
 .footer-bottom p {
-    font-size: 11px;
-    padding: 10px 0;
+    font-size: 9px;
+    padding: 19px 0;
     text-align: center;
     margin: 0;
     color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
-
 .footer-bottom {
-    background: #E3E3E3;
-    border-top: 1px solid #DDDDDD;
+    background: #ddd;
+    border-top: 0px solid #DDDDDD;
     padding-top: 10px;
     padding-bottom: 10px;
-    margin: 10px 0 0 0;
+    margin: 0px 0 0 0;
+    border-radius: 0 0 10px 10px;
+    /* color: #fff !important; */
 }
 
 
@@ -3880,7 +3908,9 @@ h4.modal-title {
 
 
 /*Form Wizard*/
-.bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
+.bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;
+ display: none;
+}
 .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
 .bs-wizard > .bs-wizard-step .bs-wizard-stepnum {
@@ -3961,6 +3991,11 @@ h4.modal-title {
    text-align: center;
 }
 
+
+    .pricing p{text-align: left;
+    padding: 10px 10px 10px 20px;
+    }
+
 .pricing-active {
   border: 3px solid #36d7ac;
   margin-top: -10px;
@@ -4003,6 +4038,23 @@ h4.modal-title {
     /* margin: 20px; */
 }
 
+
+.panel-landing {
+    background-color: #efefef !important;
+}
+
+
+.pricing-head h5 {
+    font-weight: 100;
+    color: #fff;
+    padding: 12px 0;
+    font-size: 15px;
+    background: #31708f;
+    border-bottom: solid 1px #286090;
+    letter-spacing: 1px;
+        margin-top: 0;
+}
+
 .pricing-head h4 {
   color: #bac39f;
   padding: 5px 0;
@@ -4032,11 +4084,17 @@ h4.modal-title {
 
 /*Pricing Content*/
 .pricing-content li {
-  color: #888;
-  font-size: 12px;
-  padding: 7px 15px;
-  border-bottom: solid 1px #f5f9e7;
+    color: #888;
+    font-size: 12px;
+    padding: 11px 15px;
+    border-bottom: solid 1px #f5f9e7;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #555;
+    font-size: 13px;
+    letter-spacing: 0px;
 }
+
 
 /*Pricing Footer*/
 .pricing-footer {
@@ -4084,8 +4142,6 @@ h4.modal-title {
 
 
 
-
-
 @media (min-width: 768px){
   .seven-cols .col-md-1,
   .seven-cols .col-sm-1,
@@ -4115,10 +4171,73 @@ h4.modal-title {
   }
 }
 
-.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
-    color: #5e5e5e !important;
-    background-color: transparent !important;
+
+
+
+
+.panel-heading {
+    padding: 15px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
+
+
+.panel-title2 {
+   padding: 10px 0 20px 11px;
+   margin: 0;
+  font-weight: 500;
+    color: #555;
+    font-size: 14px;
+    
+}
+
+.panel {
+    background-color: #ffffff;
+}
+
+
+p {
+    margin: 0 0 10px;
+    font-weight: 500;
+    color: #555;
+    font-size: 13px;
+}
+
+
+.navbar-brand>img {
+    display: block;
+    width: 44px;
+}
+
+
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 3px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+
+.head-title {
+    float: left;
+    color: #ccc;
+    padding: 13px 0 0 3px;
+    LETTER-SPACING: 1px;
+    font-size: 13px;
+    line-height: 14px;
+}
+
+
+.thin {
+    font-weight: 100;
+    font-size: 8px;
+}
+
+
+
+
 
 .green-border{background: #fff;
     border: 1px solid #5cb85c !important;
@@ -4126,22 +4245,172 @@ h4.modal-title {
     color: #797979;
 }
 
-.iti-flag {background-image: url("images/flags.png");}
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-    .iti-flag {background-image: url("images/flags@2x.png");}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** notifications **/
+.notify {
+    padding: 12px 18px;
+    text-align: center;
+}
+
+.notify h1 { margin-bottom: 6px; }
+
+.successbox h1 {
+    color: #5cb85c;
+    font-size: 26px;
+    line-height: 50px;
+}
+.errorbox h1 {
+    color: #ff0000;
+    font-size: 26px;
+    line-height: 50px;
+}
+
+
+
+.notify .alerticon { 
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+
+.alert-success {
+    background-color: #f1f9f7;
+    border-color: #e0f1e9;
+    color: #1d9d74;
+}
+
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+
+.notify2 {
+    padding:0;
+    text-align: center;
+    background: #f5f5f5;
+    width: 48%;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+
+.icon-box{
+    background: #3ec59d;
+    padding: 50px;
+    border-radius: 4px 4px 0 0;
+    }
+
+
+    .icon-box2{
+    background: #3ec59d;
+    padding: 50px;
+    border-radius: 4px 4px 0 0;
+    }
+
+
+
+    .notify2 h1 {
+    color: #555;
+    font-size: 19px;
+    line-height: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+.mesage-box{
+    padding: 22px 0 30px;
+    }
+
+
+        .notify p{padding: 20px 0 0;
+    font-size: 19px;
+    font-weight: 100;
 }
 
 
 
 
-/*END Form Wizard*/
 
 
-/*.modal .form-group label {
-    color: #666;
-    margin: 0 0 8px 0;
-}*/
+
+
+
+.task-icon{
+text-align: center;
+display: inline-block;
+margin: 0 10px;
+color: #555;
+    font-size: 12px;
+}
+
+.task-img{
+ display: block;
+     padding: 0 0 4px 0;
+}
+
+.task-img img{
+ width: 30px
+}
+
+
+.task-icon2 {
+    float: left;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.task-img2 {
+    display: inline;
+    padding: 0 0 4px 0;
+}
+
+
+.task-img2 img{
+ width: 40px
+}
+
+
+
+
+
+
+
+
+/*@media (min-width: 576px) {
+  .panel-title2 {
+   color: #555;
+    padding: 10px 0 20px 11px;
+    font-size: 13px;
+    margin: 0;
+    line-height: 20px;
+  }
+}
+*/
+
+
+
 
 
 /*new styles*/

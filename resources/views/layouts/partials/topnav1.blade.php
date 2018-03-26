@@ -10,7 +10,7 @@
             </button>
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'eVisa') }}
+                {{ settings('site_name', 'eVisa') }}
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -27,7 +27,6 @@
                             {{ Auth::user()->first_name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Profile</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

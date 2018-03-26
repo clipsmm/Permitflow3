@@ -6,14 +6,13 @@ use App\Events\ApplicationResubmitted;
 use App\Events\ApplicationSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
-use App\Models\ApplicationOutput;
 use App\Models\Invoice;
-use App\Models\Module;
-use App\Models\Output;
 use App\Modules\BaseModule;
+use GuzzleHttp\Client;
+use \PDF;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
 {
@@ -21,9 +20,11 @@ class ApplicationController extends Controller
 
     public function __construct(Request $request)
     {
+        parent::__construct();
         //todo: add middleware to check if module is activated
         $this->module = BaseModule::instance_from_slug($request->route('module_slug'));
-        $this->middleware(['application_editable'], ['only' => ['edit', 'review', 'submit', 'update']]);
+        $this->middleware(['application_editable', 'application_owner'], ['only' => ['edit', 'review', 'submit', 'update']]);
+        $this->middleware(['application_deletable'], ['only' => ['delete']]);
     }
 
     public function create()
@@ -82,6 +83,20 @@ class ApplicationController extends Controller
         ]);
     }
 
+
+    public function delete($module, Application $application)
+    {
+        if ($application->doDelete()) {
+            return redirect()->route('frontend.applications.index')
+                ->with('alerts', [
+                    ['type' => 'success', 'message' =>__("Application deted successfully!")]
+                ]);
+
+        } else {
+            abort(Response::HTTP_UNPROCESSABLE_ENTITY, 'Application could not be deleted');
+        }
+    }
+
     public function review($module, Application $application)
     {
         return view('applications.review', ['application' => $application, 'module' => $this->module]);
@@ -91,21 +106,22 @@ class ApplicationController extends Controller
     {
         $invoice = null;
 
-        DB::transaction(function() use($application, &$invoice){
+        DB::transaction(function () use (&$application, &$invoice) {
             $invoice = $this->module->create_invoice($application);
             $in_corrections = $application->in_corrections;
 
             $application->submit();
 
-            if($in_corrections){
+            if ($in_corrections) {
+                //change task status to review
                 event(new ApplicationResubmitted($application));
-            }else{
+            } else {
                 event(new ApplicationSubmitted($application));
             }
 
         });
 
-        if(is_null($invoice)){
+        if (is_null($invoice)) {
             return redirect()->route('application.submitted', ['module_slug' => $this->module->slug, 'application' => $application->id]);
         }
 
@@ -119,13 +135,23 @@ class ApplicationController extends Controller
 
     public function checkout(Request $request, $module_slug, Application $application, Invoice $invoice)
     {
-        if(!$invoice->bill_ref){
-            $invoice->get_pesaflow_bill_ref();
-            $invoice->fresh();
-        }
+//        if (!$invoice->bill_ref) {
+//            $invoice->get_pesaflow_bill_ref();
+//            $invoice->fresh();
+//        }
 
-        $checkout_data = get_pesaflow_checkout_data_from_invoice($invoice);
+        $checkout_data = $this->createBill([
+            'service_id' => 1,
+            'client_ref' => $invoice->bill_ref,
+            'client_name' => user()->full_name,
+            "client_email" => user()->email,
+            'client_phone' => user()->phone_number,
+            'notes' => $invoice->description,
+            'amount' => $invoice->amount
+        ]);
 
+//        $checkout_data = get_pesaflow_checkout_data_from_invoice($invoice);
+//
         return view('frontend.checkout', [
             'data' => $checkout_data,
             'module' => $this->module,
@@ -133,9 +159,16 @@ class ApplicationController extends Controller
         ]);
     }
 
+    private function createBill($params) {
+        $client = new Client();
+        $response  = $client->post('192.168.10.1:4000/api/v1/bills/create', ['form_params' => ['bill' => $params]]);
+
+        return json_decode($response->getBody());
+    }
+
     public function show(Request $request, $module, $app_id)
     {
-        $application = Application::with(['user','invoices', 'outputs', 'outputs.output'])
+        $application = Application::with(['user', 'invoices', 'outputs', 'outputs.output'])
             ->forModule($module)
             ->find($app_id);
 
@@ -144,33 +177,30 @@ class ApplicationController extends Controller
 
     public function myApplications(Request $request)
     {
-        $user  =  user();
-        $applications = $user->applications()->with(['current_invoice'])->paginate(20);
+        $user = user();
+        $builder = $user->applications()->with(['current_invoice']);
+        if ($request->q)
+            $builder->where('application_number', 'like', "%{$request->q}");
 
-        return view('frontend.my_applications',[
+        $applications = $builder->latest('applications.created_at')
+            ->paginate(20);
+
+        return view('frontend.my_applications', [
             'applications' => $applications
         ]);
     }
 
-    public function downloadOutput(Request $request, $module, Application $application, ApplicationOutput $applicationOutput)
+    public function downloadOutput(Request $request, $module, Application $application, $output)
     {
-        $applicationOutput->load(['application', 'task', 'task.user']);
-
-        $output  = Output::render_output($applicationOutput->output, [
-            'application' => $applicationOutput->application,
-            'task' => $applicationOutput->task
-        ]);
-
-        return view('blank', [
-            'content' => $output
-        ]);
+        $pdf = $output->generate_pdf(true);
+        return $pdf->download("{$output->output->name}.pdf");
     }
 
     public function downloadAttachment(Request $request)
     {
-        if($request->has('attachment')){
+        if ($request->has('attachment')) {
             $file = $request->get('attachment');
-            return response()->file(storage_path('app'.DIRECTORY_SEPARATOR.$file));
+            return response()->file(storage_path('app' . DIRECTORY_SEPARATOR . $file));
         }
         abort(404);
     }
